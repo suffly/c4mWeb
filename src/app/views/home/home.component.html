@@ -1,0 +1,168 @@
+<mat-grid-list cols="8" rowHeight="3:1">
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>เลือกฝ่ายการเมือง</mat-label>
+            <mat-select placeholder="ฝ่ายการเมือง">
+                <mat-option *ngFor="let element of this.CounselordivisionModel" [value]="element.counselordivision_id">
+                    {{element.counselordivision_name}} 
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>เลือกประเภทสมาขิก</mat-label>
+            <mat-select placeholder="ประเภทสมาชิก">
+                <mat-option *ngFor="let element of this.CounselortypeModel" [value]="element.counselortype_id">
+                    {{element.counselortype_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>เลือกสมัยการประชุม</mat-label>
+            <mat-select placeholder="สมัยการประชุม">
+                <mat-option *ngFor="let element of this.MeetingtermModel" [value]="element.meetingterm_id">
+                    {{element.meetingterm_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>เลือกประเภทการประชุม</mat-label>
+            <mat-select placeholder="ประเภทการประชุม">
+                <mat-option *ngFor="let element of this.MeetingtypeModel" [value]="element.meetingtype_id">
+                    {{element.meetingtype_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>เลือกผู้เกี่ยวข้อง</mat-label>
+            <mat-select placeholder="ผู้เกี่ยวข้อง">
+                <mat-option *ngFor="let element of this.MinistryModel" [value]="element.ministry_id">
+                    {{element.ministry_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>เลือกวัตถุประสงค์</mat-label>
+            <mat-select placeholder="วัตถุประสงค์">
+                <mat-option *ngFor="let element of this.ObjectiveModel" [value]="element.objective_id">
+                    {{element.objective_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>เลือกพรรคการเมือง</mat-label>
+            <mat-select placeholder="พรรคการเมือง">
+                <mat-option *ngFor="let element of this.PartylistModel" [value]="element.partylist_id">
+                    {{element.partylist_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>เลือกจังหวัด</mat-label>
+            <mat-select placeholder="จังหวัด">
+                <mat-option *ngFor="let element of this.ProvinceModel" [value]="element.province_id">
+                    {{element.province_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="8" rowHeight="3:1">
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>เลือกภูมิภาค</mat-label>
+            <mat-select placeholder="ภูมิภาค">
+                <mat-option *ngFor="let element of this.RegionModel" [value]="element.region_id">
+                    {{element.region_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>เลือกประเภทหัวข้อ</mat-label>
+            <mat-select placeholder="ประเภทหัวข้อ">
+                <mat-option *ngFor="let element of this.TopictypeModel" [value]="element.topictype_id">
+                    {{element.topictype_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+<!-- <div>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+            <td mat-cell *matCellDef="let element;let i= index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
+        </ng-container>
+        <ng-container matColumnDef="meetingtype_name">
+            <th mat-header-cell *matHeaderCellDef> ประเภทการประชุม </th>
+            <td mat-cell *matCellDef="let element"> {{element.meetingtype_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meeting_set">
+            <th mat-header-cell *matHeaderCellDef> ชุดที่ </th>
+            <td mat-cell *matCellDef="let element"> {{element.meeting_set}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meeting_year">
+            <th mat-header-cell *matHeaderCellDef> ปีที่ </th>
+            <td mat-cell *matCellDef="let element"> {{element.meeting_year}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meetingterm_name">
+            <th mat-header-cell *matHeaderCellDef> ประเภทการประชุม </th>
+            <td mat-cell *matCellDef="let element"> {{element.meetingterm_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meeting_date">
+            <th mat-header-cell *matHeaderCellDef> วันที่ประชุม </th>
+            <td mat-cell *matCellDef="let element"> {{element.meeting_date}} </td>
+        </ng-container>
+        <ng-container matColumnDef="create_name">
+            <th mat-header-cell *matHeaderCellDef> ผู้สร้าง </th>
+            <td mat-cell *matCellDef="let element"> {{element.create_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="create_date">
+            <th mat-header-cell *matHeaderCellDef> วันที่สร้าง </th>
+            <td mat-cell *matCellDef="let element"> {{element.create_date}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+                <button mat-icon-button color="primary">
+                    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon><span style="font-size: x-small;">เพิ่มการประชุม</span>
+                </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button mat-icon-button color="accent">
+                    <mat-icon aria-label="Refresh">refresh</mat-icon><span style="font-size: x-small;">Refresh</span>
+                </button>
+            </th>
+      
+            <td mat-cell *matCellDef="let element; let i=index;" style="text-align: center;">
+                <button mat-icon-button color="accent">
+                    <mat-icon aria-label="Edit">edit</mat-icon>
+                </button>
+                <button mat-icon-button color="accent">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSize]="this.pageSize" [pageSizeOptions]="this.pageSizeOptions" showFirstLastButtons></mat-paginator>
+</div>
+
+ -->

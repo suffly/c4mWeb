@@ -1,0 +1,64 @@
+import { Component, inject, ElementRef, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+
+import { MeetingviewService } from 'src/app/services/meetingview.service';
+import { Meetingview } from 'src/app/models/meetingview';
+import { MeetingInsertdialogComponent } from '../meeting-insertdialog/meeting-insertdialog.component';
+
+@Component({
+  selector: 'app-meetingviewlist',
+  templateUrl: './meetingviewlist.component.html',
+  styleUrls: ['./meetingviewlist.component.css']
+})
+export class MeetingviewlistComponent {
+
+  constructor(
+    public MeetingviewService: MeetingviewService,
+    public dialogService: MatDialog, 
+    private Router: Router,
+    ) {}
+
+  MeetingviewModel : Meetingview[];
+  dataSource = new MatTableDataSource<Meetingview>();
+  displayedColumns: string[] = ['index', 'meetingtype_name', 'meeting_set', 'meeting_year', 'meetingterm_name', 'meeting_date', 'create_name', 'create_date', 'actions'];
+  pageSize: number = 10;
+  pageSizeOptions = [10, 25, 50];
+  index: number;
+  id: number;
+  //subscriptions = [];
+  //private ngUnsubscribe = new Subject();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild('filter', { static: true }) filter: ElementRef;
+
+  ngOnInit(): void{
+    this.loadData();
+  }
+
+  loadData(){ 
+    console.log("LoadData");   
+    var Meetview = new Meetingview();
+    this.MeetingviewService.Getmeetingview_All(Meetview).subscribe(data => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.MeetingviewModel = data;
+      console.log(this.MeetingviewModel);
+    });
+  }
+
+   async openAddDialog(){
+    console.log("openAddDialog");
+    const dialogRef = await this.dialogService.open(MeetingInsertdialogComponent, {
+      width: '640px',
+      height: '100%',
+      data: {},
+      disableClose: true
+    });
+  }
+
+}

@@ -1,0 +1,61 @@
+<div>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+            <td mat-cell *matCellDef="let element;let i= index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
+        </ng-container>
+        <ng-container matColumnDef="meetingtype_name">
+            <th mat-header-cell *matHeaderCellDef> ประเภทการประชุม </th>
+            <td mat-cell *matCellDef="let element"> {{element.meetingtype_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meeting_set">
+            <th mat-header-cell *matHeaderCellDef> ชุดที่ </th>
+            <td mat-cell *matCellDef="let element"> {{element.meeting_set}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meeting_year">
+            <th mat-header-cell *matHeaderCellDef> ปีที่ </th>
+            <td mat-cell *matCellDef="let element"> {{element.meeting_year}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meetingterm_name">
+            <th mat-header-cell *matHeaderCellDef> ประเภทการประชุม </th>
+            <td mat-cell *matCellDef="let element"> {{element.meetingterm_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meeting_date">
+            <th mat-header-cell *matHeaderCellDef> วันที่ประชุม </th>
+            <td mat-cell *matCellDef="let element"> {{element.meeting_date}} </td>
+        </ng-container>
+        <ng-container matColumnDef="create_name">
+            <th mat-header-cell *matHeaderCellDef> ผู้สร้าง </th>
+            <td mat-cell *matCellDef="let element"> {{element.create_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="create_date">
+            <th mat-header-cell *matHeaderCellDef> วันที่สร้าง </th>
+            <td mat-cell *matCellDef="let element"> {{element.create_date}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+                <button mat-icon-button color="primary" (click)="openAddDialog()">
+                    <!-- <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon><span style="font-size: x-small;">เพิ่มการประชุม</span> -->
+                    <span style="font-size: x-small;">+Meeting</span>
+                </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button mat-icon-button color="accent" (click)="loadData()">
+                    <!-- <mat-icon aria-label="Refresh">refresh</mat-icon><span style="font-size: x-small;">Refresh</span> -->
+                    <span style="font-size: x-small;">Refresh</span>
+                </button>
+            </th>
+      
+            <td mat-cell *matCellDef="let element; let i=index;" style="text-align: center;">
+                <button mat-icon-button color="accent">
+                    <mat-icon aria-label="Edit">edit</mat-icon>
+                </button>
+                <button mat-icon-button color="accent">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSize]="this.pageSize" [pageSizeOptions]="this.pageSizeOptions" showFirstLastButtons></mat-paginator>
+</div>
