@@ -13,12 +13,29 @@ export class MeetingService {
   constructor(private http: HttpClient) { }
   readonly baseUrl = `${environment.apiURL}/api/meetings`
 
-  GetMetting_All(Meeting: Meeting): Observable<any> {
-    return this.http.post<Meeting[]>(`${this.baseUrl}/GetMetting_All`, Meeting).pipe(
-      map((MeetingData: Meeting[]) => {
+  SaveMeeting(Meeting: Meeting): Observable<any> {
+    return this.http.post<number>(`${this.baseUrl}/SaveMeeting`, Meeting).pipe(
+      map((MeetingData: number) => {
         return MeetingData;
       })
     );
   }
+
+  async UpdateMeeting(Meeting: Meeting): Promise<Observable<any>> {
+    return await this.http.post<number>(`${this.baseUrl}/UpdateMeeting`, Meeting).pipe(
+      map((MeetingData: number) => {
+        return MeetingData;
+      })
+    );
+  }
+
+  async DeleteMeeting(Meeting: Meeting): Promise<Observable<any>> {
+    return await this.http.post<number>(`${this.baseUrl}/DeleteMeeting`, Meeting).pipe(
+      map((MeetingData: number) => {
+        return MeetingData;
+      })
+    );
+  }
+
 
 }

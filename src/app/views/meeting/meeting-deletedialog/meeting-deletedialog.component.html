@@ -1,0 +1,24 @@
+<div class="container">
+    <h3 mat-dialog-title>ต้องการลบข้อมูล ?</h3>
+    <div mat-dialog-content>
+      ID: {{MeetingViewModel.meeting_id}}
+      <P></P>  
+      ประเภทการประชุม: {{MeetingViewModel.meetingtype_name}}
+      <p></p>
+      ชุดที่: {{MeetingViewModel.meetingset_desc}}
+      <p></p>
+      ปีที่: {{MeetingViewModel.meeting_year}}
+      <p></p> 
+      สมัยการประชุม: {{MeetingViewModel.meetingterm_name}}
+      <p></p> 
+      ครั้งที่: {{MeetingViewModel.meeting_time}}
+      <p></p> 
+      วันที่ประชุม: {{MeetingViewModel.meeting_date.toString()}}
+      <p></p> 
+      ผู้สร้าง: {{MeetingViewModel.create_title}}{{MeetingViewModel.create_name}}  {{MeetingViewModel.create_surname}}
+    </div>
+      <div mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="1" (click)="confirmDelete(MeetingViewModel)">Delete</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </div>

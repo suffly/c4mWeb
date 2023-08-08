@@ -4,3 +4,376 @@
 /* @import '~@angular/material/prebuilt-themes/pink-bluegrey.css'; */
 /* @import '~@angular/material/prebuilt-themes/purple-green.css'; */
 
+/* You can add global styles to this file, and also import other style files */
+
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+
+@import url('https://fonts.googleapis.com/css?family=Kanit|Prompt');
+/*@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";*/
+
+/* html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Kanit', sans-serif;
+}
+
+.header {
+    justify-content: space-between;
+}
+
+.user-profile {
+    margin-left: 15px;
+}
+
+.mat-sidenav-container {
+    height: 100%;
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.mat-nav-list .mat-list-item {
+    font-size: 11px;
+}
+
+.nav-tool-items {
+    display: inline-block;
+    margin-right: 13px;
+}
+
+.user-profile {
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.mat-sidenav, .mat-sidenav-content {
+    padding: 15px;
+}
+
+.mat-list-item.active {
+    background: rgba(0, 0, 0, .04);
+}
+
+.mat-sidenav-content {
+    padding: 25px 10px 0;
+}
+
+.mat-dialog-title{
+    background-color: #f8cf46; 
+    width: 100%;
+}
+.mat-nested{
+    background-color: #8FBC8F;  
+} 
+.mat-sidenav {
+    background-color: #F2F2F2;
+    padding-left: 0cm;
+    width: 250px;
+} 
+.header {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+mat-sidenav mat-icon {
+    margin-right: 12px;
+}
+.mat-icon-status1{
+    color:#fa6429;
+}
+.mat-icon-status8{
+    color:#25a7e4; 
+}
+.mat-icon-status9{
+    color:#eecd10;
+} 
+.mat-icon-status5{
+    color:#25e425;
+}
+.hamburger {
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+/* .hamburger {
+    visibility: hidden !important;
+} */
+
+.mat-radio-button, .mat-radio-group {
+    margin-right: 25px;
+}
+
+.controlers-wrapper>* {
+    width: 100%;
+    padding: 0;
+}
+
+.misc-bottom-padding {
+    margin: 8px 0 10px;
+}
+
+.misc-bottom-padding mat-label {
+    margin-right: 15px;
+}
+
+mat-radio-group mat-radio-button {
+    margin-left: 5px;
+}
+
+.button-wrapper button {
+    margin-right: 5px;
+}
+
+table.mat-table, table {
+    width: 100%; 
+}
+
+.inner-wrapper {
+    padding: 15px 0 130px;
+    width: 100%;
+}
+
+.inner-wrapper mat-card {
+    display: inline-block;
+    margin: 0 6% 0 0;
+    vertical-align: top;
+    width: 44%;
+}
+
+.full-wrapper {
+    width: 100%;
+}
+
+.multiple-items {
+    position: relative;
+}
+
+.multiple-items .tooltip-info {
+    right: 0;
+    top: 7px;
+    cursor: pointer;
+    color: #a1a7c7;
+    position: absolute;
+    font-size: 20px;
+}
+
+body .push-right {
+    margin-right: 10px;
+}
+
+.no-data {
+    text-align: center;
+    padding-top: 30px;
+    color: #6c75a9;
+}
+
+.button-wrapper {
+    margin: 20px 0 0 0;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.padded {
+    padding: 10px!important;
+}
+
+.with-icon {
+    display: flex;
+    align-items: center;
+}
+
+/* เมนู ยืนยันความเป็นอิสระ */
+
+.align-items-center {
+    text-align: center;
+
+}
+
+.assert-indy-form .assert-indy-cell-title {
+    width: 80%;
+}
+
+
+.assert-indy-attach mat-card-title {
+    font-size: 18px;
+}
+
+.margin_10 button {
+    margin: 0 10px 0 0;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+/* เมนู ยืนยันความเป็นอิสระ -> รายงานการยืนยัน */
+
+.mat-column-airlist_verify button {
+    margin: 5px;
+}
+.color_green {
+    color: rgb(0,128,0);
+}
+
+.color_red {
+    color: rgb(238, 67, 15);
+}
+.color_blue {
+    color: rgb(27, 127, 194);
+}
+.assert-indy-list img{
+    height: 30px;
+}
+.assert-indy-list .mat-cell,
+.assert-indy-list .mat-header-cell{
+    padding: 10px;
+}
+.assert-indy-list th.mat-header-cell:last-of-type, 
+.assert-indy-list td.mat-cell:last-of-type, 
+.assert-indy-list td.mat-footer-cell:last-of-type
+{
+    padding: 10px;
+}
+ .margin-bottom-0 {
+    margin-bottom: 0px;
+} 
+
+
+.mat-column-airlist_verify .mat-raised-button{
+    min-width: 40px;
+    line-height: 36px;
+    padding: 0 8px;
+}
+.assert-indy-list th.mat-column-index,
+.assert-indy-list td.mat-column-index,
+.assert-indy-list th.mat-column-progresstatus_review,
+.assert-indy-list td.mat-column-progresstatus_review,
+.assert-indy-list th.mat-column-airlist_filereview,
+.assert-indy-list td.mat-column-airlist_filereview  {
+    
+    text-align: center;
+        
+
+}
+
+/* เมนู ปฏิบัติงานตรวจสอบ --> อัปโหลด Working Paper */
+.background-white {
+    background-color: white;
+}
+
+.mat-icon-null{
+    color: rgb(238, 182, 78);
+}
+
+.margin-bottom-60 {
+    margin-bottom: 60px;
+}
+
+.margin-rigth-15 {
+    margin-right: 15px;
+} 
+
+
+
+
+
+
+/* เมนู ยืนยันความเป็นอิสระ -> รายงานการยืนยัน */
+@media (max-width:1366px) {
+    .assert-row{
+        min-width: 1300px;
+    }
+    .assert-col{
+        min-width: 1270px;
+    }
+    /* .assert-indy-list th.mat-header-cell,
+    .assert-indy-list td.mat-header-cell {
+        width: 130px;
+
+    } */
+    .assert-indy-list th.mat-column-index,
+    .assert-indy-list td.mat-column-index,
+    .assert-indy-list th.mat-column-progresstatus_review,
+    .assert-indy-list td.mat-column-progresstatus_review,
+    .assert-indy-list th.mat-column-airlist_filereview,
+    .assert-indy-list td.mat-column-airlist_filereview  {
+        width: 30px;
+        
+
+    }
+    /* .assert-indy-list th.mat-column-airlist_title,
+    .assert-indy-list td.mat-column-airlist_title
+    {
+
+        width: 250px;
+
+    }  */ 
+    .assert_button_verify
+    {
+
+        width: 160px;
+
+    } 
+
+}
+@media (max-width:1024px) {
+    .inner-wrapper mat-card {
+        width: 100%;
+    }
+    .mat-sidenav-content {
+        padding: 20px 20px 0;
+    }
+    .misc-bottom-padding mat-label {
+        display: block;
+        padding-bottom: 10px;
+    }
+    .mat-sidenav {
+        width: 230px;
+    }
+    .mat-nav-list .mat-list-item {
+        font-size: 14px;
+    }
+    
+}
+
+@media (max-width:767px) {
+    .nav-tool-items {
+        margin-right: 0;
+    }
+    .hamburger {
+        visibility: visible !important;
+    }
+}
+@media screen {
+    #printSection {
+        display: none;
+    }
+}

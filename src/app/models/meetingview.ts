@@ -5,7 +5,8 @@ export class Meetingview {
     meetingtype_name:string;
     meetingterm_id:number;
     meetingterm_name:string;
-    meeting_set:number;
+    meetingset_id:number;
+    meetingset_desc:string;
     meeting_year:number;
     meeting_time:number;
     count_consulation:number;

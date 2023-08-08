@@ -1,5 +1,4 @@
-<!-- <form [formGroup]="frmGrpAddMeeting" #form="ngForm"> -->
-<form>
+<form [formGroup]="frmGrpAddMeeting" #form="ngForm">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -7,8 +6,7 @@
                     <label for="">เพิ่มการประชุม</label>
                     <div class="float-right">
                         <button mat-icon-button class="mx-auto" (click)="onNoClick()">
-                            <!-- <mat-icon>cancel</mat-icon> -->
-                            <span style="font-size: x-small;">close</span>
+                            <mat-icon>cancel</mat-icon>
                         </button>
                     </div>
                 </div>
@@ -18,46 +16,78 @@
                     <div class="form-group">
                         <mat-form-field appearance="fill">
                             <mat-label>เลือกประเภทการประชุม</mat-label>
-                            <mat-select placeholder="ประเภทการประชุม">
+                            <mat-select formControlName="ddltype" placeholder="ประเภทการประชุม" 
+                                [(ngModel)]="this.MeetingViewModel.meetingtype_id" [errorStateMatcher]="matcher">
                                 <mat-option *ngFor="let element of this.MeetingtypeModel" [value]="element.meetingtype_id">
                                     {{element.meetingtype_name}}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf="frmGrpAddMeeting.controls.ddltype.hasError('required')">กรุณาระบุครั้งที่การประชุม</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="form-group"><label for="">ชุดที่</label></div>
                     <div class="form-group">
-                        meeting set
+                        <mat-form-field appearance="fill">
+                            <mat-label>เลือกชุดที่</mat-label>
+                            <mat-select formControlName="ddlset" placeholder="ชุดที่" 
+                                [(ngModel)]="this.MeetingViewModel.meetingset_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.MeetingsetModel" [value]="element.meetingset_id">
+                                    {{element.meetingset_desc}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddMeeting.controls.ddlset.hasError('required')">กรุณาระบุชุดที่การประชุม</mat-error>
+                        </mat-form-field>
                     </div>
                     <div class="form-group"><label for="">ปีที่</label></div>
                     <div class="form-group">
-                        meeting year
-                        <!-- <mat-form-field>
-                            <mat-lable>เลือกปีที่</mat-lable>
-                        </mat-form-field> -->
+                        <mat-form-field appearance="fill">
+                            <mat-label>เลือกปีที่</mat-label>
+                            <mat-select formControlName="ddlyear" placeholder="ปีที่" 
+                                [(ngModel)]="this.MeetingViewModel.meeting_year" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.DDLMeetingYear" [value]="element.value">
+                                    {{element.viewvalue}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddMeeting.controls.ddlyear.hasError('required')">กรุณาระบุปีที่การประชุม</mat-error>
+                        </mat-form-field>
                     </div>
                     <div class="form-group"><label for="">สมัยการประชุม</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill">
                             <mat-label>เลือกสมัยการประชุม</mat-label>
-                            <mat-select placeholder="สมัยการประชุม">
+                            <mat-select formControlName="ddlterm" placeholder="สมัยการประชุม" 
+                                [(ngModel)]="this.MeetingViewModel.meetingterm_id" [errorStateMatcher]="matcher">
                                 <mat-option *ngFor="let element of this.MeetingtermModel" [value]="element.meetingterm_id">
                                     {{element.meetingterm_name}}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf="frmGrpAddMeeting.controls.ddlterm.hasError('required')">กรุณาระบุสมัยการประชุม</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="form-group"><label for="">ครั้งที่ประชุม</label></div>
                     <div class="form-group">
-                        meeting time
+                        <mat-form-field appearance="fill" hintLabel="กรุณาระบุตัวเลข">
+                            <mat-label>ครั้งที่ประชุม</mat-label>
+                            <input matInput #input type="text" formControlName="meetingtime" placeholder="ครั้งที่ประชุม" [(ngModel)]="this.MeetingViewModel.meeting_time" maxlength="2" >
+                            <mat-hint align="end">{{input.value.length || 0}}/2</mat-hint>
+                            <mat-error *ngIf="frmGrpAddMeeting.controls.meetingtime.hasError('required')">กรุณาระบุครั้งที่การประชุม</mat-error>
+                        </mat-form-field>
                     </div>
                     <div class="form-group"><label for="">วันที่ประชุม</label></div>
                     <div class="form-group">
-                        meeting date
+                        <mat-form-field appearance="fill">
+                            <mat-label>วันที่ประชุม</mat-label>
+                            <input matInput [matDatepicker]="picker" placeholder="วันที่ประชุม" readonly
+                                formControlName="meetingdate" name="meetingdate"
+                                [(ngModel)]="this.MeetingViewModel.meeting_date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="frmGrpAddMeeting.controls.meetingdate.hasError('required')">กรุณาระบุวันที่การประชุม</mat-error>
+                        </mat-form-field>
                     </div>
+
                     <div style="text-align: center;">
-                        <!-- <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="form.invalid" -->
-                        <button mat-raised-button color="primary" [mat-dialog-close]="1">
+                        <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="form.invalid" [mat-dialog-close]="1">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                             บันทึก
                         </button>&nbsp;&nbsp;&nbsp;

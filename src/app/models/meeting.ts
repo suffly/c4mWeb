@@ -3,7 +3,7 @@ export class Meeting {
     meeting_date:Date;
     meetingtype_id:number;
     meetingterm_id:number;
-    meeting_set:number;
+    meetingset_id:number;
     meeting_year:number;
     meeting_time:number;
     count_consulation:number;
