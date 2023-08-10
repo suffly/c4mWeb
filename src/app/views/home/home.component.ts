@@ -109,45 +109,45 @@ export class HomeComponent {
 
   loaddata(){
     
-    var Coundivision = new Counselordivision();
-    this.CounselordivisionService.DDLcounselordivision(Coundivision).subscribe(data => {this.CounselordivisionModel = data 
-      console.log(this.CounselordivisionModel);
-    });
+    // var Coundivision = new Counselordivision();
+    // this.CounselordivisionService.DDLcounselordivision(Coundivision).subscribe(data => {this.CounselordivisionModel = data 
+    //   console.log(this.CounselordivisionModel);
+    // });
 
-    var Countype = new Counselortype();
-    this.CounselortypeService.DDLcounselortype(Countype).subscribe(data => {this.CounselortypeModel = data
-      console.log(this.CounselortypeModel);
-    });
+    // var Countype = new Counselortype();
+    // this.CounselortypeService.DDLcounselortype(Countype).subscribe(data => {this.CounselortypeModel = data
+    //   console.log(this.CounselortypeModel);
+    // });
 
-    var Meetterm = new Meetingterm();
-    this.MeetingtermService.DDLmeetingterm(Meetterm).subscribe(data => {this.MeetingtermModel = data
-      console.log(this.MeetingtermModel);
-    });
+    // var Meetterm = new Meetingterm();
+    // this.MeetingtermService.DDLmeetingterm(Meetterm).subscribe(data => {this.MeetingtermModel = data
+    //   console.log(this.MeetingtermModel);
+    // });
 
-    var Meettype = new Meetingtype();
-    this.MeetingtypeService.DDLmeetingtype(Meettype).subscribe(data => {this.MeetingtypeModel = data
-      console.log(this.MeetingtypeModel);
-    });
+    // var Meettype = new Meetingtype();
+    // this.MeetingtypeService.DDLmeetingtype(Meettype).subscribe(data => {this.MeetingtypeModel = data
+    //   console.log(this.MeetingtypeModel);
+    // });
 
-    var Minis = new Ministry();
-    this.MinistryService.DDLministry(Minis).subscribe(data => {this.MinistryModel = data
-      console.log(this.MinistryModel);
-    });
+    // var Minis = new Ministry();
+    // this.MinistryService.DDLministry(Minis).subscribe(data => {this.MinistryModel = data
+    //   console.log(this.MinistryModel);
+    // });
 
-    var Object = new Objective();
-    this.ObjectiveService.DDLobjective(Object).subscribe(data => {this.ObjectiveModel = data
-      console.log(this.ObjectiveModel);
-    });
+    // var Object = new Objective();
+    // this.ObjectiveService.DDLobjective(Object).subscribe(data => {this.ObjectiveModel = data
+    //   console.log(this.ObjectiveModel);
+    // });
 
-    var Party = new Partylist();
-    this.PartylistService.DDLpartylist(Party).subscribe(data => {this.PartylistModel = data
-      console.log(this.PartylistModel);
-    });
+    // var Party = new Partylist();
+    // this.PartylistService.DDLpartylist(Party).subscribe(data => {this.PartylistModel = data
+    //   console.log(this.PartylistModel);
+    // });
 
-    var Provinc = new Province();
-    this.ProvinceService.DDLprovince(Provinc).subscribe(data => {this.ProvinceModel = data
-      console.log(this.ProvinceModel);
-    });
+    // var Provinc = new Province();
+    // this.ProvinceService.DDLprovince(Provinc).subscribe(data => {this.ProvinceModel = data
+    //   console.log(this.ProvinceModel);
+    // });
 
     var Regi = new Region();
     this.RegionService.DDLregion(Regi).subscribe(data => {this.RegionModel = data
@@ -160,7 +160,7 @@ export class HomeComponent {
     });
 
     var Counselor = new Counselorview();
-    this.CounselorviewService.GetCounselorview_Active(Counselor).subscribe(data => {
+    this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {
       this.CounselorviewModel = data;
       this.CounselorviewFilter = this.CounselorviewModel.slice();
       console.log(this.CounselorviewModel);

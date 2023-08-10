@@ -11,18 +11,18 @@ import { Observable } from 'rxjs';
 export class CounselorviewService {
 
   constructor( private http: HttpClient) { }
-  readonly baseUrl = `${environment.apiURL}/api/meetingviews`
+  readonly baseUrl = `${environment.apiURL}/api/counselorview`
 
-  GetCounselorview_All(Counselorview: Counselorview): Observable<any>{
-    return this.http.post<Counselorview[]>(`${this.baseUrl}/GetCounselorview_All`, Counselorview).pipe(
+  GetCounselorviewAll(Counselorview: Counselorview): Observable<any>{
+    return this.http.post<Counselorview[]>(`${this.baseUrl}/GetCounselorviewAll`, Counselorview).pipe(
       map((CounselorviewData: Counselorview[]) => {
         return CounselorviewData;
       })
     );
   }
 
-  GetCounselorview_Active(Counselorview: Counselorview): Observable<any>{
-    return this.http.post<Counselorview[]>(`${this.baseUrl}/GetCounselorview_Active`, Counselorview).pipe(
+  GetCounselorviewActive(Counselorview: Counselorview): Observable<any> {
+    return this.http.post<Counselorview[]>(`${this.baseUrl}/GetCounselorviewActive`, Counselorview).pipe(
       map((CounselorviewData: Counselorview[]) => {
         return CounselorviewData;
       })
