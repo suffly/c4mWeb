@@ -28,6 +28,7 @@
     "ngx-toastr": "^17.0.2",
     "primeng": "^16.0.2",
     "rxjs": "~7.8.0",
+    "tslib": "^2.6.1",
     "zone.js": "^0.13.1"
   },
   "devDependencies": {
@@ -41,7 +42,6 @@
     "karma-coverage": "^1.1.2",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "tslib": "^2.6.1",
     "typescript": "~5.1.3"
   }
 }
