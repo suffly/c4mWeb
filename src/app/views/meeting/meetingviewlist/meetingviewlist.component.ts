@@ -39,6 +39,7 @@ export class MeetingviewlistComponent {
   id: number;
   
   SigninData: Signin;
+  tempData: any[];
 
   //subscriptions = [];
   //private ngUnsubscribe = new Subject();
@@ -52,8 +53,8 @@ export class MeetingviewlistComponent {
     // let encoded: string = btoa(passwrod);
     // console.log("Password encoded (",passwrod,"): ", encoded);
     this.SigninService.parliamentSignIn().subscribe(data => {
-      this.SigninData = data;
-      console.log(this.SigninData);
+      this.tempData = data;
+      console.log(this.tempData);
     });
   }
 

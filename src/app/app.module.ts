@@ -32,6 +32,7 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatRadioModule} from '@angular/material/radio';
 import { MatRippleModule} from '@angular/material/core';
 import { MatSelectModule} from '@angular/material/select';
+//import { MatSelectFilterModule } from 'mat-select-filter';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatSliderModule} from '@angular/material/slider';
@@ -108,6 +109,7 @@ import { MeetingDeletedialogComponent } from './views/meeting/meeting-deletedial
     MatRadioModule,
     MatRippleModule,
     MatSelectModule,
+    //MatSelectFilterModule,
     MatSidenavModule,
     MatSlideToggleModule,
     MatSliderModule,

@@ -1,4 +1,4 @@
-<mat-grid-list cols="8" rowHeight="3:1">
+<!-- <mat-grid-list cols="8" rowHeight="3:1">
     <mat-grid-tile>
         <mat-form-field appearance="fill">
             <mat-label>เลือกฝ่ายการเมือง</mat-label>
@@ -79,7 +79,7 @@
             </mat-select>
         </mat-form-field>
     </mat-grid-tile>
-</mat-grid-list>
+</mat-grid-list> -->
 
 <mat-grid-list cols="8" rowHeight="3:1">
     <mat-grid-tile>
@@ -98,6 +98,16 @@
             <mat-select placeholder="ประเภทหัวข้อ">
                 <mat-option *ngFor="let element of this.TopictypeModel" [value]="element.topictype_id">
                     {{element.topictype_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>เลือกผูู้หารือ</mat-label>
+            <mat-select placeholder="ผู้หารือ">
+                <mat-option *ngFor="let element of this.CounselorviewFilter" [value]="element.counselor_id">
+                    {{element.counselor_title}}{{element.counselor_name}} {{element.counselor_middlename}} {{element.counselor_surname}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
