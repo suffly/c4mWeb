@@ -1,12 +1,14 @@
-import { Component, inject, ElementRef, ViewChild} from '@angular/core';
+import { Component, inject, ElementRef, ViewChild, AfterViewInit, OnDestroy, OnInit} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-//import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { MatSelect } from '@angular/material/select';
 
 import { CounselordivisionService } from 'src/app/services/counselordivision.service';
 import { Counselordivision } from 'src/app/models/counselordivision';
@@ -43,7 +45,7 @@ import { Counselorview } from 'src/app/models/counselorview';
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   CounselordivisionModel : Counselordivision[];
   CounselortypeModel : Counselortype[];
@@ -58,8 +60,12 @@ export class HomeComponent {
   MeetingModel : Meeting[];
   MeetingviewModel : Meetingview[];
   CounselorviewModel : Counselorview[];
-  public CounselorviewValue : Counselorview[];
-  public CounselorviewFilter : Counselorview[];
+
+  
+  public CounselorviewFilter : FormControl = new FormControl();
+  public FilteredCounselorview : ReplaySubject<Counselorview[]> = new ReplaySubject<Counselorview[]>(1);
+  protected _onDestroy = new Subject<void>();
+  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
   dataSource = new MatTableDataSource<Meetingview>();
   displayedColumns: string[] = ['index', 'meetingtype_name', 'meeting_set', 'meeting_year', 'meetingterm_name', 'meeting_date', 'create_name', 'create_date', 'actions'];
@@ -92,7 +98,7 @@ export class HomeComponent {
     
     public dialogService: MatDialog, 
     private Router: Router,
-    //private toastr: ToastrService,
+    private toastr: ToastrService,
 
     ) {}
 
@@ -103,8 +109,24 @@ export class HomeComponent {
 
   ngOnInit(): void{
     this.loaddata();
-    
+    // var Counselor = new Counselorview();
+    // this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {
+    //   this.CounselorviewModel = data;
+    //   this.FilteredCounselorview.next(this.CounselorviewModel.slice());
+    //   console.log(this.CounselorviewModel);
+    // })
+    //this.FilteredCounselorview.next(this.CounselorviewModel.slice());
+    this.CounselorviewFilter.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.FilterCounselorview();}); 
 
+  }
+
+  ngAfterViewInit() {
+    this.setInitialValue();
+  }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 
   loaddata(){
@@ -151,20 +173,15 @@ export class HomeComponent {
 
     var Regi = new Region();
     this.RegionService.DDLregion(Regi).subscribe(data => {this.RegionModel = data
-      console.log(this.RegionModel);
+      //console.log(this.RegionModel);
     });
 
     var Topic = new Topictype();
     this.TopictypeService.DDLtopictype(Topic).subscribe(data => {this.TopictypeModel = data
-      console.log(this.TopictypeModel);
+      //console.log(this.TopictypeModel);
     });
 
-    var Counselor = new Counselorview();
-    this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {
-      this.CounselorviewModel = data;
-      this.CounselorviewFilter = this.CounselorviewModel.slice();
-      console.log(this.CounselorviewModel);
-    })
+    
 
     // var Meet = new Meeting();
     // this.MeetingService.GetMetting_All(Meet).subscribe(data => {
@@ -184,6 +201,33 @@ export class HomeComponent {
     //   console.log(this.MeetingviewModel);
     // })
 
+  }
+
+  setInitialValue() {
+    
+    var Counselor = new Counselorview();
+    this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {
+      this.CounselorviewModel = data;
+      this.FilteredCounselorview.next(this.CounselorviewModel.slice());
+    })
+    console.log(this.FilteredCounselorview);
+    this.FilteredCounselorview.pipe(take(1), takeUntil(this._onDestroy)).subscribe(()=>{
+      this.singleSelect.compareWith = (a: Counselorview, b:Counselorview) => a && b && a.counselor_id === b.counselor_id;
+    });
+  }
+
+  FilterCounselorview() {
+    let search = this.CounselorviewFilter.value;
+    if(!search)
+    {
+      this.FilteredCounselorview.next(this.CounselorviewModel.slice());
+      return;
+    }
+    else
+    {
+      search = search.toLowerCase();
+    }
+    this.FilteredCounselorview.next(this.CounselorviewModel.filter(data => data.counselor_name.toLowerCase().indexOf(search) > -1));
   }
 
 }

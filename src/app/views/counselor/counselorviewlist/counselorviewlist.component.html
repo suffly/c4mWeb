@@ -1,0 +1,74 @@
+<!-- <div class="card-header">
+    <label for="">ผู้หารือ</label>
+</div> -->
+
+<div class="card-header assert-col">
+    <button mat-icon-button  (click)="backClicked()" >
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <label for="">ผู้หารือ </label>
+</div>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+            <td mat-cell *matCellDef="let element;let i = index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
+        </ng-container>
+        <ng-container matColumnDef="counselor_title">
+            <th mat-header-cell *matHeaderCellDef> ผู้หารือ </th>
+            <td mat-cell *matCellDef="let element"> {{element.counselor_title}}{{element.counselor_name}} {{element.counselor_middlename}} {{element.counselor_surname}}</td>
+        </ng-container>
+        <ng-container matColumnDef="counselor_name">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element"> </td>
+        </ng-container>
+        <ng-container matColumnDef="counselor_middlename">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element"> </td>
+        </ng-container>
+        <ng-container matColumnDef="counselor_surname">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element"> </td>
+        </ng-container>
+        <ng-container matColumnDef="counselortype_name">
+            <th mat-header-cell *matHeaderCellDef> ประเภทสมาชิก </th>
+            <td mat-cell *matCellDef="let element"> {{element.counselortype_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="partylist_name">
+            <th mat-header-cell *matHeaderCellDef> พรรคการเมือง </th>
+            <td mat-cell *matCellDef="let element"> {{element.partylist_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="counselordivision_name">
+            <th mat-header-cell *matHeaderCellDef> ฝ่ายการเมือง </th>
+            <td mat-cell *matCellDef="let element"> {{element.counselordivision_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+                <span style="font-size: smaller;">เพิ่มผู้หารือ</span>
+                <button mat-icon-button color="primary" (click)="openAddDialog()">
+                    <mat-icon aria-label="Add">add</mat-icon>
+                </button>
+                <span style="font-size: smaller;">Refresh</span>
+                <button mat-icon-button color="accent" (click)="loadData()">
+                    <mat-icon aria-label="Refresh">refresh</mat-icon>
+                </button>
+            </th>
+
+            <td mat-cell *matCellDef="let element; let i=index;" style="text-align: center;">
+                <button mat-icon-button color="primary" (click)="addConsulation(i,element)" [routerLink]="['/counselor']">
+                    <mat-icon aria-label="speaker_notes">speaker_notes</mat-icon>
+                </button>
+                <button mat-icon-button color="accent" (click)="editItem(i,element)">
+                    <mat-icon aria-label="Edit">edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteItem(i,element)">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                </button>              
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSize]="this.pageSize" [pageSizeOptions]="this.pageSizeOptions" showFirstLastButtons></mat-paginator>
+</div>

@@ -33,6 +33,7 @@ import { MatRadioModule} from '@angular/material/radio';
 import { MatRippleModule} from '@angular/material/core';
 import { MatSelectModule} from '@angular/material/select';
 //import { MatSelectFilterModule } from 'mat-select-filter';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatSliderModule} from '@angular/material/slider';
@@ -63,6 +64,9 @@ import { LoginComponent } from './views/login/login.component';
 import { MeetingviewlistComponent } from './views/meeting/meetingviewlist/meetingviewlist.component';
 import { MeetingInsertdialogComponent } from './views/meeting/meeting-insertdialog/meeting-insertdialog.component';
 import { MeetingDeletedialogComponent } from './views/meeting/meeting-deletedialog/meeting-deletedialog.component';
+import { CounselorviewlistComponent } from './views/counselor/counselorviewlist/counselorviewlist.component';
+import { CounselorInsertdialogComponent } from './views/counselor/counselor-insertdialog/counselor-insertdialog.component';
+import { CounselorDeletedialogComponent } from './views/counselor/counselor-deletedialog/counselor-deletedialog.component';
 
 
 
@@ -76,6 +80,9 @@ import { MeetingDeletedialogComponent } from './views/meeting/meeting-deletedial
     MeetingviewlistComponent,
     MeetingInsertdialogComponent,
     MeetingDeletedialogComponent,
+    CounselorviewlistComponent,
+    CounselorInsertdialogComponent,
+    CounselorDeletedialogComponent,
 
   ],
   imports: [
@@ -110,6 +117,7 @@ import { MeetingDeletedialogComponent } from './views/meeting/meeting-deletedial
     MatRippleModule,
     MatSelectModule,
     //MatSelectFilterModule,
+    NgxMatSelectSearchModule,
     MatSidenavModule,
     MatSlideToggleModule,
     MatSliderModule,

@@ -132,15 +132,13 @@ export class MeetingInsertdialogComponent implements OnInit {
     meetingData.meetingset_id   = this.frmGrpAddMeeting.controls.ddlset.value;
     meetingData.meeting_year    = this.frmGrpAddMeeting.controls.ddlyear.value;
     meetingData.meeting_time    = this.frmGrpAddMeeting.controls.meetingtime.value;
-    
 
-
-    console.log("meeting_date : ",    this.frmGrpAddMeeting.controls.meetingdate.value);
-    console.log("meetingtype_id : ",  this.frmGrpAddMeeting.controls.ddltype.value);
-    console.log("meetingterm_id : ",  this.frmGrpAddMeeting.controls.ddlterm.value);
-    console.log("meetingset_id : ",   this.frmGrpAddMeeting.controls.ddlset.value);
-    console.log("meeting_year : " ,   this.frmGrpAddMeeting.controls.ddlyear.value);
-    console.log("meeting_time : " ,   this.frmGrpAddMeeting.controls.meetingtime.value);
+    // console.log("meeting_date : ",    this.frmGrpAddMeeting.controls.meetingdate.value);
+    // console.log("meetingtype_id : ",  this.frmGrpAddMeeting.controls.ddltype.value);
+    // console.log("meetingterm_id : ",  this.frmGrpAddMeeting.controls.ddlterm.value);
+    // console.log("meetingset_id : ",   this.frmGrpAddMeeting.controls.ddlset.value);
+    // console.log("meeting_year : " ,   this.frmGrpAddMeeting.controls.ddlyear.value);
+    // console.log("meeting_time : " ,   this.frmGrpAddMeeting.controls.meetingtime.value);
 
     if(this.MeetingViewModel.meeting_id == undefined)
     {

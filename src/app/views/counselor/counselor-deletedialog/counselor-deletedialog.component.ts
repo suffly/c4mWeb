@@ -3,27 +3,28 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
-import { MeetingService } from 'src/app/services/meeting.service';
-import { Meetingview } from 'src/app/models/meetingview';
-import { Meeting } from 'src/app/models/meeting';
-import { publishFacade } from '@angular/compiler';
+import { ConsulationService } from '@app/services/consulation.service';
+import { Consulation } from '@app/models/consulation';
+import { Consulationview } from '@app/models/consulationview';
+
 
 @Component({
-  selector: 'app-meeting-deletedialog',
-  templateUrl: './meeting-deletedialog.component.html',
-  styleUrls: ['./meeting-deletedialog.component.css']
+  selector: 'app-counselor-deletedialog',
+  templateUrl: './counselor-deletedialog.component.html',
+  styleUrls: ['./counselor-deletedialog.component.css']
 })
-export class MeetingDeletedialogComponent implements OnInit {
+export class CounselorDeletedialogComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<MeetingDeletedialogComponent>,
+    public dialogRef: MatDialogRef<CounselorDeletedialogComponent>,
     private toastr: ToastrService,
     private router: Router,
-    public MeetingService: MeetingService,
-    @Inject(MAT_DIALOG_DATA) public MeetingViewModel: Meetingview,
-   ) {}
+    public ConsulationService: ConsulationService,
+    @Inject(MAT_DIALOG_DATA) public ConsulationViewModel: Consulationview,
+  ) {}
 
   ngOnInit(): void {
+    
   }
 
   refresh(): void {
@@ -32,8 +33,8 @@ export class MeetingDeletedialogComponent implements OnInit {
     };
   }
 
-  async confirmDelete(Meeting: Meeting): Promise<void> {
-    (await this.MeetingService.DeleteMeeting(Meeting)).subscribe(data => {
+  async confirmDelete(Consulation: Consulation): Promise<void> {
+    (await this.ConsulationService.DeleteConsulation(Consulation)).subscribe(data => {
       if (data == 0) {
         this.showWarning('ไม่สามารถลบข้อมูลได้');
       } else {
@@ -53,7 +54,4 @@ export class MeetingDeletedialogComponent implements OnInit {
   showWarning(message: string) {
     this.toastr.warning(message);
   }
-  
-  
-
 }
