@@ -95,17 +95,14 @@ export class MeetingInsertdialogComponent implements OnInit {
     this.loading = true;
     var Meetterm = new Meetingterm();
     this.MeetingtermService.DDLmeetingterm(Meetterm).subscribe(data => {this.MeetingtermModel = data 
-      //console.log(this.MeetingtermModel)
     });
 
     var Meettype = new Meetingtype();
     this.MeetingtypeService.DDLmeetingtype(Meettype).subscribe(data => {this.MeetingtypeModel = data
-      //console.log(this.MeetingtypeModel)
     });
     
     var Meetset = new Meetingset();
     this.MeetingsetService.GetMeetingSet(Meetset).subscribe(data => {this.MeetingsetModel = data
-      //console.log(this.MeetingsetModel)
     });
     this.loading = false;
   }
@@ -132,13 +129,6 @@ export class MeetingInsertdialogComponent implements OnInit {
     meetingData.meetingset_id   = this.frmGrpAddMeeting.controls.ddlset.value;
     meetingData.meeting_year    = this.frmGrpAddMeeting.controls.ddlyear.value;
     meetingData.meeting_time    = this.frmGrpAddMeeting.controls.meetingtime.value;
-
-    // console.log("meeting_date : ",    this.frmGrpAddMeeting.controls.meetingdate.value);
-    // console.log("meetingtype_id : ",  this.frmGrpAddMeeting.controls.ddltype.value);
-    // console.log("meetingterm_id : ",  this.frmGrpAddMeeting.controls.ddlterm.value);
-    // console.log("meetingset_id : ",   this.frmGrpAddMeeting.controls.ddlset.value);
-    // console.log("meeting_year : " ,   this.frmGrpAddMeeting.controls.ddlyear.value);
-    // console.log("meeting_time : " ,   this.frmGrpAddMeeting.controls.meetingtime.value);
 
     if(this.MeetingViewModel.meeting_id == undefined)
     {

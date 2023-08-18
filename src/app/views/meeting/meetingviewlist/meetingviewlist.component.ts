@@ -71,7 +71,6 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
   }
 
   async openAddDialog(){
-    console.log("openAddDialog");
     const dialogRef = await this.dialogService.open(MeetingInsertdialogComponent, {
       width: '640px',
       height: '100%',
@@ -125,7 +124,6 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
     this.index = i;
     this.Meetingrow = data;
     localStorage.setItem('meetingview', JSON.stringify(this.Meetingrow));
-    console.log("SetItem : "+this.id)
 
     setTimeout(() => {
       this.Router.navigate(['/counselor'])

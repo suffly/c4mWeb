@@ -89,7 +89,7 @@ export class ConsulationInsertdialogComponent implements OnInit {
   loadData() {
     this.loading = true;
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
-    this.Counselorrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
+    this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     var topictype = new Topictype();
     this.TopictypeService.DDLtopictype(topictype).subscribe(data => {this.TopictypeModel = data});
     var objective = new Objective();

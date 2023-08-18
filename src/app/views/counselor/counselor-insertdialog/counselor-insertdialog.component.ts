@@ -79,8 +79,6 @@ export class CounselorInsertdialogComponent implements OnInit {
     if (this.frmGrpAddCounselor.invalid){return;}
     var consulationData = new Consulation();    
     consulationData.counselor_id = this.frmGrpAddCounselor.controls.ddlcounselor.value;
-    //console.log(consulationData.counselor_id);
-    //console.log(this.ConsulationviewModel);
     if (this.ConsulationviewModel.consulation_id == undefined)
     {
       consulationData.meeting_id = this.Meetingrow.meeting_id;

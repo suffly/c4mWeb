@@ -58,8 +58,8 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
   }
 
   async loadData(){ 
-    console.log("LoadCouselor");
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
+    console.log("LoadCouselor, MeetingID : "+ this.Meetingrow.meeting_id);
     var Consulationview_input = new Consulationview();
     Consulationview_input.meeting_id = this.Meetingrow.meeting_id
     const subscribe = (this.ConsulationviewService.Getconsulationview_byMeeting(Consulationview_input)).subscribe(data => {
@@ -77,7 +77,6 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
   }
 
   async openAddDialog(){
-    console.log("openAddDialog");
     const dialogRef = await this.dialogService.open(CounselorInsertdialogComponent, {
       width: '640px',
       height: '320px',
@@ -137,7 +136,6 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
     this.index = i;
     this.Counselorrow = data;
     localStorage.setItem('counselorview', JSON.stringify(this.Counselorrow));
-    console.log("SetItem : "+this.id)
 
     setTimeout(() => {
       this.Router.navigate(['/consulation'])

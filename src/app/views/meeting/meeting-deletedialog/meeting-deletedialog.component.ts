@@ -53,7 +53,4 @@ export class MeetingDeletedialogComponent implements OnInit {
   showWarning(message: string) {
     this.toastr.warning(message);
   }
-  
-  
-
 }

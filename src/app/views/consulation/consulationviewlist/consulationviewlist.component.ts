@@ -58,9 +58,9 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
   }
 
   async loadData() {
-    console.log("LoadConsulation");
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
+    console.log("LoadConsulation, MeetingID : "+this.Meetingrow.meeting_id+" CounselorID : "+this.Counselorrow.consulation_id);
     var Consulationdetailview_input = new Consulationdetailview();
     Consulationdetailview_input.meeting_id = this.Meetingrow.meeting_id;
     Consulationdetailview_input.consulation_id = this.Counselorrow.consulation_id;
@@ -74,7 +74,6 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
   }
 
   async openAddDialog(){
-    console.log("openAddDialog");
     const dialogRef = await this.dialogService.open(ConsulationInsertdialogComponent, {
       width: '640px',
       height: '100%',
@@ -127,12 +126,11 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
     this.id = data.consulationdetail_id;
     this.index = i;
     this.Consulationrow = data;
-    localStorage.setItem('consulationview', JSON.stringify(this.Counselorrow));
-    console.log("SetItem : "+this.id)
+    localStorage.setItem('consulationview', JSON.stringify(this.Consulationrow));
 
-    setTimeout(() => {
-      this.Router.navigate(['/response'])
-    }, 500);
+    // setTimeout(() => {
+    //   this.Router.navigate(['/response'])
+    // }, 500);
     //[routerLink]="['/response']" << for html
   }
 
