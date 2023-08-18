@@ -1,0 +1,22 @@
+<div class="container">
+    <h3 mat-dialog-title>ต้องการลบข้อมูล ?</h3>
+    <div mat-dialog-content>
+      ID: {{ConsulationdetailviewModel.consulationdetail_id}}
+      <p></p>
+      ประเภทเรื่อง: {{ConsulationdetailviewModel.topictype_name}}
+      <p></p>
+      วัตถุประสงค์: {{ConsulationdetailviewModel.objective_name}}
+      <p></p>
+      หน่วยงานที่เกี่ยวข้อง: {{ConsulationdetailviewModel.ministry_name}}
+      <p></p>
+      จังหวัด : {{ConsulationdetailviewModel.province_name}}
+      <p></p>
+      ข้อหารือ : {{ConsulationdetailviewModel.consulationdetail_topic}}
+      <p></p>
+      รายละเอียดข้อหารือ: {{ConsulationdetailviewModel.consulationdetail_detail}}
+    </div>
+      <div mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="1" (click)="confirmDelete(ConsulationdetailviewModel)">Delete</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+  </div>

@@ -301,7 +301,9 @@ body .push-right {
     margin-right: 15px;
 } 
 
-
+.mat-mdc-form-field {
+    width: 100%;
+}
 
 
 

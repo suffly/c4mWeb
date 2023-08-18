@@ -4,6 +4,7 @@ import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
 import { MeetingviewlistComponent } from './views/meeting/meetingviewlist/meetingviewlist.component';
 import { CounselorviewlistComponent } from './views/counselor/counselorviewlist/counselorviewlist.component';
+import { ConsulationviewlistComponent } from './views/consulation/consulationviewlist/consulationviewlist.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'meeting', component:MeetingviewlistComponent},
   {path: 'counselor', component:CounselorviewlistComponent},
+  {path: 'consulation', component:ConsulationviewlistComponent},
   //{path: '', redirectTo: 'meeting', pathMatch: 'full'},
 ];
 

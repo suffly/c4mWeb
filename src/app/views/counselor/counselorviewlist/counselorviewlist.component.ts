@@ -80,7 +80,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
     console.log("openAddDialog");
     const dialogRef = await this.dialogService.open(CounselorInsertdialogComponent, {
       width: '640px',
-      height: '100%',
+      height: '320px',
       data: {},
       disableClose: true
     });
@@ -98,7 +98,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
     this.index = i;
     const dialogRef = await this.dialogService.open(CounselorInsertdialogComponent, {
       width: '640px',
-      height: '100%',
+      height: '320px',
       data: data,
       disableClose: true
     });

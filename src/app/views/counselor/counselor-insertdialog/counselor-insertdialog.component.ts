@@ -69,7 +69,7 @@ export class CounselorInsertdialogComponent implements OnInit {
   loadData() {
     this.loading = true;
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
-    var Counselor = new Counselorview
+    var Counselor = new Counselorview();
     this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {this.CounselorviewModel = data});
     this.loading = false;
   }

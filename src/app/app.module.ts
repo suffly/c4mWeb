@@ -67,6 +67,9 @@ import { MeetingDeletedialogComponent } from './views/meeting/meeting-deletedial
 import { CounselorviewlistComponent } from './views/counselor/counselorviewlist/counselorviewlist.component';
 import { CounselorInsertdialogComponent } from './views/counselor/counselor-insertdialog/counselor-insertdialog.component';
 import { CounselorDeletedialogComponent } from './views/counselor/counselor-deletedialog/counselor-deletedialog.component';
+import { ConsulationviewlistComponent } from './views/consulation/consulationviewlist/consulationviewlist.component';
+import { ConsulationInsertdialogComponent } from './views/consulation/consulation-insertdialog/consulation-insertdialog.component';
+import { ConsulationDeletedialogComponent } from './views/consulation/consulation-deletedialog/consulation-deletedialog.component';
 
 
 
@@ -83,6 +86,9 @@ import { CounselorDeletedialogComponent } from './views/counselor/counselor-dele
     CounselorviewlistComponent,
     CounselorInsertdialogComponent,
     CounselorDeletedialogComponent,
+    ConsulationviewlistComponent,
+    ConsulationInsertdialogComponent,
+    ConsulationDeletedialogComponent,
 
   ],
   imports: [

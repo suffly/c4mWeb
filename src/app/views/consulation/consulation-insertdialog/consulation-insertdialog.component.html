@@ -1,0 +1,97 @@
+<form [formGroup]="frmGrpAddConsulation" #form="ngForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <label for="">เพิ่มข้อหารือ</label>
+                    <div class="float-right">
+                        <button mat-icon-button class="mx-auto" (click)="onNoClick()">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="form-group"><label for="">ประเภทเรื่อง</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>ประเภทเรื่อง</mat-label>
+                            <mat-select formControlName="ddltopictype" placeholder="ประเภทเรื่อง" 
+                                [(ngModel)]="this.ConsulationviewdetailModel.topictype_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.TopictypeModel" [value]="element.topictype_id">
+                                    {{element.topictype_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.ddltopictype.hasError('required')">กรุณาเลื่อกประเภทเรื่อง</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">วัตถุประสงค์</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>วัตถุประสงค์</mat-label>
+                            <mat-select formControlName="ddlobjective" placeholder="วัตถุประสงค์" 
+                                [(ngModel)]="this.ConsulationviewdetailModel.objective_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.ObjectiveModel" [value]="element.objective_id">
+                                    {{element.objective_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.ddlobjective.hasError('required')">กรุณาเลื่อกวัตถุประสงค์</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">หน่วยงานที่เกี่ยวข้อง</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>หน่วยงานที่เกี่ยวข้อง</mat-label>
+                            <mat-select formControlName="ddlministry" placeholder="หน่วยงานที่เกี่ยวข้อง" 
+                                [(ngModel)]="this.ConsulationviewdetailModel.ministry_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.MinistryModel" [value]="element.ministry_id">
+                                    {{element.ministry_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.ddlministry.hasError('required')">กรุณาเลื่อกหน่วยงานที่เกี่ยวข้อง</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">จังหวัด</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>จังหวัด</mat-label>
+                            <mat-select formControlName="ddlprovince" placeholder="จังหวัด" 
+                                [(ngModel)]="this.ConsulationviewdetailModel.province_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.ProvinceModel" [value]="element.province_id">
+                                    {{element.province_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.ddlprovince.hasError('required')">กรุณาเลื่อกจังหวัด</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">ข้อหารือ</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill" hintLabel="จำนวนคำ">
+                            <mat-label>ข้อหารือ</mat-label>
+                            <textarea matInput #inputtopic type="text" formControlName="inputtopic" placeholder="ข้อหารือ" 
+                            [(ngModel)]="this.ConsulationviewdetailModel.consulationdetail_topic" maxlength="250" [errorStateMatcher]="matcher"></textarea>
+                            <mat-hint align="end">{{inputtopic.value.length || 0}}/250</mat-hint>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.inputtopic.hasError('required')">กรุณาระบุข้อหารือ</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill" hintLabel="จำนวนคำ">
+                            <mat-label>รายละเอียดข้อหารือ</mat-label>
+                            <textarea matInput #inputdetail type="text" formControlName="inputdetail" placeholder="รายละเอียดข้อหารือ" 
+                            [(ngModel)]="this.ConsulationviewdetailModel.consulationdetail_detail" maxlength="5000" [errorStateMatcher]="matcher"></textarea>
+                            <mat-hint align="end">{{inputdetail.value.length || 0}}/5000</mat-hint>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.inputdetail.hasError('required')">กรุณาระบุรายละเอียดข้อหารือ</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div style="text-align: center;">
+                        <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="form.invalid" [mat-dialog-close]="1">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            บันทึก
+                        </button>&nbsp;&nbsp;&nbsp;
+                        <button mat-raised-button (click)="onNoClick()" color="primary" tabindex="-1" [mat-dialog-close]="0">ยกเลิก</button>      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

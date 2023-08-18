@@ -1,0 +1,25 @@
+export class Consulationdetailview {
+    consulationdetail_id:number;
+    consulation_id:number;
+    meeting_id:number;
+    topictype_id:number;
+    topictype_name:string;
+    objective_id:number;
+    objective_name:string;
+    ministry_id:number;
+    ministry_name:string;
+    consulationdetail_topic:string;
+    consulationdetail_detail:string;
+    province_id:number;
+    province_name:string;
+    consulation_attachment_flag:number;
+    status_id:number;
+    create_date:Date;
+    create_by:number;
+    update_date:Date;
+    update_by:number;
+    send_date:Date;
+    send_by:number;
+    receive_date:Date;
+    receive_by:number;
+}
