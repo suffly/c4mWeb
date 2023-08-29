@@ -83,16 +83,8 @@ export class ResponseInsertdialogComponent implements OnInit {
       responseData.create_name = "ทดสอบ";
       responseData.create_surname = "ทดสอบ";
       this.ResponseService.SaveResponse(responseData).subscribe(data => {
-        if(data == 0)
-        {
-          console.log("SaveResponse Unsuccess")
-          this.showWarning('ไม่บันทึกข้อมูล : มีข้อมูลในระบบซ้ำ');
-        }
-        else
-        {
-          console.log("SaveResponse Success")
-          this.showSuccess('บันทึกข้อมูลเรียบร้อย');
-        }
+        if(data == 0) {this.showWarning('ไม่บันทึกข้อมูลตอบกลับข้อหารือได้');}
+        else {this.showSuccess('บันทึกข้อมูลตอบกลับข้อหารือเรียบร้อย');}
       });
     }
     else
@@ -105,16 +97,8 @@ export class ResponseInsertdialogComponent implements OnInit {
       responseData.create_name = "ทดสอบ2";
       responseData.create_surname = "ทดสอบ2";
       (await this.ResponseService.UpdateResponse(responseData)).subscribe(data => {
-        if(data == 0)
-        {
-          console.log("UpdateResponse Unsuccess");
-          this.showWarning('ไม่บันทึกข้อมูล : มีข้อมูลในระบบซ้ำ');
-        }
-        else
-        {
-          console.log("UpdateResponse Success");
-          this.showSuccess('แก้ไขข้อมูลเรียบร้อย');
-        }
+        if(data == 0) { this.showWarning('ไม่แก้ไขข้อมูลตอบกลับข้อหารือ');}
+        else {this.showSuccess('แก้ไขข้อมูลตอบกลับข้อหารือเรียบร้อย');}
       });
     }
   }

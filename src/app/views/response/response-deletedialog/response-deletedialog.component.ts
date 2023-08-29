@@ -27,11 +27,8 @@ export class ResponseDeletedialogComponent implements OnInit {
 
   async confirmDelete(Response: Response): Promise<void> {
     (await this.ResponseService.DeleteResponse(Response)).subscribe(data => {
-      if (data == 0) {
-        this.showWarning('ไม่สามารถลบข้อมูลได้');
-      } else {
-        this.showSuccess('ลบข้อมูลเรียบร้อย');
-      }
+      if (data == 0) {this.showWarning('ไม่สามารถลบข้อมูลตอบกลับข้อหารือได้');}
+      else {this.showSuccess('ลบข้อมูลตอบกลับข้อหารือเรียบร้อย');}
     });
   }
   

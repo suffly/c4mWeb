@@ -34,11 +34,8 @@ export class MeetingDeletedialogComponent implements OnInit {
 
   async confirmDelete(Meeting: Meeting): Promise<void> {
     (await this.MeetingService.DeleteMeeting(Meeting)).subscribe(data => {
-      if (data == 0) {
-        this.showWarning('ไม่สามารถลบข้อมูลได้');
-      } else {
-        this.showSuccess('ลบข้อมูลเรียบร้อย');
-      }
+      if (data == 0) {this.showWarning('ไม่สามารถลบข้อมูลการประชุมได้');}
+      else {this.showSuccess('ลบข้อมูลการประชุมเรียบร้อย');}  
     });
   }
   

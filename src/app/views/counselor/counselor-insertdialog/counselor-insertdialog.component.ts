@@ -84,16 +84,8 @@ export class CounselorInsertdialogComponent implements OnInit {
       consulationData.meeting_id = this.Meetingrow.meeting_id;
       consulationData.create_by = 1;
       this.ConsulationService.SaveConsulation(consulationData).subscribe(data => {
-        if (data == 0)
-        {
-          console.log("SaveCounselor Unsuccess")
-          this.showWarning('ไม่บันทึกข้อมูล : มีข้อมูลในระบบซ้ำ');
-        }
-        else
-        {
-          console.log("SaveCounselor Success")
-          this.showSuccess('บันทึกข้อมูลเรียบร้อย');
-        }
+        if (data == 0) {this.showWarning('ไม่บันทึกผู้หารือได้');}
+        else {this.showSuccess('บันทึกผู้หารือเรียบร้อย');}
       });
     }
     else
@@ -106,16 +98,8 @@ export class CounselorInsertdialogComponent implements OnInit {
       consulationData.create_by = this.ConsulationviewModel.create_by;
 
       (await this.ConsulationService.UpdateConsulation(consulationData)).subscribe(data => {
-        if (data == 0)
-        {
-          console.log("UpdateCounselor Unsuccess");
-          this.showWarning('ไม่บันทึกข้อมูล : มีข้อมูลในระบบซ้ำ');
-        }
-        else
-        {
-          console.log("UpdateCounselor Success");
-          this.showSuccess('แก้ไขข้อมูลเรียบร้อย');
-        }
+        if (data == 0) {this.showWarning('ไม่แก้ไขผู้หารือได้');}
+        else {this.showSuccess('แก้ไขผู้หารือเรียบร้อย');}
       });
     }
   }
