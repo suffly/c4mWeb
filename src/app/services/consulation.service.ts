@@ -30,7 +30,7 @@ export class ConsulationService {
   }
 
   async DeleteConsulation(consulation: Consulation): Promise<Observable<any>> {
-    return await this.http.post<number>(`${this.baseUrl}/UpdateConsulation`,consulation).pipe(
+    return await this.http.post<number>(`${this.baseUrl}/DeleteConsulation`,consulation).pipe(
       map((consulationData: number) => {
         return consulationData
       })

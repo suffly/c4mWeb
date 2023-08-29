@@ -5,6 +5,17 @@
     <label for="">ผู้หารือ </label>
 </div>
 
+<div class="card-body">
+    <div class="row">
+        ผู้ปรึกษาหารือในที่ประชุม{{Meetingrow.meetingtype_name}} &nbsp;
+        ชุดที่ {{Meetingrow.meetingset_desc}} &nbsp;
+        ปีที่ {{Meetingrow.meeting_year}} &nbsp;
+        ครั้งที่ {{Meetingrow.meeting_time}} &nbsp;
+        ( {{Meetingrow.meetingterm_name}} ) &nbsp;
+        วันที่ {{Meetingrow.meeting_date.toString()|thaidate:'medium'}}
+    </div>
+</div>
+
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
         <ng-container matColumnDef="index">
@@ -38,6 +49,10 @@
         <ng-container matColumnDef="counselordivision_name">
             <th mat-header-cell *matHeaderCellDef> ฝ่ายการเมือง </th>
             <td mat-cell *matCellDef="let element"> {{element.counselordivision_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="count_consulationdetail">
+            <th mat-header-cell *matHeaderCellDef> จำนวนข้อหารือ </th>
+            <td mat-cell *matCellDef="let element"> {{element.count_consulationdetail}} </td>
         </ng-container>
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>

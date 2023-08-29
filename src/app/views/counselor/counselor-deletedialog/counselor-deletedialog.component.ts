@@ -38,7 +38,7 @@ export class CounselorDeletedialogComponent implements OnInit {
       if (data == 0) {
         this.showWarning('ไม่สามารถลบข้อมูลได้');
       } else {
-        this.showSuccess('ลบข้อมูลเรียบร้อย');
+        this.showSuccess('ลบข้อมูลเรียบร้อย'+data);
       }
     });
   }

@@ -47,7 +47,7 @@ import { MatTooltipModule} from '@angular/material/tooltip';
 import { MatTreeModule} from '@angular/material/tree';
 import { DialogModule } from '@angular/cdk/dialog';
 
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { ThaidatePipe } from './pipes/dateformat/thaidate.pipe';
 
@@ -70,6 +70,10 @@ import { CounselorDeletedialogComponent } from './views/counselor/counselor-dele
 import { ConsulationviewlistComponent } from './views/consulation/consulationviewlist/consulationviewlist.component';
 import { ConsulationInsertdialogComponent } from './views/consulation/consulation-insertdialog/consulation-insertdialog.component';
 import { ConsulationDeletedialogComponent } from './views/consulation/consulation-deletedialog/consulation-deletedialog.component';
+import { ResponselistComponent } from './views/response/responselist/responselist.component';
+import { ResponseInsertdialogComponent } from './views/response/response-insertdialog/response-insertdialog.component';
+import { ResponseDeletedialogComponent } from './views/response/response-deletedialog/response-deletedialog.component';
+import { HeaderComponent } from './views/header/header.component';
 
 
 
@@ -89,12 +93,16 @@ import { ConsulationDeletedialogComponent } from './views/consulation/consulatio
     ConsulationviewlistComponent,
     ConsulationInsertdialogComponent,
     ConsulationDeletedialogComponent,
+    ResponselistComponent,
+    ResponseInsertdialogComponent,
+    ResponseDeletedialogComponent,
+    HeaderComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
+    CommonModule,
     HttpClientModule,
     ToastrModule.forRoot(),
 

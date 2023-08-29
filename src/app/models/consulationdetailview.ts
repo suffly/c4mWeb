@@ -14,6 +14,7 @@ export class Consulationdetailview {
     province_name:string;
     consulation_attachment_flag:number;
     status_id:number;
+    status_name:string;
     create_date:Date;
     create_by:number;
     update_date:Date;

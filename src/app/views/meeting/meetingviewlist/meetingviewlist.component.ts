@@ -30,7 +30,7 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
   Meetingrow : Meetingview;
   MeetingviewModel : Meetingview[];
   dataSource = new MatTableDataSource<Meetingview>();
-  displayedColumns: string[] = ['index', 'meetingtype_name', 'meeting_set', 'meeting_year', 'meeting_time', 'meetingterm_name', 'meeting_date', 'create_name', 'create_date', 'actions'];
+  displayedColumns: string[] = ['index', 'meetingtype_name', 'meeting_set', 'meeting_year', 'meeting_time', 'meetingterm_name', 'meeting_date', 'count_consulation', 'count_consulationtotal', 'actions'];
   pageSize: number = 10;
   pageSizeOptions = [10, 25, 50];
   index: number;

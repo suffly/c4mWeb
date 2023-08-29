@@ -40,13 +40,13 @@
             <th mat-header-cell *matHeaderCellDef> วันที่ประชุม </th>
             <td mat-cell *matCellDef="let element"> {{element.meeting_date | thaidate: 'medium'}} </td>
         </ng-container>
-        <ng-container matColumnDef="create_name">
-            <th mat-header-cell *matHeaderCellDef> ผู้สร้าง </th>
-            <td mat-cell *matCellDef="let element"> {{element.create_id}}{{element.create_title}} {{element.create_name}} {{element.create_surname}} </td>
+        <ng-container matColumnDef="count_consulation">
+            <th mat-header-cell *matHeaderCellDef> จำนวนผู้หารือ </th>
+            <td mat-cell *matCellDef="let element"> {{element.count_consulation}} </td>
         </ng-container>
-        <ng-container matColumnDef="create_date">
-            <th mat-header-cell *matHeaderCellDef> วันที่สร้าง </th>
-            <td mat-cell *matCellDef="let element"> {{element.create_date | thaidate: 'medium'}} </td>
+        <ng-container matColumnDef="count_consulationtotal">
+            <th mat-header-cell *matHeaderCellDef> จำนวนข้อหารือ </th>
+            <td mat-cell *matCellDef="let element"> {{element.count_consulationtotal}} </td>
         </ng-container>
         
         <ng-container matColumnDef="actions">

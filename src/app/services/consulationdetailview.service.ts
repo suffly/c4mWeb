@@ -18,7 +18,7 @@ GetConsulationdetail_All(Consulationdetailview: Consulationdetailview): Observab
     map((ConsulationdetailviewData: Consulationdetailview[]) => {
       return ConsulationdetailviewData;
     })
-  )
+  );
 }
 
 GetConsulationdetail_byConsulation(Consulationdetailview: Consulationdetailview): Observable<any>{
@@ -26,7 +26,7 @@ GetConsulationdetail_byConsulation(Consulationdetailview: Consulationdetailview)
     map((ConsulationdetailviewData: Consulationdetailview[]) => {
       return ConsulationdetailviewData;
     })
-  )
+  );
 }
 
 GetConsulationdetail_byMeeting(Consulationdetailview: Consulationdetailview): Observable<any>{
@@ -34,7 +34,7 @@ GetConsulationdetail_byMeeting(Consulationdetailview: Consulationdetailview): Ob
     map((ConsulationdetailviewData: Consulationdetailview[]) => {
       return ConsulationdetailviewData;
     })
-  )
+  );
 }
 
 }

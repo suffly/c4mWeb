@@ -5,6 +5,22 @@
     <label for="">ข้อหารือ </label>
 </div>
 
+<div class="card-body">
+    <div class="row">
+        ผู้ปรึกษาหารือในที่ประชุม {{Meetingrow.meetingtype_name}} &nbsp;&nbsp;
+        ชุดที่ {{Meetingrow.meetingset_desc}} &nbsp;&nbsp;
+        ปีที่ {{Meetingrow.meeting_year}} &nbsp;&nbsp;
+        ครั้งที่ {{Meetingrow.meeting_time}} &nbsp;&nbsp;
+        ( {{Meetingrow.meetingterm_name}} ) &nbsp;&nbsp;
+        วันที่ {{Meetingrow.meeting_date.toString()|thaidate:'medium'}}
+    </div>
+    <div class="row">
+        ผู้หารือ {{Counselorrow.counselor_title}}{{Counselorrow.counselor_name}} {{Counselorrow.counselor_middlename}} {{Counselorrow.counselor_surname}} &nbsp;&nbsp;
+        สมาชิกสภาผู้แทนราษฎร{{Counselorrow.counselortype_name}} &nbsp;&nbsp; {{Counselorrow.partylist_name}}
+        
+    </div>
+</div>
+
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
         <ng-container matColumnDef="index">
@@ -35,9 +51,13 @@
             <th mat-header-cell *matHeaderCellDef> ประเภทหัวข้อ </th>
             <td mat-cell *matCellDef="let element"> {{element.topictype_name}} </td>
         </ng-container>
+        <ng-container matColumnDef="status_name">
+            <th mat-header-cell *matHeaderCellDef> สถานะการดำเนินการ </th>
+            <td mat-cell *matCellDef="let element"> {{element.status_name}} </td>
+        </ng-container>
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>
-                <span style="font-size: smaller;">เพิ่มผู้หารือ</span>
+                <span style="font-size: smaller;">เพิ่มข้อหารือ</span>
                 <button mat-icon-button color="primary" (click)="openAddDialog()">
                     <mat-icon aria-label="Add">add</mat-icon>
                 </button>
@@ -48,9 +68,9 @@
             </th>
 
             <td mat-cell *matCellDef="let element; let i=index;" style="text-align: center;">
-                <!-- <button mat-icon-button color="primary" (click)="addResponse(i,element)">
-                    <mat-icon aria-label="speaker_notes">speaker_notes</mat-icon>
-                </button> -->
+                <button mat-icon-button color="primary" (click)="addResponse(i,element)">
+                    <mat-icon aria-label="question_answer">question_answer</mat-icon>
+                </button>
                 <button mat-icon-button color="accent" (click)="editItem(i,element)">
                     <mat-icon aria-label="Edit">edit</mat-icon>
                 </button>

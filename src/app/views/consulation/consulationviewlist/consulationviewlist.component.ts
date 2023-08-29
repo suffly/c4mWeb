@@ -32,7 +32,7 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
   Counselorrow: Consulationview;
   Consulationrow: Consulationdetailview;
   dataSource = new MatTableDataSource<Consulationdetailview>();
-  displayedColumns: string[] = ['index', 'consulationdetail_topic', 'consulationdetail_detail', 'ministry_name', 'province_name', 'objective_name', 'topictype_name', 'actions'];
+  displayedColumns: string[] = ['index', 'consulationdetail_topic', 'consulationdetail_detail', 'ministry_name', 'province_name', 'objective_name', 'topictype_name', 'status_name', 'actions'];
   pageSize: number = 10;
   pageSizeOptions = [10, 20, 30];
   index: number;
@@ -128,9 +128,9 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
     this.Consulationrow = data;
     localStorage.setItem('consulationview', JSON.stringify(this.Consulationrow));
 
-    // setTimeout(() => {
-    //   this.Router.navigate(['/response'])
-    // }, 500);
+    setTimeout(() => {
+      this.Router.navigate(['/response'])
+    }, 500);
     //[routerLink]="['/response']" << for html
   }
 

@@ -13,6 +13,7 @@ import { Consulationview } from '@app/models/consulationview';
 
 import { CounselorInsertdialogComponent } from '../counselor-insertdialog/counselor-insertdialog.component';
 import { CounselorDeletedialogComponent } from '../counselor-deletedialog/counselor-deletedialog.component';
+import { ThaidatePipe } from '@app/pipes/dateformat/thaidate.pipe';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
   Meetingrow : Meetingview;
   Counselorrow: Consulationview;
   dataSource = new MatTableDataSource<Consulationview>();
-  displayedColumns: string[] = ['index', 'counselor_title', 'counselor_name', 'counselor_middlename', 'counselor_surname', 'counselortype_name', 'partylist_name', 'counselordivision_name', 'actions'];
+  displayedColumns: string[] = ['index', 'counselor_title', 'counselor_name', 'counselor_middlename', 'counselor_surname', 'counselortype_name', 'partylist_name', 'counselordivision_name', 'count_consulationdetail', 'actions'];
   pageSize: number = 10;
   pageSizeOptions = [10, 20, 30];
   index: number;
@@ -59,6 +60,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
 
   async loadData(){ 
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
+    console.log(this.Meetingrow.meetingtype_id);
     console.log("LoadCouselor, MeetingID : "+ this.Meetingrow.meeting_id);
     var Consulationview_input = new Consulationview();
     Consulationview_input.meeting_id = this.Meetingrow.meeting_id

@@ -21,8 +21,6 @@ import { MinistryService } from '@app/services/ministry.service';
 import { Ministry } from '@app/models/ministry';
 import { ProvinceService } from '@app/services/province.service';
 import { Province } from '@app/models/province';
-import { FaStackComponent } from '@fortawesome/angular-fontawesome';
-import { ConsulationDeletedialogComponent } from '../consulation-deletedialog/consulation-deletedialog.component';
 
 @Component({
   selector: 'app-consulation-insertdialog',
@@ -103,9 +101,7 @@ export class ConsulationInsertdialogComponent implements OnInit {
 
   async onSubmit() {
     if (this.frmGrpAddConsulation.invalid){return;}
-    var consulationData = new Consulationdetail();
-    consulationData.consulation_id = this.Counselorrow.consulation_id;
-    consulationData.meeting_id = this.Meetingrow.meeting_id;
+    var consulationData = new Consulationdetail();  
     consulationData.topictype_id = this.frmGrpAddConsulation.controls.ddltopictype.value;
     consulationData.objective_id = this.frmGrpAddConsulation.controls.ddlobjective.value;
     consulationData.ministry_id = this.frmGrpAddConsulation.controls.ddlministry.value;
@@ -116,22 +112,24 @@ export class ConsulationInsertdialogComponent implements OnInit {
     if(this.ConsulationviewdetailModel.consulationdetail_id == undefined)
     {
       consulationData.create_by = 1;
+      consulationData.consulation_id = this.Counselorrow.consulation_id;
+      consulationData.meeting_id = this.Meetingrow.meeting_id;
       this.ConsulationdetailService.SaveConsulationdetail(consulationData).subscribe(data => {
         if (data == 0)
         {
-          console.log("SaveMeeting Unsuccess")
+          console.log("SaveConsulation Unsuccess")
           this.showWarning('ไม่บันทึกข้อมูล : มีข้อมูลในระบบซ้ำ');
         }
         else
         {
-          console.log("SaveMeeting Success")
+          console.log("SaveConsulation Success")
           this.showSuccess('บันทึกข้อมูลเรียบร้อย');
         }
       });
     }
     else
     {
-      consulationData.create_by = 2;
+      consulationData.update_by = 2;
       consulationData.consulationdetail_id = this.ConsulationviewdetailModel.consulationdetail_id;
       consulationData.consulation_id = this.ConsulationviewdetailModel.consulation_id;
       consulationData.meeting_id = this.ConsulationviewdetailModel.meeting_id;
@@ -146,12 +144,12 @@ export class ConsulationInsertdialogComponent implements OnInit {
       (await this.ConsulationdetailService.UpdateConsulationdetail(consulationData)).subscribe(data => {
         if (data == 0)
         {
-          console.log("UpdateMeeting Unsuccess");
+          console.log("UpdateConsulation Unsuccess");
           this.showWarning('ไม่บันทึกข้อมูล : มีข้อมูลในระบบซ้ำ');
         }
         else
         {
-          console.log("UpdateMeeting Success");
+          console.log("UpdateConsulation Success");
           this.showSuccess('แก้ไขข้อมูลเรียบร้อย');
         }
       });

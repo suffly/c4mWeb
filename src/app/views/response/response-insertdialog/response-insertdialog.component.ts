@@ -6,36 +6,31 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
-import { CounselorviewlistComponent } from '../counselorviewlist/counselorviewlist.component';
-
-import { Meetingview } from 'src/app/models/meetingview';
-import { CounselorviewService } from '@app/services/counselorview.service';
-import { Counselorview } from '@app/models/counselorview';
-import { ConsulationviewService } from '@app/services/consulationview.service';
+import { Meetingview } from '@app/models/meetingview';
 import { Consulationview } from '@app/models/consulationview';
-import { Consulation } from '@app/models/consulation';
-import { ConsulationService } from '@app/services/consulation.service';
+import { Consulationdetailview } from '@app/models/consulationdetailview';
+import { ResponseService } from '@app/services/response.service';
+import { Response } from '@app/models/response';
+
+import { ResponselistComponent } from '../responselist/responselist.component';
 
 @Component({
-  selector: 'app-counselor-insertdialog',
-  templateUrl: './counselor-insertdialog.component.html',
-  styleUrls: ['./counselor-insertdialog.component.css']
+  selector: 'app-response-insertdialog',
+  templateUrl: './response-insertdialog.component.html',
+  styleUrls: ['./response-insertdialog.component.css']
 })
-export class CounselorInsertdialogComponent implements OnInit {
+export class ResponseInsertdialogComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<CounselorviewlistComponent>,
+    public dialogRef: MatDialogRef<ResponselistComponent>,
     private formBuilder: FormBuilder,
     private router: Router,
     private _snackBar: MatSnackBar,
     private ref: ChangeDetectorRef,
     private toastr: ToastrService,
+    public ResponseService: ResponseService,
 
-    public CounselorviewService: CounselorviewService,
-    public ConsulationviewService: ConsulationviewService,
-    public ConsulationService: ConsulationService,
-    
-    @Inject(MAT_DIALOG_DATA) public ConsulationviewModel: Consulationview,
+    @Inject(MAT_DIALOG_DATA) public ResponseModel: Response,
   ) {}
 
   loading: boolean = true;
@@ -43,20 +38,20 @@ export class CounselorInsertdialogComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   Meetingrow:Meetingview;
+  Counselorrow: Consulationview;
+  Consulationrow: Consulationdetailview;
 
-  CounselorviewModel: Counselorview[];
-
-  frmGrpAddCounselor: FormGroup;
+  frmGrpAddResponse: FormGroup;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-
-  ngOnInit(): void {
+  ngOnInit(): void{
     this.loadData();
-    this.frmGrpAddCounselor = this.formBuilder.group({
-      ddlcounselor: new FormControl({value: '', disabled: false}, [Validators.required])
+    this.frmGrpAddResponse = this.formBuilder.group({
+      inputresponse:  new FormControl({value: '', disabled: false}, [Validators.required]),
     });
-    if(this.ConsulationviewModel.counselor_id == undefined)
+
+    if(this.ResponseModel.response_id == undefined)
     {
       this.editable = false;
     }
@@ -64,56 +59,60 @@ export class CounselorInsertdialogComponent implements OnInit {
     {
       this.editable = true;
     }
+    
   }
 
   loadData() {
     this.loading = true;
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
-    var Counselor = new Counselorview();
-    this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {this.CounselorviewModel = data});
+    this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
+    this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
     this.loading = false;
   }
 
   async onSubmit() {
-    console.log("onSubmit");
-    if (this.frmGrpAddCounselor.invalid){return;}
-    var consulationData = new Consulation();    
-    consulationData.counselor_id = this.frmGrpAddCounselor.controls.ddlcounselor.value;
-    if (this.ConsulationviewModel.consulation_id == undefined)
+    var responseData = new Response();
+    responseData.response_topic = this.frmGrpAddResponse.controls.inputresponse.value;
+    if(this.ResponseModel.response_id == undefined)
     {
-      consulationData.meeting_id = this.Meetingrow.meeting_id;
-      consulationData.create_by = 1;
-      this.ConsulationService.SaveConsulation(consulationData).subscribe(data => {
-        if (data == 0)
+      responseData.consulationdetail_id = this.Consulationrow.consulationdetail_id;
+      responseData.consulation_id = this.Counselorrow.consulation_id;
+      responseData.meeting_id = this.Meetingrow.meeting_id;
+      responseData.create_by = 1;
+      responseData.create_title = "นาย";
+      responseData.create_name = "ทดสอบ";
+      responseData.create_surname = "ทดสอบ";
+      this.ResponseService.SaveResponse(responseData).subscribe(data => {
+        if(data == 0)
         {
-          console.log("SaveCounselor Unsuccess")
+          console.log("SaveResponse Unsuccess")
           this.showWarning('ไม่บันทึกข้อมูล : มีข้อมูลในระบบซ้ำ');
         }
         else
         {
-          console.log("SaveCounselor Success")
+          console.log("SaveResponse Success")
           this.showSuccess('บันทึกข้อมูลเรียบร้อย');
         }
       });
     }
     else
     {
-      consulationData.update_by = 2;
-      consulationData.consulation_id = this.ConsulationviewModel.consulation_id;
-      consulationData.meeting_id = this.ConsulationviewModel.meeting_id;
-      consulationData.count_consulationdetail = this.ConsulationviewModel.count_consulationdetail;
-      consulationData.create_date = this.ConsulationviewModel.create_date;
-      consulationData.create_by = this.ConsulationviewModel.create_by;
-
-      (await this.ConsulationService.UpdateConsulation(consulationData)).subscribe(data => {
-        if (data == 0)
+      responseData.consulationdetail_id = this.ResponseModel.consulationdetail_id;
+      responseData.consulation_id = this.ResponseModel.consulation_id;
+      responseData.meeting_id = this.ResponseModel.meeting_id;
+      responseData.create_by = 2;
+      responseData.create_title = "นาย";
+      responseData.create_name = "ทดสอบ2";
+      responseData.create_surname = "ทดสอบ2";
+      (await this.ResponseService.UpdateResponse(responseData)).subscribe(data => {
+        if(data == 0)
         {
-          console.log("UpdateCounselor Unsuccess");
+          console.log("UpdateResponse Unsuccess");
           this.showWarning('ไม่บันทึกข้อมูล : มีข้อมูลในระบบซ้ำ');
         }
         else
         {
-          console.log("UpdateCounselor Success");
+          console.log("UpdateResponse Success");
           this.showSuccess('แก้ไขข้อมูลเรียบร้อย');
         }
       });
@@ -139,7 +138,7 @@ export class CounselorInsertdialogComponent implements OnInit {
   ngAfterContentChecked() {
     this.ref.detectChanges();
   }
-  get f() { return this.frmGrpAddCounselor.controls; }
+  get f() { return this.frmGrpAddResponse.controls; }
 
   refresh(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
