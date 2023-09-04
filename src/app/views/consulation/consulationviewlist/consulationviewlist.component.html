@@ -28,11 +28,11 @@
             <td mat-cell *matCellDef="let element;let i = index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
         </ng-container>
         <ng-container matColumnDef="consulationdetail_topic">
-            <th mat-header-cell *matHeaderCellDef> ข้อหารือ </th>
+            <th mat-header-cell *matHeaderCellDef> ชื่อข้อหารือ (สำหรับใส่ใบนำส่ง) </th>
             <td mat-cell *matCellDef="let element"> {{element.consulationdetail_topic}} </td>
         </ng-container>
         <ng-container matColumnDef="consulationdetail_detail">
-            <th mat-header-cell *matHeaderCellDef> รายละเอียด </th>
+            <th mat-header-cell *matHeaderCellDef> ประเด็นข้อปรึกษาหารือฯ </th>
             <td mat-cell *matCellDef="let element"> {{element.consulationdetail_detail}} </td>
         </ng-container>
         <ng-container matColumnDef="ministry_name">
