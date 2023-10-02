@@ -17,10 +17,10 @@ import { TopictypeService } from '@app/services/topictype.service';
 import { Topictype } from '@app/models/topictype';
 import { ObjectiveService } from '@app/services/objective.service';
 import { Objective } from '@app/models/objective';
-import { MinistryService } from '@app/services/ministry.service';
-import { Ministry } from '@app/models/ministry';
-import { ProvinceService } from '@app/services/province.service';
-import { Province } from '@app/models/province';
+// import { MinistryService } from '@app/services/ministry.service';
+// import { Ministry } from '@app/models/ministry';
+// import { ProvinceService } from '@app/services/province.service';
+// import { Province } from '@app/models/province';
 
 @Component({
   selector: 'app-consulation-insertdialog',
@@ -39,8 +39,8 @@ export class ConsulationInsertdialogComponent implements OnInit {
     public ConsulationdetailService: ConsulationdetailService,
     public TopictypeService: TopictypeService,
     public ObjectiveService: ObjectiveService,
-    public MinistryService: MinistryService,
-    public ProvinceService: ProvinceService,
+    // public MinistryService: MinistryService,
+    // public ProvinceService: ProvinceService,
 
     
     @Inject(MAT_DIALOG_DATA) public ConsulationviewdetailModel: Consulationdetailview,
@@ -50,13 +50,13 @@ export class ConsulationInsertdialogComponent implements OnInit {
   editable: boolean = false;
   matcher = new MyErrorStateMatcher();
 
-  Meetingrow:Meetingview;
-  Counselorrow: Consulationview;
+  Meetingrow:number;
+  Counselorrow: number;
 
   TopictypeModel: Topictype[];
   ObjectiveModel: Objective[];
-  MinistryModel: Ministry[];
-  ProvinceModel: Province[];
+  // MinistryModel: Ministry[];
+  // ProvinceModel: Province[];
 
   frmGrpAddConsulation: FormGroup;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -67,8 +67,8 @@ export class ConsulationInsertdialogComponent implements OnInit {
     this.frmGrpAddConsulation = this.formBuilder.group({
       ddltopictype: new FormControl({value: '', disabled: false}, [Validators.required]),
       ddlobjective: new FormControl({value: '', disabled: false}, [Validators.required]),
-      ddlministry:  new FormControl({value: '', disabled: false}, [Validators.required]),
-      ddlprovince:  new FormControl({value: '', disabled: false}, [Validators.required]),
+      // ddlministry:  new FormControl({value: '', disabled: false}, [Validators.required]),
+      // ddlprovince:  new FormControl({value: '', disabled: false}, [Validators.required]),
       inputtopic:   new FormControl({value: '', disabled: false}, [Validators.required]),
       inputdetail:  new FormControl({value: '', disabled: false}, [Validators.required]),
     });
@@ -92,10 +92,10 @@ export class ConsulationInsertdialogComponent implements OnInit {
     this.TopictypeService.DDLtopictype(topictype).subscribe(data => {this.TopictypeModel = data});
     var objective = new Objective();
     this.ObjectiveService.DDLobjective(objective).subscribe(data => {this.ObjectiveModel = data});
-    var ministry = new Ministry();
-    this.MinistryService.DDLministry(ministry).subscribe(data => {this.MinistryModel = data});
-    var province = new Province();
-    this.ProvinceService.DDLprovince(province).subscribe(data => {this.ProvinceModel = data});
+    // var ministry = new Ministry();
+    // this.MinistryService.DDLministry(ministry).subscribe(data => {this.MinistryModel = data});
+    // var province = new Province();
+    // this.ProvinceService.DDLprovince(province).subscribe(data => {this.ProvinceModel = data});
     this.loading = false;
   }
 
@@ -104,16 +104,16 @@ export class ConsulationInsertdialogComponent implements OnInit {
     var consulationData = new Consulationdetail();  
     consulationData.topictype_id = this.frmGrpAddConsulation.controls.ddltopictype.value;
     consulationData.objective_id = this.frmGrpAddConsulation.controls.ddlobjective.value;
-    consulationData.ministry_id = this.frmGrpAddConsulation.controls.ddlministry.value;
+    // consulationData.ministry_id = this.frmGrpAddConsulation.controls.ddlministry.value;
     consulationData.consulationdetail_topic = this.frmGrpAddConsulation.controls.inputtopic.value;
     consulationData.consulationdetail_detail = this.frmGrpAddConsulation.controls.inputdetail.value;
-    consulationData.province_id = this.frmGrpAddConsulation.controls.ddlprovince.value;
+    // consulationData.province_id = this.frmGrpAddConsulation.controls.ddlprovince.value;
 
     if(this.ConsulationviewdetailModel.consulationdetail_id == undefined)
     {
       consulationData.create_by = 1;
-      consulationData.consulation_id = this.Counselorrow.consulation_id;
-      consulationData.meeting_id = this.Meetingrow.meeting_id;
+      consulationData.consulation_id = this.Counselorrow;
+      consulationData.meeting_id = this.Meetingrow;
       this.ConsulationdetailService.SaveConsulationdetail(consulationData).subscribe(data => {
         if (data == 0) {this.showWarning('ไม่สามารถบันทึกข้อหารือได้');}
         else {this.showSuccess('บันทึกข้อหารือเรียบร้อย');}

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class ConsulationdetailService {
 
   constructor(private http: HttpClient) { }
-  readonly baseUrl = `${environment.apiURL}/api/Consulationdetails`
+  readonly baseUrl = `${environment.apiURL}/api/consulationdetails`
 
   SaveConsulationdetail(consulationdetail: Consulationdetail): Observable<any> {
     return this.http.post<number>(`${this.baseUrl}/SaveConsulationdetail`,consulationdetail).pipe(

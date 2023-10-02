@@ -27,7 +27,7 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
     private Router: Router,
     ) {}
 
-  Meetingrow : Meetingview;
+  Meetingrow : number;
   MeetingviewModel : Meetingview[];
   dataSource = new MatTableDataSource<Meetingview>();
   displayedColumns: string[] = ['index', 'meetingtype_name', 'meeting_set', 'meeting_year', 'meeting_time', 'meetingterm_name', 'meeting_date', 'count_consulation', 'count_consulationtotal', 'actions'];
@@ -37,19 +37,20 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
   id: number;
   
   subscriptions = [];
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
   ngOnInit(): void{
+    localStorage.removeItem("meetingview");
     this.loadData();
 
   }
 
   ngOnDestroy() {
-    //this.ngUnsubscribe.next();
+    this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
@@ -122,7 +123,7 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
   {
     this.id = data.meeting_id;
     this.index = i;
-    this.Meetingrow = data;
+    this.Meetingrow = data.meeting_id;
     localStorage.setItem('meetingview', JSON.stringify(this.Meetingrow));
 
     setTimeout(() => {

@@ -1,9 +1,9 @@
-<form [formGroup]="frmGrpAddCounselor" #form="ngForm">
+<form [formGroup]="frmGrpAddProvince" #form="ngForm">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <label for="">เพิ่มผู้หารือ</label>
+                    <label for="">เพิ่มจังหวัด</label>
                     <div class="float-right">
                         <button mat-icon-button class="mx-auto" (click)="onNoClick()">
                             <mat-icon>cancel</mat-icon>
@@ -12,19 +12,19 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="form-group"><label for="">ผู้หารือ</label></div>
+                    <div class="form-group"><label for="">จังหวัด</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill">
-                            <mat-label>เลือกผู้หารือ</mat-label>
-                            <mat-select formControlName="ddlcounselor" placeholder="ผู้หารือ" [(ngModel)]="this.ConsulationviewModel.counselor_id" [errorStateMatcher]="matcher"> 
+                            <mat-label>จังหวัด</mat-label>
+                            <mat-select formControlName="ddlprovince" placeholder="จังหวัด" [(ngModel)]="this.ConsulationprovinceviewModel.province_id" [errorStateMatcher]="matcher">
                                 <mat-option>
-                                    <ngx-mat-select-search [formControl]="CounselorviewFilter" placeholderLabel="ค้นหาผู้หารือ" noEntriesFoundLabel="ไม่พบผู้หารือ"></ngx-mat-select-search>
+                                    <ngx-mat-select-search [formControl]="ProvinceFilter" placeholderLabel="ค้นหาจังหวัด" noEntriesFoundLabel="ไม่พบจังหวัด"></ngx-mat-select-search>
                                 </mat-option>
-                                <mat-option *ngFor="let element of this.FilteredCounselorview | async" [value]="element.counselor_id">
-                                    {{element.counselor_title}}{{element.counselor_name}} {{element.counselor_middlename}} {{element.counselor_surname}}
+                                <mat-option *ngFor="let element of this.FilteredProvince | async" [value]="element.province_id">
+                                    {{element.province_name}}
                                 </mat-option>
                             </mat-select>
-                            <mat-error *ngIf="frmGrpAddCounselor.controls.ddlcounselor.hasError('required')">กรุณาเลื่อกผู้หารือ</mat-error>
+                            <mat-error *ngIf="frmGrpAddProvince.controls.ddlprovince.hasError('required')">กรุณาเลื่อกจังหวัด</mat-error>
                         </mat-form-field>
                     </div>
 

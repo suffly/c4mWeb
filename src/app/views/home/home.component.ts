@@ -44,7 +44,7 @@ import { Counselorview } from 'src/app/models/counselorview';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-
+//-- set value for select search AfterViewInit, OnDestroy
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   CounselordivisionModel : Counselordivision[];
@@ -61,11 +61,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   MeetingviewModel : Meetingview[];
   CounselorviewModel : Counselorview[];
 
-  
+  //-- set value for select search
   public CounselorviewFilter : FormControl = new FormControl();
   public FilteredCounselorview : ReplaySubject<Counselorview[]> = new ReplaySubject<Counselorview[]>(1);
   protected _onDestroy = new Subject<void>();
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
+  //-- set value for select search
 
   dataSource = new MatTableDataSource<Meetingview>();
   displayedColumns: string[] = ['index', 'meetingtype_name', 'meeting_set', 'meeting_year', 'meetingterm_name', 'meeting_date', 'create_name', 'create_date', 'actions'];
@@ -116,10 +117,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     //   console.log(this.CounselorviewModel);
     // })
     //this.FilteredCounselorview.next(this.CounselorviewModel.slice());
+    //-- set value for select search
     this.CounselorviewFilter.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.FilterCounselorview();}); 
 
   }
 
+  //-- set value for select search
   ngAfterViewInit() {
     this.setInitialValue();
   }
@@ -128,7 +131,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this._onDestroy.next();
     this._onDestroy.complete();
   }
-
+  //-- set value for select search
+  
   loaddata(){
     
     // var Coundivision = new Counselordivision();
@@ -203,6 +207,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  //-- set value for select search
   setInitialValue() {
     
     var Counselor = new Counselorview();
@@ -229,5 +234,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.FilteredCounselorview.next(this.CounselorviewModel.filter(data => data.counselor_name.toLowerCase().indexOf(search) > -1));
   }
+  //-- set value for select search
 
 }

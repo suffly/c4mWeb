@@ -6,12 +6,8 @@ export class Consulationdetailview {
     topictype_name:string;
     objective_id:number;
     objective_name:string;
-    ministry_id:number;
-    ministry_name:string;
     consulationdetail_topic:string;
     consulationdetail_detail:string;
-    province_id:number;
-    province_name:string;
     consulation_attachment_flag:number;
     status_id:number;
     status_name:string;

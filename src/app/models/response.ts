@@ -1,5 +1,6 @@
 export class Response {
     response_id:number;
+    consulationministry_id:number;
     consulationdetail_id:number;
     consulation_id:number;
     meeting_id:number;

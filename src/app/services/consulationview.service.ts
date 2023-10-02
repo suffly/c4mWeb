@@ -11,23 +11,31 @@ import { Observable } from 'rxjs';
 export class ConsulationviewService {
 
   constructor(private http: HttpClient) { }
-readonly baseUrl = `${environment.apiURL}/api/consulationviews`
+  readonly baseUrl = `${environment.apiURL}/api/consulationviews`
 
-Getconsulationview_All(Consulationview: Consulationview): Observable<any>{
-  return this.http.post<Consulationview[]>(`${this.baseUrl}/Getconsulationview_All`,Consulationview).pipe(
-    map((ConsulationData: Consulationview[]) => {
-      return ConsulationData;
-    })
-  )
-}
+  Getconsulationview_All(Consulationview: Consulationview): Observable<any>{
+    return this.http.post<Consulationview[]>(`${this.baseUrl}/Getconsulationview_All`,Consulationview).pipe(
+      map((ConsulationData: Consulationview[]) => {
+        return ConsulationData;
+      })
+    );
+  }
 
-Getconsulationview_byMeeting(Consulationview: Consulationview): Observable<any>{
-  return this.http.post<Consulationview[]>(`${this.baseUrl}/Getconsulationview_byMeeting`,Consulationview).pipe(
-    map((ConsulationData: Consulationview[]) => {
-      return ConsulationData;
-    })
-  )
-}
+  Getconsulationview_byMeeting(Consulationview: Consulationview): Observable<any>{
+    return this.http.post<Consulationview[]>(`${this.baseUrl}/Getconsulationview_byMeeting`,Consulationview).pipe(
+      map((ConsulationData: Consulationview[]) => {
+        return ConsulationData;
+      })
+    );
+  }
+
+  Getconsulationview_byID(Consulationview: Consulationview): Observable<any>{
+    return this.http.post<Consulationview[]>(`${this.baseUrl}/Getconsulationview_byID`,Consulationview).pipe(
+      map((ConsulationData: Consulationview[]) => {
+        return ConsulationData;
+      })
+    );
+  }
 
 
 

@@ -102,23 +102,23 @@
             </mat-select>
         </mat-form-field>
     </mat-grid-tile>
-
+    <!-- set value for select search -->
     <mat-grid-tile>
         <mat-form-field appearance="fill">
             <mat-label>เลือกผูู้หารือ</mat-label>
             <mat-select placeholder="ผู้หารือ">
-
+                <!-- set value for select search -->
                 <mat-option>
                     <ngx-mat-select-search [formControl]="CounselorviewFilter"></ngx-mat-select-search>
                 </mat-option>
-
-                <mat-option *ngFor="let element of this.FilteredCounselorview | async" [value]="element.counselor_id">
+                <!-- set value for select search -->
+                <mat-option *ngFor="let element of this.FilteredCounselorview | async" [value]="element.counselor_id"> <!-- set value for select search -->
                     {{element.counselor_title}}{{element.counselor_name}} {{element.counselor_middlename}} {{element.counselor_surname}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
     </mat-grid-tile>
-
+    <!-- set value for select search -->
 </mat-grid-list>
 
 

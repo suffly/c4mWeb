@@ -7,7 +7,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 
+import { MeetingviewService } from '@app/services/meetingview.service';
 import { Meetingview } from 'src/app/models/meetingview';
+import { ConsulationviewService } from '@app/services/consulationview.service';
 import { Consulationview } from '@app/models/consulationview';
 import { ConsulationdetailviewService } from '@app/services/consulationdetailview.service';
 import { Consulationdetailview } from '@app/models/consulationdetailview';
@@ -24,59 +26,74 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
 
   constructor(
     public ConsulationdetailviewService: ConsulationdetailviewService,
+    public ConsulationviewService: ConsulationviewService,
+    public MeetingviewService: MeetingviewService,
     public dialogService: MatDialog, 
     private Router: Router,
     ) {}
 
-  Meetingrow : Meetingview;
-  Counselorrow: Consulationview;
-  Consulationrow: Consulationdetailview;
+  Meetingrow : number;
+  Counselorrow: number;
+  Consulationrow: number;
   dataSource = new MatTableDataSource<Consulationdetailview>();
-  displayedColumns: string[] = ['index', 'consulationdetail_topic', 'consulationdetail_detail', 'ministry_name', 'province_name', 'objective_name', 'topictype_name', 'status_name', 'actions'];
+  // displayedColumns: string[] = ['index', 'consulationdetail_topic', 'consulationdetail_detail', 'ministry_name', 'province_name', 'objective_name', 'topictype_name', 'status_name', 'actions'];
+  displayedColumns: string[] = ['index', 'consulationdetail_topic', 'consulationdetail_detail', 'objective_name', 'topictype_name', 'status_name', 'actions'];
   pageSize: number = 10;
   pageSizeOptions = [10, 20, 30];
   index: number;
   id: number;
 
   subscriptions = [];
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
   ConsulationdetailviewModel: Consulationdetailview;
+  ConsulationviewModel: Consulationview;
+  MeetingModel: Meetingview;
 
   ngOnInit(): void{
+    localStorage.removeItem("consulationview");
     this.loadData();
 
   }
 
   ngOnDestroy() {
-    //this.ngUnsubscribe.next();
+    this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
   async loadData() {
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
-    console.log("LoadConsulation, MeetingID : "+this.Meetingrow.meeting_id+" CounselorID : "+this.Counselorrow.consulation_id);
+    console.log("LoadConsulation, MeetingID : "+this.Meetingrow+" CounselorID : "+this.Counselorrow);
+    
+    var Meetingview_input = new Meetingview();
+    Meetingview_input.meeting_id = this.Meetingrow;
+    this.MeetingviewService.Getmeetingview_byID(Meetingview_input).subscribe(data => {this.MeetingModel = data});
+
+    var Consulationview_input = new Consulationview();
+    Consulationview_input.consulation_id = this.Counselorrow;
+    this.ConsulationviewService.Getconsulationview_byID(Consulationview_input).subscribe(data => {this.ConsulationviewModel = data});
+
     var Consulationdetailview_input = new Consulationdetailview();
-    Consulationdetailview_input.meeting_id = this.Meetingrow.meeting_id;
-    Consulationdetailview_input.consulation_id = this.Counselorrow.consulation_id;
+    Consulationdetailview_input.consulation_id = this.Counselorrow;
     const subscribe = (this.ConsulationdetailviewService.GetConsulationdetail_byConsulation(Consulationdetailview_input)).subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.ConsulationdetailviewModel = data;
       console.log("Consulationdetail Data: "+this.ConsulationdetailviewModel);
     });
+
     this.subscriptions.push();
   }
 
   async openAddDialog(){
     const dialogRef = await this.dialogService.open(ConsulationInsertdialogComponent, {
       width: '640px',
-      height: '100%',
+      height: '85%',
       data: {},
       disableClose: true
     });
@@ -94,7 +111,7 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
     this.index = i;
     const dialogRef = await this.dialogService.open(ConsulationInsertdialogComponent, {
       width: '640px',
-      height: '100%',
+      height: '85%',
       data: data,
       disableClose: true
     });
@@ -121,15 +138,15 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
     });
   }
   
-  addResponse(i: number, data: Consulationdetailview)
+  addDetail(i:number, data: Consulationdetailview)
   {
     this.id = data.consulationdetail_id;
     this.index = i;
-    this.Consulationrow = data;
+    this.Consulationrow = data.consulationdetail_id;
     localStorage.setItem('consulationview', JSON.stringify(this.Consulationrow));
 
     setTimeout(() => {
-      this.Router.navigate(['/response'])
+      this.Router.navigate(['/consulationdetail'])
     }, 500);
     //[routerLink]="['/response']" << for html
   }

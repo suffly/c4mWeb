@@ -1,10 +1,13 @@
-import { Component, OnInit, ElementRef, Input, Output, Inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, Output, Inject, ChangeDetectorRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, AbstractControl, ValidationErrors, FormControl, NgForm, FormGroupDirective } from "@angular/forms";
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ReplaySubject, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { MatSelect } from '@angular/material/select';
 
 import { CounselorviewlistComponent } from '../counselorviewlist/counselorviewlist.component';
 
@@ -21,7 +24,7 @@ import { ConsulationService } from '@app/services/consulation.service';
   templateUrl: './counselor-insertdialog.component.html',
   styleUrls: ['./counselor-insertdialog.component.css']
 })
-export class CounselorInsertdialogComponent implements OnInit {
+export class CounselorInsertdialogComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<CounselorviewlistComponent>,
@@ -42,9 +45,14 @@ export class CounselorInsertdialogComponent implements OnInit {
   editable: boolean = false;
   matcher = new MyErrorStateMatcher();
 
-  Meetingrow:Meetingview;
+  Meetingrow:number;
 
   CounselorviewModel: Counselorview[];
+
+  public CounselorviewFilter : FormControl = new FormControl();
+  public FilteredCounselorview : ReplaySubject<Counselorview[]> = new ReplaySubject<Counselorview[]>(1);
+  protected _onDestroy = new Subject<void>();
+  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
   frmGrpAddCounselor: FormGroup;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -64,13 +72,23 @@ export class CounselorInsertdialogComponent implements OnInit {
     {
       this.editable = true;
     }
+    this.CounselorviewFilter.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.FilterCounselorview();});
+  }
+
+  ngAfterViewInit() {
+    this.setInitialValue();
+  }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 
   loadData() {
     this.loading = true;
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     var Counselor = new Counselorview();
-    this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {this.CounselorviewModel = data});
+    //this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {this.CounselorviewModel = data});
     this.loading = false;
   }
 
@@ -81,7 +99,7 @@ export class CounselorInsertdialogComponent implements OnInit {
     consulationData.counselor_id = this.frmGrpAddCounselor.controls.ddlcounselor.value;
     if (this.ConsulationviewModel.consulation_id == undefined)
     {
-      consulationData.meeting_id = this.Meetingrow.meeting_id;
+      consulationData.meeting_id = this.Meetingrow;
       consulationData.create_by = 1;
       this.ConsulationService.SaveConsulation(consulationData).subscribe(data => {
         if (data == 0) {this.showWarning('ไม่บันทึกผู้หารือได้');}
@@ -137,6 +155,33 @@ export class CounselorInsertdialogComponent implements OnInit {
 
   showWarning(message: string) {
     this.toastr.warning(message);
+  }
+
+  setInitialValue() {
+    
+    var Counselor = new Counselorview();
+    this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {
+      this.CounselorviewModel = data;
+      this.FilteredCounselorview.next(this.CounselorviewModel.slice());
+    })
+    console.log(this.FilteredCounselorview);
+    this.FilteredCounselorview.pipe(take(1), takeUntil(this._onDestroy)).subscribe(()=>{
+      this.singleSelect.compareWith = (a: Counselorview, b:Counselorview) => a && b && a.counselor_id === b.counselor_id;
+    });
+  }
+
+  FilterCounselorview() {
+    let search = this.CounselorviewFilter.value;
+    if(!search)
+    {
+      this.FilteredCounselorview.next(this.CounselorviewModel.slice());
+      return;
+    }
+    else
+    {
+      search = search.toLowerCase();
+    }
+    this.FilteredCounselorview.next(this.CounselorviewModel.filter(data => data.counselor_name.toLowerCase().indexOf(search) > -1));
   }
 
 }

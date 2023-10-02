@@ -37,9 +37,10 @@ export class ResponseInsertdialogComponent implements OnInit {
   editable: boolean = false;
   matcher = new MyErrorStateMatcher();
 
-  Meetingrow:Meetingview;
-  Counselorrow: Consulationview;
-  Consulationrow: Consulationdetailview;
+  Meetingrow:number;
+  Counselorrow: number;
+  Consulationrow: number;
+  Consulationministryrow: number;
 
   frmGrpAddResponse: FormGroup;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -67,6 +68,7 @@ export class ResponseInsertdialogComponent implements OnInit {
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
+    this.Consulationministryrow = JSON.parse(localStorage.getItem('consulationminitryview')||'{}');
     this.loading = false;
   }
 
@@ -75,9 +77,10 @@ export class ResponseInsertdialogComponent implements OnInit {
     responseData.response_topic = this.frmGrpAddResponse.controls.inputresponse.value;
     if(this.ResponseModel.response_id == undefined)
     {
-      responseData.consulationdetail_id = this.Consulationrow.consulationdetail_id;
-      responseData.consulation_id = this.Counselorrow.consulation_id;
-      responseData.meeting_id = this.Meetingrow.meeting_id;
+      responseData.consulationministry_id = this.Consulationministryrow;
+      responseData.consulationdetail_id = this.Consulationrow;
+      responseData.consulation_id = this.Counselorrow;
+      responseData.meeting_id = this.Meetingrow;
       responseData.create_by = 1;
       responseData.create_title = "นาย";
       responseData.create_name = "ทดสอบ";
@@ -89,6 +92,7 @@ export class ResponseInsertdialogComponent implements OnInit {
     }
     else
     {
+      responseData.consulationministry_id = this.ResponseModel.consulationministry_id;
       responseData.consulationdetail_id = this.ResponseModel.consulationdetail_id;
       responseData.consulation_id = this.ResponseModel.consulation_id;
       responseData.meeting_id = this.ResponseModel.meeting_id;

@@ -31,9 +31,10 @@ export class ResponselistComponent implements OnInit {
     private Router: Router,
     ) {}
 
-  Meetingrow: Meetingview;
-  Counselorrow: Consulationview;
-  Consulationrow: Consulationdetailview;
+  Meetingrow: number;
+  Counselorrow: number;
+  Consulationrow: number;
+  Consulationministryrow: number;
   ResponseModel: Response;
   dataSource = new MatTableDataSource<Response>();
   displayedColumns: string[] = ['index', 'response_topic', 'create_date', 'create_title', 'create_name', 'create_surname', 'actions'];
@@ -57,12 +58,14 @@ export class ResponselistComponent implements OnInit {
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
-    console.log("LoadResponse, MeetingID : "+this.Meetingrow.meeting_id+" CounselorID : "+this.Counselorrow.consulation_id+" ConsulationID : "+this.Consulationrow.consulationdetail_id);
+    this.Consulationministryrow = JSON.parse(localStorage.getItem('consulationminitryview')||'{consulationminitryview}')
+    console.log("LoadResponse, MeetingID : "+this.Meetingrow+" CounselorID : "+this.Counselorrow+" ConsulationID : "+this.Consulationrow+" CSLMID : "+this.Consulationministryrow);
     var Responseview_input = new Response();
-    Responseview_input.meeting_id = this.Meetingrow.meeting_id;
-    Responseview_input.consulation_id = this.Counselorrow.consulation_id;
-    Responseview_input.consulationdetail_id = this.Consulationrow.consulationdetail_id;
-    const subscribe = (this.ResponseService.GetResponse_byConsulationdetail(Responseview_input)).subscribe(data => {
+    Responseview_input.meeting_id = this.Meetingrow;
+    Responseview_input.consulation_id = this.Counselorrow;
+    Responseview_input.consulationdetail_id = this.Consulationrow;
+    Responseview_input.consulationministry_id = this.Consulationministryrow;
+    const subscribe = (this.ResponseService.GetResponse_byConsulationministry(Responseview_input)).subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.ResponseModel = data;
@@ -74,7 +77,7 @@ export class ResponselistComponent implements OnInit {
   async openAddDialog(){
     const dialogRef = await this.dialogService.open(ResponseInsertdialogComponent, {
       width: '640px',
-      height: '100%',
+      height: '640px',
       data: {},
       disableClose: true
     });
@@ -92,7 +95,7 @@ export class ResponselistComponent implements OnInit {
     this.index = i;
     const dialogRef = await this.dialogService.open(ResponseInsertdialogComponent, {
       width: '640px',
-      height: '100%',
+      height: '640px',
       data: data,
       disableClose: true
     });
@@ -121,7 +124,7 @@ export class ResponselistComponent implements OnInit {
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/consulation'])
+      this.Router.navigate(['/consulationdetail'])
     }, 500);
   }
 

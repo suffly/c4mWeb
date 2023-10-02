@@ -4,10 +4,8 @@ export class Consulationdetail {
     meeting_id:number;
     topictype_id:number;
     objective_id:number;
-    ministry_id:number;
     consulationdetail_topic:string;
     consulationdetail_detail:string;
-    province_id:number;
     consulation_attachment_flag:number;
     status_id:number;
     create_date:Date;

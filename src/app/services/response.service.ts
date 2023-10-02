@@ -21,6 +21,14 @@ export class ResponseService {
     );
   } 
 
+  GetResponse_byConsulationministry(Response: Response): Observable<any> {
+    return this.http.post<Response[]>(`${this.baseUrl}/GetResponse_byConsulationministry`,Response).pipe(
+      map((ResponseData: Response[]) => {
+        return ResponseData;
+      })
+    );
+  } 
+
   SaveResponse(Response: Response): Observable<any> {
     return this.http.post<number>(`${this.baseUrl}/SaveResponse`,Response).pipe(
       map((ResponseData: number) => {

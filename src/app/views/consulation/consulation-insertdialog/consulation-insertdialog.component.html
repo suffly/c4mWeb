@@ -38,7 +38,7 @@
                             <mat-error *ngIf="frmGrpAddConsulation.controls.ddlobjective.hasError('required')">กรุณาเลื่อกวัตถุประสงค์</mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="form-group"><label for="">หน่วยงานที่เกี่ยวข้อง</label></div>
+                    <!-- <div class="form-group"><label for="">หน่วยงานที่เกี่ยวข้อง</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill">
                             <mat-label>หน่วยงานที่เกี่ยวข้อง</mat-label>
@@ -63,25 +63,25 @@
                             </mat-select>
                             <mat-error *ngIf="frmGrpAddConsulation.controls.ddlprovince.hasError('required')">กรุณาเลื่อกจังหวัด</mat-error>
                         </mat-form-field>
-                    </div>
-                    <div class="form-group"><label for="">ข้อหารือ</label></div>
+                    </div> -->
+                    <div class="form-group"><label for="">ชื่อข้อหารือ (สำหรับใส่ใบนำส่ง)</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill" hintLabel="จำนวนคำ">
-                            <mat-label>ข้อหารือ</mat-label>
-                            <textarea matInput #inputtopic type="text" formControlName="inputtopic" placeholder="ข้อหารือ" 
-                            [(ngModel)]="this.ConsulationviewdetailModel.consulationdetail_topic" maxlength="250" [errorStateMatcher]="matcher"></textarea>
-                            <mat-hint align="end">{{inputtopic.value.length || 0}}/250</mat-hint>
-                            <mat-error *ngIf="frmGrpAddConsulation.controls.inputtopic.hasError('required')">กรุณาระบุข้อหารือ</mat-error>
+                            <mat-label>ชื่อข้อหารือ</mat-label>
+                            <textarea matInput #inputtopic type="text" formControlName="inputtopic" placeholder="ชื่อข้อหารือ" 
+                            [(ngModel)]="this.ConsulationviewdetailModel.consulationdetail_topic" maxlength="500" [errorStateMatcher]="matcher"></textarea>
+                            <mat-hint align="end">{{inputtopic.value.length || 0}}/500</mat-hint>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.inputtopic.hasError('required')">กรุณาระบุชื่อข้อหารือ</mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="form-group"><label for="">รายละเอียดข้อหารือ</label></div>
+                    <div class="form-group"><label for="">ประเด็นข้อปรึกษาหารือฯ</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill" hintLabel="จำนวนคำ">
-                            <mat-label>รายละเอียดข้อหารือ</mat-label>
-                            <textarea matInput #inputdetail type="text" formControlName="inputdetail" placeholder="รายละเอียดข้อหารือ" 
-                            [(ngModel)]="this.ConsulationviewdetailModel.consulationdetail_detail" maxlength="5000" [errorStateMatcher]="matcher"></textarea>
-                            <mat-hint align="end">{{inputdetail.value.length || 0}}/5000</mat-hint>
-                            <mat-error *ngIf="frmGrpAddConsulation.controls.inputdetail.hasError('required')">กรุณาระบุรายละเอียดข้อหารือ</mat-error>
+                            <mat-label>ประเด็นข้อปรึกษาหารือฯ</mat-label>
+                            <textarea matInput #inputdetail type="text" formControlName="inputdetail" placeholder="ประเด็นข้อปรึกษาหารือฯ" 
+                            [(ngModel)]="this.ConsulationviewdetailModel.consulationdetail_detail" maxlength="10000" [errorStateMatcher]="matcher"></textarea>
+                            <mat-hint align="end">{{inputdetail.value.length || 0}}/10000</mat-hint>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.inputdetail.hasError('required')">กรุณาระบุประเด็นข้อปรึกษาหารือฯ</mat-error>
                         </mat-form-field>
                     </div>
                     <div style="text-align: center;">

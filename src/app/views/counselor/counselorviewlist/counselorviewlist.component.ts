@@ -7,13 +7,13 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 
+import { MeetingviewService } from '@app/services/meetingview.service';
 import { Meetingview } from 'src/app/models/meetingview';
 import { ConsulationviewService } from '@app/services/consulationview.service';
 import { Consulationview } from '@app/models/consulationview';
 
 import { CounselorInsertdialogComponent } from '../counselor-insertdialog/counselor-insertdialog.component';
 import { CounselorDeletedialogComponent } from '../counselor-deletedialog/counselor-deletedialog.component';
-import { ThaidatePipe } from '@app/pipes/dateformat/thaidate.pipe';
 
 
 @Component({
@@ -25,12 +25,14 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
 
   constructor(
     public ConsulationviewService: ConsulationviewService,
+    public MeetingviewService: MeetingviewService,
     public dialogService: MatDialog, 
     private Router: Router,
     ) {}
   
-  Meetingrow : Meetingview;
-  Counselorrow: Consulationview;
+
+  Meetingrow : number;
+  Counselorrow: number;
   dataSource = new MatTableDataSource<Consulationview>();
   displayedColumns: string[] = ['index', 'counselor_title', 'counselor_name', 'counselor_middlename', 'counselor_surname', 'counselortype_name', 'partylist_name', 'counselordivision_name', 'count_consulationdetail', 'actions'];
   pageSize: number = 10;
@@ -39,31 +41,34 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
   id: number;
 
   subscriptions = [];
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
   ConsulationviewModel :Consulationview[];
-
+  MeetingModel: Meetingview;
 
   ngOnInit(): void{
+    localStorage.removeItem("counselorview");
     this.loadData();
 
   }
 
   ngOnDestroy() {
-    //this.ngUnsubscribe.next();
+    this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
   async loadData(){ 
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
-    console.log(this.Meetingrow.meetingtype_id);
-    console.log("LoadCouselor, MeetingID : "+ this.Meetingrow.meeting_id);
+    console.log("LoadCouselor, MeetingID : "+ this.Meetingrow);
+    var Meetingview_input = new Meetingview();
+    Meetingview_input.meeting_id = this.Meetingrow;
+    this.MeetingviewService.Getmeetingview_byID(Meetingview_input).subscribe(data => {this.MeetingModel = data});
     var Consulationview_input = new Consulationview();
-    Consulationview_input.meeting_id = this.Meetingrow.meeting_id
+    Consulationview_input.meeting_id = this.Meetingrow
     const subscribe = (this.ConsulationviewService.Getconsulationview_byMeeting(Consulationview_input)).subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
@@ -136,7 +141,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
   {
     this.id = data.consulation_id;
     this.index = i;
-    this.Counselorrow = data;
+    this.Counselorrow = data.consulation_id;
     localStorage.setItem('counselorview', JSON.stringify(this.Counselorrow));
 
     setTimeout(() => {

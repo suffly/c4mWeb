@@ -74,6 +74,11 @@ import { ResponselistComponent } from './views/response/responselist/responselis
 import { ResponseInsertdialogComponent } from './views/response/response-insertdialog/response-insertdialog.component';
 import { ResponseDeletedialogComponent } from './views/response/response-deletedialog/response-deletedialog.component';
 import { HeaderComponent } from './views/header/header.component';
+import { ConsulationviewdetailComponent } from './views/consulation/consulationviewdetail/consulationviewdetail.component';
+import { ConsulationministryInsertdialogComponent } from './views/consulation/consulationministry/consulationministry-insertdialog/consulationministry-insertdialog.component';
+import { ConsulationministryDeletedialogComponent } from './views/consulation/consulationministry/consulationministry-deletedialog/consulationministry-deletedialog.component';
+import { ConsulationprovinceInsertdialogComponent } from './views/consulation/consulationprovince/consulationprovince-insertdialog/consulationprovince-insertdialog.component';
+import { ConsulationprovinceDeletedialogComponent } from './views/consulation/consulationprovince/consulationprovince-deletedialog/consulationprovince-deletedialog.component';
 
 
 
@@ -97,6 +102,11 @@ import { HeaderComponent } from './views/header/header.component';
     ResponseInsertdialogComponent,
     ResponseDeletedialogComponent,
     HeaderComponent,
+    ConsulationviewdetailComponent,
+    ConsulationministryInsertdialogComponent,
+    ConsulationministryDeletedialogComponent,
+    ConsulationprovinceInsertdialogComponent,
+    ConsulationprovinceDeletedialogComponent,
 
   ],
   imports: [

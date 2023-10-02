@@ -20,4 +20,12 @@ export class MeetingviewService {
       })
     );
   }
+
+  Getmeetingview_byID(Meeintview: Meetingview): Observable<any>{
+    return this.http.post<Meetingview>(`${this.baseUrl}/Getmeetingview_byID`, Meeintview).pipe(
+      map((MeetingviewData: Meetingview) => {
+        return MeetingviewData;
+      })
+    );
+  }
 }

@@ -1,0 +1,170 @@
+<div class="card-header assert-col">
+    <button mat-icon-button  (click)="backClicked()" >
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <label for=""> รายละเอียดข้อหารือ </label>
+</div>
+
+<!-- <div class="card-body">
+    <div class="row">
+        ผู้ปรึกษาหารือในที่ประชุม {{MeetingModel.meetingtype_name}} &nbsp;&nbsp;
+        ชุดที่ {{MeetingModel.meetingset_desc}} &nbsp;&nbsp;
+        ปีที่ {{MeetingModel.meeting_year}} &nbsp;&nbsp;
+        ครั้งที่ {{MeetingModel.meeting_time}} &nbsp;&nbsp;
+        ( {{MeetingModel.meetingterm_name}} ) &nbsp;&nbsp;
+        วันที่ {{MeetingModel.meeting_date.toString()|thaidate:'medium'}}
+    </div>
+    <div class="row">
+        ผู้หารือ {{ConsulationviewModel.counselor_title}}{{ConsulationviewModel.counselor_name}} {{ConsulationviewModel.counselor_middlename}} {{ConsulationviewModel.counselor_surname}} &nbsp;&nbsp;
+        สมาชิกสภาผู้แทนราษฎร{{ConsulationviewModel.counselortype_name}} &nbsp;&nbsp; {{ConsulationviewModel.partylist_name}}
+        
+    </div>
+</div> -->
+
+<div class="card-body assert-row">
+    <div class="card-header background-white">
+        <label for=""> ข้อหารือ </label>
+    </div>
+    <div class="mat-elevation-z8 margin-bottom-60">
+        <table mat-table [dataSource]="dataSourceCSLD" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="meeting_id">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"></td>
+            </ng-container>
+            <ng-container matColumnDef="consulationdetail_topic">
+                <th mat-header-cell *matHeaderCellDef> ชื่อข้อหารือ (สำหรับใส่ใบนำส่ง) </th>
+                <td mat-cell *matCellDef="let element"> {{element.consulationdetail_topic}} </td>
+            </ng-container>
+            <ng-container matColumnDef="consulationdetail_detail">
+                <th mat-header-cell *matHeaderCellDef> ประเด็นข้อปรึกษาหารือฯ </th>
+                <td mat-cell *matCellDef="let element"> {{element.consulationdetail_detail}} </td>
+            </ng-container>
+            <ng-container matColumnDef="objective_name">
+                <th mat-header-cell *matHeaderCellDef> วัตถุประสงค์ </th>
+                <td mat-cell *matCellDef="let element"> {{element.objective_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="topictype_name">
+                <th mat-header-cell *matHeaderCellDef> ประเภทหัวข้อ </th>
+                <td mat-cell *matCellDef="let element"> {{element.topictype_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status_name">
+                <th mat-header-cell *matHeaderCellDef> สถานะการดำเนินการ </th>
+                <td mat-cell *matCellDef="let element"> {{element.status_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>
+                    <span style="font-size: smaller;">Refresh</span>
+                    <button mat-icon-button color="accent" (click)="loadData()">
+                        <mat-icon aria-label="Refresh">refresh</mat-icon>
+                    </button>
+                </th>
+    
+                <td mat-cell *matCellDef="let element; let i=indexCSLD;" style="text-align: center;">
+                    <button mat-icon-button color="accent" (click)="editCSLDItem(i,element)">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCSLD"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsCSLD;"></tr>
+        </table>
+        <!-- <mat-paginator #paginatorCSLD [pageSize]="this.pageSizeCSLD" [pageSizeOptions]="this.pageSizeOptionsCSLD" showFirstLastButtons></mat-paginator> -->
+    </div>
+
+    <div class="card-header background-white">
+        <label for=""> หน่วยงานที่เกี่ยวข้อง </label>
+    </div>
+    
+    <div class="mat-elevation-z8 margin-bottom-60">
+        <table mat-table [dataSource]="dataSourceCSLM" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="meeting_id">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"></td>
+            </ng-container>
+            <ng-container matColumnDef="ministry_name">
+                <th mat-header-cell *matHeaderCellDef> หน่วยงานที่เกี่ยวข้อง </th>
+                <td mat-cell *matCellDef="let element"> {{element.ministry_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status_name">
+                <th mat-header-cell *matHeaderCellDef> สถานะการดำเนินการ </th>
+                <td mat-cell *matCellDef="let element"> {{element.status_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>
+                    <span style="font-size: smaller;">เพิ่มหน่วยงานที่เกี่ยวข้อง</span>
+                    <button mat-icon-button color="primary" (click)="openAddCSLMDialog()">
+                        <mat-icon aria-label="Add">add</mat-icon>
+                    </button>
+                    <span style="font-size: smaller;">Refresh</span>
+                    <button mat-icon-button color="accent" (click)="loadData()">
+                        <mat-icon aria-label="Refresh">refresh</mat-icon>
+                    </button>
+                </th>
+    
+                <td mat-cell *matCellDef="let element; let i=indexCSLM;" style="text-align: center;">
+                    <button mat-icon-button color="primary" (click)="addResponse(i,element)">
+                        <mat-icon aria-label="question_answer">question_answer</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" (click)="editCSLMItem(i,element)">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="deleteCSLMItem(i,element)">
+                        <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCSLM"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsCSLM;"></tr>
+        </table>
+        <!-- <mat-paginator #paginatorCSLM [pageSize]="this.pageSizeCSLM" [pageSizeOptions]="this.pageSizeOptionsCSLM" showFirstLastButtons></mat-paginator> -->
+    </div>
+
+    <div class="card-header background-white">
+        <label for=""> จังหวัด </label>
+    </div>
+
+    <div class="mat-elevation-z8 margin-bottom-60">
+        <table mat-table [dataSource]="dataSourceCSLP" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="meeting_id">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"></td>
+            </ng-container>
+            <ng-container matColumnDef="province_name">
+                <th mat-header-cell *matHeaderCellDef> จังหวัด </th>
+                <td mat-cell *matCellDef="let element"> {{element.province_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="region_name">
+                <th mat-header-cell *matHeaderCellDef> ภูมิภาค </th>
+                <td mat-cell *matCellDef="let element"> {{element.region_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>
+                    <span style="font-size: smaller;">เพิ่มจังหวัด</span>
+                    <button mat-icon-button color="primary" (click)="openAddCSLPDialog()">
+                        <mat-icon aria-label="Add">add</mat-icon>
+                    </button>
+                    <span style="font-size: smaller;">Refresh</span>
+                    <button mat-icon-button color="accent" (click)="loadData()">
+                        <mat-icon aria-label="Refresh">refresh</mat-icon>
+                    </button>
+                </th>
+    
+                <td mat-cell *matCellDef="let element; let i=indexCSLP;" style="text-align: center;">
+                    <button mat-icon-button color="accent" (click)="editCSLPItem(i,element)">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="deleteCSLPItem(i,element)">
+                        <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCSLP"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsCSLP;"></tr>
+        </table>
+        <!-- <mat-paginator #paginatorCSLP [pageSize]="this.pageSizeCSLP" [pageSizeOptions]="this.pageSizeOptionsCSLP" showFirstLastButtons></mat-paginator> -->
+    </div>
+
+</div>
+
+
+

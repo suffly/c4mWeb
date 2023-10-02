@@ -11,30 +11,46 @@ import { Observable } from 'rxjs';
 export class ConsulationdetailviewService {
 
   constructor(private http: HttpClient) { }
-readonly baseUrl = `${environment.apiURL}/api/consulationdetailviews`
+  readonly baseUrl = `${environment.apiURL}/api/consulationdetailviews`
 
-GetConsulationdetail_All(Consulationdetailview: Consulationdetailview): Observable<any>{
-  return this.http.post<Consulationdetailview[]>(`${this.baseUrl}/GetConsulationdetail_All`,Consulationdetailview).pipe(
-    map((ConsulationdetailviewData: Consulationdetailview[]) => {
-      return ConsulationdetailviewData;
-    })
-  );
-}
+  GetConsulationdetail_All(Consulationdetailview: Consulationdetailview): Observable<any>{
+    return this.http.post<Consulationdetailview[]>(`${this.baseUrl}/GetConsulationdetail_All`,Consulationdetailview).pipe(
+      map((ConsulationdetailviewData: Consulationdetailview[]) => {
+        return ConsulationdetailviewData;
+      })
+    );
+  }
 
-GetConsulationdetail_byConsulation(Consulationdetailview: Consulationdetailview): Observable<any>{
-  return this.http.post<Consulationdetailview[]>(`${this.baseUrl}/GetConsulationdetail_byConsulation`,Consulationdetailview).pipe(
-    map((ConsulationdetailviewData: Consulationdetailview[]) => {
-      return ConsulationdetailviewData;
-    })
-  );
-}
+  GetConsulationdetail_byConsulation(Consulationdetailview: Consulationdetailview): Observable<any>{
+    return this.http.post<Consulationdetailview[]>(`${this.baseUrl}/GetConsulationdetail_byConsulation`,Consulationdetailview).pipe(
+      map((ConsulationdetailviewData: Consulationdetailview[]) => {
+        return ConsulationdetailviewData;
+      })
+    );
+  }
 
-GetConsulationdetail_byMeeting(Consulationdetailview: Consulationdetailview): Observable<any>{
-  return this.http.post<Consulationdetailview[]>(`${this.baseUrl}/GetConsulationdetail_byMeeting`,Consulationdetailview).pipe(
-    map((ConsulationdetailviewData: Consulationdetailview[]) => {
-      return ConsulationdetailviewData;
-    })
-  );
-}
+  GetConsulationdetail_byMeeting(Consulationdetailview: Consulationdetailview): Observable<any>{
+    return this.http.post<Consulationdetailview[]>(`${this.baseUrl}/GetConsulationdetail_byMeeting`,Consulationdetailview).pipe(
+      map((ConsulationdetailviewData: Consulationdetailview[]) => {
+        return ConsulationdetailviewData;
+      })
+    );
+  }
+
+  GetConsulationdetail_byDetail(Consulationdetailview: Consulationdetailview): Observable<any>{
+    return this.http.post<Consulationdetailview[]>(`${this.baseUrl}/GetConsulationdetail_byDetail`,Consulationdetailview).pipe(
+      map((ConsulationdetailviewData: Consulationdetailview[]) => {
+        return ConsulationdetailviewData;
+      })
+    );
+  }
+
+  GetConsulationdetail_byID(Consulationdetailview: Consulationdetailview): Observable<any>{
+    return this.http.post<Consulationdetailview[]>(`${this.baseUrl}/GetConsulationdetail_byID`,Consulationdetailview).pipe(
+      map((ConsulationdetailviewData: Consulationdetailview[]) => {
+        return ConsulationdetailviewData;
+      })
+    );
+  }
 
 }
