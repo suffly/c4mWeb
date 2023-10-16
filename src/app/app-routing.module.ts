@@ -7,6 +7,7 @@ import { CounselorviewlistComponent } from './views/counselor/counselorviewlist/
 import { ConsulationviewlistComponent } from './views/consulation/consulationviewlist/consulationviewlist.component';
 import { ConsulationviewdetailComponent } from './views/consulation/consulationviewdetail/consulationviewdetail.component';
 import { ResponselistComponent } from './views/response/responselist/responselist.component';
+import { ResponsedetailComponent } from './views/response/responsedetail/responsedetail.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'consulation', component:ConsulationviewlistComponent},
   {path: 'consulationdetail', component:ConsulationviewdetailComponent},
   {path: 'response', component:ResponselistComponent},
+  {path: 'responsedetail', component:ResponsedetailComponent},
 
   //{path: '', redirectTo: 'home', pathMatch: 'full'},
 ];

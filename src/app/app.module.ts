@@ -4,8 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+//import { JwtInterceptor } from './interceptor/jwt.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+
+
 
 //Import Angular Material
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -49,6 +52,7 @@ import { DialogModule } from '@angular/cdk/dialog';
 
 import { CommonModule, NgFor } from '@angular/common';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { DatePipe } from '@angular/common';
 import { ThaidatePipe } from './pipes/dateformat/thaidate.pipe';
 
 
@@ -79,6 +83,11 @@ import { ConsulationministryInsertdialogComponent } from './views/consulation/co
 import { ConsulationministryDeletedialogComponent } from './views/consulation/consulationministry/consulationministry-deletedialog/consulationministry-deletedialog.component';
 import { ConsulationprovinceInsertdialogComponent } from './views/consulation/consulationprovince/consulationprovince-insertdialog/consulationprovince-insertdialog.component';
 import { ConsulationprovinceDeletedialogComponent } from './views/consulation/consulationprovince/consulationprovince-deletedialog/consulationprovince-deletedialog.component';
+import { AttachInsertdialogComponent } from './views/consulation/attach/attach-insertdialog/attach-insertdialog.component';
+import { AttachDeletedialogComponent } from './views/consulation/attach/attach-deletedialog/attach-deletedialog.component';
+import { ResponsedetailComponent } from './views/response/responsedetail/responsedetail.component';
+import { AttachresInsertdialogComponent } from './views/response/attachres/attachres-insertdialog/attachres-insertdialog.component';
+import { AttachresDeletedialogComponent } from './views/response/attachres/attachres-deletedialog/attachres-deletedialog.component';
 
 
 
@@ -107,6 +116,11 @@ import { ConsulationprovinceDeletedialogComponent } from './views/consulation/co
     ConsulationministryDeletedialogComponent,
     ConsulationprovinceInsertdialogComponent,
     ConsulationprovinceDeletedialogComponent,
+    AttachInsertdialogComponent,
+    AttachDeletedialogComponent,
+    ResponsedetailComponent,
+    AttachresInsertdialogComponent,
+    AttachresDeletedialogComponent,
 
   ],
   imports: [
@@ -157,6 +171,7 @@ import { ConsulationprovinceDeletedialogComponent } from './views/consulation/co
     NgFor,
     FormsModule,
     BrowserAnimationsModule,
+    FileSaverModule,
     ReactiveFormsModule,
 
 
@@ -195,6 +210,10 @@ import { ConsulationprovinceDeletedialogComponent } from './views/consulation/co
   ],
   providers: [
     //for insert jwt service
+    //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: DatePipe },
+    DatePipe, 
+    MatDatepickerModule,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

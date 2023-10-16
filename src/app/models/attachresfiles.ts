@@ -1,4 +1,4 @@
-export class Attachres {
+export class Attachresfiles {
     attachres_id:number;
     response_id:number;
     consulationministry_id:number;
@@ -9,4 +9,6 @@ export class Attachres {
     upload_filename:string;
     upload_date:Date;
     upload_by:number;
+    //NotMapped
+    files : File;
 }

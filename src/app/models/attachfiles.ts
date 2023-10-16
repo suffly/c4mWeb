@@ -1,4 +1,4 @@
-export class Attach {
+export class Attachfiles {
     attach_id:number;
     consulationdetail_id:number;
     consulation_id:number;
@@ -7,4 +7,6 @@ export class Attach {
     upload_filename:string;
     upload_date:Date;
     upload_by:number;
+    //notmapped
+    files : File;
 }

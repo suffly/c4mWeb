@@ -6,12 +6,16 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
+import { FileSaverService } from 'ngx-filesaver';
+import { DatePipe } from '@angular/common';
 
 import { ConsulationInsertdialogComponent } from '../consulation-insertdialog/consulation-insertdialog.component';
 import { ConsulationministryInsertdialogComponent } from '../consulationministry/consulationministry-insertdialog/consulationministry-insertdialog.component';
 import { ConsulationministryDeletedialogComponent } from '../consulationministry/consulationministry-deletedialog/consulationministry-deletedialog.component';
 import { ConsulationprovinceInsertdialogComponent } from '../consulationprovince/consulationprovince-insertdialog/consulationprovince-insertdialog.component';
 import { ConsulationprovinceDeletedialogComponent } from '../consulationprovince/consulationprovince-deletedialog/consulationprovince-deletedialog.component';
+import { AttachInsertdialogComponent } from '../attach/attach-insertdialog/attach-insertdialog.component';
+import { AttachDeletedialogComponent } from '../attach/attach-deletedialog/attach-deletedialog.component';
 
 import { MeetingviewService } from '@app/services/meetingview.service';
 import { Meetingview } from 'src/app/models/meetingview';
@@ -27,6 +31,9 @@ import { ConsulationprovinceviewService } from '@app/services/consulationprovinc
 import { Consulationprovinceview } from '@app/models/consulationprovinceview';
 import { ConsulationprovinceService } from '@app/services/consulationprovince.service';
 import { Consulationprovince } from '@app/models/consulationprovince';
+import { AttachService } from '@app/services/attach.service';
+import { Attach } from '@app/models/attach';
+import { Attachfiles } from '@app/models/attachfiles';
 
 
 @Component({
@@ -44,9 +51,11 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     public ConsulationdetailviewService: ConsulationdetailviewService,
     public ConsulationviewService: ConsulationviewService,
     public MeetingviewService: MeetingviewService,
+    public AttachService: AttachService,
     public dialogService: MatDialog, 
     private Router: Router,
-    
+    private _FileSaverService: FileSaverService,
+    public datepipe: DatePipe,
     ) {}
 
   Meetingrow : number;
@@ -85,8 +94,19 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
   indexCSLP: number;
   // idCSLP: number;
 
+  dataSourceAttach = new MatTableDataSource<Attach>();
+  displayedColumnsAttach: string[] = ['meeting_id', 'attach_name', 'actions'];
+  @ViewChild('MatPaginatorAttach') paginatorAttach: MatPaginator;
+  @ViewChild('MatSortAttach', { static: true }) sortAttach: MatSort;
+  @ViewChild('filterAttach', { static: true }) filterAttach: ElementRef;
+  pageSizeAttach: number = 10;
+  pageSizeOptionsAttach = [10, 20, 30];
+  indexAttach: number;
+  // idAttach: number;
+
   index: number;
   id: number;
+  date: Date;
 
   subscriptions = [];
   private ngUnsubscribe = new Subject<void>();
@@ -96,6 +116,7 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
   ConsulationdetailviewModel: Consulationdetailview;
   ConsulationviewModel: Consulationview;
   MeetingModel: Meetingview;
+  AttachModel: Attach;
 
   
   ngOnInit(): void {
@@ -113,7 +134,7 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}')
-    console.log("LoadConsulationDetail, MeetingID : "+this.Meetingrow+" CounselorID : "+this.Counselorrow);
+    console.log("LoadConsulationDetail, MeetingID : "+this.Meetingrow+" CounselorID : "+this.Counselorrow+" ConsulationID : "+this.Consulationrow);
 
     // var Meetingview_input = new Meetingview();
     // Meetingview_input.meeting_id = this.Meetingrow;
@@ -126,6 +147,7 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     this.loadConsulation();
     this.loadMinistry();
     this.loadProvince();
+    this.loadAttach();
   }
 
   loadConsulation() {
@@ -157,6 +179,17 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
       this.dataSourceCSLP.data = data;
       this.dataSourceCSLP.paginator = this.paginatorCSLP;
       this.ConsulationprovinceviewModel = data;
+    });
+    this.subscriptions.push();
+  }
+
+  loadAttach() {
+    var Attach_input = new Attach();
+    Attach_input.consulationdetail_id = this.Consulationrow;
+    const subscribe = (this.AttachService.GetAttach_byConsulationdetail(Attach_input)).subscribe(data => {
+      this.dataSourceAttach.data = data;
+      this.dataSourceAttach.paginator = this.paginatorAttach;
+      this.AttachModel = data;
     });
     this.subscriptions.push();
   }
@@ -287,6 +320,65 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
       } 
     });
   }
+
+  async openAddAttachDialog() {
+    const dialogRef = await this.dialogService.open(AttachInsertdialogComponent, {
+      width: '640px',
+      height: 'auto',
+      data: {},
+    });
+
+    dialogRef.afterClosed().toPromise().then(result => {
+      if(result == 1) {
+        setTimeout(() => {
+          this.loadAttach()}, 500);
+      }
+    });
+  }
+
+  async editAttachItem(i: number, data: Attach) {
+    this.id = data.attach_id;
+    this.index = i;
+    const dialogRef = await this.dialogService.open(AttachInsertdialogComponent, {
+      width: '640px',
+      height: 'auto',
+      data: data,
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 1) {
+        setTimeout(() => {
+          this.loadAttach()}, 500);
+      }
+
+    });
+  }
+
+  async deleteAttachItem(i: number, data: Attach) {
+    const dialogRef  = await this.dialogService.open(AttachDeletedialogComponent, {
+      data: data,
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 1){
+        setTimeout(() => {
+          this.loadAttach()}, 500);
+      }
+    })
+  }
+
+  downloadAttach(i: number, data: Attach) {
+    var filename = "";
+    this.AttachService.Download_Attach(data.attach_id).subscribe((response: any) => {
+      this.date = new Date();
+      let latest_date = this.datepipe.transform(this.date, 'ddMMyyyy_HHmmss');
+      filename = data.attach_name + latest_date?.toString();
+      this._FileSaverService.save(response, filename); 
+    }),
+      (error: any) => console.log('Error downloading the file'), //when you use stricter type checking
+      () => console.info('File downloaded successfully');
+  }
+
 
   backClicked() {
     setTimeout(() => {

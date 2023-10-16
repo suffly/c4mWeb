@@ -7,8 +7,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 
-import { Meetingview } from '@app/models/meetingview';
+import { MeetingviewService } from '@app/services/meetingview.service';
+import { Meetingview } from 'src/app/models/meetingview';
+import { ConsulationviewService } from '@app/services/consulationview.service';
 import { Consulationview } from '@app/models/consulationview';
+import { ConsulationdetailviewService } from '@app/services/consulationdetailview.service';
 import { Consulationdetailview } from '@app/models/consulationdetailview';
 import { ResponseService } from '@app/services/response.service';
 import { Response } from '@app/models/response';
@@ -26,6 +29,9 @@ import { ResponseDeletedialogComponent } from '../response-deletedialog/response
 export class ResponselistComponent implements OnInit {
 
   constructor(
+    public ConsulationdetailviewService: ConsulationdetailviewService,
+    public ConsulationviewService: ConsulationviewService,
+    public MeetingviewService: MeetingviewService,
     public ResponseService: ResponseService,
     public dialogService: MatDialog, 
     private Router: Router,
@@ -35,6 +41,7 @@ export class ResponselistComponent implements OnInit {
   Counselorrow: number;
   Consulationrow: number;
   Consulationministryrow: number;
+  Responserow: number;
   ResponseModel: Response;
   dataSource = new MatTableDataSource<Response>();
   displayedColumns: string[] = ['index', 'response_topic', 'create_date', 'create_title', 'create_name', 'create_surname', 'actions'];
@@ -51,6 +58,7 @@ export class ResponselistComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
   ngOnInit(): void {
+    localStorage.removeItem("response");
     this.loadData();
   }
 
@@ -120,6 +128,18 @@ export class ResponselistComponent implements OnInit {
           this.loadData()}, 500); 
       } 
     });
+  }
+
+  addDetail(i:number, data: Response) {
+    this.id = data.response_id;
+    this.index = i;
+    this.Responserow = data.response_id;
+    localStorage.setItem('response', JSON.stringify(this.Responserow));
+
+    setTimeout(() => {
+      this.Router.navigate(['/responsedetail'])
+    }, 500);
+    //[routerLink]="['/response']" << for html
   }
 
   backClicked() {

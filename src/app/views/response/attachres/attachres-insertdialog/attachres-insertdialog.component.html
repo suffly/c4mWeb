@@ -1,0 +1,47 @@
+<form [formGroup]="frmGrpAttachresUpload" #form="ngForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <label for=""> อัปโหลดเอกสารแนบ </label>
+                </div>
+
+                <div class="card-body">
+                    <div class="form-group"><label for=""> ชื่อเอกสารแนบ </label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill" hintLabel="จำนวนคำ">
+                            <mat-label> ชื่อเอกสารแนบ </mat-label>
+                            <input matInput #txtattachres_name type="text" formControlName="txtattachres_name" placeholder="ชื่อเอกสารแนบ"
+                            [(ngModel)]="this.AttachresModel.attachres_name" maxlength="1000" [errorStateMatcher]="matcher">
+                            <mat-hint align="end"> {{txtattachres_name.value.length || 0}}/1000 </mat-hint>
+                            <!-- <mat-error *ngif="frmGrpAttachresUpload.hasError('required')"> กรุณาระบุชื่อเอกสารแนบ </mat-error> -->
+                        </mat-form-field>
+                        <mat-form-field>
+                            <div>
+                                <mat-toolbar>
+                                    <input matInput [(ngModel)]="fileAttr" formControlName="txtUploadFile" readonly name="name">
+                                    <!-- <button mat-flat-button color="primary">Browse File</button> -->
+                                </mat-toolbar>
+                                <input #fileInput type="file" formControlName="txtInputUploadFile" id="uploadFile" (change)="onSelectFile($event,'IMG')" name="uploadFile">
+                            </div>
+                        </mat-form-field>
+                        <div *ngIf="currentFile" class="progress my-3">
+                            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{ progress }}"
+                                 aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
+                                {{ progress }}%
+                            </div>
+                        </div>
+                        <div *ngIf="message" class="alert-warning" role="alert"> {{ message }} </div>
+                        <div mat-dialog-actions>
+                            <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="form.invalid">
+                                <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
+                                    บันทึก
+                            </button>
+                            <button mat-raised-button (click)="onNoClick()" color="primary" tabindex="-1" [mat-dialog-close]="0"> ยกเลิก </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
