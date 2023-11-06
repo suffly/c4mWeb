@@ -5,7 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-//import { JwtInterceptor } from './interceptor/jwt.interceptor';
+import { JwtInterceptor } from './interceptor/jwt.interceptor';
+import { HttpErrorInterceptor } from './interceptor/http-error.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 
 
@@ -58,12 +59,11 @@ import { ThaidatePipe } from './pipes/dateformat/thaidate.pipe';
 
 //export
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatOptionModule, MatNativeDateModule } from '@angular/material/core';
+import { MatOptionModule, MatNativeDateModule , DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, NativeDateAdapter } from '@angular/material/core';
 import { FileSaverModule } from 'ngx-filesaver';
 
 //view
 import { HomeComponent } from './views/home/home.component';
-import { MenuComponent } from './views/menu/menu.component';
 import { LoginComponent } from './views/login/login.component';
 import { MeetingviewlistComponent } from './views/meeting/meetingviewlist/meetingviewlist.component';
 import { MeetingInsertdialogComponent } from './views/meeting/meeting-insertdialog/meeting-insertdialog.component';
@@ -88,8 +88,51 @@ import { AttachDeletedialogComponent } from './views/consulation/attach/attach-d
 import { ResponsedetailComponent } from './views/response/responsedetail/responsedetail.component';
 import { AttachresInsertdialogComponent } from './views/response/attachres/attachres-insertdialog/attachres-insertdialog.component';
 import { AttachresDeletedialogComponent } from './views/response/attachres/attachres-deletedialog/attachres-deletedialog.component';
+import { MenuItemComponent } from './views/menu/menu-item/menu-item.component';
+import { MenuListItemComponent } from './views/menu/menu-list-item/menu-list-item.component';
+import { LoadingComponent } from './loading/loading.component';
 
+// export class AppDateAdapter extends NativeDateAdapter {
+//   format(date: Date, displayFormat: Object): string {
+//       date.setUTCHours(date.getUTCHours() + 7, 0, 0);
+//       if (displayFormat == "input") {
+//           let day = date.getDate();
+//           let month = date.getMonth() + 1;
+//           let year;
+//           if (date.getFullYear() < 2500)
+//               year = date.getFullYear() + 543;
+//           else
+//               year = date.getFullYear();
+//           return this._to2digit(day) + '/' + this._to2digit(month) + '/' + year;
+//       } else {
+//           let day = date.getMonth() + 1;
+//           let month = date.getDate();
+//           let year;
+//           if (date.getFullYear() < 2500)
+//               year = date.getFullYear() + 543;
+//           else
+//               year = date.getFullYear();
 
+//           return this._to2digit(day) + '/' + this._to2digit(month) + '/' + year;
+//       }
+//   }
+
+//   private _to2digit(n: number) {
+//       return ('00' + n).slice(-2);
+//   }
+// }
+
+// export const APP_DATE_FORMATS = {
+//   parse: {
+//       dateInput: 'DD/MM/YYYY',
+//   },
+//   display: {
+//       dateInput: 'input',
+//       monthYearLabel: 'input',
+//       dateA11yLabel: 'LL',
+//       monthYearA11yLabel: 'DD/MMM/YYYY',
+//   },
+// };
 
 @NgModule({
   declarations: [
@@ -97,7 +140,6 @@ import { AttachresDeletedialogComponent } from './views/response/attachres/attac
     AppComponent,
     LoginComponent,
     HomeComponent,
-    MenuComponent,
     MeetingviewlistComponent,
     MeetingInsertdialogComponent,
     MeetingDeletedialogComponent,
@@ -121,6 +163,9 @@ import { AttachresDeletedialogComponent } from './views/response/attachres/attac
     ResponsedetailComponent,
     AttachresInsertdialogComponent,
     AttachresDeletedialogComponent,
+    MenuItemComponent,
+    MenuListItemComponent,
+    LoadingComponent,
 
   ],
   imports: [
@@ -209,9 +254,12 @@ import { AttachresDeletedialogComponent } from './views/response/attachres/attac
 
   ],
   providers: [
-    //for insert jwt service
-    //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'th-TH' },
+    //{ provide: DateAdapter, useClass: AppDateAdapter },
     { provide: DatePipe },
+    //{ provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
     DatePipe, 
     MatDatepickerModule,
   ],

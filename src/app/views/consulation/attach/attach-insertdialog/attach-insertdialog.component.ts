@@ -13,6 +13,7 @@ import { ConsulationviewdetailComponent } from '../../consulationviewdetail/cons
 import { AttachService } from '@app/services/attach.service';
 import { Attachfiles } from '@app/models/attachfiles';
 import { Attach } from '@app/models/attach';
+import { Userprofile } from '@app/models/userprofile';
 
 @Component({
   selector: 'app-attach-insertdialog',
@@ -40,6 +41,9 @@ export class AttachInsertdialogComponent implements OnInit {
   Counselorrow: number;
   Consulationrow: number;
 
+  currentUser: Userprofile;
+  private readonly CURRENT_USER = 'currentUser';
+
   constructor(
     public dialogRef: MatDialogRef<ConsulationviewdetailComponent>,
     private formBuilder: FormBuilder,
@@ -64,6 +68,7 @@ export class AttachInsertdialogComponent implements OnInit {
   }
 
   loadData(){
+    this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
@@ -81,7 +86,7 @@ export class AttachInsertdialogComponent implements OnInit {
       attachData.consulationdetail_id = this.Consulationrow;
       attachData.consulation_id = this.Counselorrow;
       attachData.meeting_id = this.Meetingrow;
-      attachData.upload_by = 1;
+      attachData.upload_by = this.currentUser.user_id;
       (await this.AttachService.Upload_Attach(attachData)).subscribe({
         next: (event:any) => {
         if(event.type === HttpEventType.UploadProgress){
@@ -131,7 +136,6 @@ export class AttachInsertdialogComponent implements OnInit {
   }
 
   onNoClick(): void {
-    console.log("closeDialog");
     this.dialogRef.close();
   }
 

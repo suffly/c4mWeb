@@ -1,0 +1,26 @@
+.custom-bg {
+	background-image: url('../../../assets/images/custom.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.custompage {
+	position: relative;
+	height: 100vh;
+    padding: 50px;
+}
+.custom-content {
+	max-width: 420px;
+	width: 100%;
+	line-height: 1.4;
+	padding: 50px 50px;
+	background: #fff;
+	text-align: center;
+	border-radius: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.login-img {
+	background-size: cover;
+}

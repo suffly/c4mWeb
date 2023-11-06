@@ -1,4 +1,10 @@
+<app-loading *ngIf="loading">
+</app-loading>
 <mat-toolbar color="primary" class="mat-elevation-z1">
+    <button mat-icon-button class="nav-tool-items" (click)="sidenav.toggle()" alt="เมนูหลัก">
+        <mat-icon *ngIf="!this.opened" alt="เปิดเมนูหลัก">menu</mat-icon>
+        <mat-icon *ngIf="this.opened" alt="ปิดเมนูหลัก">close</mat-icon>
+      </button>
     <div>
         <img src="../assets/images/logo-plm.png" height="50px"/>
     </div>
@@ -7,10 +13,43 @@
         ระบบการจัดการข้อปรึกษาหารือของสมาชิกสภาผู้แทนราษฎร
         (Consultation management system for Member of the House of Representative : C4M)
     </div>
+    <span class="toolbar-spacer"></span>
+    <span flex></span>
+    <div style="font-size: 11px">
+        <div class="row">
+          <div class="row">
+            <!-- <div class="col col-sm-4" align="right">[ ชื่อผู้ใช้งาน ] : {{currentUser.user_title}}{{ currentUser.user_name }} {{
+              currentUser.user_surname }}</div> -->
+            <!-- <div class="col col-sm-12" align="right">
+              [ ชื่อผู้ใช้งาน ] : {{currentUser.user_title}}{{ currentUser.user_name }} {{currentUser.user_surname }} 
+              [ ตำแหน่ง ] : {{ currentUser.user_position}} [ สังกัด ] : {{ currentUser.costcenter_name}}
+            </div> -->
+          </div>
+          <div class="row">
+            <div class="col col-sm-12" align="right">[ สิทธิ์ ] : {{ currentUser.role_name}} วันที่เข้าล่าสุด : {{
+              nowDate.toString() | thaidate: 'full' }} </div>
+          </div>
+        </div>
+    
+        <!-- <img src="../assets/images/matio-avatar.png" alt="Avatar" class="avatar"> -->
+        <!-- <mat-icon style="font-size: 25px">person</mat-icon> -->
+    
+      </div>
 </mat-toolbar>
 
-<!-- <mat-sidnav-container>
-    <mat-sidevav-content>
-        
-    </mat-sidevav-content>
-</mat-sidnav-container> -->
+<mat-sidenav-container *ngIf="currentUser.access_token">
+  <mat-sidenav #sidenav="matSidenav" [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened"
+    [fixedInViewport]="false" class="mat-elevation-z8">
+    <img class="center avatarBig mat-elevation-z8" src="../assets/images/avatar2.png" alt="Avatar" />
+    <h5 class="name">{{currentUser.user_title}}{{ currentUser.user_name }} {{currentUser.user_surname }}</h5>
+    <p class="designation"> {{ currentUser.user_position}}</p>
+    <p class="designation"> {{ currentUser.costcenter_name}}</p>
+
+    <mat-divider></mat-divider>
+    <app-menu-list-item (sidenavClose)="sidenav.close()"></app-menu-list-item>
+  </mat-sidenav>
+  
+  <mat-sidenav-content class="mat-elevation-z8">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

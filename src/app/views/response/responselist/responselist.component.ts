@@ -77,7 +77,6 @@ export class ResponselistComponent implements OnInit {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.ResponseModel = data;
-      console.log("Response Data : "+this.ResponseModel);
     });
     this.subscriptions.push();
   }

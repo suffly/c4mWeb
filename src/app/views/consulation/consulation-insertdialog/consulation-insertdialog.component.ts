@@ -12,6 +12,7 @@ import { ConsulationdetailService } from '@app/services/consulationdetail.servic
 import { Consulationdetail } from '@app/models/consulationdetail';
 import { Meetingview } from 'src/app/models/meetingview';
 import { Consulationview } from '@app/models/consulationview';
+import { Userprofile } from '@app/models/userprofile';
 
 import { TopictypeService } from '@app/services/topictype.service';
 import { Topictype } from '@app/models/topictype';
@@ -62,6 +63,9 @@ export class ConsulationInsertdialogComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
+  currentUser: Userprofile;
+  private readonly CURRENT_USER = 'currentUser';
+
   ngOnInit(): void {
     this.loadData();
     this.frmGrpAddConsulation = this.formBuilder.group({
@@ -86,6 +90,7 @@ export class ConsulationInsertdialogComponent implements OnInit {
 
   loadData() {
     this.loading = true;
+    this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     var topictype = new Topictype();
@@ -111,7 +116,7 @@ export class ConsulationInsertdialogComponent implements OnInit {
 
     if(this.ConsulationviewdetailModel.consulationdetail_id == undefined)
     {
-      consulationData.create_by = 1;
+      consulationData.create_by = this.currentUser.user_id;
       consulationData.consulation_id = this.Counselorrow;
       consulationData.meeting_id = this.Meetingrow;
       this.ConsulationdetailService.SaveConsulationdetail(consulationData).subscribe(data => {
@@ -121,7 +126,7 @@ export class ConsulationInsertdialogComponent implements OnInit {
     }
     else
     {
-      consulationData.update_by = 2;
+      consulationData.update_by = this.currentUser.user_id;
       consulationData.consulationdetail_id = this.ConsulationviewdetailModel.consulationdetail_id;
       consulationData.consulation_id = this.ConsulationviewdetailModel.consulation_id;
       consulationData.meeting_id = this.ConsulationviewdetailModel.meeting_id;
@@ -142,7 +147,6 @@ export class ConsulationInsertdialogComponent implements OnInit {
   }
 
   onNoClick(): void {
-    console.log("closeDialog");
     this.dialogRef.close();
   }
 

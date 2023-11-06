@@ -73,7 +73,6 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.ConsulationviewModel = data;
-      console.log("Consulation Data: "+this.ConsulationviewModel);
     });
     this.subscriptions.push();
   }

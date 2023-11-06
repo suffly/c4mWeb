@@ -13,6 +13,7 @@ import { ResponsedetailComponent } from '../../responsedetail/responsedetail.com
 import { AttachresService } from '@app/services/attachres.service';
 import { Attachresfiles } from '@app/models/attachresfiles';
 import { Attachres } from '@app/models/attachres';
+import { Userprofile } from '@app/models/userprofile';
 
 @Component({
   selector: 'app-attachres-insertdialog',
@@ -52,6 +53,9 @@ export class AttachresInsertdialogComponent implements OnInit{
   Consulationministryrow:number;
   Responserow:number;
 
+  currentUser: Userprofile;
+  private readonly CURRENT_USER = 'currentUser';
+
   ngOnInit(): void {
     this.loadData();
     this.frmGrpAttachresUpload = this.formBuilder.group({
@@ -63,6 +67,7 @@ export class AttachresInsertdialogComponent implements OnInit{
   }
 
   loadData(){
+    this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
@@ -85,7 +90,7 @@ export class AttachresInsertdialogComponent implements OnInit{
       attachresData.consulationdetail_id = this.Consulationrow;
       attachresData.consulation_id = this.Counselorrow;
       attachresData.meeting_id = this.Meetingrow;
-      attachresData.upload_by = 1;
+      attachresData.upload_by = this.currentUser.user_id;
       (await this.AttachresService.Upload_Attachres(attachresData)).subscribe({
         next: (event:any) => {
         if(event.type === HttpEventType.UploadProgress){
@@ -137,7 +142,6 @@ export class AttachresInsertdialogComponent implements OnInit{
   }
 
   onNoClick(): void {
-    console.log("closeDialog");
     this.dialogRef.close();
   }
 

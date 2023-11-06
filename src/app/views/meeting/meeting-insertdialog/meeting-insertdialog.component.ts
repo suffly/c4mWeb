@@ -16,6 +16,7 @@ import { Meetingtype } from 'src/app/models/meetingtype';
 import { MeetingsetService } from 'src/app/services/meetingset.service';
 import { Meetingset } from 'src/app/models/meetingset';
 import { Meetingview } from 'src/app/models/meetingview';
+import { Userprofile } from '@app/models/userprofile';
 
 
 interface DDLMeetingYear {
@@ -60,13 +61,13 @@ export class MeetingInsertdialogComponent implements OnInit {
   MeetingtermModel : Meetingterm[];
   MeetingtypeModel : Meetingtype[];
   MeetingsetModel : Meetingset[];
-
   
   frmGrpAddMeeting : FormGroup;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  
+  currentUser: Userprofile;
+  private readonly CURRENT_USER = 'currentUser';
 
   ngOnInit(): void {
 
@@ -93,6 +94,7 @@ export class MeetingInsertdialogComponent implements OnInit {
 
   loadData() {
     this.loading = true;
+    this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
     var Meetterm = new Meetingterm();
     this.MeetingtermService.DDLmeetingterm(Meetterm).subscribe(data => {this.MeetingtermModel = data 
     });
@@ -119,9 +121,7 @@ export class MeetingInsertdialogComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log("onSubmit")
     if (this.frmGrpAddMeeting.invalid){return;}
-
     var meetingData = new Meeting();
     meetingData.meeting_date    = this.frmGrpAddMeeting.controls.meetingdate.value;
     meetingData.meetingtype_id  = this.frmGrpAddMeeting.controls.ddltype.value;
@@ -132,10 +132,7 @@ export class MeetingInsertdialogComponent implements OnInit {
 
     if(this.MeetingViewModel.meeting_id == undefined)
     {
-      //test user
-      meetingData.create_by = 1;
-      console.log("meeting_id : " ,   this.MeetingViewModel.meeting_id);
-      //test user
+      meetingData.create_by = this.currentUser.user_id;
       this.MeetingService.SaveMeeting(meetingData).subscribe(data => {
         if (data == 0) {this.showWarning('ไม่บันทึกข้อมูลการประชุมได้');}
         else {this.showSuccess('บันทึกข้อมูลการประชุมเรียบร้อย');}
@@ -143,10 +140,7 @@ export class MeetingInsertdialogComponent implements OnInit {
     }
     else
     { 
-      //test user
-      meetingData.update_by = 2;
-      console.log("meeting_id : " ,   this.MeetingViewModel.meeting_id);
-      //test user 
+      meetingData.update_by = this.currentUser.user_id;
       meetingData.meeting_id = this.MeetingViewModel.meeting_id;
       meetingData.count_consulation = this.MeetingViewModel.count_consulation;
       meetingData.count_consulationtotal = this.MeetingViewModel.count_consulationtotal;
@@ -161,7 +155,6 @@ export class MeetingInsertdialogComponent implements OnInit {
   }
 
   onNoClick(): void {
-    console.log("closeDialog");
     this.dialogRef.close();
   }
 

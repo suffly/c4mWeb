@@ -124,7 +124,6 @@ export class ConsulationministryInsertdialogComponent implements OnInit,AfterVie
   }
 
   onNoClick(): void {
-    console.log("closeDialog");
     this.dialogRef.close();
   }
 
@@ -165,7 +164,6 @@ export class ConsulationministryInsertdialogComponent implements OnInit,AfterVie
       this.MinistryModel = data;
       this.FilteredMinistry.next(this.MinistryModel.slice());
     })
-    console.log(this.FilteredMinistry);
     this.FilteredMinistry.pipe(take(1), takeUntil(this._onDestroy)).subscribe(()=>{
       this.singleSelect.compareWith = (a: Ministry, b:Ministry) => a && b && a.ministry_id === b.ministry_id;
     });

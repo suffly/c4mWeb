@@ -84,7 +84,6 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.ConsulationdetailviewModel = data;
-      console.log("Consulationdetail Data: "+this.ConsulationdetailviewModel);
     });
 
     this.subscriptions.push();

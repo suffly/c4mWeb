@@ -11,6 +11,7 @@ import { Consulationview } from '@app/models/consulationview';
 import { Consulationdetailview } from '@app/models/consulationdetailview';
 import { ResponseService } from '@app/services/response.service';
 import { Response } from '@app/models/response';
+import { Userprofile } from '@app/models/userprofile';
 
 import { ResponselistComponent } from '../responselist/responselist.component';
 
@@ -46,6 +47,9 @@ export class ResponseInsertdialogComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
+  currentUser: Userprofile;
+  private readonly CURRENT_USER = 'currentUser';
+
   ngOnInit(): void{
     this.loadData();
     this.frmGrpAddResponse = this.formBuilder.group({
@@ -65,6 +69,7 @@ export class ResponseInsertdialogComponent implements OnInit {
 
   loadData() {
     this.loading = true;
+    this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
@@ -75,16 +80,16 @@ export class ResponseInsertdialogComponent implements OnInit {
   async onSubmit() {
     var responseData = new Response();
     responseData.response_topic = this.frmGrpAddResponse.controls.inputresponse.value;
+    responseData.create_by = this.currentUser.user_id;
+    responseData.create_title = this.currentUser.user_title;
+    responseData.create_name = this.currentUser.user_name;
+    responseData.create_surname = this.currentUser.user_surname;
     if(this.ResponseModel.response_id == undefined)
     {
       responseData.consulationministry_id = this.Consulationministryrow;
       responseData.consulationdetail_id = this.Consulationrow;
       responseData.consulation_id = this.Counselorrow;
       responseData.meeting_id = this.Meetingrow;
-      responseData.create_by = 1;
-      responseData.create_title = "นาย";
-      responseData.create_name = "ทดสอบ";
-      responseData.create_surname = "ทดสอบ";
       this.ResponseService.SaveResponse(responseData).subscribe(data => {
         if(data == 0) {this.showWarning('ไม่บันทึกข้อมูลตอบกลับข้อหารือได้');}
         else {this.showSuccess('บันทึกข้อมูลตอบกลับข้อหารือเรียบร้อย');}
@@ -96,10 +101,6 @@ export class ResponseInsertdialogComponent implements OnInit {
       responseData.consulationdetail_id = this.ResponseModel.consulationdetail_id;
       responseData.consulation_id = this.ResponseModel.consulation_id;
       responseData.meeting_id = this.ResponseModel.meeting_id;
-      responseData.create_by = 2;
-      responseData.create_title = "นาย";
-      responseData.create_name = "ทดสอบ2";
-      responseData.create_surname = "ทดสอบ2";
       (await this.ResponseService.UpdateResponse(responseData)).subscribe(data => {
         if(data == 0) { this.showWarning('ไม่แก้ไขข้อมูลตอบกลับข้อหารือ');}
         else {this.showSuccess('แก้ไขข้อมูลตอบกลับข้อหารือเรียบร้อย');}
@@ -108,7 +109,6 @@ export class ResponseInsertdialogComponent implements OnInit {
   }
 
   onNoClick(): void {
-    console.log("closeDialog");
     this.dialogRef.close();
   }
 

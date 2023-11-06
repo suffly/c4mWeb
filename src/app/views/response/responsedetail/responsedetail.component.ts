@@ -112,7 +112,6 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
       this.dataSourceResponse.data = data;
       this.dataSourceResponse.paginator = this.paginatorResponse;
       this.ResponseModel = data;
-      console.log("Response Data : "+this.ResponseModel);
     });
     this.subscriptions.push();
   }
@@ -124,7 +123,6 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
       this.dataSourceAttachres.data = data;
       this.dataSourceAttachres.paginator = this.paginatorAttachres;
       this.AttachresModel = data;
-      console.log("Attachres Data : "+ this.AttachresModel);
     })
     this.subscriptions.push();
   }

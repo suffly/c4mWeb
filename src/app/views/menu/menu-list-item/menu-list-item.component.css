@@ -1,0 +1,27 @@
+.designation { 
+    font-size: 14px;
+    text-align: left;
+    color: rgb(0, 0, 0);
+    padding-top: 0px;
+}
+.mat-icon {
+    font-size: 20px;
+    color: rgb(128, 0, 0);
+    padding-top: 3px;
+    
+}
+.logout { 
+    font-size: 15px; 
+    text-align: left;
+    color: rgb(128, 0, 0);
+}
+
+.mat-mdc-menu-item{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+    border-bottom-width: 0px;
+}
+

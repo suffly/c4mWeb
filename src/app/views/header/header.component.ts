@@ -24,13 +24,16 @@ export class HeaderComponent implements OnInit {
 
   @Output() public sidenavToggle = new EventEmitter();
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
+  @ViewChild(ElementRef) appDrawer: ElementRef;
   public href: string = "";
   opened = true;
   nowDate = new Date();
   loading = false;
   returnUrl: string;
-  public currentUser: Userprofile;
-  
+  user: Userprofile;
+  currentUser: Userprofile;
+  checked: boolean;
+  private readonly CURRENT_USER = 'currentUser';
 
   ngOnInit(): void {
     
@@ -42,8 +45,8 @@ export class HeaderComponent implements OnInit {
       //this.sidenav.fixedTopGap = 55;
       this.opened = true;
     }
-    
-    this.loaddata();
+    this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
+    //this.loaddata();
     
   }
 
@@ -53,10 +56,41 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([this.returnUrl]);
   }
 
+  
+
+  getCurrentDate() {
+    setInterval(() => {
+      this.nowDate = new Date(); //set time variable with current date 
+    }, 1000); // set it every one seconds}
+  }
+
+  public onToggleSidenav = () => {
+    this.sidenavToggle.emit();
+  }
 
   logOut() {
     //this.authenService.logout();
     this.router.navigate(['/login']);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) { //: { target: { innerWidth: number; }; }
+    if (event.target.innerWidth < 768) {
+      //this.sidenav.fixedTopGap = 55;
+      this.opened = false;
+    } else {
+      //this.sidenav.fixedTopGap = 55
+      this.opened = true;
+    }
+  }
+
+  isBiggerScreen() {
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if (width < 768) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

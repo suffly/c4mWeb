@@ -45,7 +45,7 @@ import { Counselorview } from 'src/app/models/counselorview';
   styleUrls: ['./home.component.css']
 })
 //-- set value for select search AfterViewInit, OnDestroy
-export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   CounselordivisionModel : Counselordivision[];
   CounselortypeModel : Counselortype[];
@@ -74,8 +74,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   pageSizeOptions = [10, 25, 50];
   index: number;
   id: number;
-  //subscriptions = [];
-  //private ngUnsubscribe = new Subject();
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
@@ -103,29 +102,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ) {}
 
-  // ngOnDestroy() {
-  //   this.ngUnsubscribe.next();
-  //   this.ngUnsubscribe.complete();
-  // }
 
   ngOnInit(): void{
     this.loaddata();
-    // var Counselor = new Counselorview();
-    // this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {
-    //   this.CounselorviewModel = data;
-    //   this.FilteredCounselorview.next(this.CounselorviewModel.slice());
-    //   console.log(this.CounselorviewModel);
-    // })
-    //this.FilteredCounselorview.next(this.CounselorviewModel.slice());
+
     //-- set value for select search
-    this.CounselorviewFilter.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.FilterCounselorview();}); 
+    // this.CounselorviewFilter.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.FilterCounselorview();}); 
 
   }
 
-  //-- set value for select search
-  ngAfterViewInit() {
-    this.setInitialValue();
-  }
+  // //-- set value for select search
+  // ngAfterViewInit() {
+  //   this.setInitialValue();
+  // }
 
   ngOnDestroy() {
     this._onDestroy.next();
@@ -135,105 +124,35 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   
   loaddata(){
     
-    // var Coundivision = new Counselordivision();
-    // this.CounselordivisionService.DDLcounselordivision(Coundivision).subscribe(data => {this.CounselordivisionModel = data 
-    //   console.log(this.CounselordivisionModel);
-    // });
-
-    // var Countype = new Counselortype();
-    // this.CounselortypeService.DDLcounselortype(Countype).subscribe(data => {this.CounselortypeModel = data
-    //   console.log(this.CounselortypeModel);
-    // });
-
-    // var Meetterm = new Meetingterm();
-    // this.MeetingtermService.DDLmeetingterm(Meetterm).subscribe(data => {this.MeetingtermModel = data
-    //   console.log(this.MeetingtermModel);
-    // });
-
-    // var Meettype = new Meetingtype();
-    // this.MeetingtypeService.DDLmeetingtype(Meettype).subscribe(data => {this.MeetingtypeModel = data
-    //   console.log(this.MeetingtypeModel);
-    // });
-
-    // var Minis = new Ministry();
-    // this.MinistryService.DDLministry(Minis).subscribe(data => {this.MinistryModel = data
-    //   console.log(this.MinistryModel);
-    // });
-
-    // var Object = new Objective();
-    // this.ObjectiveService.DDLobjective(Object).subscribe(data => {this.ObjectiveModel = data
-    //   console.log(this.ObjectiveModel);
-    // });
-
-    // var Party = new Partylist();
-    // this.PartylistService.DDLpartylist(Party).subscribe(data => {this.PartylistModel = data
-    //   console.log(this.PartylistModel);
-    // });
-
-    // var Provinc = new Province();
-    // this.ProvinceService.DDLprovince(Provinc).subscribe(data => {this.ProvinceModel = data
-    //   console.log(this.ProvinceModel);
-    // });
-
-    var Regi = new Region();
-    this.RegionService.DDLregion(Regi).subscribe(data => {this.RegionModel = data
-      //console.log(this.RegionModel);
-    });
-
-    var Topic = new Topictype();
-    this.TopictypeService.DDLtopictype(Topic).subscribe(data => {this.TopictypeModel = data
-      //console.log(this.TopictypeModel);
-    });
-
     
-
-    // var Meet = new Meeting();
-    // this.MeetingService.GetMetting_All(Meet).subscribe(data => {
-    //   this.MeetingModel = data
-    //   this.dataSource.data = data;
-    //   this.dataSource.paginator = this.paginator;
-
-    //   console.log(this.MeetingModel);
-
-    // });
-
-    // var Meetview = new Meetingview();
-    // this.MeetingviewService.Getmeetingview_All(Meetview).subscribe(data => {
-    //   this.MeetingviewModel = data;
-    //   this.dataSource.data = data;
-    //   this.dataSource.paginator = this.paginator;
-    //   console.log(this.MeetingviewModel);
-    // })
-
   }
 
-  //-- set value for select search
-  setInitialValue() {
+  // //-- set value for select search
+  // setInitialValue() {
     
-    var Counselor = new Counselorview();
-    this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {
-      this.CounselorviewModel = data;
-      this.FilteredCounselorview.next(this.CounselorviewModel.slice());
-    })
-    console.log(this.FilteredCounselorview);
-    this.FilteredCounselorview.pipe(take(1), takeUntil(this._onDestroy)).subscribe(()=>{
-      this.singleSelect.compareWith = (a: Counselorview, b:Counselorview) => a && b && a.counselor_id === b.counselor_id;
-    });
-  }
+  //   var Counselor = new Counselorview();
+  //   this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {
+  //     this.CounselorviewModel = data;
+  //     this.FilteredCounselorview.next(this.CounselorviewModel.slice());
+  //   })
+  //   this.FilteredCounselorview.pipe(take(1), takeUntil(this._onDestroy)).subscribe(()=>{
+  //     this.singleSelect.compareWith = (a: Counselorview, b:Counselorview) => a && b && a.counselor_id === b.counselor_id;
+  //   });
+  // }
 
-  FilterCounselorview() {
-    let search = this.CounselorviewFilter.value;
-    if(!search)
-    {
-      this.FilteredCounselorview.next(this.CounselorviewModel.slice());
-      return;
-    }
-    else
-    {
-      search = search.toLowerCase();
-    }
-    this.FilteredCounselorview.next(this.CounselorviewModel.filter(data => data.counselor_name.toLowerCase().indexOf(search) > -1));
-  }
-  //-- set value for select search
+  // FilterCounselorview() {
+  //   let search = this.CounselorviewFilter.value;
+  //   if(!search)
+  //   {
+  //     this.FilteredCounselorview.next(this.CounselorviewModel.slice());
+  //     return;
+  //   }
+  //   else
+  //   {
+  //     search = search.toLowerCase();
+  //   }
+  //   this.FilteredCounselorview.next(this.CounselorviewModel.filter(data => data.counselor_name.toLowerCase().indexOf(search) > -1));
+  // }
+  // //-- set value for select search
 
 }

@@ -18,6 +18,7 @@ import { ConsulationviewService } from '@app/services/consulationview.service';
 import { Consulationview } from '@app/models/consulationview';
 import { Consulation } from '@app/models/consulation';
 import { ConsulationService } from '@app/services/consulation.service';
+import { Userprofile } from '@app/models/userprofile';
 
 @Component({
   selector: 'app-counselor-insertdialog',
@@ -58,6 +59,8 @@ export class CounselorInsertdialogComponent implements OnInit, AfterViewInit, On
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
+  currentUser: Userprofile;
+  private readonly CURRENT_USER = 'currentUser';
 
   ngOnInit(): void {
     this.loadData();
@@ -86,6 +89,7 @@ export class CounselorInsertdialogComponent implements OnInit, AfterViewInit, On
 
   loadData() {
     this.loading = true;
+    this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     var Counselor = new Counselorview();
     //this.CounselorviewService.GetCounselorviewActive(Counselor).subscribe(data => {this.CounselorviewModel = data});
@@ -93,14 +97,13 @@ export class CounselorInsertdialogComponent implements OnInit, AfterViewInit, On
   }
 
   async onSubmit() {
-    console.log("onSubmit");
     if (this.frmGrpAddCounselor.invalid){return;}
     var consulationData = new Consulation();    
     consulationData.counselor_id = this.frmGrpAddCounselor.controls.ddlcounselor.value;
     if (this.ConsulationviewModel.consulation_id == undefined)
     {
       consulationData.meeting_id = this.Meetingrow;
-      consulationData.create_by = 1;
+      consulationData.create_by = this.currentUser.user_id;
       this.ConsulationService.SaveConsulation(consulationData).subscribe(data => {
         if (data == 0) {this.showWarning('ไม่บันทึกผู้หารือได้');}
         else {this.showSuccess('บันทึกผู้หารือเรียบร้อย');}
@@ -108,7 +111,7 @@ export class CounselorInsertdialogComponent implements OnInit, AfterViewInit, On
     }
     else
     {
-      consulationData.update_by = 2;
+      consulationData.update_by = this.currentUser.user_id;
       consulationData.consulation_id = this.ConsulationviewModel.consulation_id;
       consulationData.meeting_id = this.ConsulationviewModel.meeting_id;
       consulationData.count_consulationdetail = this.ConsulationviewModel.count_consulationdetail;
@@ -123,7 +126,6 @@ export class CounselorInsertdialogComponent implements OnInit, AfterViewInit, On
   }
 
   onNoClick(): void {
-    console.log("closeDialog");
     this.dialogRef.close();
   }
 
@@ -164,7 +166,6 @@ export class CounselorInsertdialogComponent implements OnInit, AfterViewInit, On
       this.CounselorviewModel = data;
       this.FilteredCounselorview.next(this.CounselorviewModel.slice());
     })
-    console.log(this.FilteredCounselorview);
     this.FilteredCounselorview.pipe(take(1), takeUntil(this._onDestroy)).subscribe(()=>{
       this.singleSelect.compareWith = (a: Counselorview, b:Counselorview) => a && b && a.counselor_id === b.counselor_id;
     });
