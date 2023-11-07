@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   ) {
     if (this.AuthService.currentUserValue) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     }
   }
 
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
           else 
           {
             this.router.navigate([this.returnUrl]);
-            //this.loading = false;
+            this.loading = false;
           }}, 
         error: (error:any) => {
           this.showWarning('ชื่อผู้ใช้งาน หรือ รหัสผ่าน ไม่ถูกต้อง');

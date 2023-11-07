@@ -32,7 +32,8 @@ const routes: Routes = [
   {path: 'consulationdetail', component:ConsulationviewdetailComponent, canActivate: [AuthGuard]},
   {path: 'response', component:ResponselistComponent, canActivate: [AuthGuard]},
   {path: 'responsedetail', component:ResponsedetailComponent, canActivate: [AuthGuard]},
-  {path: '', redirectTo: 'login', pathMatch: 'full'}
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
 
 ];
 
