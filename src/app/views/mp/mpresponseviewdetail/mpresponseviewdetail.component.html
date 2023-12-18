@@ -1,0 +1,101 @@
+<div class="card-header assert-col">
+    <button mat-icon-button  (click)="backClicked()" >
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <label for=""> รายละเอียดตอบกลับข้อหารือ </label>
+</div>
+
+<div class="card-body assert-row">
+    <div class="card-header background-white">
+        <label for=""> ตอบกลับข้อหารือ </label>
+    </div>
+    <div class="mat-elevation-z8 margin-bottom-60">
+        <table mat-table [dataSource]="dataSourceResponse" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="meeting_id">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"></td>
+            </ng-container>
+            <ng-container matColumnDef="response_topic">
+                <th mat-header-cell *matHeaderCellDef> ตอบกลับข้อหารือ </th>
+                <td mat-cell *matCellDef="let element"> {{element.response_topic}} </td>
+            </ng-container>
+            <ng-container matColumnDef="create_date">
+                <th mat-header-cell *matHeaderCellDef> วันที่ตอบกลับ </th>
+                <td mat-cell *matCellDef="let element"> {{element.create_date  | thaidate: 'medium'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="create_title">
+                <th mat-header-cell *matHeaderCellDef> ผู้ตอบข้อหารือ </th>
+                <td mat-cell *matCellDef="let element"> {{element.create_title}}{{element.create_name}}  {{element.create_surname}} </td>
+            </ng-container>
+            <ng-container matColumnDef="create_name">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"></td>
+            </ng-container>
+            <ng-container matColumnDef="create_surname">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"></td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>
+                    <span style="font-size: smaller;">Refresh</span>
+                    <button mat-icon-button color="accent" (click)="loadData()">
+                        <mat-icon aria-label="Refresh">refresh</mat-icon>
+                    </button>
+                </th>
+                <td mat-cell *matCellDef="let element; let i=indexResponse;" style="text-align: center;">
+                    <!-- <button mat-icon-button color="accent" (click)="editResponseItem(i,element)">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button> -->
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsResponse"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsResponse;"></tr>
+        </table>
+    </div>
+
+    <div class="card-header background-white">
+        <label for=""> เอกสารแนบ </label>
+    </div>
+    
+    <div class="mat-elevation-z8 margin-bottom-60">
+        <table mat-table [dataSource]="dataSourceAttachres" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="meeting_id">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"></td>
+            </ng-container>
+            <ng-container matColumnDef="attachres_name">
+                <th mat-header-cell *matHeaderCellDef> ชื่อเอกสาร </th>
+                <td mat-cell *matCellDef="let element"> {{element.attachres_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>
+                    <!-- <span style="font-size: smaller;">เพิ่มเอกสารแนบ</span>
+                    <button mat-icon-button color="primary" (click)="openAddAttachresDialog()">
+                        <mat-icon aria-label="Add">add</mat-icon>
+                    </button> -->
+                    <span style="font-size: smaller;">Refresh</span>
+                    <button mat-icon-button color="accent" (click)="loadData()">
+                        <mat-icon aria-label="Refresh">refresh</mat-icon>
+                    </button>
+                </th>
+    
+                <td mat-cell *matCellDef="let element; let i=indexAttachres;" style="text-align: center;">
+                    
+                    <!-- <button mat-icon-button color="accent" (click)="editAttachItem(i,element)">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button> -->
+                    <button mat-icon-button style="color: #8FBC8F" (click)="downloadAttachres(i,element)">
+                        <mat-icon aria-label="Edit">download</mat-icon>
+                    </button>
+                    <!-- <button mat-icon-button color="warn" (click)="deleteAttachresItem(i,element)">
+                        <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button> -->
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsAttachres"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsAttachres;"></tr>
+        </table>
+        <!-- <mat-paginator #paginatorAttach [pageSize]="this.pageSizeAttach" [pageSizeOptions]="this.pageSizeOptionsAttach" showFirstLastButtons></mat-paginator> -->
+    </div>
+</div>
+

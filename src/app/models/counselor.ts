@@ -1,6 +1,6 @@
 export class Counselor {
     counselor_id:number;
-    counselor_cid:number;
+    counselor_cid:string;
     userprofile_id:number;
     counselor_title:string;
     counselor_name:string;

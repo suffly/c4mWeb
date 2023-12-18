@@ -9,44 +9,29 @@ import { Subject } from 'rxjs';
 import { FileSaverService } from 'ngx-filesaver';
 import { DatePipe } from '@angular/common';
 
-import { ResponseInsertdialogComponent } from '../response-insertdialog/response-insertdialog.component';
-import { AttachresInsertdialogComponent } from '../attachres/attachres-insertdialog/attachres-insertdialog.component';
-import { AttachresDeletedialogComponent } from '../attachres/attachres-deletedialog/attachres-deletedialog.component';
-
-import { MeetingviewService } from '@app/services/meetingview.service';
-import { Meetingview } from 'src/app/models/meetingview';
-import { ConsulationviewService } from '@app/services/consulationview.service';
-import { Consulationview } from '@app/models/consulationview';
-import { ConsulationdetailviewService } from '@app/services/consulationdetailview.service';
-import { Consulationdetailview } from '@app/models/consulationdetailview';
 import { ResponseService } from '@app/services/response.service';
 import { Response } from '@app/models/response';
 import { AttachresService } from '@app/services/attachres.service';
 import { Attachres } from '@app/models/attachres';
 
+import { AttachresInsertdialogComponent } from '@app/views/response/attachres/attachres-insertdialog/attachres-insertdialog.component';
+
 @Component({
-  selector: 'app-responsedetail',
-  templateUrl: './responsedetail.component.html',
-  styleUrls: ['./responsedetail.component.css']
+  selector: 'app-garesponseviewdetail',
+  templateUrl: './garesponseviewdetail.component.html',
+  styleUrls: ['./garesponseviewdetail.component.css']
 })
-export class ResponsedetailComponent implements OnInit, OnDestroy {
-  
+export class GaresponseviewdetailComponent implements OnInit, OnDestroy  {
+
   constructor(
     public AttachresService: AttachresService,
     public ResponseService: ResponseService,
-    public ConsulationdetailviewService: ConsulationdetailviewService,
-    public ConsulationviewService: ConsulationviewService,
-    public MeetingviewService: MeetingviewService,
     public dialogService: MatDialog, 
     private Router: Router,
     private _FileSaverService: FileSaverService,
     public datepipe: DatePipe,
   ) {}
 
-  Meetingrow : number;
-  Counselorrow: number;
-  Consulationrow: number;
-  Consulationministryrow: number;
   Responserow: number;
 
   dataSourceResponse = new MatTableDataSource<Response>();
@@ -77,11 +62,8 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
 
   ResponseModel: Response;
-  ConsulationdetailviewModel: Consulationdetailview;
-  ConsulationviewModel: Consulationview;
-  MeetingModel: Meetingview;
   AttachresModel: Attachres;
-  
+
   ngOnInit(): void {
     this.loadData();
   }
@@ -92,16 +74,12 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
   }
 
   loadData(){
-      this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
-      this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
-      this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
-      this.Consulationministryrow = JSON.parse(localStorage.getItem('consulationminitryview')||'{}')
-      this.Responserow = JSON.parse(localStorage.getItem('response')||'{}');
-      this.loadResponse();
-      this.loadAttachres();
+    this.Responserow = JSON.parse(localStorage.getItem('garesponse')||'{}');
+    this.loadResponse();
+    this.loadAttachres();
   }
 
-  loadResponse() {
+  loadResponse(){
     var Response_input = new Response();
     Response_input.response_id = this.Responserow;
     const subscribe = (this.ResponseService.GetResponse_byid(Response_input)).subscribe(data => {
@@ -112,7 +90,7 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
     this.subscriptions.push();
   }
 
-  loadAttachres() {
+  loadAttachres(){
     var Attachres_input = new Attachres();
     Attachres_input.response_id = this.Responserow;
     const subscribe = (this.AttachresService.GetAttachres_byResponse(Attachres_input)).subscribe(data => {
@@ -121,24 +99,6 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
       this.AttachresModel = data;
     })
     this.subscriptions.push();
-  }
-
-  async editResponseItem(i: number, data: Response) {
-    this.id = data.response_id;
-    this.index = i;
-    const dialogRef = await this.dialogService.open(ResponseInsertdialogComponent, {
-      width: '640px',
-      height: '640px',
-      data: data,
-      disableClose: true
-    });
-
-    await dialogRef.afterClosed().subscribe(result => {
-      if (result == 1) {
-        setTimeout(() => {
-          this.loadResponse()}, 500); 
-      } 
-    });
   }
 
   async openAddAttachresDialog() {
@@ -174,19 +134,6 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  async deleteAttachresItem(i: number, data: Attachres) {
-    const dialogRef  = await this.dialogService.open(AttachresDeletedialogComponent, {
-      data: data,
-    });
-    
-    dialogRef.afterClosed().subscribe(result => {
-      if(result == 1){
-        setTimeout(() => {
-          this.loadAttachres()}, 500);
-      }
-    })
-  }
-
   downloadAttachres(i: number, data: Attachres) {
     var filename = "";
     this.AttachresService.Download_Attachres(data.attachres_id).subscribe((response: any) => {
@@ -199,12 +146,9 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
       () => console.info('File downloaded successfully');
   }
 
-
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/response'])
+      this.Router.navigate(['/garesponse'])
     }, 500);
   }
-
-
 }

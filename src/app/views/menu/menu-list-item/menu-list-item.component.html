@@ -6,7 +6,7 @@
       <button class="button-1" mat-menu-item [matMenuTriggerFor]="menu.childMenu" [disabled]="item.disabled" >
         <mat-icon>{{item.iconName_front}}</mat-icon>
         <span class="designation" >{{item.display_name}}</span>
-        <mat-icon>{{item.iconName_back}}</mat-icon>
+        <!-- <mat-icon>{{item.iconName_back}}</mat-icon> -->
       </button>
       <app-menu-item #menu [items]="item.children"></app-menu-item>
     </span>
@@ -15,7 +15,7 @@
       <button mat-menu-item color="primary" [routerLink]="item.route">
         <mat-icon>{{item.iconName_front}}</mat-icon>
         <span class="designation">{{item.display_name}}</span>
-        <mat-icon>{{item.iconName_back}}</mat-icon>
+        <span><mat-icon>{{item.iconName_back}}</mat-icon></span>
       </button>
     </span>
   </span>

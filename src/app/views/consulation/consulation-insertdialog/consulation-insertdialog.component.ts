@@ -117,6 +117,7 @@ export class ConsulationInsertdialogComponent implements OnInit {
     if(this.ConsulationviewdetailModel.consulationdetail_id == undefined)
     {
       consulationData.create_by = this.currentUser.user_id;
+      consulationData.send_by = this.currentUser.user_id;
       consulationData.consulation_id = this.Counselorrow;
       consulationData.meeting_id = this.Meetingrow;
       this.ConsulationdetailService.SaveConsulationdetail(consulationData).subscribe(data => {
@@ -127,6 +128,7 @@ export class ConsulationInsertdialogComponent implements OnInit {
     else
     {
       consulationData.update_by = this.currentUser.user_id;
+      consulationData.send_by = this.currentUser.user_id;
       consulationData.consulationdetail_id = this.ConsulationviewdetailModel.consulationdetail_id;
       consulationData.consulation_id = this.ConsulationviewdetailModel.consulation_id;
       consulationData.meeting_id = this.ConsulationviewdetailModel.meeting_id;

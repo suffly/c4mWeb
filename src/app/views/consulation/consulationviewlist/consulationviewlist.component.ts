@@ -68,7 +68,7 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
   async loadData() {
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
-    console.log("LoadConsulation, MeetingID : "+this.Meetingrow+" CounselorID : "+this.Counselorrow);
+    //console.log("LoadConsulation, MeetingID : "+this.Meetingrow+" CounselorID : "+this.Counselorrow);
     
     var Meetingview_input = new Meetingview();
     Meetingview_input.meeting_id = this.Meetingrow;

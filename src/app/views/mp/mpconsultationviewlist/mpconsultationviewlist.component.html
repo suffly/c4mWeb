@@ -1,0 +1,58 @@
+<div class="card-header">
+    <label for="">ข้อหารือของสมาชิกสภาผู้แทนราษฎร</label>
+    {{this.currentUser.user_title}}{{this.currentUser.user_name}} {{this.currentUser.user_midname}} {{this.currentUser.user_surname}}
+    <!-- สมาชิกสภาผู้แทนราษฎร   พรรค -->
+</div>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+            <td mat-cell *matCellDef="let element;let i = index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
+        </ng-container>
+        <ng-container matColumnDef="consulationdetail_topic">
+            <th mat-header-cell *matHeaderCellDef> ข้อหารือ </th>
+            <td mat-cell *matCellDef="let element"> {{element.consulationdetail_topic}} </td>
+        </ng-container>
+        <ng-container matColumnDef="consulationdetail_detail">
+            <th mat-header-cell *matHeaderCellDef> รายละเอียดข้อหารือ </th>
+            <td mat-cell *matCellDef="let element"> {{element.consulationdetail_detail}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meeting_date">
+            <th mat-header-cell *matHeaderCellDef> วันที่ประชุม </th>
+            <td mat-cell *matCellDef="let element"> {{element.meeting_date | thaidate: 'medium'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meetingset_desc">
+            <th mat-header-cell *matHeaderCellDef> ชุดที่ </th>
+            <td mat-cell *matCellDef="let element"> {{element.meetingset_desc}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meeting_year">
+            <th mat-header-cell *matHeaderCellDef> ปีที่ </th>
+            <td mat-cell *matCellDef="let element"> {{element.meeting_year}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meeting_time">
+            <th mat-header-cell *matHeaderCellDef> ครั้งที่ </th>
+            <td mat-cell *matCellDef="let element"> {{element.meeting_time}} </td>
+        </ng-container>
+        <ng-container matColumnDef="meetingterm_name">
+            <th mat-header-cell *matHeaderCellDef> สมัยประชุม </th>
+            <td mat-cell *matCellDef="let element"> {{element.meetingterm_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">   
+            <th mat-header-cell *matHeaderCellDef>
+                <span style="font-size:smaller;">Refresh</span>
+                <button mat-icon-button color="accent" (click)="loadData()">
+                    <mat-icon aria-label="Refresh">refresh</mat-icon>
+                </button>
+            </th>
+            <td mat-cell *matCellDef="let element; let i=index;" style="text-align: center;">
+                <button mat-icon-button color="primary" (click)="viewDetail(i,element)">
+                    <mat-icon aria-label="question_answer">question_answer</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSize]="this.pageSize" [pageSizeOptions]="this.pageSizeOptions" showFirstLastButtons></mat-paginator>
+</div>

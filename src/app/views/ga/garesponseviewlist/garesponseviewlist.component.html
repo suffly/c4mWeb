@@ -1,0 +1,60 @@
+<div class="card-header assert-col">
+    <button mat-icon-button  (click)="backClicked()" >
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <label for=""> ตอบกลับข้อหารือ </label>
+</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+          <td mat-cell *matCellDef="let element;let i = index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
+      </ng-container>
+      <ng-container matColumnDef="response_topic">
+          <th mat-header-cell *matHeaderCellDef> ตอบกลับข้อหารือ </th>
+          <td mat-cell *matCellDef="let element"> {{element.response_topic}} </td>
+      </ng-container>
+      <ng-container matColumnDef="create_date">
+          <th mat-header-cell *matHeaderCellDef> วันที่ตอบกลับ </th>
+          <td mat-cell *matCellDef="let element"> {{element.create_date  | thaidate: 'medium'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="create_title">
+        <th mat-header-cell *matHeaderCellDef> ผู้ตอบข้อหารือ </th>
+        <td mat-cell *matCellDef="let element"> {{element.create_title}}{{element.create_name}}  {{element.create_surname}} </td>
+    </ng-container>
+    <ng-container matColumnDef="create_name">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element">  </td>
+    </ng-container>
+    <ng-container matColumnDef="create_surname">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element">  </td>
+    </ng-container>
+      
+      <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>
+              <span style="font-size: smaller;">เพิ่มตอบกลับข้อหารือ</span>
+              <button mat-icon-button color="primary" (click)="openAddDialog()">
+                  <mat-icon aria-label="Add">add</mat-icon>
+              </button>
+              <span style="font-size: smaller;">Refresh</span>
+              <button mat-icon-button color="accent" (click)="loadData()">
+                  <mat-icon aria-label="Refresh">refresh</mat-icon>
+              </button>
+          </th>
+
+          <td mat-cell *matCellDef="let element; let i=index;" style="text-align: center;">
+              <button mat-icon-button color="primary" (click)="addDetail(i,element)">
+                  <mat-icon aria-label="question_answer">question_answer</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" (click)="editItem(i,element)">
+                  <mat-icon aria-label="Edit">edit</mat-icon>
+              </button>
+          </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #paginator [pageSize]="this.pageSize" [pageSizeOptions]="this.pageSizeOptions" showFirstLastButtons></mat-paginator>
+</div>

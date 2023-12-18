@@ -16,6 +16,14 @@
     </div>
 </div> -->
 
+<!-- <mat-form-field>
+    <mat-label>ค้นหา</mat-label>
+    <input matInput (keyup)="applyFilter($event)"
+      placeholder="ตัวอย่าง ใส่คำที่ต้องการค้นหา เช่น ชื่อผู้หารือ "
+      #input>
+    <mat-icon matSuffix>search</mat-icon>
+</mat-form-field> -->
+
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
         <ng-container matColumnDef="index">

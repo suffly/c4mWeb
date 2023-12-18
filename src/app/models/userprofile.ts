@@ -1,6 +1,6 @@
 export class Userprofile {
     user_id:number;
-    user_cid:number;
+    user_cid:string;
     user_login:string;
     user_password:string;
     user_title:string;
@@ -12,6 +12,9 @@ export class Userprofile {
     costcenter_id:number;
     usertype_id:number;
     user_status:number;
+    user_email:string;
+    user_member:number;
+    user_ministry:number;
 
     //NotMapped
     userad_password: string;

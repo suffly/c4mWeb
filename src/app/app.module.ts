@@ -91,48 +91,57 @@ import { AttachresDeletedialogComponent } from './views/response/attachres/attac
 import { MenuItemComponent } from './views/menu/menu-item/menu-item.component';
 import { MenuListItemComponent } from './views/menu/menu-list-item/menu-list-item.component';
 import { LoadingComponent } from './loading/loading.component';
+import { MpconsultationviewlistComponent } from './views/mp/mpconsultationviewlist/mpconsultationviewlist.component';
+import { MpconsultationviewdetailComponent } from './views/mp/mpconsultationviewdetail/mpconsultationviewdetail.component';
+import { MpresponseviewlistComponent } from './views/mp/mpresponseviewlist/mpresponseviewlist.component';
+import { MpresponseviewdetailComponent } from './views/mp/mpresponseviewdetail/mpresponseviewdetail.component';
+import { GaconsultationviewlistComponent } from './views/ga/gaconsultationviewlist/gaconsultationviewlist.component';
+import { GaconsultationviewdetailComponent } from './views/ga/gaconsultationviewdetail/gaconsultationviewdetail.component';
+import { GaresponseviewlistComponent } from './views/ga/garesponseviewlist/garesponseviewlist.component';
+import { GaresponseviewdetailComponent } from './views/ga/garesponseviewdetail/garesponseviewdetail.component';
 
-// export class AppDateAdapter extends NativeDateAdapter {
-//   format(date: Date, displayFormat: Object): string {
-//       date.setUTCHours(date.getUTCHours() + 7, 0, 0);
-//       if (displayFormat == "input") {
-//           let day = date.getDate();
-//           let month = date.getMonth() + 1;
-//           let year;
-//           if (date.getFullYear() < 2500)
-//               year = date.getFullYear() + 543;
-//           else
-//               year = date.getFullYear();
-//           return this._to2digit(day) + '/' + this._to2digit(month) + '/' + year;
-//       } else {
-//           let day = date.getMonth() + 1;
-//           let month = date.getDate();
-//           let year;
-//           if (date.getFullYear() < 2500)
-//               year = date.getFullYear() + 543;
-//           else
-//               year = date.getFullYear();
 
-//           return this._to2digit(day) + '/' + this._to2digit(month) + '/' + year;
-//       }
-//   }
+export class AppDateAdapter extends NativeDateAdapter {
+  override format(date: Date, displayFormat: Object): string {
+      date.setUTCHours(date.getUTCHours() + 7, 0, 0);
+      if (displayFormat == "input") {
+          let day = date.getDate();
+          let month = date.getMonth() + 1;
+          let year;
+          if (date.getFullYear() < 2500)
+              year = date.getFullYear() + 543;
+          else
+              year = date.getFullYear();
+          return this._to2digit(day) + '/' + this._to2digit(month) + '/' + year;
+      } else {
+          let day = date.getMonth() + 1;
+          let month = date.getDate();
+          let year;
+          if (date.getFullYear() < 2500)
+              year = date.getFullYear() + 543;
+          else
+              year = date.getFullYear();
 
-//   private _to2digit(n: number) {
-//       return ('00' + n).slice(-2);
-//   }
-// }
+          return this._to2digit(day) + '/' + this._to2digit(month) + '/' + year;
+      }
+  }
 
-// export const APP_DATE_FORMATS = {
-//   parse: {
-//       dateInput: 'DD/MM/YYYY',
-//   },
-//   display: {
-//       dateInput: 'input',
-//       monthYearLabel: 'input',
-//       dateA11yLabel: 'LL',
-//       monthYearA11yLabel: 'DD/MMM/YYYY',
-//   },
-// };
+  private _to2digit(n: number) {
+      return ('00' + n).slice(-2);
+  }
+}
+
+export const APP_DATE_FORMATS = {
+  parse: {
+      dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+      dateInput: 'input',
+      monthYearLabel: 'input',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'DD/MMM/YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -166,6 +175,15 @@ import { LoadingComponent } from './loading/loading.component';
     MenuItemComponent,
     MenuListItemComponent,
     LoadingComponent,
+    MpconsultationviewlistComponent,
+    MpconsultationviewdetailComponent,
+    MpresponseviewlistComponent,
+    MpresponseviewdetailComponent,
+    GaconsultationviewlistComponent,
+    GaconsultationviewdetailComponent,
+    GaresponseviewlistComponent,
+    GaresponseviewdetailComponent,
+
 
   ],
   imports: [
@@ -257,9 +275,9 @@ import { LoadingComponent } from './loading/loading.component';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'th-TH' },
-    //{ provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: DatePipe },
-    //{ provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
     DatePipe, 
     MatDatepickerModule,
   ],

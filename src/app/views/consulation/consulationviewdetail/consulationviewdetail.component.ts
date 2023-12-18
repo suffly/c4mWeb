@@ -54,6 +54,7 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     public AttachService: AttachService,
     public dialogService: MatDialog, 
     private Router: Router,
+    private cd: ChangeDetectorRef,
     private _FileSaverService: FileSaverService,
     public datepipe: DatePipe,
     ) {}
@@ -134,7 +135,7 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}')
-    console.log("LoadConsulationDetail, MeetingID : "+this.Meetingrow+" CounselorID : "+this.Counselorrow+" ConsulationID : "+this.Consulationrow);
+    //console.log("LoadConsulationDetail, MeetingID : "+this.Meetingrow+" CounselorID : "+this.Counselorrow+" ConsulationID : "+this.Consulationrow);
 
     // var Meetingview_input = new Meetingview();
     // Meetingview_input.meeting_id = this.Meetingrow;
@@ -143,7 +144,7 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     // var Consulationview_input = new Consulationview();
     // Consulationview_input.consulation_id = this.Counselorrow;
     // this.ConsulationviewService.Getconsulationview_byID(Consulationview_input).subscribe(data => {this.ConsulationviewModel = data});
-
+    this.checkStatusConsulationDetail();
     this.loadConsulation();
     this.loadMinistry();
     this.loadProvince();
@@ -223,7 +224,8 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     await dialogRef.afterClosed().subscribe(result => {
        if (result == 1) {
           setTimeout(() => {
-            this.loadMinistry()}, 500); 
+            this.loadData()
+          }, 500); 
         } 
     });
   }
@@ -241,7 +243,7 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     await dialogRef.afterClosed().subscribe(result => {
       if (result == 1) {
         setTimeout(() => {
-          this.loadMinistry()}, 500); 
+          this.loadData()}, 500); 
       } 
     });
   }
@@ -255,7 +257,8 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     await dialogRef.afterClosed().subscribe(result => {
       if (result == 1) {
         setTimeout(() => {
-          this.loadMinistry()}, 500); 
+          this.loadData()
+        }, 500); 
       } 
     });
   }
@@ -379,14 +382,20 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
       () => console.info('File downloaded successfully');
   }
 
-
   backClicked() {
     setTimeout(() => {
       this.Router.navigate(['/consulation'])
     }, 500);
   }
 
-
+  checkStatusConsulationDetail() {
+    var param_obj =new Consulationministry();
+    param_obj.consulationdetail_id = this.Consulationrow;
+    const subscription = this.ConsulationministryService.checkStatusConsulationDetail(param_obj).subscribe((data) => {
+      this.cd.detectChanges();
+    });
+    this.subscriptions.push();
+  }
 
   // applyFilterCSLD(event: Event) {
   //   const filterValue = (event.target as HTMLInputElement).value;

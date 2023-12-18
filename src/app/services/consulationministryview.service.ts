@@ -20,5 +20,13 @@ export class ConsulationministryviewService {
       })
     );
   }
+  
+  Getconsulationministryview_byMinistry(Consulationministryview: Consulationministryview): Observable<any>{
+    return this.http.post<Consulationministryview[]>(`${this.baseUrl}/Getconsulationministryview_byMinistry`,Consulationministryview).pipe(
+      map((ConsulationministryviewData: Consulationministryview[]) => {
+        return ConsulationministryviewData;
+      })
+    );
+  }
 
 }

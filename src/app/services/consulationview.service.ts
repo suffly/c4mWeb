@@ -30,8 +30,8 @@ export class ConsulationviewService {
   }
 
   Getconsulationview_byID(Consulationview: Consulationview): Observable<any>{
-    return this.http.post<Consulationview[]>(`${this.baseUrl}/Getconsulationview_byID`,Consulationview).pipe(
-      map((ConsulationData: Consulationview[]) => {
+    return this.http.post<Consulationview>(`${this.baseUrl}/Getconsulationview_byID`,Consulationview).pipe(
+      map((ConsulationData: Consulationview) => {
         return ConsulationData;
       })
     );

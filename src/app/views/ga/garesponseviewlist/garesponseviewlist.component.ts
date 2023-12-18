@@ -7,45 +7,28 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 
-import { MeetingviewService } from '@app/services/meetingview.service';
-import { Meetingview } from 'src/app/models/meetingview';
-import { ConsulationviewService } from '@app/services/consulationview.service';
-import { Consulationview } from '@app/models/consulationview';
-import { ConsulationdetailviewService } from '@app/services/consulationdetailview.service';
-import { Consulationdetailview } from '@app/models/consulationdetailview';
-import { ConsulationministryService } from '@app/services/consulationministry.service';
-import { Consulationministry } from '@app/models/consulationministry';
 import { ResponseService } from '@app/services/response.service';
 import { Response } from '@app/models/response';
 
-import { ResponseInsertdialogComponent } from '../response-insertdialog/response-insertdialog.component';
-import { ResponseDeletedialogComponent } from '../response-deletedialog/response-deletedialog.component';
-
-
+import { ResponseInsertdialogComponent } from '@app/views/response/response-insertdialog/response-insertdialog.component';
+import { ResponseDeletedialogComponent } from '@app/views/response/response-deletedialog/response-deletedialog.component';
 
 @Component({
-  selector: 'app-responselist',
-  templateUrl: './responselist.component.html',
-  styleUrls: ['./responselist.component.css']
+  selector: 'app-garesponseviewlist',
+  templateUrl: './garesponseviewlist.component.html',
+  styleUrls: ['./garesponseviewlist.component.css']
 })
-export class ResponselistComponent implements OnInit {
+export class GaresponseviewlistComponent implements OnInit {
 
   constructor(
-    public ConsulationministryService: ConsulationministryService,
-    public ConsulationdetailviewService: ConsulationdetailviewService,
-    public ConsulationviewService: ConsulationviewService,
-    public MeetingviewService: MeetingviewService,
     public ResponseService: ResponseService,
     public dialogService: MatDialog, 
     private Router: Router,
     private cd: ChangeDetectorRef,
     ) {}
 
-  Meetingrow: number;
-  Counselorrow: number;
-  Consulationrow: number;
-  Consulationministryrow: number;
   Responserow: number;
+  Consulationministryrow: number;                                                                                       
   ResponseModel: Response;
   dataSource = new MatTableDataSource<Response>();
   displayedColumns: string[] = ['index', 'response_topic', 'create_date', 'create_title', 'create_name', 'create_surname', 'actions'];
@@ -62,21 +45,13 @@ export class ResponselistComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
   ngOnInit(): void {
-    localStorage.removeItem("response");
+    localStorage.removeItem("garesponse");
     this.loadData();
   }
 
   loadData() {
-    this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
-    this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
-    this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
-    this.Consulationministryrow = JSON.parse(localStorage.getItem('consulationminitryview')||'{}');
-    this.checkStatusConsulationDetail();
-    //console.log("LoadResponse, MeetingID : "+this.Meetingrow+" CounselorID : "+this.Counselorrow+" ConsulationID : "+this.Consulationrow+" CSLMID : "+this.Consulationministryrow);
+    this.Consulationministryrow = JSON.parse(localStorage.getItem('gaconsulationminitryview')||'{}');
     var Responseview_input = new Response();
-    Responseview_input.meeting_id = this.Meetingrow;
-    Responseview_input.consulation_id = this.Counselorrow;
-    Responseview_input.consulationdetail_id = this.Consulationrow;
     Responseview_input.consulationministry_id = this.Consulationministryrow;
     const subscribe = (this.ResponseService.GetResponse_byConsulationministry(Responseview_input)).subscribe(data => {
       this.dataSource.data = data;
@@ -97,7 +72,6 @@ export class ResponselistComponent implements OnInit {
     await dialogRef.afterClosed().subscribe(result => {
        if (result == 1) {
           setTimeout(() => {
-            this.checkStatusConsulationDetail()
             this.loadData()}, 500); 
         } 
     });
@@ -130,7 +104,6 @@ export class ResponselistComponent implements OnInit {
     await dialogRef.afterClosed().subscribe(result => {
       if (result == 1) {
         setTimeout(() => {
-          this.checkStatusConsulationDetail()
           this.loadData()}, 500); 
       } 
     });
@@ -140,33 +113,17 @@ export class ResponselistComponent implements OnInit {
     this.id = data.response_id;
     this.index = i;
     this.Responserow = data.response_id;
-    localStorage.setItem('response', JSON.stringify(this.Responserow));
+    localStorage.setItem('garesponse', JSON.stringify(this.Responserow));
 
     setTimeout(() => {
-      this.Router.navigate(['/responsedetail'])
+      this.Router.navigate(['/garesponsedetail'])
     }, 500);
-    //[routerLink]="['/response']" << for html
+    //[routerLink]="['/garesponse']" << for html
   }
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/consulationdetail'])
+      this.Router.navigate(['/gaconsultationdetail'])
     }, 500);
   }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  checkStatusConsulationDetail() {
-    var param_obj =new Consulationministry();
-    param_obj.consulationdetail_id = this.Consulationrow;
-    const subscription = this.ConsulationministryService.checkStatusConsulationDetail(param_obj).subscribe((data) => {
-      this.cd.detectChanges();
-    });
-    this.subscriptions.push();
-  }
-
-
 }

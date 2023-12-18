@@ -35,7 +35,6 @@ export class AuthService {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       .pipe(map(user => {
         this.isTokenExpired(user);
-
         localStorage.setItem(this.CURRENT_USER, JSON.stringify(user));
         this.currentUserSubject.next(user);
         return user;

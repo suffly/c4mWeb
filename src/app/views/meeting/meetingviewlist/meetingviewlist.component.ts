@@ -55,13 +55,13 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
   }
 
   async loadData(){ 
-    console.log("LoadMeeting");   
+    //console.log("LoadMeeting");   
     var Meetview = new Meetingview();
     const subscription = (this.MeetingviewService.Getmeetingview_All(Meetview)).subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.MeetingviewModel = data;
-      console.log("Meeting Data: "+this.MeetingviewModel);
+      //console.log(this.MeetingviewModel);
     });
     this.subscriptions.push();
   }
