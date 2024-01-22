@@ -99,6 +99,10 @@ import { GaconsultationviewlistComponent } from './views/ga/gaconsultationviewli
 import { GaconsultationviewdetailComponent } from './views/ga/gaconsultationviewdetail/gaconsultationviewdetail.component';
 import { GaresponseviewlistComponent } from './views/ga/garesponseviewlist/garesponseviewlist.component';
 import { GaresponseviewdetailComponent } from './views/ga/garesponseviewdetail/garesponseviewdetail.component';
+import { PpsearchComponent } from './views/pp/ppsearch/ppsearch.component';
+import { PpsearchdetailComponent } from './views/pp/ppsearchdetail/ppsearchdetail.component';
+import { PpresponseComponent } from './views/pp/ppresponse/ppresponse.component';
+import { PpresponsedetailComponent } from './views/pp/ppresponsedetail/ppresponsedetail.component';
 
 
 export class AppDateAdapter extends NativeDateAdapter {
@@ -183,6 +187,10 @@ export const APP_DATE_FORMATS = {
     GaconsultationviewdetailComponent,
     GaresponseviewlistComponent,
     GaresponseviewdetailComponent,
+    PpsearchComponent,
+    PpsearchdetailComponent,
+    PpresponseComponent,
+    PpresponsedetailComponent,
 
 
   ],

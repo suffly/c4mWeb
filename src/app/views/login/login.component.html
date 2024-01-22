@@ -48,6 +48,15 @@
                     </div>
                   </div>
                 </form>
+
+                <div>
+                  <button [disabled]="loading" class="btn" style="background-color:white;color: slategray;" (click)="search()" [routerLink]="['/search']">
+                    <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
+                    <i class="glyphicon glyphicon-log-in"></i>
+                    บริการข้อมูลปรึกษาหารือของสมาชิกฯ สำหรับประชาชน
+                  </button>
+                </div>
+
               </div>
             </div>
           </div>

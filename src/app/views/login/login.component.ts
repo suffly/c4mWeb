@@ -75,6 +75,12 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  search() {
+    setTimeout(() => {
+      this.router.navigate(['/search'])
+    }, 500);
+  }
+
   showWarning(message: string) {
     this.toastr.warning(message);
   }

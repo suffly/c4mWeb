@@ -21,10 +21,21 @@ import { GaconsultationviewdetailComponent } from './views/ga/gaconsultationview
 import { GaresponseviewlistComponent } from './views/ga/garesponseviewlist/garesponseviewlist.component';
 import { GaresponseviewdetailComponent } from './views/ga/garesponseviewdetail/garesponseviewdetail.component';
 
+import { PpsearchComponent } from './views/pp/ppsearch/ppsearch.component';
+import { PpsearchdetailComponent } from './views/pp/ppsearchdetail/ppsearchdetail.component';
+import { PpresponseComponent } from './views/pp/ppresponse/ppresponse.component';
+import { PpresponsedetailComponent } from './views/pp/ppresponsedetail/ppresponsedetail.component';
+
 const routes: Routes = [
 
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
+
+  {path: 'search', component: PpsearchComponent},
+  {path: 'searchdetail', component: PpsearchdetailComponent},
+  {path: 'searchresponse', component: PpresponseComponent},
+  {path: 'searchresdetail', component: PpresponsedetailComponent},
+
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   

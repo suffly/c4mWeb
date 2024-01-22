@@ -1,0 +1,103 @@
+<mat-toolbar color="primary" class="mat-elevation-z1">
+    <div>
+        <img src="../assets/images/logo-plm.png" height="50px"/>
+    </div>
+    &nbsp;&nbsp;
+    <div style="font-size: 14px">
+        ระบบการจัดการข้อปรึกษาหารือของสมาชิกสภาผู้แทนราษฎร
+        (Consultation management system for Member of the House of Representative : C4M)
+    </div>
+</mat-toolbar>
+
+<div class="card-header assert-col">
+    <button mat-icon-button  (click)="backClicked()">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <label for=""> login </label>
+</div>
+
+<div class="card-body assert-row">
+  <div class="card-header">
+    <label for="">บริการข้อมูลปรึกษาหารือของสมาชิกฯสำหรับประชาชน</label>
+  </div>  
+</div>
+
+<div class="card-body assert-row">
+  <!-- <div>
+    <table style="width: 100%;">
+      <tr>
+        <td style="width: 60%;">
+          <mat-form-field>
+            <input matInput class="form-field" [formControl]="consultation_topicFilter"
+              placeholder="ค้นหา ข้อหารือ จังหวัด">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </td>
+        <td style="width: 2%;"></td>
+        <td style="width: 38%;">
+          <mat-form-field>
+            <input matInput class="form-field" [formControl]="meeting_dateFilter"
+              placeholder="ค้นหา วันที่หารือ คศ-เดือน-วัน (2021-12-01)">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </div> -->
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+            <td mat-cell *matCellDef="let element;let i = index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
+        </ng-container>
+        <ng-container matColumnDef="consulationdetail_topic">
+            <th mat-header-cell *matHeaderCellDef> ข้อหารือ </th>
+            <td mat-cell *matCellDef="let element"> {{element.consulationdetail_topic}} </td>
+        </ng-container>
+        <ng-container matColumnDef="consulationdetail_detail">
+            <th mat-header-cell *matHeaderCellDef> รายละเอียดข้อหารือ </th>
+            <td mat-cell *matCellDef="let element"> {{element.consulationdetail_detail}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="counselor_title">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element">  </td>
+        </ng-container>
+        <ng-container matColumnDef="counselor_name">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element">  </td>
+        </ng-container>
+        <ng-container matColumnDef="counselor_middlename">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element">  </td>
+        </ng-container>
+        <ng-container matColumnDef="counselor_surname">
+            <th mat-header-cell *matHeaderCellDef> ผู้หารือ </th>
+            <td mat-cell *matCellDef="let element"> {{element.counselor_title}}{{element.counselor_name}} {{element.counselor_middlename}} {{element.counselor_surname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="meeting_date">
+            <th mat-header-cell *matHeaderCellDef> วันที่ประชุม </th>
+            <td mat-cell *matCellDef="let element"> {{element.meeting_date | thaidate: 'medium'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">   
+            <th mat-header-cell *matHeaderCellDef>
+                <span style="font-size:smaller;">Refresh</span>
+                <button mat-icon-button color="accent" (click)="loadData()">
+                    <mat-icon aria-label="Refresh">refresh</mat-icon>
+                </button>
+            </th>
+            <td mat-cell *matCellDef="let element; let i=index;" style="text-align: center;">
+                <button mat-icon-button color="primary" (click)="viewDetail(i,element)">
+                    <mat-icon aria-label="question_answer">question_answer</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSize]="this.pageSize" [pageSizeOptions]="this.pageSizeOptions" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
