@@ -38,7 +38,7 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
     public ConsulationviewService: ConsulationviewService,
     public MeetingviewService: MeetingviewService,
     public dialogService: MatDialog, 
-    private Router: Router,
+    private router: Router,
     private _FileSaverService: FileSaverService,
     public datepipe: DatePipe,
   ) {}
@@ -202,7 +202,7 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/response'])
+      this.router.navigate(['/response'])
     }, 500);
   }
 

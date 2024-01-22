@@ -28,7 +28,7 @@ import { ResponseDeletedialogComponent } from '../response-deletedialog/response
   templateUrl: './responselist.component.html',
   styleUrls: ['./responselist.component.css']
 })
-export class ResponselistComponent implements OnInit {
+export class ResponselistComponent implements OnInit, OnDestroy {
 
   constructor(
     public ConsulationministryService: ConsulationministryService,
@@ -37,7 +37,7 @@ export class ResponselistComponent implements OnInit {
     public MeetingviewService: MeetingviewService,
     public ResponseService: ResponseService,
     public dialogService: MatDialog, 
-    private Router: Router,
+    private router: Router,
     private cd: ChangeDetectorRef,
     ) {}
 
@@ -55,7 +55,7 @@ export class ResponselistComponent implements OnInit {
   id: number;
 
   subscriptions = [];
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -64,6 +64,11 @@ export class ResponselistComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem("response");
     this.loadData();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   loadData() {
@@ -143,14 +148,14 @@ export class ResponselistComponent implements OnInit {
     localStorage.setItem('response', JSON.stringify(this.Responserow));
 
     setTimeout(() => {
-      this.Router.navigate(['/responsedetail'])
+      this.router.navigate(['/responsedetail'])
     }, 500);
     //[routerLink]="['/response']" << for html
   }
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/consulationdetail'])
+      this.router.navigate(['/consulationdetail'])
     }, 500);
   }
 
