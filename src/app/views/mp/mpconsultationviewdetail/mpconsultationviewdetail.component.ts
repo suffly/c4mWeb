@@ -28,14 +28,14 @@ import { Attachfiles } from '@app/models/attachfiles';
   templateUrl: './mpconsultationviewdetail.component.html',
   styleUrls: ['./mpconsultationviewdetail.component.css']
 })
-export class MpconsultationviewdetailComponent implements OnInit {
+export class MpconsultationviewdetailComponent implements OnInit, OnDestroy {
 
   constructor(
     public ConsulationministryviewService: ConsulationministryviewService,
     public ConsulationprovinceviewService: ConsulationprovinceviewService,
     public AttachService: AttachService,
     public MpconsulationviewService: MpconsulationviewService,
-    private Router: Router,
+    private router: Router,
     private _FileSaverService: FileSaverService,
     public datepipe: DatePipe,
   ) {}
@@ -95,6 +95,11 @@ export class MpconsultationviewdetailComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem("mpconsulationminitryview");
     this.loadData();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   loadData() {
@@ -165,14 +170,14 @@ export class MpconsultationviewdetailComponent implements OnInit {
     localStorage.setItem('mpconsulationminitryview', JSON.stringify(this.Mpconsulationministryrow));
 
     setTimeout(() => {
-      this.Router.navigate(['/mpresponse'])
+      this.router.navigate(['/mpresponse'])
     }, 500);
     //[routerLink]="['/mpresponse']" << for html
   }
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/mpconsultation'])
+      this.router.navigate(['/mpconsultation'])
     }, 500);
   }
 }

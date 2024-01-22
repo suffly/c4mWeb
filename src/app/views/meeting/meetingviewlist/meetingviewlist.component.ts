@@ -24,7 +24,7 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
   constructor(
     public MeetingviewService: MeetingviewService,
     public dialogService: MatDialog, 
-    private Router: Router,
+    private router: Router,
     ) {}
 
   Meetingrow : number;
@@ -127,7 +127,7 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
     localStorage.setItem('meetingview', JSON.stringify(this.Meetingrow));
 
     setTimeout(() => {
-      this.Router.navigate(['/counselor'])
+      this.router.navigate(['/counselor'])
     }, 500);
     //[routerLink]="['/counselor']" << for html
   }

@@ -29,14 +29,14 @@ import { Attachfiles } from '@app/models/attachfiles';
   templateUrl: './gaconsultationviewdetail.component.html',
   styleUrls: ['./gaconsultationviewdetail.component.css']
 })
-export class GaconsultationviewdetailComponent implements OnInit {
+export class GaconsultationviewdetailComponent implements OnInit, OnDestroy {
 
   constructor(
     public ConsulationministryviewService: ConsulationministryviewService,
     public ConsulationprovinceviewService: ConsulationprovinceviewService,
     public AttachService: AttachService,
     public GaconsulationviewService: GaconsulationviewService,
-    private Router: Router,
+    private router: Router,
     private _FileSaverService: FileSaverService,
     public datepipe: DatePipe,
   ) {}
@@ -97,6 +97,11 @@ export class GaconsultationviewdetailComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem("gaconsulationminitryview");
     this.loadData();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   loadData() {
@@ -169,14 +174,14 @@ export class GaconsultationviewdetailComponent implements OnInit {
     localStorage.setItem('gaconsulationminitryview', JSON.stringify(this.Gaconsulationminitryrow));
 
     setTimeout(() => {
-      this.Router.navigate(['/garesponse'])
+      this.router.navigate(['/garesponse'])
     }, 500);
     //[routerLink]="['/garesponse']" << for html
   }
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/gaconsultation'])
+      this.router.navigate(['/gaconsultation'])
     }, 500);
   }
 }

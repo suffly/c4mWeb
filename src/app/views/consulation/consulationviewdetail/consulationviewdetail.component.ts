@@ -53,7 +53,7 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     public MeetingviewService: MeetingviewService,
     public AttachService: AttachService,
     public dialogService: MatDialog, 
-    private Router: Router,
+    private router: Router,
     private cd: ChangeDetectorRef,
     private _FileSaverService: FileSaverService,
     public datepipe: DatePipe,
@@ -271,7 +271,7 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     localStorage.setItem('consulationminitryview', JSON.stringify(this.Consulationministryrow));
 
     setTimeout(() => {
-      this.Router.navigate(['/response'])
+      this.router.navigate(['/response'])
     }, 500);
     //[routerLink]="['/response']" << for html
   }
@@ -384,7 +384,7 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/consulation'])
+      this.router.navigate(['/consulation'])
     }, 500);
   }
 

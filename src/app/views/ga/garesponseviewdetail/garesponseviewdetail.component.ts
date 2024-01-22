@@ -21,13 +21,13 @@ import { AttachresInsertdialogComponent } from '@app/views/response/attachres/at
   templateUrl: './garesponseviewdetail.component.html',
   styleUrls: ['./garesponseviewdetail.component.css']
 })
-export class GaresponseviewdetailComponent implements OnInit, OnDestroy  {
+export class GaresponseviewdetailComponent implements OnInit, OnDestroy {
 
   constructor(
     public AttachresService: AttachresService,
     public ResponseService: ResponseService,
     public dialogService: MatDialog, 
-    private Router: Router,
+    private router: Router,
     private _FileSaverService: FileSaverService,
     public datepipe: DatePipe,
   ) {}
@@ -148,7 +148,7 @@ export class GaresponseviewdetailComponent implements OnInit, OnDestroy  {
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/garesponse'])
+      this.router.navigate(['/garesponse'])
     }, 500);
   }
 }

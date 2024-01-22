@@ -27,7 +27,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
     public ConsulationviewService: ConsulationviewService,
     public MeetingviewService: MeetingviewService,
     public dialogService: MatDialog, 
-    private Router: Router,
+    private router: Router,
     ) {}
   
 
@@ -132,7 +132,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/meeting'])
+      this.router.navigate(['/meeting'])
     }, 500);
   }
 
@@ -144,7 +144,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
     localStorage.setItem('counselorview', JSON.stringify(this.Counselorrow));
 
     setTimeout(() => {
-      this.Router.navigate(['/consulation'])
+      this.router.navigate(['/consulation'])
     }, 500);
     //[routerLink]="['/consulation']" << for html
   }

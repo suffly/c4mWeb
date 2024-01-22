@@ -8,6 +8,7 @@ import { Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Userprofile } from '@app/models/userprofile';
+import { AuthService } from '@app/services/authen/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -17,10 +18,16 @@ import { Userprofile } from '@app/models/userprofile';
 export class HeaderComponent implements OnInit {
 
   constructor(
+    private authenService: AuthService,
     private router: Router,
+    private datePipe: DatePipe,
     public _location: Location,
     public dialogService: MatDialog,
-  ) {}
+  ) {
+    this.authenService.currentUser.subscribe(x => this.currentUser = x);
+    this.datePipe.transform(this.nowDate, 'yyyy-MM-dd');
+    this.returnUrl = 'home';
+  }
 
   @Output() public sidenavToggle = new EventEmitter();
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
@@ -46,12 +53,11 @@ export class HeaderComponent implements OnInit {
       this.opened = true;
     }
     this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
-    //this.loaddata();
+    this.loaddata();
     
   }
 
   loaddata() {
-    //this.currentUser.user_id = 1;
     this.returnUrl = 'meeting'   
     this.router.navigate([this.returnUrl]);
   }
@@ -69,7 +75,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    //this.authenService.logout();
+    this.authenService.logout();
     this.router.navigate(['/login']);
   }
 

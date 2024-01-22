@@ -17,11 +17,11 @@ import { Gaconsulationview } from '@app/models/gaconsulationview';
   templateUrl: './gaconsultationviewlist.component.html',
   styleUrls: ['./gaconsultationviewlist.component.css']
 })
-export class GaconsultationviewlistComponent implements OnInit {
+export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
 
   constructor(
     public GaconsulationviewService: GaconsulationviewService,
-    private Router: Router,
+    private router: Router,
   ) {}
   
   Gaconsulationviewrow: number;
@@ -73,7 +73,7 @@ export class GaconsultationviewlistComponent implements OnInit {
     localStorage.setItem('gaconsultation', JSON.stringify(this.Gaconsulationviewrow));
 
     setTimeout(() => {
-      this.Router.navigate(['/gaconsultationdetail'])
+      this.router.navigate(['/gaconsultationdetail'])
     }, 500);
     //[routerLink]="['/gaconsultationdetail']" << for html
   }

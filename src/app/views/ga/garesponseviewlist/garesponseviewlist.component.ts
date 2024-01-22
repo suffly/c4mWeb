@@ -18,12 +18,12 @@ import { ResponseDeletedialogComponent } from '@app/views/response/response-dele
   templateUrl: './garesponseviewlist.component.html',
   styleUrls: ['./garesponseviewlist.component.css']
 })
-export class GaresponseviewlistComponent implements OnInit {
+export class GaresponseviewlistComponent implements OnInit, OnDestroy {
 
   constructor(
     public ResponseService: ResponseService,
     public dialogService: MatDialog, 
-    private Router: Router,
+    private router: Router,
     private cd: ChangeDetectorRef,
     ) {}
 
@@ -38,7 +38,7 @@ export class GaresponseviewlistComponent implements OnInit {
   id: number;
 
   subscriptions = [];
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -47,6 +47,11 @@ export class GaresponseviewlistComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem("garesponse");
     this.loadData();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   loadData() {
@@ -116,14 +121,14 @@ export class GaresponseviewlistComponent implements OnInit {
     localStorage.setItem('garesponse', JSON.stringify(this.Responserow));
 
     setTimeout(() => {
-      this.Router.navigate(['/garesponsedetail'])
+      this.router.navigate(['/garesponsedetail'])
     }, 500);
     //[routerLink]="['/garesponse']" << for html
   }
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/gaconsultationdetail'])
+      this.router.navigate(['/gaconsultationdetail'])
     }, 500);
   }
 }

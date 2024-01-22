@@ -28,14 +28,14 @@ export class AppComponent {
       this.currentUser = this.authenService.currentUserValue;
   }
 
- ngOnInit() {
-  if (this.currentUser.access_token){
-    this.isLogin =  true;
+  ngOnInit() {
+    if (this.currentUser.access_token){
+      this.isLogin =  true;
 
-  }else{
+    }else{
+      
+    }
 
   }
-
-}
 
 }

@@ -15,12 +15,12 @@ import { Response } from '@app/models/response';
   templateUrl: './mpresponseviewlist.component.html',
   styleUrls: ['./mpresponseviewlist.component.css']
 })
-export class MpresponseviewlistComponent implements OnInit {
+export class MpresponseviewlistComponent implements OnInit, OnDestroy {
 
   constructor(
     public ResponseService: ResponseService,
     public dialogService: MatDialog, 
-    private Router: Router,
+    private router: Router,
     ) {}
 
   Mpconsulationministryrow: number;
@@ -34,7 +34,7 @@ export class MpresponseviewlistComponent implements OnInit {
   id: number;
   
   subscriptions = [];
-  private ngUnsubscribe = new Subject();
+  private ngUnsubscribe = new Subject<void>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -43,6 +43,11 @@ export class MpresponseviewlistComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem("mpresponse");
     this.loadData();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   loadData() {
@@ -64,14 +69,14 @@ export class MpresponseviewlistComponent implements OnInit {
     localStorage.setItem('mpresponse', JSON.stringify(this.Mpresponserow));
 
     setTimeout(() => {
-      this.Router.navigate(['/mpresponsedetail'])
+      this.router.navigate(['/mpresponsedetail'])
     }, 500);
     //[routerLink]="['/mpresponse']" << for html
   }
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/mpconsultationdetail'])
+      this.router.navigate(['/mpconsultationdetail'])
     }, 500);
   }
 

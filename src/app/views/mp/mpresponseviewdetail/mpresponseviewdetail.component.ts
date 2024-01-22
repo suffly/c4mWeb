@@ -19,13 +19,13 @@ import { Attachres } from '@app/models/attachres';
   templateUrl: './mpresponseviewdetail.component.html',
   styleUrls: ['./mpresponseviewdetail.component.css']
 })
-export class MpresponseviewdetailComponent implements OnInit {
+export class MpresponseviewdetailComponent implements OnInit, OnDestroy {
 
   constructor(
     public AttachresService: AttachresService,
     public ResponseService: ResponseService,
     public dialogService: MatDialog, 
-    private Router: Router,
+    private router: Router,
     private _FileSaverService: FileSaverService,
     public datepipe: DatePipe,
   ) {}
@@ -115,7 +115,7 @@ export class MpresponseviewdetailComponent implements OnInit {
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/mpresponse'])
+      this.router.navigate(['/mpresponse'])
     }, 500);
   }
 

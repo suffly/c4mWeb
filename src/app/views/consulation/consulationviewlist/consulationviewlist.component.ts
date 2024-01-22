@@ -29,7 +29,7 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
     public ConsulationviewService: ConsulationviewService,
     public MeetingviewService: MeetingviewService,
     public dialogService: MatDialog, 
-    private Router: Router,
+    private router: Router,
     ) {}
 
   Meetingrow : number;
@@ -145,14 +145,14 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
     localStorage.setItem('consulationview', JSON.stringify(this.Consulationrow));
 
     setTimeout(() => {
-      this.Router.navigate(['/consulationdetail'])
+      this.router.navigate(['/consulationdetail'])
     }, 500);
     //[routerLink]="['/response']" << for html
   }
 
   backClicked() {
     setTimeout(() => {
-      this.Router.navigate(['/counselor'])
+      this.router.navigate(['/counselor'])
     }, 500);
   }
 

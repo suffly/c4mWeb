@@ -17,11 +17,11 @@ import { Mpconsulationview } from '@app/models/mpconsulationview';
   templateUrl: './mpconsultationviewlist.component.html',
   styleUrls: ['./mpconsultationviewlist.component.css']
 })
-export class MpconsultationviewlistComponent implements OnInit {
+export class MpconsultationviewlistComponent implements OnInit, OnDestroy {
 
   constructor(
     public MpconsulationviewService: MpconsulationviewService,
-    private Router: Router,
+    private router: Router,
   ) {}
 
   Mpconsultationrow: number;
@@ -75,7 +75,7 @@ export class MpconsultationviewlistComponent implements OnInit {
     localStorage.setItem('mpconsultation', JSON.stringify(this.Mpconsultationrow));
 
     setTimeout(() => {
-      this.Router.navigate(['/mpconsultationdetail'])
+      this.router.navigate(['/mpconsultationdetail'])
     }, 500);
     //[routerLink]="['/mpconsultationdetail']" << for html
   }
