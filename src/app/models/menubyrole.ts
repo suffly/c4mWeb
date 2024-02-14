@@ -7,5 +7,5 @@ export class Menubyrole {
     route:string;
     level:number;
     parent_id:number;
-    disable:number;
+    disabled:number;
 }
