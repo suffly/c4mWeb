@@ -1,5 +1,5 @@
 <div class="card-header">
-    <label for="">ข้อหารือของสมาชิกสภาผู้แทนราษฎร</label>
+    <label for="">ข้อปรึกษาหารือของสมาชิกสภาผู้แทนราษฎร</label>
     {{this.currentUser.user_title}}{{this.currentUser.user_name}} {{this.currentUser.user_midname}} {{this.currentUser.user_surname}}
     <!-- สมาชิกสภาผู้แทนราษฎร   พรรค -->
 </div>
@@ -11,11 +11,11 @@
             <td mat-cell *matCellDef="let element;let i = index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
         </ng-container>
         <ng-container matColumnDef="consulationdetail_topic">
-            <th mat-header-cell *matHeaderCellDef> ข้อหารือ </th>
+            <th mat-header-cell *matHeaderCellDef> ข้อปรึกษาหารือ </th>
             <td mat-cell *matCellDef="let element"> {{element.consulationdetail_topic}} </td>
         </ng-container>
         <ng-container matColumnDef="consulationdetail_detail">
-            <th mat-header-cell *matHeaderCellDef> รายละเอียดข้อหารือ </th>
+            <th mat-header-cell *matHeaderCellDef> รายละเอียดข้อปรึกษาหารือ </th>
             <td mat-cell *matCellDef="let element"> {{element.consulationdetail_detail}} </td>
         </ng-container>
         <ng-container matColumnDef="meeting_date">

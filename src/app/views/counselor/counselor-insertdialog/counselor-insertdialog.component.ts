@@ -105,7 +105,7 @@ export class CounselorInsertdialogComponent implements OnInit, AfterViewInit, On
       consulationData.meeting_id = this.Meetingrow;
       consulationData.create_by = this.currentUser.user_id;
       this.ConsulationService.SaveConsulation(consulationData).subscribe(data => {
-        if (data == 0) {this.showWarning('ไม่บันทึกผู้หารือได้');}
+        if (data == 0) {this.showWarning('ไม่สามารถบันทึกผู้หารือได้');}
         else {this.showSuccess('บันทึกผู้หารือเรียบร้อย');}
       });
     }
@@ -119,7 +119,7 @@ export class CounselorInsertdialogComponent implements OnInit, AfterViewInit, On
       consulationData.create_by = this.ConsulationviewModel.create_by;
 
       (await this.ConsulationService.UpdateConsulation(consulationData)).subscribe(data => {
-        if (data == 0) {this.showWarning('ไม่แก้ไขผู้หารือได้');}
+        if (data == 0) {this.showWarning('ไม่สามารถแก้ไขผู้หารือได้');}
         else {this.showSuccess('แก้ไขผู้หารือเรียบร้อย');}
       });
     }

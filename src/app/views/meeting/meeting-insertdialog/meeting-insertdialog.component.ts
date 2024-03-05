@@ -134,7 +134,7 @@ export class MeetingInsertdialogComponent implements OnInit {
     {
       meetingData.create_by = this.currentUser.user_id;
       this.MeetingService.SaveMeeting(meetingData).subscribe(data => {
-        if (data == 0) {this.showWarning('ไม่บันทึกข้อมูลการประชุมได้');}
+        if (data == 0) {this.showWarning('ไม่สามารถบันทึกข้อมูลการประชุมได้');}
         else {this.showSuccess('บันทึกข้อมูลการประชุมเรียบร้อย');}
       });
     }
@@ -148,7 +148,7 @@ export class MeetingInsertdialogComponent implements OnInit {
       meetingData.create_date     = this.MeetingViewModel.create_date;
 
       (await this.MeetingService.UpdateMeeting(meetingData)).subscribe(data => {
-        if (data == 0) {this.showWarning('ไม่แก้ไขข้อมูลการประชุม');}
+        if (data == 0) {this.showWarning('ไม่สามารถแก้ไขข้อมูลการประชุม');}
         else {this.showSuccess('แก้ไขข้อมูลการประชุมเรียบร้อย');}
       });
     }

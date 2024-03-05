@@ -34,8 +34,8 @@ export class ConsulationDeletedialogComponent implements OnInit {
 
   async confirmDelete(Consulationdetail: Consulationdetail): Promise<void> {
     (await this.ConsulationdetailService.DeleteConsulationdetail(Consulationdetail)).subscribe(data => {
-      if (data == 0) {this.showWarning('ไม่สามารถลบข้อหารือได้');}
-      else {this.showSuccess('ลบข้อหารือเรียบร้อย');}
+      if (data == 0) {this.showWarning('ไม่สามารถลบข้อปรึกษาหารือได้');}
+      else {this.showSuccess('ลบข้อปรึกษาหารือเรียบร้อย');}
     });
   }
   

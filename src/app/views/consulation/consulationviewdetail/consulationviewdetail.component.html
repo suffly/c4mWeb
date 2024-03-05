@@ -2,7 +2,7 @@
     <button mat-icon-button  (click)="backClicked()" >
       <mat-icon>arrow_back_ios</mat-icon>
     </button>
-    <label for=""> รายละเอียดข้อหารือ </label>
+    <label for=""> รายละเอียดข้อปรึกษาหารือ </label>
 </div>
 
 <!-- <div class="card-body">
@@ -23,7 +23,7 @@
 
 <div class="card-body assert-row">
     <div class="card-header background-white">
-        <label for=""> ข้อหารือ </label>
+        <label for=""> ข้อปรึกษาหารือ </label>
     </div>
     <div class="mat-elevation-z8 margin-bottom-60">
         <table mat-table [dataSource]="dataSourceCSLD" matSort class="mat-elevation-z8">
@@ -32,11 +32,11 @@
                 <td mat-cell *matCellDef="let element"></td>
             </ng-container>
             <ng-container matColumnDef="consulationdetail_topic">
-                <th mat-header-cell *matHeaderCellDef> ชื่อข้อหารือ (สำหรับใส่ใบนำส่ง) </th>
+                <th mat-header-cell *matHeaderCellDef> ข้อปรึกษาหารือ (สำหรับใส่ใบนำส่ง) </th>
                 <td mat-cell *matCellDef="let element"> {{element.consulationdetail_topic}} </td>
             </ng-container>
             <ng-container matColumnDef="consulationdetail_detail">
-                <th mat-header-cell *matHeaderCellDef> ประเด็นข้อปรึกษาหารือฯ </th>
+                <th mat-header-cell *matHeaderCellDef> รายละเอียดข้อปรึกษาหารือ </th>
                 <td mat-cell *matCellDef="let element"> {{element.consulationdetail_detail}} </td>
             </ng-container>
             <ng-container matColumnDef="objective_name">

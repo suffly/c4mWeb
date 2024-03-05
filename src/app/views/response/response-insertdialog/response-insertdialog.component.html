@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <label for=""> เพิ่มตอบกลับข้อหารือ </label>
+                    <label for=""> เพิ่มแจ้งผลข้อปรึกษาหารือ </label>
                     <div class="float-right">
                         <button mat-icon-button class="mx-auto" (click)="onNoClick()">
                             <mat-icon>cancel</mat-icon>
@@ -11,14 +11,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="form-group"><label for="">ตอบกลับข้อหารือ</label></div>
+                    <div class="form-group"><label for="">แจ้งผลข้อปรึกษาหารือ</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill" hintLabel="จำนวนคำ">
-                            <mat-label>ตอบกลับข้อหารือ</mat-label>
-                            <textarea matInput #inputresponse type="text" formControlName="inputresponse" placeholder="ตอบกลับข้อหารือ" 
+                            <mat-label>แจ้งผลข้อปรึกษาหารือ</mat-label>
+                            <textarea matInput #inputresponse type="text" formControlName="inputresponse" placeholder="แจ้งผลข้อปรึกษาหารือ" 
                             [(ngModel)]="this.ResponseModel.response_topic" maxlength="5000" [errorStateMatcher]="matcher"></textarea>
                             <mat-hint align="end">{{inputresponse.value.length || 0}}/5000</mat-hint>
-                            <mat-error *ngIf="frmGrpAddResponse.controls.inputresponse.hasError('required')">กรุณาระบุรายละเอียดข้อหารือ</mat-error>
+                            <mat-error *ngIf="frmGrpAddResponse.controls.inputresponse.hasError('required')">กรุณาระบุรายละเอียดข้อปรึกษาหารือ</mat-error>
                         </mat-form-field>
                     </div>
                     <div style="text-align: center;">

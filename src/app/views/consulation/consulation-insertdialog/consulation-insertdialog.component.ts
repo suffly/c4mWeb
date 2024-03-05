@@ -121,8 +121,8 @@ export class ConsulationInsertdialogComponent implements OnInit {
       consulationData.consulation_id = this.Counselorrow;
       consulationData.meeting_id = this.Meetingrow;
       this.ConsulationdetailService.SaveConsulationdetail(consulationData).subscribe(data => {
-        if (data == 0) {this.showWarning('ไม่สามารถบันทึกข้อหารือได้');}
-        else {this.showSuccess('บันทึกข้อหารือเรียบร้อย');}
+        if (data == 0) {this.showWarning('ไม่สามารถบันทึกข้อปรึกษาหารือได้');}
+        else {this.showSuccess('บันทึกข้อปรึกษาหารือเรียบร้อย');}
       });
     }
     else
@@ -141,8 +141,8 @@ export class ConsulationInsertdialogComponent implements OnInit {
       consulationData.receive_date = this.ConsulationviewdetailModel.receive_date;
       consulationData.receive_by = this.ConsulationviewdetailModel.receive_by;
       (await this.ConsulationdetailService.UpdateConsulationdetail(consulationData)).subscribe(data => {
-        if (data == 0) {this.showWarning('ไม่สามารถแก้ไขข้อหารือได้');}
-        else {this.showSuccess('แก้ไขข้อหารือเรียบร้อย');}
+        if (data == 0) {this.showWarning('ไม่สามารถแก้ไขข้อปรึกษาหารือได้');}
+        else {this.showSuccess('แก้ไขข้อปรึกษาหารือเรียบร้อย');}
       });
     }
 

@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <label for="">เพิ่มข้อหารือ</label>
+                    <label for="">เพิ่มข้อปรึกษาหารือ</label>
                     <div class="float-right">
                         <button mat-icon-button class="mx-auto" (click)="onNoClick()">
                             <mat-icon>cancel</mat-icon>
@@ -64,24 +64,24 @@
                             <mat-error *ngIf="frmGrpAddConsulation.controls.ddlprovince.hasError('required')">กรุณาเลื่อกจังหวัด</mat-error>
                         </mat-form-field>
                     </div> -->
-                    <div class="form-group"><label for="">ชื่อข้อหารือ (สำหรับใส่ใบนำส่ง)</label></div>
+                    <div class="form-group"><label for="">ข้อปรึกษาหารือ (สำหรับใส่ใบนำส่ง)</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill" hintLabel="จำนวนคำ">
-                            <mat-label>ชื่อข้อหารือ</mat-label>
-                            <textarea matInput #inputtopic type="text" formControlName="inputtopic" placeholder="ชื่อข้อหารือ" 
+                            <mat-label>ข้อปรึกษาหารือ</mat-label>
+                            <textarea matInput #inputtopic type="text" formControlName="inputtopic" placeholder="ข้อปรึกษาหารือ" 
                             [(ngModel)]="this.ConsulationviewdetailModel.consulationdetail_topic" maxlength="500" [errorStateMatcher]="matcher"></textarea>
                             <mat-hint align="end">{{inputtopic.value.length || 0}}/500</mat-hint>
-                            <mat-error *ngIf="frmGrpAddConsulation.controls.inputtopic.hasError('required')">กรุณาระบุชื่อข้อหารือ</mat-error>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.inputtopic.hasError('required')">กรุณาระบุข้อปรึกษาหารือ</mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="form-group"><label for="">ประเด็นข้อปรึกษาหารือฯ</label></div>
+                    <div class="form-group"><label for="">รายละเอียดข้อปรึกษาหารือ</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill" hintLabel="จำนวนคำ">
-                            <mat-label>ประเด็นข้อปรึกษาหารือฯ</mat-label>
-                            <textarea matInput #inputdetail type="text" formControlName="inputdetail" placeholder="ประเด็นข้อปรึกษาหารือฯ" 
+                            <mat-label>รายละเอียดข้อปรึกษาหารือ</mat-label>
+                            <textarea matInput #inputdetail type="text" formControlName="inputdetail" placeholder="รายละเอียดข้อปรึกษาหารือ" 
                             [(ngModel)]="this.ConsulationviewdetailModel.consulationdetail_detail" maxlength="10000" [errorStateMatcher]="matcher"></textarea>
                             <mat-hint align="end">{{inputdetail.value.length || 0}}/10000</mat-hint>
-                            <mat-error *ngIf="frmGrpAddConsulation.controls.inputdetail.hasError('required')">กรุณาระบุประเด็นข้อปรึกษาหารือฯ</mat-error>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.inputdetail.hasError('required')">กรุณาระบุรายละเอียดข้อปรึกษาหารือ</mat-error>
                         </mat-form-field>
                     </div>
                     <div style="text-align: center;">

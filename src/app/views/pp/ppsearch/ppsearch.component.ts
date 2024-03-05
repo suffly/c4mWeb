@@ -86,4 +86,10 @@ export class PpsearchComponent implements OnInit, OnDestroy {
         this.router.navigate(['/login'])
       }, 250);
     }
+
+    Lagacy() {
+      setTimeout(() => {
+        window.open("https://web.parliament.go.th/view/104/main/TH-TH", '_blank');
+      }, 250);
+    }
 }

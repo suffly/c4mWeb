@@ -16,34 +16,33 @@
     <label for=""> login </label>
 </div>
 
-<div class="card-body assert-row">
-  <div class="card-header">
-    <label for="">บริการข้อมูลปรึกษาหารือของสมาชิกฯสำหรับประชาชน</label>
-  </div>  
-</div>
 
-<div class="card-body assert-row">
-  <!-- <div>
-    <table style="width: 100%;">
+  <div class="card-body background-white">
+    <table>
       <tr>
-        <td style="width: 60%;">
-          <mat-form-field>
-            <input matInput class="form-field" [formControl]="consultation_topicFilter"
-              placeholder="ค้นหา ข้อหารือ จังหวัด">
-            <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
-        </td>
-        <td style="width: 2%;"></td>
-        <td style="width: 38%;">
-          <mat-form-field>
-            <input matInput class="form-field" [formControl]="meeting_dateFilter"
-              placeholder="ค้นหา วันที่หารือ คศ-เดือน-วัน (2021-12-01)">
-            <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
-        </td>
+        <th><label for="">บริการข้อมูลปรึกษาหารือของสมาชิกฯสำหรับประชาชน</label></th>
+        <th>
+          <div align="right">
+            <button class="btn" style="background-color:rgb(0, 140, 0);color:white;" (click)="Lagacy()"> ระบบแจ้งผลและจัดเก็บข้อปรึกษาหารือ </button>
+          </div>
+        </th>
       </tr>
     </table>
-  </div> -->
+  </div> 
+
+
+<div class="card-body assert-row">
+  <div class="card-bodybackground-white">
+    <label for=""> ข้อปรึกษาหารือ </label>
+  </div>
+
+  <mat-form-field>
+    <mat-label>ค้นหา</mat-label>
+    <input matInput (keyup)="applyFilter($event)"
+      placeholder="ตัวอย่าง ใส่คำที่ต้องการค้นหา เช่น ข้อปรึกษาหารือ ชื่อผู้หารือ วันที่หารือ(คศ-เดือน-วัน) "
+      #input>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
 
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -52,11 +51,11 @@
             <td mat-cell *matCellDef="let element;let i = index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
         </ng-container>
         <ng-container matColumnDef="consulationdetail_topic">
-            <th mat-header-cell *matHeaderCellDef> ข้อหารือ </th>
+            <th mat-header-cell *matHeaderCellDef> ข้อปรึกษาหารือ </th>
             <td mat-cell *matCellDef="let element"> {{element.consulationdetail_topic}} </td>
         </ng-container>
         <ng-container matColumnDef="consulationdetail_detail">
-            <th mat-header-cell *matHeaderCellDef> รายละเอียดข้อหารือ </th>
+            <th mat-header-cell *matHeaderCellDef> รายละเอียดข้อปรึกษาหารือ </th>
             <td mat-cell *matCellDef="let element"> {{element.consulationdetail_detail}} </td>
         </ng-container>
         
@@ -78,7 +77,7 @@
         </ng-container>
 
         <ng-container matColumnDef="meeting_date">
-            <th mat-header-cell *matHeaderCellDef> วันที่ประชุม </th>
+            <th mat-header-cell *matHeaderCellDef> วันที่หารือ </th>
             <td mat-cell *matCellDef="let element"> {{element.meeting_date | thaidate: 'medium'}} </td>
         </ng-container>
         <ng-container matColumnDef="actions">   

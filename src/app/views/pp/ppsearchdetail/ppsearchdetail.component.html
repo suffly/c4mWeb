@@ -23,7 +23,7 @@
 
   <div class="card-body assert-row">
     <div class="card-header background-white">
-        <label for=""> ข้อหารือ </label>
+        <label for=""> ข้อปรึกษาหารือ </label>
     </div>
     <div class="mat-elevation-z8 margin-bottom-60">
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -32,11 +32,11 @@
             <td mat-cell *matCellDef="let element"></td>
         </ng-container>
           <ng-container matColumnDef="consulationdetail_topic">
-              <th mat-header-cell *matHeaderCellDef> ข้อหารือ </th>
+              <th mat-header-cell *matHeaderCellDef> ข้อปรึกษาหารือ </th>
               <td mat-cell *matCellDef="let element"> {{element.consulationdetail_topic}} </td>
           </ng-container>
           <ng-container matColumnDef="consulationdetail_detail">
-              <th mat-header-cell *matHeaderCellDef> รายละเอียดข้อหารือ </th>
+              <th mat-header-cell *matHeaderCellDef> รายละเอียดข้อปรึกษาหารือ </th>
               <td mat-cell *matCellDef="let element"> {{element.consulationdetail_detail}} </td>
           </ng-container>
           
@@ -58,7 +58,7 @@
           </ng-container>
   
           <ng-container matColumnDef="meeting_date">
-              <th mat-header-cell *matHeaderCellDef> วันที่ประชุม </th>
+              <th mat-header-cell *matHeaderCellDef> วันที่หารือ </th>
               <td mat-cell *matCellDef="let element"> {{element.meeting_date | thaidate: 'medium'}} </td>
           </ng-container>
           <ng-container matColumnDef="actions">   

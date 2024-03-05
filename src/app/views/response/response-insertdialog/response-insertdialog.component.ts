@@ -91,8 +91,8 @@ export class ResponseInsertdialogComponent implements OnInit {
       responseData.consulation_id = this.Counselorrow;
       responseData.meeting_id = this.Meetingrow;
       this.ResponseService.SaveResponse(responseData).subscribe(data => {
-        if(data == 0) {this.showWarning('ไม่บันทึกข้อมูลตอบกลับข้อหารือได้');}
-        else {this.showSuccess('บันทึกข้อมูลตอบกลับข้อหารือเรียบร้อย');}
+        if(data == 0) {this.showWarning('ไม่สามารถบันทึกข้อมูลแจ้งผลข้อปรึกษาหารือได้');}
+        else {this.showSuccess('บันทึกข้อมูลแจ้งผลข้อปรึกษาหารือเรียบร้อย');}
       });
     }
     else
@@ -102,8 +102,8 @@ export class ResponseInsertdialogComponent implements OnInit {
       responseData.consulation_id = this.ResponseModel.consulation_id;
       responseData.meeting_id = this.ResponseModel.meeting_id;
       (await this.ResponseService.UpdateResponse(responseData)).subscribe(data => {
-        if(data == 0) { this.showWarning('ไม่แก้ไขข้อมูลตอบกลับข้อหารือ');}
-        else {this.showSuccess('แก้ไขข้อมูลตอบกลับข้อหารือเรียบร้อย');}
+        if(data == 0) { this.showWarning('ไม่สามารถแก้ไขข้อมูลแจ้งผลข้อปรึกษาหารือ');}
+        else {this.showSuccess('แก้ไขข้อมูลแจ้งผลข้อปรึกษาหารือเรียบร้อย');}
       });
     }
   }
