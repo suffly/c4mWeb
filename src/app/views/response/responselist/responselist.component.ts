@@ -93,7 +93,7 @@ export class ResponselistComponent implements OnInit, OnDestroy {
 
   async openAddDialog(){
     const dialogRef = await this.dialogService.open(ResponseInsertdialogComponent, {
-      width: '640px',
+      width: '1280px',
       height: '640px',
       data: {},
       disableClose: true
@@ -112,7 +112,7 @@ export class ResponselistComponent implements OnInit, OnDestroy {
     this.id = data.response_id;
     this.index = i;
     const dialogRef = await this.dialogService.open(ResponseInsertdialogComponent, {
-      width: '640px',
+      width: '1280px',
       height: '640px',
       data: data,
       disableClose: true
