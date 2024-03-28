@@ -92,7 +92,7 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
   async openAddDialog(){
     const dialogRef = await this.dialogService.open(ConsulationInsertdialogComponent, {
       width: '1280px',
-      height: '8%',
+      height: '85%',
       data: {},
       disableClose: true
     });
