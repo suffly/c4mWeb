@@ -58,8 +58,26 @@ export class HeaderComponent implements OnInit {
   }
 
   loaddata() {
-    this.returnUrl = 'meeting'   
-    this.router.navigate([this.returnUrl]);
+    if (this.authenService.currentUserValue.role_id == 8)
+    {
+      this.returnUrl = 'meeting'   
+      this.router.navigate([this.returnUrl]);
+    }
+    else if (this.authenService.currentUserValue.role_id == 10)
+    {
+      this.returnUrl = 'mpconsultation'   
+      this.router.navigate([this.returnUrl]);
+    }
+    else if (this.authenService.currentUserValue.role_id == 11)
+    {
+      this.returnUrl = 'gaconsultation'   
+      this.router.navigate([this.returnUrl]);
+    }
+    else
+    {
+      this.returnUrl = 'home'   
+      this.router.navigate([this.returnUrl]);
+    }
   }
 
   
