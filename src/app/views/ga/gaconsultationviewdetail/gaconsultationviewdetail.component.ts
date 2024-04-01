@@ -115,7 +115,7 @@ export class GaconsultationviewdetailComponent implements OnInit, OnDestroy {
 
   loadGAConsultation() {
     var Gaconsulationview_input = new Gaconsulationview;
-    Gaconsulationview_input.ministry_id = this.Gaconsultationrow;
+    Gaconsulationview_input.consulationdetail_id = this.Gaconsultationrow;
     const subscribe = (this.GaconsulationviewService.Getgaconsulation_byid(Gaconsulationview_input)).subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
@@ -127,8 +127,9 @@ export class GaconsultationviewdetailComponent implements OnInit, OnDestroy {
   loadMinistry() {
     var Consulationministryview_input = new Consulationministryview();
     //Consulationministryview_input.ministry_id = this.currentUser.user_ministry;
-    Consulationministryview_input.ministry_id = this.currentUser.costcenter_id;
-    const subscribe = (this.ConsulationministryviewService.Getconsulationministryview_byMinistry(Consulationministryview_input)).subscribe(data => {
+    //Consulationministryview_input.ministry_id = this.currentUser.costcenter_id;
+    Consulationministryview_input.consulationdetail_id = this.Gaconsultationrow;
+    const subscribe = (this.ConsulationministryviewService.Getconsulationministryview_byDetail(Consulationministryview_input)).subscribe(data => {
       this.dataSourceCSLM.data = data;
       this.dataSourceCSLM.paginator = this.paginatorCSLM;
     });
