@@ -58,8 +58,9 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next : (data:any) => {
-          if (data.user_id == 0) {
+          if (data.user_id == 0 || data.access_token == null) { 
             this.showWarning('ชื่อผู้ใช้งาน หรือ รหัสผ่าน ไม่ถูกต้อง');
+            this.AuthService.logout();
             this.loading = false;
           } 
           else 

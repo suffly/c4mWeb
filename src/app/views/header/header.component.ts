@@ -58,26 +58,53 @@ export class HeaderComponent implements OnInit {
   }
 
   loaddata() {
-    if (this.authenService.currentUserValue.role_id == 8)
+    switch(this.authenService.currentUserValue.role_id)
     {
-      this.returnUrl = 'meeting'   
-      this.router.navigate([this.returnUrl]);
+      case 8 : {
+        this.returnUrl = 'meeting';
+        this.router.navigate([this.returnUrl]);
+        break;
+      }
+      
+      case 9 : {
+        this.returnUrl = 'meeting';
+        this.router.navigate([this.returnUrl]);
+        break;
+      }
+
+      case 10 : {
+        this.returnUrl = 'mpconsultation';
+        this.router.navigate([this.returnUrl]);
+        break;
+      }
+
+      case 11 : {
+        this.returnUrl = 'gaconsultation';
+        this.router.navigate([this.returnUrl]);
+        break;
+      }
     }
-    else if (this.authenService.currentUserValue.role_id == 10)
-    {
-      this.returnUrl = 'mpconsultation'   
-      this.router.navigate([this.returnUrl]);
-    }
-    else if (this.authenService.currentUserValue.role_id == 11)
-    {
-      this.returnUrl = 'gaconsultation'   
-      this.router.navigate([this.returnUrl]);
-    }
-    else
-    {
-      this.returnUrl = 'home'   
-      this.router.navigate([this.returnUrl]);
-    }
+
+    // if (this.authenService.currentUserValue.role_id == 8)
+    // {
+    //   this.returnUrl = 'meeting'   
+    //   this.router.navigate([this.returnUrl]);
+    // }
+    // else if (this.authenService.currentUserValue.role_id == 10)
+    // {
+    //   this.returnUrl = 'mpconsultation'   
+    //   this.router.navigate([this.returnUrl]);
+    // }
+    // else if (this.authenService.currentUserValue.role_id == 11)
+    // {
+    //   this.returnUrl = 'gaconsultation'   
+    //   this.router.navigate([this.returnUrl]);
+    // }
+    // else
+    // {
+    //   this.returnUrl = 'home'   
+    //   this.router.navigate([this.returnUrl]);
+    // }
   }
 
   
