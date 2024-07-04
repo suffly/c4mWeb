@@ -4,20 +4,65 @@ mat-toolbar {
     height: 75px;
 }
 
+.mdc-data-table__header-cell{
+    text-align: left;
+  }
 .mdc-data-table__cell{
-    padding: 0px 8px 0px 8px;
+    padding: 15px;
+    text-align: left;
 }
 
-.mat-column-consulationdetail_topic {
+.mat-column-meeting_id {
+    flex: 0 0 0% !important;
+    width: 0% !important;
+    padding: 0px 0px 0px 0px;
+}
+
+/* .mat-column-consulationdetail_topic {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 20% !important;
-    width: 20% !important;
+    flex: 0 0 15% !important;
+    width: 15% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
     word-break: break-word;
-  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+} */
+.mat-column-consulationdetail_topic {
+    flex: 0 0 0% !important;
+    width: 0% !important;
+    padding: 0px 0px 0px 0px;
+}
+.mat-column-consulationdetail_detail {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 70% !important;
+    width: 70% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    text-align: left;
+}
+.mat-column-counselor_title {
+    flex: 0 0 0% !important;
+    width: 0% !important;
+    padding: 0px 0px 0px 0px;
+}
+.mat-column-counselor_name {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 15% !important;
+    width: 15% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
@@ -25,31 +70,39 @@ mat-toolbar {
 }
 
 .mat-column-counselor_middlename {
+    flex: 0 0 0% !important;
+    width: 0% !important;
+    padding: 0px 0px 0px 0px;
+}
+
+.mat-column-counselor_surname {
+    flex: 0 0 0% !important;
+    width: 0% !important;
+    padding: 0px 0px 0px 0px;
+}
+
+.mat-column-meeting_date {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 12% !important;
-    width: 12% !important;
+    flex: 0 0 15% !important;
+    width: 15% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
     word-break: break-word;
-  
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
 }
 
-.mat-column-meeting_date {
+.mat-column-actions {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 8% !important;
-    width: 8% !important;
+    flex: 0 0 10% !important;
+    width: 10% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
     word-break: break-word;
-  
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;

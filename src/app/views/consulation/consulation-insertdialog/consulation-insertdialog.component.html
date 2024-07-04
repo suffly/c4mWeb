@@ -17,12 +17,40 @@
                         <mat-form-field appearance="fill">
                             <mat-label>ประเภทเรื่อง</mat-label>
                             <mat-select formControlName="ddltopictype" placeholder="ประเภทเรื่อง" 
-                                [(ngModel)]="this.ConsulationviewdetailModel.topictype_id" [errorStateMatcher]="matcher">
+                                [(ngModel)]="this.ConsulationviewdetailModel.topictype_id" [errorStateMatcher]="matcher"
+                                (ngModelChange)="onTopictypeSelected($event)">
                                 <mat-option *ngFor="let element of this.TopictypeModel" [value]="element.topictype_id">
                                     {{element.topictype_name}}
                                 </mat-option>
                             </mat-select>
                             <mat-error *ngIf="frmGrpAddConsulation.controls.ddltopictype.hasError('required')">กรุณาเลื่อกประเภทเรื่อง</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">ประเภทเรื่องรอง</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>ประเภทเรื่องรอง</mat-label>
+                            <mat-select formControlName="ddlSecondtopictype" placeholder="ประเภทเรื่องรอง" 
+                                [(ngModel)]="this.ConsulationviewdetailModel.secondtopictype_id" [errorStateMatcher]="matcher"
+                                (ngModelChange)="onSecondTopictypeSelected($event)">
+                                <mat-option *ngFor="let element of this.SecondtopictypeModel" [value]="element.secondtopictype_id">
+                                    {{element.secondtopictype_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.ddlSecondtopictype.hasError('required')">กรุณาเลื่อกประเภทเรื่องรอง</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">ประเภทเรื่องย่อย</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>ประเภทเรื่องย่อย</mat-label>
+                            <mat-select formControlName="ddlSubtopictype" placeholder="ประเภทเรื่องย่อย" 
+                                [(ngModel)]="this.ConsulationviewdetailModel.subtopictype_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.SubtopictypeModel" [value]="element.subtopictype_id">
+                                    {{element.subtopictype_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddConsulation.controls.ddlSubtopictype.hasError('required')">กรุณาเลื่อกประเภทเรื่องย่อย</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="form-group"><label for="">วัตถุประสงค์</label></div>

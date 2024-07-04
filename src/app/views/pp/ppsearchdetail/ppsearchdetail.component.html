@@ -5,7 +5,7 @@
     &nbsp;&nbsp;
     <div style="font-size: 14px">
         ระบบการจัดการข้อปรึกษาหารือของสมาชิกสภาผู้แทนราษฎร
-        (Consultation management system for Member of the House of Representative : C4M)
+        (Consultation management system for Members of the House of Representative : C4M)
     </div>
 </mat-toolbar>
 
@@ -16,9 +16,18 @@
 </div>
 
 <div class="card-body assert-row">
-    <div class="card-header">
-      <label for="">บริการข้อมูลปรึกษาหารือของสมาชิกฯสำหรับประชาชน</label>
-    </div>  
+    <div class="card-body background-white">
+        <table>
+          <tr>
+            <th><label for="">บริการข้อมูลปรึกษาหารือของสมาชิกฯสำหรับประชาชน</label></th>
+            <th>
+              <!-- <div align="right">
+                <button class="btn" style="background-color:rgb(255, 255, 0);color:rgb(0, 0, 0);" (click)="loadData()"> refresh </button>
+              </div> -->
+            </th>
+          </tr>
+        </table>
+      </div>  
   
 
   <div class="card-body assert-row">
@@ -31,12 +40,12 @@
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element"></td>
         </ng-container>
-          <ng-container matColumnDef="consulationdetail_topic">
+          <!-- <ng-container matColumnDef="consulationdetail_topic">
               <th mat-header-cell *matHeaderCellDef> ข้อปรึกษาหารือ </th>
               <td mat-cell *matCellDef="let element"> {{element.consulationdetail_topic}} </td>
-          </ng-container>
+          </ng-container> -->
           <ng-container matColumnDef="consulationdetail_detail">
-              <th mat-header-cell *matHeaderCellDef> รายละเอียดข้อปรึกษาหารือ </th>
+              <th mat-header-cell *matHeaderCellDef> ข้อปรึกษาหารือ </th>
               <td mat-cell *matCellDef="let element"> {{element.consulationdetail_detail}} </td>
           </ng-container>
           
@@ -45,12 +54,12 @@
               <td mat-cell *matCellDef="let element">  </td>
           </ng-container>
           <ng-container matColumnDef="counselor_name">
-              <th mat-header-cell *matHeaderCellDef>  </th>
-              <td mat-cell *matCellDef="let element">  </td>
-          </ng-container>
-          <ng-container matColumnDef="counselor_middlename">
               <th mat-header-cell *matHeaderCellDef> ผู้หารือ </th>
               <td mat-cell *matCellDef="let element"> {{element.counselor_title}}{{element.counselor_name}} {{element.counselor_middlename}} {{element.counselor_surname}} </td>
+          </ng-container>
+          <ng-container matColumnDef="counselor_middlename">
+              <th mat-header-cell *matHeaderCellDef>  </th>
+              <td mat-cell *matCellDef="let element">  </td>
           </ng-container>
           <ng-container matColumnDef="counselor_surname">
               <th mat-header-cell *matHeaderCellDef>  </th>
@@ -58,10 +67,10 @@
           </ng-container>
   
           <ng-container matColumnDef="meeting_date">
-              <th mat-header-cell *matHeaderCellDef> วันที่หารือ </th>
+              <th mat-header-cell *matHeaderCellDef> วันที่ประชุม </th>
               <td mat-cell *matCellDef="let element"> {{element.meeting_date | thaidate: 'medium'}} </td>
           </ng-container>
-          <ng-container matColumnDef="actions">   
+          <!-- <ng-container matColumnDef="actions">   
               <th mat-header-cell *matHeaderCellDef>
                   <span style="font-size:smaller;">Refresh</span>
                   <button mat-icon-button color="accent" (click)="loadData()">
@@ -70,7 +79,7 @@
               </th>
               <td mat-cell *matCellDef="let element; let i=index;" style="text-align: center;">
               </td>
-          </ng-container>
+          </ng-container> -->
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
@@ -81,7 +90,7 @@
     </div>
     
     <div class="mat-elevation-z8 margin-bottom-60">
-        <table mat-table [dataSource]="dataSourceCSLM" matSort class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourceCSLM" matSort class="mat-elevation-z8 " >
             <ng-container matColumnDef="meeting_id">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element"></td>
@@ -103,9 +112,12 @@
                 </th>
     
                 <td mat-cell *matCellDef="let element; let i=indexCSLM;" style="text-align: center;">
-                    <button mat-icon-button color="primary" (click)="viewResponse(i,element)">
+                    <!-- <button mat-icon-button color="primary" (click)="viewResponse(i,element)">
                         <mat-icon aria-label="question_answer">question_answer</mat-icon>
-                    </button>
+                    </button> -->
+                    <mat-button mat-flat-button class="btn btn-success btn-add" (click)="viewResponse(i,element)">
+                        แจ้งผลการดำเนินการ
+                    </mat-button>
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumnsCSLM"></tr>
@@ -131,7 +143,7 @@
                 <th mat-header-cell *matHeaderCellDef> ภูมิภาค </th>
                 <td mat-cell *matCellDef="let element"> {{element.region_name}} </td>
             </ng-container>
-            <ng-container matColumnDef="actions">
+            <!-- <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>
                     <span style="font-size: smaller;">Refresh</span>
                     <button mat-icon-button color="accent" (click)="loadData()">
@@ -140,7 +152,7 @@
                 </th>
                 <td mat-cell *matCellDef="let element; let i=indexCSLP;" style="text-align: center;">
                 </td>
-            </ng-container>
+            </ng-container> -->
             <tr mat-header-row *matHeaderRowDef="displayedColumnsCSLP"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsCSLP;"></tr>
         </table>

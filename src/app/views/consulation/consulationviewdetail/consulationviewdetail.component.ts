@@ -199,7 +199,7 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     this.id = data.consulationdetail_id;
     this.index = i;
     const dialogRef = await this.dialogService.open(ConsulationInsertdialogComponent, {
-      width: '640px',
+      width: '1280px',
       height: '100%',
       data: data,
       disableClose: true

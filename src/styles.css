@@ -308,6 +308,11 @@ body .push-right {
     background-color: rgb(238, 67, 15);
 }
 
+.btn-add{
+    /* background-color: #008000bc; */
+    padding: 2px 5px 2px 5px;
+}
+
 
 
 /* เมนู ยืนยันความเป็นอิสระ -> รายงานการยืนยัน */

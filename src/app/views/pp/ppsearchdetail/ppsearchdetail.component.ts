@@ -39,7 +39,7 @@ export class PpsearchdetailComponent implements OnInit, OnDestroy {
     Ppsearchdetailrow: number;
 
     dataSource = new MatTableDataSource<Ppsearchview>();
-    displayedColumns: string[] = ['meeting_id', 'consulationdetail_topic', 'consulationdetail_detail', 'counselor_title', 'counselor_name', 'counselor_middlename', 'counselor_surname', 'meeting_date', 'actions'];
+    displayedColumns: string[] = ['meeting_id', 'consulationdetail_detail', 'counselor_title', 'counselor_name', 'counselor_middlename', 'counselor_surname', 'meeting_date'];
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
     @ViewChild('filter', { static: true }) filter: ElementRef;
@@ -59,7 +59,7 @@ export class PpsearchdetailComponent implements OnInit, OnDestroy {
     idCSLM: number;
 
     dataSourceCSLP = new MatTableDataSource<Consulationprovinceview>();
-    displayedColumnsCSLP: string[] = ['meeting_id', 'province_name', 'region_name', 'actions'];
+    displayedColumnsCSLP: string[] = ['meeting_id', 'province_name', 'region_name'];
     @ViewChild('MatPaginatorCSLP') paginatorCSLP: MatPaginator;
     @ViewChild('MatSortCSLP', { static: true }) sortCSLP: MatSort;
     @ViewChild('filterCSLP', { static: true }) filterCSLP: ElementRef;
@@ -87,7 +87,7 @@ export class PpsearchdetailComponent implements OnInit, OnDestroy {
     private ngUnsubscribe = new Subject<void>();
 
     ngOnInit(): void {
-      localStorage.removeItem("ppconsultationdetail");
+      localStorage.removeItem("ppconsultationministry");
       this.loadData();
     }
 
@@ -151,11 +151,11 @@ export class PpsearchdetailComponent implements OnInit, OnDestroy {
         () => console.info('File downloaded successfully');
     }
 
-    viewResponse(i: number, data: Ppsearchview) {
-      this.id  = data.consulationdetail_id;
+    viewResponse(i: number, data: Consulationministryview) {
+      this.id  = data.consulationministry_id;
       this.index = i;
-      this.Ppsearchrow = data.consulationdetail_id;
-      localStorage.setItem('ppconsultationdetail' , JSON.stringify(this.Ppsearchrow));
+      this.Ppsearchrow = data.consulationministry_id;
+      localStorage.setItem('ppconsultationministry' , JSON.stringify(this.Ppsearchrow));
 
       setTimeout(() => {
         this.router.navigate(['/searchresponse'])

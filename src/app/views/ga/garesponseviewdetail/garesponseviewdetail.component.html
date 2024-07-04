@@ -41,6 +41,8 @@
                       <mat-icon aria-label="Refresh">refresh</mat-icon>
                   </button>
               </th>
+              <td mat-cell *matCellDef="let element; let i=indexResponse;" style="text-align: center;">
+              </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumnsResponse"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumnsResponse;"></tr>

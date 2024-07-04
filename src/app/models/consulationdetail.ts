@@ -3,6 +3,8 @@ export class Consulationdetail {
     consulation_id:number;
     meeting_id:number;
     topictype_id:number;
+    secondtopictype_id:number;
+    subtopictype_id:number;
     objective_id:number;
     consulationdetail_topic:string;
     consulationdetail_detail:string;

@@ -90,6 +90,7 @@ export class ResponseInsertdialogComponent implements OnInit {
       responseData.consulationdetail_id = this.Consulationrow;
       responseData.consulation_id = this.Counselorrow;
       responseData.meeting_id = this.Meetingrow;
+      console.log(responseData);
       this.ResponseService.SaveResponse(responseData).subscribe(data => {
         if(data == 0) {this.showWarning('ไม่สามารถบันทึกข้อมูลแจ้งผลข้อปรึกษาหารือได้');}
         else {this.showSuccess('บันทึกข้อมูลแจ้งผลข้อปรึกษาหารือเรียบร้อย');}
@@ -97,6 +98,7 @@ export class ResponseInsertdialogComponent implements OnInit {
     }
     else
     {
+      responseData.response_id = this.ResponseModel.response_id;
       responseData.consulationministry_id = this.ResponseModel.consulationministry_id;
       responseData.consulationdetail_id = this.ResponseModel.consulationdetail_id;
       responseData.consulation_id = this.ResponseModel.consulation_id;

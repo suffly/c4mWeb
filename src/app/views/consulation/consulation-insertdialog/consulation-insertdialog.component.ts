@@ -1,10 +1,13 @@
-import { Component, OnInit, ElementRef, Input, Output, Inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, Output, Inject, ChangeDetectorRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, AbstractControl, ValidationErrors, FormControl, NgForm, FormGroupDirective } from "@angular/forms";
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ReplaySubject, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { MatSelect } from '@angular/material/select';
 
 import { ConsulationviewlistComponent } from '../consulationviewlist/consulationviewlist.component';
 import { Consulationdetailview } from '@app/models/consulationdetailview';
@@ -18,6 +21,10 @@ import { TopictypeService } from '@app/services/topictype.service';
 import { Topictype } from '@app/models/topictype';
 import { ObjectiveService } from '@app/services/objective.service';
 import { Objective } from '@app/models/objective';
+import { SecondtopictypeService } from '@app/services/secondtopictype.service';
+import { Secondtopictype } from '@app/models/secondtopictype';
+import { SubtopictypeService } from '@app/services/subtopictype.service';
+import { Subtopictype } from '@app/models/subtopictype';
 // import { MinistryService } from '@app/services/ministry.service';
 // import { Ministry } from '@app/models/ministry';
 // import { ProvinceService } from '@app/services/province.service';
@@ -40,6 +47,8 @@ export class ConsulationInsertdialogComponent implements OnInit {
     public ConsulationdetailService: ConsulationdetailService,
     public TopictypeService: TopictypeService,
     public ObjectiveService: ObjectiveService,
+    public SecondtopictypeService: SecondtopictypeService,
+    public SubtopictypeService: SubtopictypeService,
     // public MinistryService: MinistryService,
     // public ProvinceService: ProvinceService,
 
@@ -56,8 +65,15 @@ export class ConsulationInsertdialogComponent implements OnInit {
 
   TopictypeModel: Topictype[];
   ObjectiveModel: Objective[];
+  SecondtopictypeModel: Secondtopictype[];
+  SubtopictypeModel: Subtopictype[];
   // MinistryModel: Ministry[];
   // ProvinceModel: Province[];
+
+  topictypeSelect: string;
+  
+
+  protected _onDestroy = new Subject<void>();
 
   frmGrpAddConsulation: FormGroup;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -70,6 +86,8 @@ export class ConsulationInsertdialogComponent implements OnInit {
     this.loadData();
     this.frmGrpAddConsulation = this.formBuilder.group({
       ddltopictype: new FormControl({value: '', disabled: false}, [Validators.required]),
+      ddlSecondtopictype: new FormControl({value: '', disabled: false}, [Validators.required]),
+      ddlSubtopictype: new FormControl({value: '', disabled: false}, [Validators.required]),
       ddlobjective: new FormControl({value: '', disabled: false}, [Validators.required]),
       // ddlministry:  new FormControl({value: '', disabled: false}, [Validators.required]),
       // ddlprovince:  new FormControl({value: '', disabled: false}, [Validators.required]),
@@ -87,6 +105,12 @@ export class ConsulationInsertdialogComponent implements OnInit {
     }
 
   }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
+  }
+
 
   loadData() {
     this.loading = true;
@@ -108,6 +132,8 @@ export class ConsulationInsertdialogComponent implements OnInit {
     if (this.frmGrpAddConsulation.invalid){return;}
     var consulationData = new Consulationdetail();  
     consulationData.topictype_id = this.frmGrpAddConsulation.controls.ddltopictype.value;
+    consulationData.secondtopictype_id = this.frmGrpAddConsulation.controls.ddlSecondtopictype.value;
+    consulationData.subtopictype_id = this.frmGrpAddConsulation.controls.ddlSubtopictype.value;
     consulationData.objective_id = this.frmGrpAddConsulation.controls.ddlobjective.value;
     // consulationData.ministry_id = this.frmGrpAddConsulation.controls.ddlministry.value;
     consulationData.consulationdetail_topic = this.frmGrpAddConsulation.controls.inputtopic.value;
@@ -172,6 +198,22 @@ export class ConsulationInsertdialogComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
+  }
+
+  onTopictypeSelected(selectedTopictypeID: any){
+    //call service secondtopictype by topictype
+    this.SecondtopictypeModel = [];
+    this.SubtopictypeModel = [];
+    var secondtopictype = new Secondtopictype();
+    secondtopictype.topictype_id = selectedTopictypeID;
+    this.SecondtopictypeService.DDLsecondtopictype_byTopictype(secondtopictype).subscribe(data =>{this.SecondtopictypeModel = data});
+  }
+
+  onSecondTopictypeSelected(selectedSecondTopictypeID: any){
+    //call service secondtopictype by topictype
+    var subtopictype = new Subtopictype();
+    subtopictype.secondtopictype_id = selectedSecondTopictypeID;
+    this.SubtopictypeService.DDLsubtopictype_bySecond(subtopictype).subscribe(data => {this.SubtopictypeModel = data});
   }
 
   showSuccess(message: string) {

@@ -46,7 +46,7 @@ export class PpresponseComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
-    this.Ppsearchdetailrow = JSON.parse(localStorage.getItem('ppconsultationdetail')||'{}');
+    this.Ppsearchdetailrow = JSON.parse(localStorage.getItem('ppconsultationministry')||'{}');
     var Responseview_input = new Response();
     Responseview_input.consulationministry_id = this.Ppsearchdetailrow;
     const subscribe = (this.ResponseService.GetResponse_byConsulationministry(Responseview_input)).subscribe(data => {

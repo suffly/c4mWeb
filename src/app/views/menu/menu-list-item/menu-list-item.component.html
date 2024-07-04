@@ -2,20 +2,20 @@
 <mat-nav-list>
   <span class="nav-caption" *ngFor="let item of navItems">
     <!-- Handle branch node buttons here -->
-    <span class="nav-caption" style =" border-right-width: 0px;"*ngIf="item.children && item.children.length > 0">
-      <button class="button-1" mat-menu-item [matMenuTriggerFor]="menu.childMenu" [disabled]="item.disabled" >
+    <span class="nav-caption" *ngIf="item.children && item.children.length > 0">
+      <button mat-menu-item [matMenuTriggerFor]="menu.childMenu" [disabled]="item.disabled" >
         <mat-icon>{{item.iconName_front}}</mat-icon>
         <span class="designation" >{{item.display_name}}</span>
-        <!-- <mat-icon>{{item.iconName_back}}</mat-icon> -->
+        <span><mat-icon>{{item.iconName_back}}</mat-icon></span>
       </button>
       <app-menu-item #menu [items]="item.children"></app-menu-item>
     </span>
     <!-- Leaf node buttons here -->
     <span class="nav-caption" *ngIf="!item.children || item.children.length === 0">
-      <button mat-menu-item color="primary" [routerLink]="item.route">
+      <button mat-menu-item [routerLink]="item.route">
         <mat-icon>{{item.iconName_front}}</mat-icon>
         <span class="designation">{{item.display_name}}</span>
-        <span><mat-icon>{{item.iconName_back}}</mat-icon></span>
+        <!-- <span><mat-icon>{{item.iconName_back}}</mat-icon></span> -->
       </button>
     </span>
   </span>

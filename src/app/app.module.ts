@@ -103,6 +103,8 @@ import { PpsearchComponent } from './views/pp/ppsearch/ppsearch.component';
 import { PpsearchdetailComponent } from './views/pp/ppsearchdetail/ppsearchdetail.component';
 import { PpresponseComponent } from './views/pp/ppresponse/ppresponse.component';
 import { PpresponsedetailComponent } from './views/pp/ppresponsedetail/ppresponsedetail.component';
+import { UserviewlistComponent } from './views/adm/user/userviewlist/userviewlist.component';
+import { UserInsertdialogComponent } from './views/adm/user/user-insertdialog/user-insertdialog.component';
 
 
 export class AppDateAdapter extends NativeDateAdapter {
@@ -191,6 +193,8 @@ export const APP_DATE_FORMATS = {
     PpsearchdetailComponent,
     PpresponseComponent,
     PpresponsedetailComponent,
+    UserviewlistComponent,
+    UserInsertdialogComponent,
 
 
   ],

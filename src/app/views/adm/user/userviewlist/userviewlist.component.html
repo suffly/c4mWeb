@@ -1,0 +1,74 @@
+<div class="card-header assert-col">
+    <label for="">ข้อปรึกษาหารือ </label>
+</div>
+
+<mat-form-field>
+    <mat-label>ค้นหา</mat-label>
+    <input matInput (keyup)="applyFilter($event)"
+      placeholder="user_login ชื่อ นามสกุล หน่วยงาน "
+      #input>
+    <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+            <td mat-cell *matCellDef="let element;let i = index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
+        </ng-container>
+        <ng-container matColumnDef="user_login">
+            <th mat-header-cell *matHeaderCellDef> รหัสผู้ใช้งาน </th>
+            <td mat-cell *matCellDef="let element"> {{element.user_login}} </td>
+        </ng-container>
+        <ng-container matColumnDef="user_title">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element"> </td>
+        </ng-container>
+        <ng-container matColumnDef="user_name">
+            <th mat-header-cell *matHeaderCellDef> ชื่อ - นามสกุล </th>
+            <td mat-cell *matCellDef="let element">{{element.user_title}}{{element.user_name}} {{element.user_midname}} {{element.user_surname}} </td>
+        </ng-container>
+        <ng-container matColumnDef="user_midname">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element"> </td>
+        </ng-container>
+        <ng-container matColumnDef="user_surname">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element"> </td>
+        </ng-container>
+        <ng-container matColumnDef="costcenter_name">
+            <th mat-header-cell *matHeaderCellDef> หนวยงาน </th>
+            <td mat-cell *matCellDef="let element"> {{element.costcenter_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="userlevel_name">
+            <th mat-header-cell *matHeaderCellDef> สิทธิ์ </th>
+            <td mat-cell *matCellDef="let element"> {{element.userlevel_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="usertype_name">
+            <th mat-header-cell *matHeaderCellDef> ประเภทการเข้าถึง </th>
+            <td mat-cell *matCellDef="let element"> {{element.usertype_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+                <span style="font-size:smaller;">เพิ่มผูใช้งาน</span>
+                <button mat-icon-button color="primary" (click)="openAddDialog()">
+                    <mat-icon aria-label="Add">add</mat-icon>
+                </button>
+                <span style="font-size:smaller;">Refresh</span>
+                <button mat-icon-button color="accent" (click)="loadData()">
+                    <mat-icon aria-label="Refresh">refresh</mat-icon>
+                </button>
+            </th>
+      
+            <td mat-cell *matCellDef="let element; let i=index;" style="text-align: center;">
+                <button mat-icon-button color="accent" (click)="editItem(i,element)">
+                    <mat-icon aria-label="Edit">edit</mat-icon>
+                </button>              
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSize]="this.pageSize" [pageSizeOptions]="this.pageSizeOptions" showFirstLastButtons></mat-paginator>
+</div>

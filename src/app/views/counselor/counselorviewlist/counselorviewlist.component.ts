@@ -71,6 +71,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
     Consulationview_input.meeting_id = this.Meetingrow
     const subscribe = (this.ConsulationviewService.Getconsulationview_byMeeting(Consulationview_input)).subscribe(data => {
       this.dataSource.data = data;
+      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.ConsulationviewModel = data;
     });

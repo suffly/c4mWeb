@@ -33,7 +33,7 @@ export class PpresponsedetailComponent implements OnInit, OnDestroy {
   date: Date;
 
   dataSourceResponse = new MatTableDataSource<Response>();
-  displayedColumnsResponse: string[] = ['meeting_id', 'response_topic', 'create_date', 'create_title', 'create_name', 'create_surname', 'actions'];
+  displayedColumnsResponse: string[] = ['meeting_id', 'response_topic', 'create_date', 'create_title', 'create_name', 'create_surname'];
   @ViewChild('MatPaginatorResponse') paginatorResponse: MatPaginator;
   @ViewChild('MatSortResponse', { static: true }) sortResponse: MatSort;
   @ViewChild('filterResponse', { static: true }) filterResponse: ElementRef;

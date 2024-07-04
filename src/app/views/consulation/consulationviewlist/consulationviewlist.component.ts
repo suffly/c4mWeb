@@ -82,6 +82,7 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
     Consulationdetailview_input.consulation_id = this.Counselorrow;
     const subscribe = (this.ConsulationdetailviewService.GetConsulationdetail_byConsulation(Consulationdetailview_input)).subscribe(data => {
       this.dataSource.data = data;
+      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.ConsulationdetailviewModel = data;
     });

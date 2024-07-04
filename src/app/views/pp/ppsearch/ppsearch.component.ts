@@ -28,7 +28,7 @@ export class PpsearchComponent implements OnInit, OnDestroy {
     Ppsearchrow: number;
     PpsearchModel: Ppsearchview;
     dataSource = new MatTableDataSource<Ppsearchview>();
-    displayedColumns: string[] = ['index', 'consulationdetail_topic', 'consulationdetail_detail', 'counselor_title', 'counselor_name', 'counselor_middlename', 'counselor_surname', 'meeting_date', 'actions'];
+    displayedColumns: string[] = ['index', 'consulationdetail_topic', 'counselor_title', 'counselor_name', 'counselor_middlename', 'counselor_surname', 'meeting_date', 'actions'];
     pageSize: number = 10;
     pageSizeOptions = [10, 20, 30];
     index: number;
@@ -54,6 +54,7 @@ export class PpsearchComponent implements OnInit, OnDestroy {
       var Ppsearch_input = new Ppsearchview;
       const subscribe = (this.PpsearchviewService.Getppsearch_all(Ppsearch_input)).subscribe(data => {
         this.dataSource.data = data;
+        this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.PpsearchModel = data;
       });

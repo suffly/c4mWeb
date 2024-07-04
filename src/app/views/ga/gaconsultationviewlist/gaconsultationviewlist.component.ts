@@ -24,6 +24,9 @@ export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
     private router: Router,
   ) {}
   
+
+  Gameetingviewrow: number;
+  Gacounselorviewrow: number;
   Gaconsulationviewrow: number;
   GaconsulationviewModel: Gaconsulationview[];
   dataSource = new MatTableDataSource<Gaconsulationview>();
@@ -45,7 +48,9 @@ export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
   private readonly CURRENT_USER = 'currentUser';
 
   ngOnInit(): void {
-    localStorage.removeItem("gaconsultation");
+    localStorage.removeItem("meetingview");
+    localStorage.removeItem("counselorview");
+    localStorage.removeItem("consulationview");
     this.loadData();
   }
 
@@ -69,8 +74,12 @@ export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
   viewDetail(i:number, data: Gaconsulationview) {
     this.id = data.consulationdetail_id;
     this.index = i;
+    this.Gameetingviewrow = data.meeting_id;
+    this.Gacounselorviewrow = data.consulation_id;
     this.Gaconsulationviewrow = data.consulationdetail_id;
-    localStorage.setItem('gaconsultation', JSON.stringify(this.Gaconsulationviewrow));
+    localStorage.setItem('meetingview', JSON.stringify(this.Gameetingviewrow));
+    localStorage.setItem('counselorview', JSON.stringify(this.Gacounselorviewrow));
+    localStorage.setItem('consulationview', JSON.stringify(this.Gaconsulationviewrow));
 
     setTimeout(() => {
       this.router.navigate(['/gaconsultationdetail'])

@@ -5,19 +5,68 @@ mat-toolbar {
 }
 
 .mdc-data-table__cell{
-    padding: 0px 8px 0px 8px;
+    padding: 5px 18px 5px 18px;
+}
+
+.mat-column-index {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 5% !important;
+    width: 5% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
 }
 
 .mat-column-consulationdetail_topic {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 50% !important;
+    width: 50% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+/* .mat-column-consulationdetail_detail {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 40% !important;
+    width: 40% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+} */
+.mat-column-consulationdetail_detail {
+    flex: 0 0 0% !important;
+    width: 0% !important;
+    padding: 0px 0px 0px 0px;
+}
+.mat-column-counselor_title {
+    flex: 0 0 0% !important;
+    width: 0% !important;
+    padding: 0px 0px 0px 0px;
+}
+.mat-column-counselor_name {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 20% !important;
     width: 20% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
     word-break: break-word;
-  
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
@@ -25,31 +74,40 @@ mat-toolbar {
 }
 
 .mat-column-counselor_middlename {
+    flex: 0 0 0% !important;
+    width: 0% !important;
+    padding: 0px 0px 0px 0px;
+}
+
+.mat-column-counselor_surname {
+    flex: 0 0 0% !important;
+    width: 0% !important;
+    padding: 0px 0px 0px 0px;
+}
+
+
+.mat-column-meeting_date {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 12% !important;
     width: 12% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
     word-break: break-word;
-  
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
 }
 
-.mat-column-meeting_date {
+.mat-column-actions {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 8% !important;
-    width: 8% !important;
+    flex: 0 0 12% !important;
+    width: 12% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
     word-break: break-word;
-  
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;

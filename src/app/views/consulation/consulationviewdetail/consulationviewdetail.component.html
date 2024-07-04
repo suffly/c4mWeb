@@ -102,9 +102,12 @@
                 </th>
     
                 <td mat-cell *matCellDef="let element; let i=indexCSLM;" style="text-align: center;">
-                    <button mat-icon-button color="primary" (click)="addResponse(i,element)">
+                    <!-- <button mat-icon-button color="primary" (click)="addResponse(i,element)">
                         <mat-icon aria-label="question_answer">question_answer</mat-icon>
-                    </button>
+                    </button> -->
+                    <mat-button mat-flat-button class="btn btn-success btn-add" (click)="addResponse(i,element)">
+                        แจ้งผล
+                    </mat-button>
                     <button mat-icon-button color="accent" (click)="editCSLMItem(i,element)">
                         <mat-icon aria-label="Edit">edit</mat-icon>
                     </button>

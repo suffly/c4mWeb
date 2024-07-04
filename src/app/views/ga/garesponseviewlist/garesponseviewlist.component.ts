@@ -45,7 +45,7 @@ export class GaresponseviewlistComponent implements OnInit, OnDestroy {
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
   ngOnInit(): void {
-    localStorage.removeItem("garesponse");
+    localStorage.removeItem("response");
     this.loadData();
   }
 
@@ -55,7 +55,7 @@ export class GaresponseviewlistComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
-    this.Consulationministryrow = JSON.parse(localStorage.getItem('gaconsulationminitryview')||'{}');
+    this.Consulationministryrow = JSON.parse(localStorage.getItem('consulationminitryview')||'{}');
     var Responseview_input = new Response();
     Responseview_input.consulationministry_id = this.Consulationministryrow;
     const subscribe = (this.ResponseService.GetResponse_byConsulationministry(Responseview_input)).subscribe(data => {
@@ -118,7 +118,7 @@ export class GaresponseviewlistComponent implements OnInit, OnDestroy {
     this.id = data.response_id;
     this.index = i;
     this.Responserow = data.response_id;
-    localStorage.setItem('garesponse', JSON.stringify(this.Responserow));
+    localStorage.setItem('response', JSON.stringify(this.Responserow));
 
     setTimeout(() => {
       this.router.navigate(['/garesponsedetail'])

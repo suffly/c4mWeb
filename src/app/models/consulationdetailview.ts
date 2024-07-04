@@ -4,6 +4,10 @@ export class Consulationdetailview {
     meeting_id:number;
     topictype_id:number;
     topictype_name:string;
+    secondtopictype_id:number;
+    secondtopictype_name:string;
+    subtopictype_id:number;
+    subtopictype_name:string;
     objective_id:number;
     objective_name:string;
     consulationdetail_topic:string;

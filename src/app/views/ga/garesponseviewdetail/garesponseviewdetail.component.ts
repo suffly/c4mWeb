@@ -74,7 +74,7 @@ export class GaresponseviewdetailComponent implements OnInit, OnDestroy {
   }
 
   loadData(){
-    this.Responserow = JSON.parse(localStorage.getItem('garesponse')||'{}');
+    this.Responserow = JSON.parse(localStorage.getItem('response')||'{}');
     this.loadResponse();
     this.loadAttachres();
   }

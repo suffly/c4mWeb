@@ -26,6 +26,8 @@ import { PpsearchdetailComponent } from './views/pp/ppsearchdetail/ppsearchdetai
 import { PpresponseComponent } from './views/pp/ppresponse/ppresponse.component';
 import { PpresponsedetailComponent } from './views/pp/ppresponsedetail/ppresponsedetail.component';
 
+import { UserviewlistComponent } from './views/adm/user/userviewlist/userviewlist.component';
+
 const routes: Routes = [
 
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -55,6 +57,8 @@ const routes: Routes = [
   {path: 'gaconsultationdetail', component:GaconsultationviewdetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','11']}},
   {path: 'garesponse', component:GaresponseviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','11']}},
   {path: 'garesponsedetail', component:GaresponseviewdetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','11']}},
+
+  {path: 'userlist', component:UserviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9']}},
 
 ];
 

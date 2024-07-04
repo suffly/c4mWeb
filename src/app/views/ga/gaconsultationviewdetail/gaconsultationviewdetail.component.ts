@@ -95,7 +95,7 @@ export class GaconsultationviewdetailComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    localStorage.removeItem("gaconsulationminitryview");
+    localStorage.removeItem("consulationminitryview");
     this.loadData();
   }
 
@@ -106,7 +106,7 @@ export class GaconsultationviewdetailComponent implements OnInit, OnDestroy {
 
   loadData() {
     this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
-    this.Gaconsultationrow = JSON.parse(localStorage.getItem('gaconsultation')||'{}');
+    this.Gaconsultationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
     this.loadGAConsultation();
     this.loadMinistry();
     this.loadProvince();
@@ -115,23 +115,25 @@ export class GaconsultationviewdetailComponent implements OnInit, OnDestroy {
 
   loadGAConsultation() {
     var Gaconsulationview_input = new Gaconsulationview;
+    Gaconsulationview_input.ministry_id = this.currentUser.user_ministry;
     Gaconsulationview_input.consulationdetail_id = this.Gaconsultationrow;
     const subscribe = (this.GaconsulationviewService.Getgaconsulation_byid(Gaconsulationview_input)).subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.GaconsulationviewModel = data;
+      //console.log(data);
     });
     this.subscriptions.push();
   }
 
   loadMinistry() {
     var Consulationministryview_input = new Consulationministryview();
-    //Consulationministryview_input.ministry_id = this.currentUser.user_ministry;
-    //Consulationministryview_input.ministry_id = this.currentUser.costcenter_id;
+    Consulationministryview_input.ministry_id = this.currentUser.user_ministry;
     Consulationministryview_input.consulationdetail_id = this.Gaconsultationrow;
-    const subscribe = (this.ConsulationministryviewService.Getconsulationministryview_byDetail(Consulationministryview_input)).subscribe(data => {
+    const subscribe = (this.ConsulationministryviewService.Getconsulationministryview_byMinistry(Consulationministryview_input)).subscribe(data => {
       this.dataSourceCSLM.data = data;
       this.dataSourceCSLM.paginator = this.paginatorCSLM;
+      //console.log(data);
     });
     this.subscriptions.push();
   }
@@ -172,7 +174,7 @@ export class GaconsultationviewdetailComponent implements OnInit, OnDestroy {
     this.id = data.consulationministry_id;
     this.index = i;
     this.Gaconsulationminitryrow = data.consulationministry_id;
-    localStorage.setItem('gaconsulationminitryview', JSON.stringify(this.Gaconsulationminitryrow));
+    localStorage.setItem('consulationminitryview', JSON.stringify(this.Gaconsulationminitryrow));
 
     setTimeout(() => {
       this.router.navigate(['/garesponse'])
