@@ -53,7 +53,15 @@ export class HeaderComponent implements OnInit {
       this.opened = true;
     }
     this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
-    this.loaddata();
+    if (this.currentUser.user_id == 0 || this.currentUser.access_token == null)
+    {
+      this.authenService.logout();
+    }
+    else
+    {
+      this.loaddata();
+    }
+    
     
   }
 

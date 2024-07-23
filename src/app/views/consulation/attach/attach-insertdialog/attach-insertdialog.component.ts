@@ -5,7 +5,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 import { HttpEventType, HttpResponse ,HttpEvent} from '@angular/common/http';
 
 import { ConsulationviewdetailComponent } from '../../consulationviewdetail/consulationviewdetail.component';
@@ -14,6 +15,7 @@ import { AttachService } from '@app/services/attach.service';
 import { Attachfiles } from '@app/models/attachfiles';
 import { Attach } from '@app/models/attach';
 import { Userprofile } from '@app/models/userprofile';
+
 
 @Component({
   selector: 'app-attach-insertdialog',
@@ -41,6 +43,44 @@ export class AttachInsertdialogComponent implements OnInit {
   Counselorrow: number;
   Consulationrow: number;
 
+  options: string[] = [
+    'หนังสือส่งนายกรัฐมนตรี',
+    'หนังสือส่งกระทรวงกลาโหม',
+    'หนังสือส่งกระทรวงการคลัง',
+    'หนังสือส่งกระทรวงการต่างประเทศ',
+    'หนังสือส่งกระทรวงการท่องเที่ยวและกีฬา',
+    'หนังสือส่งกระทรวงการพัฒนาสังคมและความมั่นคงของมนุษย์',
+    'หนังสือส่งกระทรวงเกษตรและสหกรณ์',
+    'หนังสือส่งกระทรวงคมนาคม',
+    'หนังสือส่งกระทรวงทรัพยากรธรรมชาติและสิ่งแวดล้อม',
+    'หนังสือส่งกระทรวงดิจิทัลเพื่อเศรษฐกิจและสังคม',
+    'หนังสือส่งกระทรวงพลังงาน',
+    'หนังสือส่งกระทรวงพาณิชย์',
+    'หนังสือส่งกระทรวงมหาดไทย',
+    'หนังสือส่งกระทรวงยุติธรรม',
+    'หนังสือส่งกระทรวงแรงงาน',
+    'หนังสือส่งกระทรวงวัฒนธรรม',
+    'หนังสือส่งกระทรวงการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรม',
+    'หนังสือส่งกระทรวงศึกษาธิการ',
+    'หนังสือส่งกระทรวงสาธารณสุข',
+    'หนังสือส่งกระทรวงอุตสาหกรรม',
+    'หนังสือส่งสำนักงานคณะกรรมการการเลือกตั้ง',
+    'หนังสือส่งสำนักงานผู้ตรวจการแผ่นดิน',
+    'หนังสือส่งสำนักงานคณะกรรมการป้องกันและปราบปรามการทุจริตแห่งชาติ',
+    'หนังสือส่งสำนักงานการตรวจเงินแผ่นดิน',
+    'หนังสือส่งสำนักงานคณะกรรมการสิทธิมนุษยชนแห่งชาติ',
+    'หนังสือส่งสำนักงานศาลยุติธรรม',
+    'หนังสือส่งสำนักงานศาลรัฐธรรมนูญ',
+    'หนังสือส่งสำนักงานศาลปกครอง',
+    'หนังสือส่งสำนักงานเลขาธิการสภาผู้แทนราษฎร',
+    'หนังสือส่งสำนักงานเลขาธิการวุฒิสภา',
+    'หนังสือส่งสถาบันพระปกเกล้า',
+    'หนังสือส่งสำนักงานอัยการสูงสุด',
+    'หนังสือส่งธนาคารแห่งประเทศไทย',
+    'หนังสือส่งสำนักงานคณะกรรมการกิจการกระจายเสียง กิจการโทรทัศน์ และกิจการโทรคมนาคมแห่งชาติ (กสทช.)',
+  ];
+  filteredOptions: Observable<string[]>;
+
   currentUser: Userprofile;
   private readonly CURRENT_USER = 'currentUser';
 
@@ -65,6 +105,15 @@ export class AttachInsertdialogComponent implements OnInit {
       txtUploadFile: new FormControl({ value: '', disabled: false }, [Validators.required]),
       txtInputUploadFile: new FormControl({ value: '', disabled: false }, [Validators.required])
     });
+    this.filteredOptions = this.frmGrpAttachUpload.controls['txtattach_name'].valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   loadData(){

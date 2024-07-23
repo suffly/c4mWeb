@@ -12,8 +12,13 @@
                         <mat-form-field appearance="fill" hintLabel="จำนวนคำ">
                             <mat-label> ชื่อเอกสารแนบ </mat-label>
                             <input matInput #txtattach_name type="text" formControlName="txtattach_name" placeholder="ชื่อเอกสารแนบ"
-                            [(ngModel)]="this.AttachModel.attach_name" maxlength="1000" [errorStateMatcher]="matcher">
+                            [(ngModel)]="this.AttachModel.attach_name" maxlength="1000" [errorStateMatcher]="matcher" [matAutocomplete]="auto">
                             <mat-hint align="end"> {{txtattach_name.value.length || 0}}/1000 </mat-hint>
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
                             <!-- <mat-error *ngif="frmGrpAttachUpload.hasError('required')"> กรุณาระบุชื่อเอกสารแนบ </mat-error> -->
                         </mat-form-field>
                         <mat-form-field>
