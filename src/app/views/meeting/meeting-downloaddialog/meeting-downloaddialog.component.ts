@@ -84,7 +84,7 @@ export class MeetingDownloaddialogComponent implements OnInit {
             () => console.info('File downloaded successfully');
         }
     
-        if (data.template_index == 2)
+        if (data.template_index == 3)
         {
           var filename = "";
           this.ReportmeetingService.Createmeetingresultreport(this.MeetingViewModel.meeting_id).subscribe((response: Blob) => {
