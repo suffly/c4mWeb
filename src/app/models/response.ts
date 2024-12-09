@@ -9,5 +9,6 @@ export class Response {
     create_by:number;
     create_title:string;
     create_name:string;
+    create_midname:string;
     create_surname:string;
 }

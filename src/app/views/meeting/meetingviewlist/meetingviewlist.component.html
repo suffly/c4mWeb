@@ -73,7 +73,10 @@
                 </button>
                 <button mat-icon-button color="warn" (click)="deleteItem(i,element)">
                     <mat-icon aria-label="Delete">delete</mat-icon>
-                </button>              
+                </button>
+                <button mat-icon-button style="color: #8FBC8F" (click)="OpenscreenExport(i,element)">
+                    <mat-icon aria-label="Edit">download</mat-icon>
+                </button>       
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

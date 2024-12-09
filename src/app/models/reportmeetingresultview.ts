@@ -1,0 +1,19 @@
+export class Reportmeetingresultview {
+    consulationministry_id:number;
+    consulationdetail_id:number;
+    consulation_id:number;
+    meeting_id:number;
+    ministry_id:number;
+    ministry_name:string;
+    meetingset_desc:string;
+    meeting_year:number;
+    meeting_time:number;
+    meeting_date:Date;
+    counselor_id:number;
+    counselor_fullname:string;
+    counselortype_name:string;
+    partylist_name:string;
+    consulationdetail_detail:string;
+    status_name:string;
+    response_topic:string;
+}

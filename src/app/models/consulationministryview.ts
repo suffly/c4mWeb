@@ -9,4 +9,8 @@ export class Consulationministryview {
     ministry_invitation:string;
     status_id:number;
     status_name:string;
+    create_date:Date;
+    create_by:number;
+    update_date:Date;
+    update_by:number;
 }

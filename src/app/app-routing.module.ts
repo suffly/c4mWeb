@@ -26,7 +26,14 @@ import { PpsearchdetailComponent } from './views/pp/ppsearchdetail/ppsearchdetai
 import { PpresponseComponent } from './views/pp/ppresponse/ppresponse.component';
 import { PpresponsedetailComponent } from './views/pp/ppresponsedetail/ppresponsedetail.component';
 
+import { ApprovedviewlistComponent } from './views/approve/approvedviewlist/approvedviewlist.component';
+
 import { UserviewlistComponent } from './views/adm/user/userviewlist/userviewlist.component';
+import { MemberviewlistComponent } from './views/adm/member/memberviewlist/memberviewlist.component';
+import { CounselorsviewlistComponent } from './views/adm/member/counselorsviewlist/counselorsviewlist.component';
+import { CostcenterviewlistComponent } from './views/adm/costcenter/costcenterviewlist/costcenterviewlist.component';
+import { MinistryviewlistComponent } from './views/adm/ministry/ministryviewlist/ministryviewlist.component';
+import { PartylistviewlistComponent } from './views/adm/partylist/partylistviewlist/partylistviewlist.component';
 
 const routes: Routes = [
 
@@ -41,12 +48,12 @@ const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   
-  {path: 'meeting', component:MeetingviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['8','9']}},
-  {path: 'counselor', component:CounselorviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['8','9']}},
-  {path: 'consulation', component:ConsulationviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['8','9']}},
-  {path: 'consulationdetail', component:ConsulationviewdetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['8','9']}},
-  {path: 'response', component:ResponselistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['8','9']}},
-  {path: 'responsedetail', component:ResponsedetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['8','9']}},
+  {path: 'meeting', component:MeetingviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['6','7','8','9']}},
+  {path: 'counselor', component:CounselorviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['6','7','8','9']}},
+  {path: 'consulation', component:ConsulationviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['6','7','8','9']}},
+  {path: 'consulationdetail', component:ConsulationviewdetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['6','7','8','9']}},
+  {path: 'response', component:ResponselistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['6','7','8','9']}},
+  {path: 'responsedetail', component:ResponsedetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['6','7','8','9']}},
   
   {path: 'mpconsultation', component:MpconsultationviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','10']}},
   {path: 'mpconsultationdetail', component:MpconsultationviewdetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','10']}},
@@ -58,7 +65,14 @@ const routes: Routes = [
   {path: 'garesponse', component:GaresponseviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','11']}},
   {path: 'garesponsedetail', component:GaresponseviewdetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','11']}},
 
+  {path: 'approved', component:ApprovedviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','8','7','6']}},
+
   {path: 'userlist', component:UserviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9']}},
+  {path: 'memberlist', component:MemberviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9']}},
+  {path: 'counselorslist', component:CounselorsviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9']}},
+  {path: 'costcenterlist', component:CostcenterviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9']}},
+  {path: 'ministrylist', component:MinistryviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9']}},
+  {path: 'partylist', component:PartylistviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9']}},
 
 ];
 

@@ -68,6 +68,18 @@ export class HeaderComponent implements OnInit {
   loaddata() {
     switch(this.authenService.currentUserValue.role_id)
     {
+      case 6 : {
+        this.returnUrl = 'approved';
+        this.router.navigate([this.returnUrl]);
+        break;
+      }
+
+      case 7 : {
+        this.returnUrl = 'approved';
+        this.router.navigate([this.returnUrl]);
+        break;
+      }
+
       case 8 : {
         this.returnUrl = 'meeting';
         this.router.navigate([this.returnUrl]);

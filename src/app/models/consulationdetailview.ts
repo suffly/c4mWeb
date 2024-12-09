@@ -19,8 +19,8 @@ export class Consulationdetailview {
     create_by:number;
     update_date:Date;
     update_by:number;
-    send_date:Date;
-    send_by:number;
-    receive_date:Date;
-    receive_by:number;
+    // send_date:Date;
+    // send_by:number;
+    // receive_date:Date;
+    // receive_by:number;
 }

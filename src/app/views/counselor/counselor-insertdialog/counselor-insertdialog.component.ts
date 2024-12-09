@@ -98,7 +98,8 @@ export class CounselorInsertdialogComponent implements OnInit, AfterViewInit, On
 
   async onSubmit() {
     if (this.frmGrpAddCounselor.invalid){return;}
-    var consulationData = new Consulation();    
+    var consulationData = new Consulation();
+    consulationData = this.ConsulationviewModel;
     consulationData.counselor_id = this.frmGrpAddCounselor.controls.ddlcounselor.value;
     if (this.ConsulationviewModel.consulation_id == undefined)
     {

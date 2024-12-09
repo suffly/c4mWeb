@@ -12,6 +12,7 @@ import { Meetingview } from 'src/app/models/meetingview';
 
 import { MeetingInsertdialogComponent } from '../meeting-insertdialog/meeting-insertdialog.component';
 import { MeetingDeletedialogComponent } from '../meeting-deletedialog/meeting-deletedialog.component';
+import { MeetingDownloaddialogComponent } from '../meeting-downloaddialog/meeting-downloaddialog.component';
 
 
 @Component({
@@ -113,6 +114,27 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
     });
 
     await dialogRef.afterClosed().subscribe(result => {
+      if (result == 1) {
+        setTimeout(() => {
+          this.loadData()}, 500); 
+      } 
+    });
+  }
+
+  OpenscreenExport(i: number, data: Meetingview) {
+    this.id = data.meeting_id;
+    this.index = i;
+
+    const dialogRef = this.dialogService.open(MeetingDownloaddialogComponent,
+      {
+        width: '800px',
+        height: '600px',
+        data: data,
+        disableClose: true
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
       if (result == 1) {
         setTimeout(() => {
           this.loadData()}, 500); 

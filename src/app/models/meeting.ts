@@ -12,12 +12,13 @@ export class Meeting {
     create_by:number;
     update_date:Date;
     update_by:number;
+    public_date:Date;
+    public_by:number;
+    progressstatus_id:number;
+    owner_id:number;
     
     //notmapped
     meetingtype_name:string;
     meetingterm_name:string;
-    create_name:string;
-    create_surname:string;
-    update_name:string;
-    update_surname:string;
+    progressstatus_name:string;
 }

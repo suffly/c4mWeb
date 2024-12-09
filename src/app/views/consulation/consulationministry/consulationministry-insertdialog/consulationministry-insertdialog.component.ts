@@ -16,6 +16,7 @@ import { MinistryService } from '@app/services/ministry.service';
 import { Ministry } from '@app/models/ministry';
 import { ConsulationministryService } from '@app/services/consulationministry.service';
 import { Consulationministry } from '@app/models/consulationministry';
+import { Userprofile } from '@app/models/userprofile';
 
 @Component({
   selector: 'app-consulationministry-insertdialog',
@@ -56,6 +57,9 @@ export class ConsulationministryInsertdialogComponent implements OnInit,AfterVie
   protected _onDestroy = new Subject<void>();
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
+  currentUser: Userprofile;
+  private readonly CURRENT_USER = 'currentUser';
+
   ngOnInit(): void {
     this.loadData();
     this.frmGrpAddMinistry = this.formBuilder.group({
@@ -85,6 +89,7 @@ export class ConsulationministryInsertdialogComponent implements OnInit,AfterVie
 
   loadData() {
     this.loading = true;
+    this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
@@ -97,13 +102,17 @@ export class ConsulationministryInsertdialogComponent implements OnInit,AfterVie
   async onSubmit() {
     if(this.frmGrpAddMinistry.invalid){return;}
     var consulationministryData = new Consulationministry();
+    
+    consulationministryData = this.ConsulationministryviewModel;
     consulationministryData.ministry_id = this.frmGrpAddMinistry.controls.ddlministry.value;
 
     if(this.ConsulationministryviewModel.consulationministry_id == undefined)
     {
+      consulationministryData.create_by = this.currentUser.user_id;
       consulationministryData.consulationdetail_id = this.Consulationrow;
       consulationministryData.consulation_id = this.Counselorrow;
       consulationministryData.meeting_id = this.Meetingrow;
+
       this.ConsulationministryService.SaveConsulationministry(consulationministryData).subscribe(data => {
         if(data == 0) {this.showWarning('ไม่สามารถบันทึกหน่วยงานที่เกี่ยวข้องได้');}
         else {this.showSuccess('บันทึกหน่วยงานที่เกี่ยวข้องเรียบร้อย');}
@@ -111,11 +120,8 @@ export class ConsulationministryInsertdialogComponent implements OnInit,AfterVie
     }
     else
     {
-      consulationministryData.consulationministry_id = this.ConsulationministryviewModel.consulationministry_id
-      consulationministryData.consulationdetail_id = this.ConsulationministryviewModel.consulationdetail_id;
-      consulationministryData.consulation_id = this.ConsulationministryviewModel.consulation_id;
-      consulationministryData.meeting_id = this.ConsulationministryviewModel.meeting_id;
-      consulationministryData.status_id = this.ConsulationministryviewModel.status_id;
+      consulationministryData.update_by = this.currentUser.user_id;
+      
       (await this.ConsulationministryService.UpdateConsulationministry(consulationministryData)).subscribe(data => {
         if(data == 0) {this.showWarning('ไม่สามารถแก้ไขหน่วยงานที่เกี่ยวข้องได้');}
         else {this.showSuccess('แก้ไขหน่วยงานที่เกี่ยวข้องเรียบร้อย');}

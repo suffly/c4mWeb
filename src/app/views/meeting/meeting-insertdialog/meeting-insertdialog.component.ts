@@ -123,6 +123,8 @@ export class MeetingInsertdialogComponent implements OnInit {
   async onSubmit() {
     if (this.frmGrpAddMeeting.invalid){return;}
     var meetingData = new Meeting();
+    
+    meetingData = this.MeetingViewModel;
     meetingData.meeting_date    = this.frmGrpAddMeeting.controls.meetingdate.value;
     meetingData.meetingtype_id  = this.frmGrpAddMeeting.controls.ddltype.value;
     meetingData.meetingterm_id  = this.frmGrpAddMeeting.controls.ddlterm.value;
@@ -133,6 +135,7 @@ export class MeetingInsertdialogComponent implements OnInit {
     if(this.MeetingViewModel.meeting_id == undefined)
     {
       meetingData.create_by = this.currentUser.user_id;
+
       this.MeetingService.SaveMeeting(meetingData).subscribe(data => {
         if (data == 0) {this.showWarning('ไม่สามารถบันทึกข้อมูลการประชุมได้');}
         else {this.showSuccess('บันทึกข้อมูลการประชุมเรียบร้อย');}
@@ -141,11 +144,6 @@ export class MeetingInsertdialogComponent implements OnInit {
     else
     { 
       meetingData.update_by = this.currentUser.user_id;
-      meetingData.meeting_id = this.MeetingViewModel.meeting_id;
-      meetingData.count_consulation = this.MeetingViewModel.count_consulation;
-      meetingData.count_consulationtotal = this.MeetingViewModel.count_consulationtotal;
-      meetingData.create_by       = this.MeetingViewModel.create_by;
-      meetingData.create_date     = this.MeetingViewModel.create_date;
 
       (await this.MeetingService.UpdateMeeting(meetingData)).subscribe(data => {
         if (data == 0) {this.showWarning('ไม่สามารถแก้ไขข้อมูลการประชุม');}

@@ -5,4 +5,8 @@ export class Consulationministry {
     meeting_id:number;
     ministry_id:number;
     status_id:number;
+    create_date:Date;
+    create_by:number;
+    update_date:Date;
+    update_by:number;
 }

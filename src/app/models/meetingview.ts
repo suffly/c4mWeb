@@ -13,12 +13,17 @@ export class Meetingview {
     count_consulationtotal:number;
     create_date:Date;
     create_by:number;
-    create_title:string;
-    create_name:string;
-    create_surname:string;
+    //create_title:string;
+    //create_name:string;
+    //create_surname:string;
     update_date:Date;
     update_by:number;
-    update_title:string;
-    update_name:string;
-    update_surname:string;   
+    //update_title:string;
+    //update_name:string;
+    //update_surname:string;   
+    public_date:Date;
+    public_by:number;
+    owner_id:number;
+    progressstatus_id:number;
+    progressstatus_name:string;
 }

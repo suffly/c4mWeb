@@ -16,6 +16,7 @@ import { ProvinceService } from '@app/services/province.service';
 import { Province } from '@app/models/province';
 import { ConsulationprovinceService } from '@app/services/consulationprovince.service';
 import { Consulationprovince } from '@app/models/consulationprovince';
+import { Userprofile } from '@app/models/userprofile';
 
 @Component({
   selector: 'app-consulationprovince-insertdialog',
@@ -56,6 +57,9 @@ export class ConsulationprovinceInsertdialogComponent implements OnInit,AfterVie
   protected _onDestroy = new Subject<void>();
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
+  currentUser: Userprofile;
+  private readonly CURRENT_USER = 'currentUser';
+
   ngOnInit(): void {
     this.loadData();
     this.frmGrpAddProvince = this.formBuilder.group({
@@ -84,24 +88,27 @@ export class ConsulationprovinceInsertdialogComponent implements OnInit,AfterVie
 
   loadData(){
     this.loading = true;
+    this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
-    // var province_input = new Province();
-    // this.ProvinceService.DDLprovince(province_input).subscribe(data =>{this.ProvinceModel = data});
     this.loading = false;
   }
 
   async onSubmit() {
     if(this.frmGrpAddProvince.invalid){return;}
     var consulationprovinceData = new Consulationprovince();
+    
+    consulationprovinceData = this.ConsulationprovinceviewModel;
     consulationprovinceData.province_id = this.frmGrpAddProvince.controls.ddlprovince.value;
 
     if(this.ConsulationprovinceviewModel.consulationprovince_id == undefined)
     {
+      consulationprovinceData.create_by = this.currentUser.user_id;
       consulationprovinceData.consulationdetail_id = this.Consulationrow;
       consulationprovinceData.consulation_id = this.Counselorrow;
       consulationprovinceData.meeting_id = this.Meetingrow;
+
       this.ConsulationprovinceService.SaveConsulationprovince(consulationprovinceData).subscribe(data =>{
         if(data == 0) {this.showWarning('ไม่สามารถบันทึกจังหวัดได้')}
         else {this.showSuccess('บันทึกจังหวัดเรียบร้อย')}
@@ -109,10 +116,8 @@ export class ConsulationprovinceInsertdialogComponent implements OnInit,AfterVie
     }
     else
     {
-      consulationprovinceData.consulationprovince_id = this.ConsulationprovinceviewModel.consulationprovince_id;
-      consulationprovinceData.consulationdetail_id = this.ConsulationprovinceviewModel.consulationdetail_id;
-      consulationprovinceData.consulation_id = this.ConsulationprovinceviewModel.consulation_id;
-      consulationprovinceData.meeting_id = this.ConsulationprovinceviewModel.meeting_id;
+      consulationprovinceData.update_by = this.currentUser.user_id;
+
       (await this.ConsulationprovinceService.UpdateConsulationprovince(consulationprovinceData)).subscribe(data => {
         if(data == 0) {this.showWarning('ไม่สามารถแก้ไขจังหวัดได้')}
         else {this.showSuccess('แก้ไขจังหวัดเรียบร้อย')}

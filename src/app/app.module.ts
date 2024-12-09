@@ -105,6 +105,19 @@ import { PpresponseComponent } from './views/pp/ppresponse/ppresponse.component'
 import { PpresponsedetailComponent } from './views/pp/ppresponsedetail/ppresponsedetail.component';
 import { UserviewlistComponent } from './views/adm/user/userviewlist/userviewlist.component';
 import { UserInsertdialogComponent } from './views/adm/user/user-insertdialog/user-insertdialog.component';
+import { MeetingDownloaddialogComponent } from './views/meeting/meeting-downloaddialog/meeting-downloaddialog.component';
+import { ApprovedviewlistComponent } from './views/approve/approvedviewlist/approvedviewlist.component';
+import { ApprovedPublicdialogComponent } from './views/approve/approved-publicdialog/approved-publicdialog.component';
+import { ApprovedApprovedialogComponent } from './views/approve/approved-approvedialog/approved-approvedialog.component';
+import { ApprovedEditdialogComponent } from './views/approve/approved-editdialog/approved-editdialog.component';
+import { CostcenterviewlistComponent } from './views/adm/costcenter/costcenterviewlist/costcenterviewlist.component';
+import { CostcenterInsertdialogComponent } from './views/adm/costcenter/costcenter-insertdialog/costcenter-insertdialog.component';
+import { PartylistviewlistComponent } from './views/adm/partylist/partylistviewlist/partylistviewlist.component';
+import { PartylistInsertdialogComponent } from './views/adm/partylist/partylist-insertdialog/partylist-insertdialog.component';
+import { MinistryviewlistComponent } from './views/adm/ministry/ministryviewlist/ministryviewlist.component';
+import { MinistryInsertdialogComponent } from './views/adm/ministry/ministry-insertdialog/ministry-insertdialog.component';
+import { MemberviewlistComponent } from './views/adm/member/memberviewlist/memberviewlist.component';
+import { CounselorsviewlistComponent } from './views/adm/member/counselorsviewlist/counselorsviewlist.component';
 
 
 export class AppDateAdapter extends NativeDateAdapter {
@@ -195,6 +208,19 @@ export const APP_DATE_FORMATS = {
     PpresponsedetailComponent,
     UserviewlistComponent,
     UserInsertdialogComponent,
+    MeetingDownloaddialogComponent,
+    ApprovedviewlistComponent,
+    ApprovedPublicdialogComponent,
+    ApprovedApprovedialogComponent,
+    ApprovedEditdialogComponent,
+    CostcenterviewlistComponent,
+    CostcenterInsertdialogComponent,
+    PartylistviewlistComponent,
+    PartylistInsertdialogComponent,
+    MinistryviewlistComponent,
+    MinistryInsertdialogComponent,
+    MemberviewlistComponent,
+    CounselorsviewlistComponent,
 
 
   ],

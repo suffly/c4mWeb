@@ -15,12 +15,12 @@ export class Consulationview {
     count_consulationdetail:number;
     create_date:Date;
     create_by:number;
-    create_title:string;
-    create_name:string;
-    create_surname:string;
+    // create_title:string;
+    // create_name:string;
+    // create_surname:string;
     update_date:Date;
     update_by:number;
-    update_title:string;
-    update_name:string;
-    update_surname:string;
+    // update_title:string;
+    // update_name:string;
+    // update_surname:string;
 }

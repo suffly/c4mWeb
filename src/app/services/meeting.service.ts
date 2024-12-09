@@ -37,5 +37,20 @@ export class MeetingService {
     );
   }
 
+  async SavePublish(Meeting: Meeting): Promise<Observable<any>> {
+    return await this.http.post<number>(`${this.baseUrl}/SavePublish`, Meeting).pipe(
+      map((MeetingData: number) => {
+        return MeetingData;
+      })
+    );
+  }
+
+  async SaveOwner(Meeting: Meeting): Promise<Observable<any>> {
+    return await this.http.post<number>(`${this.baseUrl}/SaveOwner`, Meeting).pipe(
+      map((MeetingData: number) => {
+        return MeetingData;
+      })
+    );
+  }
 
 }

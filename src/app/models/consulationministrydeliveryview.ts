@@ -18,7 +18,9 @@ export class Consulationministrydeliveryview {
     meetingset_desc:string;
     meeting_year:number;
     meeting_time:number;
-    create_by:number;
-    fullname:string;
+    progressstatus_id:number;
+    public_date:Date;
+    owner_id:number;
+    owner_name:string;
 
 }

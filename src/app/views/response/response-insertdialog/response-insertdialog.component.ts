@@ -79,18 +79,22 @@ export class ResponseInsertdialogComponent implements OnInit {
 
   async onSubmit() {
     var responseData = new Response();
+
+    responseData = this.ResponseModel;
     responseData.response_topic = this.frmGrpAddResponse.controls.inputresponse.value;
     responseData.create_by = this.currentUser.user_id;
     responseData.create_title = this.currentUser.user_title;
     responseData.create_name = this.currentUser.user_name;
+    responseData.create_midname = this.currentUser.user_midname;
     responseData.create_surname = this.currentUser.user_surname;
+    
     if(this.ResponseModel.response_id == undefined)
     {
       responseData.consulationministry_id = this.Consulationministryrow;
       responseData.consulationdetail_id = this.Consulationrow;
       responseData.consulation_id = this.Counselorrow;
       responseData.meeting_id = this.Meetingrow;
-      console.log(responseData);
+
       this.ResponseService.SaveResponse(responseData).subscribe(data => {
         if(data == 0) {this.showWarning('ไม่สามารถบันทึกข้อมูลแจ้งผลข้อปรึกษาหารือได้');}
         else {this.showSuccess('บันทึกข้อมูลแจ้งผลข้อปรึกษาหารือเรียบร้อย');}
@@ -98,11 +102,6 @@ export class ResponseInsertdialogComponent implements OnInit {
     }
     else
     {
-      responseData.response_id = this.ResponseModel.response_id;
-      responseData.consulationministry_id = this.ResponseModel.consulationministry_id;
-      responseData.consulationdetail_id = this.ResponseModel.consulationdetail_id;
-      responseData.consulation_id = this.ResponseModel.consulation_id;
-      responseData.meeting_id = this.ResponseModel.meeting_id;
       (await this.ResponseService.UpdateResponse(responseData)).subscribe(data => {
         if(data == 0) { this.showWarning('ไม่สามารถแก้ไขข้อมูลแจ้งผลข้อปรึกษาหารือ');}
         else {this.showSuccess('แก้ไขข้อมูลแจ้งผลข้อปรึกษาหารือเรียบร้อย');}

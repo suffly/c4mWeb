@@ -1,0 +1,41 @@
+<form [formGroup]="frmGrpApprovedEdit" #form="ngForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <label for="">ผู้รับผิดชอบ</label>
+                    <div class="float-right">
+                        <button mat-icon-button class="mx-auto" (click)="onNoClick()">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    
+                    <div class="form-group"><label for="">ผู้รับผิดชอบ</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>ผู้รับผิดชอบ</mat-label>
+                            <mat-select formControlName="ddlowner" placeholder="ผู้รับผิดชอบ" 
+                                [(ngModel)]="this.AppovedViewModel.owner_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.UserprofileModel" [value]="element.user_id">
+                                    {{element.user_title}}{{element.user_name}} {{element.user_midname}} {{element.user_surname}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpApprovedEdit.controls.ddlowner.hasError('required')">ผู้รับผิดชอบ</mat-error>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="form.invalid" [mat-dialog-close]="1">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            บันทึก
+                        </button>&nbsp;&nbsp;&nbsp;
+                        <button mat-raised-button (click)="onNoClick()" color="warn" tabindex="-1" [mat-dialog-close]="0">ยกเลิก</button>      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

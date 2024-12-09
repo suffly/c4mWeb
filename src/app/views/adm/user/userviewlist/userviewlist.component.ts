@@ -53,7 +53,13 @@ export class UserviewlistComponent implements OnInit, OnDestroy {
   }
 
   loadData(){
-
+    var User = new Userprofileview();
+    const subscription = (this.UserprofileviewService.Getuserprofileview(User)).subscribe(data => {
+      this.dataSource.data = data;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
+    this.subscriptions.push();
   }
 
   async openAddDialog(){

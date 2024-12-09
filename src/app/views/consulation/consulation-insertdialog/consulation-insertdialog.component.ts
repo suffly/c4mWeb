@@ -86,12 +86,10 @@ export class ConsulationInsertdialogComponent implements OnInit {
     this.loadData();
     this.frmGrpAddConsulation = this.formBuilder.group({
       ddltopictype: new FormControl({value: '', disabled: false}, [Validators.required]),
-      ddlSecondtopictype: new FormControl({value: '', disabled: false}, [Validators.required]),
-      ddlSubtopictype: new FormControl({value: '', disabled: false}, [Validators.required]),
+      ddlSecondtopictype: new FormControl({value: '', disabled: false}),
+      ddlSubtopictype: new FormControl({value: '', disabled: false}),
       ddlobjective: new FormControl({value: '', disabled: false}, [Validators.required]),
-      // ddlministry:  new FormControl({value: '', disabled: false}, [Validators.required]),
-      // ddlprovince:  new FormControl({value: '', disabled: false}, [Validators.required]),
-      inputtopic:   new FormControl({value: '', disabled: false}, [Validators.required]),
+      inputtopic:   new FormControl({value: '', disabled: false}),
       inputdetail:  new FormControl({value: '', disabled: false}, [Validators.required]),
     });
 
@@ -121,31 +119,27 @@ export class ConsulationInsertdialogComponent implements OnInit {
     this.TopictypeService.DDLtopictype(topictype).subscribe(data => {this.TopictypeModel = data});
     var objective = new Objective();
     this.ObjectiveService.DDLobjective(objective).subscribe(data => {this.ObjectiveModel = data});
-    // var ministry = new Ministry();
-    // this.MinistryService.DDLministry(ministry).subscribe(data => {this.MinistryModel = data});
-    // var province = new Province();
-    // this.ProvinceService.DDLprovince(province).subscribe(data => {this.ProvinceModel = data});
     this.loading = false;
   }
 
   async onSubmit() {
     if (this.frmGrpAddConsulation.invalid){return;}
     var consulationData = new Consulationdetail();  
+
+    consulationData = this.ConsulationviewdetailModel;
     consulationData.topictype_id = this.frmGrpAddConsulation.controls.ddltopictype.value;
     consulationData.secondtopictype_id = this.frmGrpAddConsulation.controls.ddlSecondtopictype.value;
     consulationData.subtopictype_id = this.frmGrpAddConsulation.controls.ddlSubtopictype.value;
     consulationData.objective_id = this.frmGrpAddConsulation.controls.ddlobjective.value;
-    // consulationData.ministry_id = this.frmGrpAddConsulation.controls.ddlministry.value;
     consulationData.consulationdetail_topic = this.frmGrpAddConsulation.controls.inputtopic.value;
     consulationData.consulationdetail_detail = this.frmGrpAddConsulation.controls.inputdetail.value;
-    // consulationData.province_id = this.frmGrpAddConsulation.controls.ddlprovince.value;
 
     if(this.ConsulationviewdetailModel.consulationdetail_id == undefined)
     {
       consulationData.create_by = this.currentUser.user_id;
-      consulationData.send_by = this.currentUser.user_id;
       consulationData.consulation_id = this.Counselorrow;
       consulationData.meeting_id = this.Meetingrow;
+      
       this.ConsulationdetailService.SaveConsulationdetail(consulationData).subscribe(data => {
         if (data == 0) {this.showWarning('ไม่สามารถบันทึกข้อปรึกษาหารือได้');}
         else {this.showSuccess('บันทึกข้อปรึกษาหารือเรียบร้อย');}
@@ -154,18 +148,7 @@ export class ConsulationInsertdialogComponent implements OnInit {
     else
     {
       consulationData.update_by = this.currentUser.user_id;
-      consulationData.send_by = this.currentUser.user_id;
-      consulationData.consulationdetail_id = this.ConsulationviewdetailModel.consulationdetail_id;
-      consulationData.consulation_id = this.ConsulationviewdetailModel.consulation_id;
-      consulationData.meeting_id = this.ConsulationviewdetailModel.meeting_id;
-      consulationData.consulation_attachment_flag = this.ConsulationviewdetailModel.consulation_attachment_flag;
-      consulationData.status_id = this.ConsulationviewdetailModel.status_id;
-      consulationData.create_date = this.ConsulationviewdetailModel.create_date; 
-      consulationData.create_by = this.ConsulationviewdetailModel.create_by;
-      consulationData.send_date = this.ConsulationviewdetailModel.send_date;
-      consulationData.send_by = this.ConsulationviewdetailModel.send_by;
-      consulationData.receive_date = this.ConsulationviewdetailModel.receive_date;
-      consulationData.receive_by = this.ConsulationviewdetailModel.receive_by;
+
       (await this.ConsulationdetailService.UpdateConsulationdetail(consulationData)).subscribe(data => {
         if (data == 0) {this.showWarning('ไม่สามารถแก้ไขข้อปรึกษาหารือได้');}
         else {this.showSuccess('แก้ไขข้อปรึกษาหารือเรียบร้อย');}
