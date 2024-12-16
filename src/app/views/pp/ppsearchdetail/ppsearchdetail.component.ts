@@ -39,7 +39,7 @@ export class PpsearchdetailComponent implements OnInit, OnDestroy {
     Ppsearchdetailrow: number;
 
     dataSource = new MatTableDataSource<Ppsearchview>();
-    displayedColumns: string[] = ['meeting_id', 'consulationdetail_detail', 'counselor_title', 'counselor_name', 'counselor_middlename', 'counselor_surname', 'meeting_date'];
+    displayedColumns: string[] = ['meeting_id', 'consulationdetail_detail', 'counselor_fullname', 'meeting_date'];
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
     @ViewChild('filter', { static: true }) filter: ElementRef;

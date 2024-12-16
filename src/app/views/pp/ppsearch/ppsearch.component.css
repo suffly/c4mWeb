@@ -54,12 +54,12 @@ mat-toolbar {
     width: 0% !important;
     padding: 0px 0px 0px 0px;
 }
-.mat-column-counselor_title {
+/* .mat-column-counselor_title {
     flex: 0 0 0% !important;
     width: 0% !important;
     padding: 0px 0px 0px 0px;
-}
-.mat-column-counselor_name {
+} */
+.mat-column-counselor_fullname {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 20% !important;
@@ -73,7 +73,7 @@ mat-toolbar {
     hyphens: auto;
 }
 
-.mat-column-counselor_middlename {
+/* .mat-column-counselor_middlename {
     flex: 0 0 0% !important;
     width: 0% !important;
     padding: 0px 0px 0px 0px;
@@ -83,7 +83,7 @@ mat-toolbar {
     flex: 0 0 0% !important;
     width: 0% !important;
     padding: 0px 0px 0px 0px;
-}
+} */
 
 
 .mat-column-meeting_date {

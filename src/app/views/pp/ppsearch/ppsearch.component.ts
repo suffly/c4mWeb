@@ -28,9 +28,9 @@ export class PpsearchComponent implements OnInit, OnDestroy {
     Ppsearchrow: number;
     PpsearchModel: Ppsearchview;
     dataSource = new MatTableDataSource<Ppsearchview>();
-    displayedColumns: string[] = ['index', 'consulationdetail_topic', 'counselor_title', 'counselor_name', 'counselor_middlename', 'counselor_surname', 'meeting_date', 'actions'];
+    displayedColumns: string[] = ['index', 'consulationdetail_topic', 'counselor_fullname', 'meeting_date', 'actions'];
     pageSize: number = 10;
-    pageSizeOptions = [10, 20, 30];
+    pageSizeOptions = [10, 20, 30, 40, 50];
     index: number;
     id: number;
 
