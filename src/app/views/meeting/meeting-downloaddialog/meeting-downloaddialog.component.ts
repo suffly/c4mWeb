@@ -83,6 +83,20 @@ export class MeetingDownloaddialogComponent implements OnInit {
             (error: any) => console.log('Error downloading the file'), //when you use stricter type checking
             () => console.info('File downloaded successfully');
         }
+
+        if (data.template_index == 2)
+          {
+            var filename = "";
+            this.ReportmeetingService.Createmeetingstatisticreport(this.MeetingViewModel.meeting_id).subscribe((response: Blob) => {
+              this.date = new Date();
+              let latest_date = this.datepipe.transform(this.date, 'ddMMyyyy_HHmmss');
+              filename = data.template_topic + latest_date?.toString() + ".xlsx";
+              this.FileSaverService.save(response, filename);
+              this.showSuccess('ดาวน์โหลดข้อมูลสำเร็จ');
+            }),
+              (error: any) => console.log('Error downloading the file'), //when you use stricter type checking
+              () => console.info('File downloaded successfully');
+          }
     
         if (data.template_index == 3)
         {

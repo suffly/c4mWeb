@@ -18,9 +18,14 @@ export class ReportmeetingService {
     return this.http.get(`${this.baseUrl}/Createmeetingsummaryreport/${meeting_id}`,{responseType: 'blob'});
   }
 
+  Createmeetingstatisticreport(meeting_id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Createmeetingstatisticreport/${meeting_id}`,{responseType: 'blob'});
+  }
+
   Createmeetingresultreport(meeting_id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/Createmeetingresultreport/${meeting_id}`,{responseType: 'blob'});
   }
+
 
 
 }
