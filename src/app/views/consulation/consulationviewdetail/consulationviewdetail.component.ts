@@ -137,13 +137,13 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}')
     //console.log("LoadConsulationDetail, MeetingID : "+this.Meetingrow+" CounselorID : "+this.Counselorrow+" ConsulationID : "+this.Consulationrow);
 
-    // var Meetingview_input = new Meetingview();
-    // Meetingview_input.meeting_id = this.Meetingrow;
-    // this.MeetingviewService.Getmeetingview_byID(Meetingview_input).subscribe(data => {this.MeetingModel = data});
+    var Meetingview_input = new Meetingview();
+    Meetingview_input.meeting_id = this.Meetingrow;
+    this.MeetingviewService.Getmeetingview_byID(Meetingview_input).subscribe(data => {this.MeetingModel = data});
 
-    // var Consulationview_input = new Consulationview();
-    // Consulationview_input.consulation_id = this.Counselorrow;
-    // this.ConsulationviewService.Getconsulationview_byID(Consulationview_input).subscribe(data => {this.ConsulationviewModel = data});
+    var Consulationview_input = new Consulationview();
+    Consulationview_input.consulation_id = this.Counselorrow;
+    this.ConsulationviewService.Getconsulationview_byID(Consulationview_input).subscribe(data => {this.ConsulationviewModel = data});
     this.checkStatusConsulationDetail();
     this.loadConsulation();
     this.loadMinistry();

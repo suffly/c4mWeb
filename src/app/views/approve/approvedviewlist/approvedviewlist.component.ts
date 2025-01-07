@@ -39,7 +39,8 @@ export class ApprovedviewlistComponent implements OnInit, OnDestroy {
     Meetingrow : number;
     MeetingviewModel : Meetingview[];
     dataSource = new MatTableDataSource<Meetingview>();
-    displayedColumns: string[] = ['index', 'meetingtype_name', 'meeting_set', 'meeting_year', 'meeting_time', 'meetingterm_name', 'meeting_date', 'progressstatus_name', 'actions'];
+    //displayedColumns: string[] = ['index', 'meetingtype_name', 'meeting_set', 'meeting_year', 'meeting_time', 'meetingterm_name', 'meeting_date', 'progressstatus_name', 'actions'];
+    displayedColumns: string[] = ['index', 'meeting_set', 'meeting_year', 'meeting_time', 'meetingterm_name', 'meeting_date', 'owner_name', 'progressstatus_name', 'actions'];
     pageSize: number = 10;
     pageSizeOptions = [10, 25, 50];
     index: number;

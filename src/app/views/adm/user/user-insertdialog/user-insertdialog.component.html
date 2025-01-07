@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <label for="">เพิ่มผู้ใช้งานเ</label>
+                    <label for="">เพิ่มผู้ใช้งาน</label>
                     <div class="float-right">
                         <button mat-icon-button class="mx-auto" (click)="onNoClick()">
                             <mat-icon>cancel</mat-icon>
@@ -11,80 +11,177 @@
                     </div>
                 </div>
 
-                <!-- <div class="card-body">
-                    <div class="form-group"><label for="">ประเภทการประชุม</label></div>
+                <div class="card-body">
+                    <div class="form-group"><label for="">user_login</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill">
-                            <mat-label>เลือกประเภทการประชุม</mat-label>
-                            <mat-select formControlName="ddltype" placeholder="ประเภทการประชุม" 
-                                [(ngModel)]="this.MeetingViewModel.meetingtype_id" [errorStateMatcher]="matcher">
-                                <mat-option *ngFor="let element of this.MeetingtypeModel" [value]="element.meetingtype_id">
-                                    {{element.meetingtype_name}}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="frmGrpAddMeeting.controls.ddltype.hasError('required')">กรุณาระบุครั้งที่การประชุม</mat-error>
+                            <mat-label>user_login</mat-label>
+                            <input matInput #userlogin type="text" formControlName="user_login" placeholder="user_login" 
+                            [(ngModel)]="this.UserprofileModel.user_login" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="frmGrpAddUser.controls.user_login.hasError('required')">กรุณา user_login</mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="form-group"><label for="">ชุดที่</label></div>
+                    <div class="form-group"><label for="">user_password</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill">
-                            <mat-label>เลือกชุดที่</mat-label>
-                            <mat-select formControlName="ddlset" placeholder="ชุดที่" 
-                                [(ngModel)]="this.MeetingViewModel.meetingset_id" [errorStateMatcher]="matcher">
-                                <mat-option *ngFor="let element of this.MeetingsetModel" [value]="element.meetingset_id">
-                                    {{element.meetingset_desc}}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="frmGrpAddMeeting.controls.ddlset.hasError('required')">กรุณาระบุชุดที่การประชุม</mat-error>
+                            <mat-label>user_password</mat-label>
+                            <input matInput #userpassword type="text" formControlName="user_password" placeholder="user_password" 
+                            [(ngModel)]="this.UserprofileModel.user_password">
+                            <mat-error *ngIf="frmGrpAddUser.controls.user_password.hasError('required')">กรุณา user_password</mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="form-group"><label for="">ปีที่</label></div>
+                    <div class="form-group"><label for="">user_cid</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill" hintLabel="กรุณาระบุตัวเลข">
+                            <mat-label>user_cid</mat-label>
+                            <input matInput #usercid type="text" formControlName="user_cid" placeholder="user_cid" 
+                            [(ngModel)]="this.UserprofileModel.user_cid" maxlength="13" >
+                            <mat-hint align="end">{{usercid.value.length || 0}}/13</mat-hint>
+                            <mat-error *ngIf="frmGrpAddUser.controls.user_cid.hasError('required')">กรุณา user_cid</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">user_title</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill">
-                            <mat-label>เลือกปีที่</mat-label>
-                            <mat-select formControlName="ddlyear" placeholder="ปีที่" 
-                                [(ngModel)]="this.MeetingViewModel.meeting_year" [errorStateMatcher]="matcher">
-                                <mat-option *ngFor="let element of this.DDLMeetingYear" [value]="element.value">
+                            <mat-label>user_title</mat-label>
+                            <input matInput #usertitle type="text" formControlName="user_title" placeholder="user_title" 
+                            [(ngModel)]="this.UserprofileModel.user_title" [errorStateMatcher]="matcher" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let option of filteredTitleOptions | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-error *ngIf="frmGrpAddUser.controls.user_title.hasError('required')">กรุณา user_title</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">user_name</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>user_name</mat-label>
+                            <input matInput #username type="text" formControlName="user_name" placeholder="user_name" 
+                            [(ngModel)]="this.UserprofileModel.user_name" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="frmGrpAddUser.controls.user_name.hasError('required')">กรุณา user_name</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">user_midname</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>user_midname</mat-label>
+                            <input matInput #usermidname type="text" formControlName="user_midname" placeholder="user_midname" 
+                            [(ngModel)]="this.UserprofileModel.user_midname" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="frmGrpAddUser.controls.user_midname.hasError('required')">กรุณา user_midname</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">user_surname</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>user_surname</mat-label>
+                            <input matInput #usersurname type="text" formControlName="user_surname" placeholder="user_surname" 
+                            [(ngModel)]="this.UserprofileModel.user_surname" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="frmGrpAddUser.controls.user_surname.hasError('required')">กรุณา user_surname</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">user_position</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>user_position</mat-label>
+                            <input matInput #userposition type="text" formControlName="user_position" placeholder="user_position" 
+                            [(ngModel)]="this.UserprofileModel.user_position" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="frmGrpAddUser.controls.user_position.hasError('required')">กรุณา user_position</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">user_level</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>user_level</mat-label>
+                            <mat-select formControlName="ddluserlevel" placeholder="ddluserlevel" 
+                                [(ngModel)]="this.UserprofileModel.userlevel_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.UserlevelModel" [value]="element.userlevel_id">
+                                    {{element.userlevel_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddUser.controls.ddluserlevel.hasError('required')">กรุณา user_level</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">costcenter</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>costcenter</mat-label>
+                            <mat-select formControlName="ddlcostcenter" placeholder="ddlcostcenter" 
+                                [(ngModel)]="this.UserprofileModel.costcenter_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.CostcenterModel" [value]="element.costcenter_id">
+                                    {{element.costcenter_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddUser.controls.ddlcostcenter.hasError('required')">กรุณา costcenter</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">user_type</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>user_type</mat-label>
+                            <mat-select formControlName="ddlusertype" placeholder="ddlusertype" 
+                                [(ngModel)]="this.UserprofileModel.usertype_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.UsertypeModel" [value]="element.usertype_id">
+                                    {{element.usertype_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddUser.controls.ddlusertype.hasError('required')">กรุณา user_type</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">user_status</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>user_status</mat-label>
+                            <mat-select formControlName="ddluserstatus" placeholder="ddluserstatus" 
+                                [(ngModel)]="this.UserprofileModel.user_status" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.DDLUserStatus" [value]="element.value">
                                     {{element.viewvalue}}
                                 </mat-option>
                             </mat-select>
-                            <mat-error *ngIf="frmGrpAddMeeting.controls.ddlyear.hasError('required')">กรุณาระบุปีที่การประชุม</mat-error>
+                            <mat-error *ngIf="frmGrpAddUser.controls.ddluserstatus.hasError('required')">กรุณา user_status</mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="form-group"><label for="">สมัยการประชุม</label></div>
+                    <div class="form-group"><label for="">user_email</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill">
-                            <mat-label>เลือกสมัยการประชุม</mat-label>
-                            <mat-select formControlName="ddlterm" placeholder="สมัยการประชุม" 
-                                [(ngModel)]="this.MeetingViewModel.meetingterm_id" [errorStateMatcher]="matcher">
-                                <mat-option *ngFor="let element of this.MeetingtermModel" [value]="element.meetingterm_id">
-                                    {{element.meetingterm_name}}
+                            <mat-label>user_email</mat-label>
+                            <input matInput #useremail type="text" formControlName="user_email" placeholder="user_email" 
+                            [(ngModel)]="this.UserprofileModel.user_email" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="frmGrpAddUser.controls.user_email.hasError('required')">กรุณา user_email</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">user_member</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>เลือกผู้หารือ</mat-label>
+                            <mat-select formControlName="ddlusermember" placeholder="ddlusermember" 
+                            [(ngModel)]="this.UserprofileModel.user_member" [errorStateMatcher]="matcher"> 
+                                <mat-option>
+                                    <ngx-mat-select-search [formControl]="CounselorviewFilter" placeholderLabel="ค้นหาผู้หารือ" noEntriesFoundLabel="ไม่พบผู้หารือ"></ngx-mat-select-search>
+                                </mat-option>
+                                <mat-option *ngFor="let element of this.FilteredCounselorview | async" [value]="element.counselor_id">
+                                    {{element.counselor_title}}{{element.counselor_name}} {{element.counselor_middlename}} {{element.counselor_surname}}
                                 </mat-option>
                             </mat-select>
-                            <mat-error *ngIf="frmGrpAddMeeting.controls.ddlterm.hasError('required')">กรุณาระบุสมัยการประชุม</mat-error>
+                            <mat-error *ngIf="frmGrpAddUser.controls.ddlusermember.hasError('required')">กรุณาเลื่อกผู้หารือ</mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="form-group"><label for="">ครั้งที่ประชุม</label></div>
-                    <div class="form-group">
-                        <mat-form-field appearance="fill" hintLabel="กรุณาระบุตัวเลข">
-                            <mat-label>ครั้งที่ประชุม</mat-label>
-                            <input matInput #input type="text" formControlName="meetingtime" placeholder="ครั้งที่ประชุม" [(ngModel)]="this.MeetingViewModel.meeting_time" maxlength="2" >
-                            <mat-hint align="end">{{input.value.length || 0}}/2</mat-hint>
-                            <mat-error *ngIf="frmGrpAddMeeting.controls.meetingtime.hasError('required')">กรุณาระบุครั้งที่การประชุม</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="form-group"><label for="">วันที่ประชุม</label></div>
+                    <div class="form-group"><label for="">user_ministry</label></div>
                     <div class="form-group">
                         <mat-form-field appearance="fill">
-                            <mat-label>วันที่ประชุม</mat-label>
-                            <input matInput [matDatepicker]="picker" placeholder="วันที่ประชุม" readonly
-                                formControlName="meetingdate" name="meetingdate"
-                                [(ngModel)]="this.MeetingViewModel.meeting_date">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                            <mat-error *ngIf="frmGrpAddMeeting.controls.meetingdate.hasError('required')">กรุณาระบุวันที่การประชุม</mat-error>
+                            <mat-label>user_ministry</mat-label>
+                            <mat-select formControlName="ddluserministry" placeholder="ddluserministry" 
+                                [(ngModel)]="this.UserprofileModel.user_ministry" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.MinistryModel" [value]="element.ministry_id">
+                                    {{element.ministry_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddUser.controls.ddluserministry.hasError('required')">กรุณา user_ministry</mat-error>
                         </mat-form-field>
                     </div>
+
+                    
 
                     <div style="text-align: center;">
                         <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="form.invalid" [mat-dialog-close]="1">
@@ -93,7 +190,7 @@
                         </button>&nbsp;&nbsp;&nbsp;
                         <button mat-raised-button (click)="onNoClick()" color="warn" tabindex="-1" [mat-dialog-close]="0">ยกเลิก</button>      
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>

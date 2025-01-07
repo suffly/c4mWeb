@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     
     this.href = window.location.pathname;// this.router.url;
-    if (window.innerWidth < 768) {
+    if (window.innerWidth <= 1024) {
       //this.sidenav.fixedTopGap = 55;
       this.opened = false;
     } else {

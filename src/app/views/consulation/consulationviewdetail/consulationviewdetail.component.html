@@ -1,13 +1,14 @@
-<div class="card-header assert-col">
+<div class="card-header assert-row">
     <button mat-icon-button  (click)="backClicked()" >
       <mat-icon>arrow_back_ios</mat-icon>
     </button>
     <label for=""> รายละเอียดข้อปรึกษาหารือ </label>
 </div>
 
-<!-- <div class="card-body">
+<div class="card-body">
     <div class="row">
-        ผู้ปรึกษาหารือในที่ประชุม {{MeetingModel.meetingtype_name}} &nbsp;&nbsp;
+        <!-- ผู้ปรึกษาหารือในที่{{MeetingModel.meetingtype_name}} &nbsp; -->
+        &nbsp;&nbsp;การ{{MeetingModel.meetingtype_name}} &nbsp;&nbsp;
         ชุดที่ {{MeetingModel.meetingset_desc}} &nbsp;&nbsp;
         ปีที่ {{MeetingModel.meeting_year}} &nbsp;&nbsp;
         ครั้งที่ {{MeetingModel.meeting_time}} &nbsp;&nbsp;
@@ -15,11 +16,11 @@
         วันที่ {{MeetingModel.meeting_date.toString()|thaidate:'medium'}}
     </div>
     <div class="row">
-        ผู้หารือ {{ConsulationviewModel.counselor_title}}{{ConsulationviewModel.counselor_name}} {{ConsulationviewModel.counselor_middlename}} {{ConsulationviewModel.counselor_surname}} &nbsp;&nbsp;
+        &nbsp;&nbsp;ผู้หารือ {{ConsulationviewModel.counselor_title}}{{ConsulationviewModel.counselor_name}} {{ConsulationviewModel.counselor_middlename}} {{ConsulationviewModel.counselor_surname}} &nbsp;&nbsp;
         สมาชิกสภาผู้แทนราษฎร{{ConsulationviewModel.counselortype_name}} &nbsp;&nbsp; {{ConsulationviewModel.partylist_name}}
         
     </div>
-</div> -->
+</div>
 
 <div class="card-body assert-row">
     <div class="card-header background-white">

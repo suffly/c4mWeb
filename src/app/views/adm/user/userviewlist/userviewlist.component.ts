@@ -11,7 +11,6 @@ import { UserprofileviewService } from '@app/services/userprofileview.service';
 import { Userprofileview } from '@app/models/userprofileview';
 
 import { UserInsertdialogComponent } from '../user-insertdialog/user-insertdialog.component';
-import { result } from 'lodash';
 
 
 @Component({

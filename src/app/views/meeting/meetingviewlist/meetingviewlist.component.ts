@@ -31,7 +31,8 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
   Meetingrow : number;
   MeetingviewModel : Meetingview[];
   dataSource = new MatTableDataSource<Meetingview>();
-  displayedColumns: string[] = ['index', 'meetingtype_name', 'meeting_set', 'meeting_year', 'meeting_time', 'meetingterm_name', 'meeting_date', 'count_consulation', 'count_consulationtotal', 'actions'];
+  //displayedColumns: string[] = ['index', 'meetingtype_name', 'meeting_set', 'meeting_year', 'meeting_time', 'meetingterm_name', 'meeting_date', 'count_consulation', 'count_consulationtotal', 'actions'];
+  displayedColumns: string[] = ['index', 'meeting_set', 'meeting_year', 'meeting_time', 'meetingterm_name', 'meeting_date', 'owner_name', 'count_consulation', 'count_consulationtotal', 'actions'];
   pageSize: number = 10;
   pageSizeOptions = [10, 25, 50];
   index: number;

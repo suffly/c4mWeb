@@ -2,6 +2,59 @@ mat-toolbar {
     background: #800000;
     color: white;
     height: 75px;
+    width: 100% !important;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+    white-space: nowrap;
+}
+
+img {
+    height : 50px;
+}
+
+@media (max-width:1450px){
+    mat-toolbar {
+        height: 90px;
+    }
+    img {
+        height : 60px;
+    }
+    .mat-toolbar-row, .mat-toolbar-single-row {
+        white-space: wrap;
+    }
+    .date-row{
+        display: none;
+    }
+}
+
+@media (max-width:1024px){
+    mat-toolbar {
+        height: 125px;
+    }
+    .mat-toolbar-row, .mat-toolbar-single-row {
+        white-space: wrap;
+    }
+    img {
+        height : 75px;
+    }
+    .date-row{
+        display: none;
+    }
+}
+
+@media (max-width:768px){
+    mat-toolbar {
+        height: 150px;
+    }
+    .mat-toolbar-row, .mat-toolbar-single-row {
+        white-space: wrap;
+    }
+    img {
+        height : 75px;
+    }
+    .date-row{
+        display: none;
+    }
 }
 
 /* mat-sidenav {
@@ -44,6 +97,7 @@ mat-sidenav-container {
     justify-content: flex-start;
     font-size: 1rem;
 }
+
 mat-icon {
     margin-right: 8px;
 }

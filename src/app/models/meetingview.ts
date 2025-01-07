@@ -24,6 +24,7 @@ export class Meetingview {
     public_date:Date;
     public_by:number;
     owner_id:number;
+    owener_name:string;
     progressstatus_id:number;
     progressstatus_name:string;
 }

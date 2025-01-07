@@ -18,4 +18,15 @@ export class Userprofileview {
     user_email:string;
     user_member:number;
     user_ministry:number;
+
+    //NotMapped
+    userad_password: string;
+    access_token: string;
+    refresh_token: string;
+    error_message: string;
+
+    role_id:number;
+    role_name:string;
+    user_id_new:string;
+
 }

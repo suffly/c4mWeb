@@ -1,21 +1,14 @@
-<div class="card-header assert-col">
+<div class="card-header assert-row">
     <button mat-icon-button  (click)="backClicked()" >
       <mat-icon>arrow_back_ios</mat-icon>
     </button>
     <label for="">ข้อปรึกษาหารือ </label>
 </div>
 
-<mat-form-field>
-    <mat-label>ค้นหา</mat-label>
-    <input matInput (keyup)="applyFilter($event)"
-      placeholder="ตัวอย่าง ใส่คำที่ต้องการค้นหา เช่น ข้อปรึกษาหารือ "
-      #input>
-    <mat-icon matSuffix>search</mat-icon>
-</mat-form-field>
-
-<!-- <div class="card-body">
+<div class="card-body assert-row">
     <div class="row">
-        ผู้ปรึกษาหารือในที่ {{MeetingModel.meetingtype_name}} &nbsp;&nbsp;
+        <!-- ผู้ปรึกษาหารือในที่{{MeetingModel.meetingtype_name}} &nbsp; -->
+        &nbsp;&nbsp;การ{{MeetingModel.meetingtype_name}} &nbsp;&nbsp;
         ชุดที่ {{MeetingModel.meetingset_desc}} &nbsp;&nbsp;
         ปีที่ {{MeetingModel.meeting_year}} &nbsp;&nbsp;
         ครั้งที่ {{MeetingModel.meeting_time}} &nbsp;&nbsp;
@@ -23,67 +16,79 @@
         วันที่ {{MeetingModel.meeting_date.toString()|thaidate:'medium'}}
     </div>
     <div class="row">
-        ผู้หารือ {{ConsulationviewModel.counselor_title}}{{ConsulationviewModel.counselor_name}} {{ConsulationviewModel.counselor_middlename}} {{ConsulationviewModel.counselor_surname}} &nbsp;&nbsp;
+        &nbsp;&nbsp;ผู้หารือ {{ConsulationviewModel.counselor_title}}{{ConsulationviewModel.counselor_name}} {{ConsulationviewModel.counselor_middlename}} {{ConsulationviewModel.counselor_surname}} &nbsp;&nbsp;
         สมาชิกสภาผู้แทนราษฎร{{ConsulationviewModel.counselortype_name}} &nbsp;&nbsp; {{ConsulationviewModel.partylist_name}}
         
     </div>
-</div> -->
+</div>
 
-<div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-        <ng-container matColumnDef="index">
-            <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
-            <td mat-cell *matCellDef="let element;let i = index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
-        </ng-container>
-        <ng-container matColumnDef="consulationdetail_topic">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ข้อปรึกษาหารือ (สำหรับใส่ใบนำส่ง) </th>
-            <td mat-cell *matCellDef="let element"> {{element.consulationdetail_topic}} </td>
-        </ng-container>
-        <ng-container matColumnDef="consulationdetail_detail">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> รายละเอียดข้อปรึกษาหารือ </th>
-            <td mat-cell *matCellDef="let element"> {{element.consulationdetail_detail}} </td>
-        </ng-container>
-        <ng-container matColumnDef="objective_name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> วัตถุประสงค์ </th>
-            <td mat-cell *matCellDef="let element"> {{element.objective_name}} </td>
-        </ng-container>
-        <ng-container matColumnDef="topictype_name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ประเภทหัวข้อ </th>
-            <td mat-cell *matCellDef="let element"> {{element.topictype_name}} </td>
-        </ng-container>
-        <ng-container matColumnDef="status_name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> สถานะการดำเนินการ </th>
-            <td mat-cell *matCellDef="let element"> {{element.status_name}} </td>
-        </ng-container>
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>
-                <span style="font-size: smaller;">เพิ่มข้อปรึกษาหารือ</span>
-                <button mat-icon-button color="primary" (click)="openAddDialog()">
-                    <mat-icon aria-label="Add">add</mat-icon>
-                </button>
-                <span style="font-size: smaller;">Refresh</span>
-                <button mat-icon-button color="accent" (click)="loadData()">
-                    <mat-icon aria-label="Refresh">refresh</mat-icon>
-                </button>
-            </th>
+<div class="card-body assert-row">
+    <mat-form-field>
+        <mat-label>ค้นหา</mat-label>
+        <input matInput (keyup)="applyFilter($event)"
+          placeholder="ตัวอย่าง ใส่คำที่ต้องการค้นหา เช่น ข้อปรึกษาหารือ "
+          #input>
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+</div>
 
-            <td mat-cell *matCellDef="let element; let i=index;" style="text-align: center;">
-                <!-- <button mat-icon-button color="primary" (click)="addDetail(i,element)">
-                    <mat-icon aria-label="question_answer">question_answer</mat-icon>
-                </button> -->
-                <mat-button mat-flat-button class="btn btn-success btn-add" (click)="addDetail(i,element)">
-                    รายละเอียด
-                </mat-button>
-                <button mat-icon-button color="accent" (click)="editItem(i,element)">
-                    <mat-icon aria-label="Edit">edit</mat-icon>
-                </button>
-                <button mat-icon-button color="warn" (click)="deleteItem(i,element)">
-                    <mat-icon aria-label="Delete">delete</mat-icon>
-                </button>              
-            </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <mat-paginator #paginator [pageSize]="this.pageSize" [pageSizeOptions]="this.pageSizeOptions" showFirstLastButtons></mat-paginator>
+<div class="card-body assert-row">
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+                <td mat-cell *matCellDef="let element;let i = index"> {{i+(paginator.pageIndex * paginator.pageSize)+1}}
+            </ng-container>
+            <ng-container matColumnDef="consulationdetail_topic">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ข้อปรึกษาหารือ (สำหรับใส่ใบนำส่ง) </th>
+                <td mat-cell *matCellDef="let element"> {{element.consulationdetail_topic}} </td>
+            </ng-container>
+            <ng-container matColumnDef="consulationdetail_detail">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> รายละเอียดข้อปรึกษาหารือ </th>
+                <td mat-cell *matCellDef="let element"> {{element.consulationdetail_detail}} </td>
+            </ng-container>
+            <ng-container matColumnDef="objective_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> วัตถุประสงค์ </th>
+                <td mat-cell *matCellDef="let element"> {{element.objective_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="topictype_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ประเภทหัวข้อ </th>
+                <td mat-cell *matCellDef="let element"> {{element.topictype_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> สถานะการดำเนินการ </th>
+                <td mat-cell *matCellDef="let element"> {{element.status_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>
+                    <span style="font-size: smaller;">เพิ่มข้อปรึกษาหารือ</span>
+                    <button mat-icon-button color="primary" (click)="openAddDialog()">
+                        <mat-icon aria-label="Add">add</mat-icon>
+                    </button>
+                    <span style="font-size: smaller;">Refresh</span>
+                    <button mat-icon-button color="accent" (click)="loadData()">
+                        <mat-icon aria-label="Refresh">refresh</mat-icon>
+                    </button>
+                </th>
+    
+                <td mat-cell *matCellDef="let element; let i=index;" style="text-align: center;">
+                    <!-- <button mat-icon-button color="primary" (click)="addDetail(i,element)">
+                        <mat-icon aria-label="question_answer">question_answer</mat-icon>
+                    </button> -->
+                    <mat-button mat-flat-button class="btn btn-success btn-add" (click)="addDetail(i,element)">
+                        รายละเอียด
+                    </mat-button>
+                    <button mat-icon-button color="accent" (click)="editItem(i,element)">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="deleteItem(i,element)">
+                        <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>              
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator #paginator [pageSize]="this.pageSize" [pageSizeOptions]="this.pageSizeOptions" showFirstLastButtons></mat-paginator>
+    </div>
 </div>

@@ -6,7 +6,7 @@
         <mat-icon *ngIf="this.opened" alt="ปิดเมนูหลัก">close</mat-icon>
       </button>
     <div>
-        <img src="../assets/images/logo-plm.png" height="50px"/>
+        <img src="../assets/images/logo-plm.png"/>
     </div>
     &nbsp;&nbsp;
     <div style="font-size: 14px">
@@ -25,9 +25,10 @@
               [ ตำแหน่ง ] : {{ currentUser.user_position}} [ สังกัด ] : {{ currentUser.costcenter_name}}
             </div> -->
           </div>
-          <div class="row">
-            <div class="col col-sm-12" align="right">[ สิทธิ์ ] : {{ currentUser.role_name}} วันที่เข้าล่าสุด : {{
-              nowDate.toString() | thaidate: 'full' }} </div>
+          <div class="row date-row">
+            <div class="col col-sm-12" align="right">[ สิทธิ์ ] : {{ currentUser.role_name}} 
+              วันที่เข้าล่าสุด : {{nowDate.toString() | thaidate: 'full' }} 
+            </div>
           </div>
         </div>
     

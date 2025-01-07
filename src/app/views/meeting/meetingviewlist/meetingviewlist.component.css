@@ -20,7 +20,7 @@
   hyphens: auto;
   text-align: center;
 }
-.mat-column-meetingtype_name {
+/* .mat-column-meetingtype_name {
   word-wrap: break-word !important;
   white-space: unset !important;
   flex: 0 0 10% !important;
@@ -32,7 +32,7 @@
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
-}
+} */
 .mat-column-meeting_set {
   word-wrap: break-word !important;
   white-space: unset !important;
@@ -49,8 +49,8 @@
 .mat-column-meeting_year {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 5% !important;
-  width: 5% !important;
+  flex: 0 0 4% !important;
+  width: 4% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
@@ -90,6 +90,19 @@
   white-space: unset !important;
   flex: 0 0 10% !important;
   width: 10% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.mat-column-owner_name {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 13% !important;
+  width: 13% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
