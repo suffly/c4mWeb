@@ -27,6 +27,8 @@ export class UserviewlistComponent implements OnInit, OnDestroy {
 
   ) {}
 
+  loading = false;
+
   dataSource = new MatTableDataSource<Userprofileview>();
   displayedColumns: string[] = ['index', 'user_login', 'user_title', 'user_name', 'user_midname', 'user_surname', 'costcenter_name', 'userlevel_name', 'usertype_name', 'actions'];
   pageSize: number = 50;
@@ -52,18 +54,20 @@ export class UserviewlistComponent implements OnInit, OnDestroy {
   }
 
   loadData(){
+    this.loading = true;
     var User = new Userprofileview();
     const subscription = (this.UserprofileviewService.Getuserprofileview(User)).subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+      this.loading = false;
     });
     this.subscriptions.push();
   }
 
   async openAddDialog(){
     const dialogRef = await this.dialogService.open(UserInsertdialogComponent, {
-      width: '1280px',
+      width: '640px',
       height: '85%',
       data: {},
       disableClose: true
@@ -81,7 +85,7 @@ export class UserviewlistComponent implements OnInit, OnDestroy {
     this.id = data.user_id;
     this.index = i;
     const dialogRef = await this.dialogService.open(UserInsertdialogComponent, {
-      width: '1280px',
+      width: '640px',
       height: '85%',
       data: data,
       disableClose: true

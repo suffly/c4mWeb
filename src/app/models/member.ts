@@ -1,18 +1,18 @@
 export class Member {
-    SSP_ID:number;
-    SSP_NUMBER:number;
-    SS_IDCARD:string;
-    SSP_PREFIX:string;
-    SSP_NAME:string;
-    SSP_LAST_JOB:string;
-    SS_TYPE_ID:number;
-    SS_TYPE_NAME_TH:string;
-    PARTY_ID:number;
-    PARTY_NAME_TH:string;
-    PROV_ID:number;
-    PROV_TH_NAME:string;
-    SSP_DISTRICT_ID:number;
-    EDU:string;
-    IMG_SS_PIC:string;
-    IMG_PARTY_PIC:string;
+    ssP_ID:number;
+    ssP_NUMBER:number;
+    sS_IDCARD:string;
+    ssP_PREFIX:string;
+    ssP_NAME:string;
+    ssP_LAST_JOB:string;
+    sS_TYPE_ID:number;
+    sS_TYPE_NAME_TH:string;
+    partY_ID:number;
+    partY_NAME_TH:string;
+    proV_ID:number;
+    proV_TH_NAME:string;
+    ssP_DISTRICT_ID:number;
+    edu:string;
+    imG_SS_PIC:string;
+    imG_PARTY_PIC:string;
 }

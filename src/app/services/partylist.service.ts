@@ -20,4 +20,22 @@ export class PartylistService {
       })
     );
   }
+
+  Savepartylist(Partylist: Partylist): Observable<any> {
+    return this.http.post<number>(`${this.baseUrl}/Savepartylist`,Partylist).pipe(
+      map((PartylistData: number) => {
+        return PartylistData;
+      })
+    );
+  }
+
+  async Updatepartylist(Partylist: Partylist): Promise<Observable<any>> {
+    return await this.http.post<number>(`${this.baseUrl}/Updatepartylist`,Partylist).pipe(
+      map((PartylistData: number) => {
+        return PartylistData;
+      })
+    );
+  }
+
+  
 }

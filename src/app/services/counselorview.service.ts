@@ -28,5 +28,16 @@ export class CounselorviewService {
       })
     );
   }
+  
+  Getcounselorview_byID(Counselorview: Counselorview): Observable<any> {
+    return this.http.post<Counselorview>(`${this.baseUrl}/Getcounselorview_byID`, Counselorview).pipe(
+      map((CounselorviewData: Counselorview) => {
+        return CounselorviewData;
+      })
+    );
+  }
+
+
+
 
 }

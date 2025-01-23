@@ -1,1 +1,50 @@
-<p>partylist-insertdialog works!</p>
+<form [formGroup]="frmGrpAddpartylist" #form="ngForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <label for="">เพิ่มพรรคการเมิอง</label>
+                    <div class="float-right">
+                        <button mat-icon-button class="mx-auto" (click)="onNoClick()">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="form-group"><label for="">พรรคการเมือง</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>พรรคการเมือง</mat-label>
+                            <input matInput #userlogin type="text" formControlName="partylist_name" placeholder="พรรคการเมือง" 
+                            [(ngModel)]="this.PartylistviewModel.partylist_name" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="frmGrpAddpartylist.controls.partylist_name.hasError('required')">กรุณาระบุพรรคการเมือง</mat-error>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div class="form-group"><label for="">ฝ่ายการเมือง</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>ฝ่ายการเมือง</mat-label>
+                            <mat-select formControlName="ddlcounselordivision" placeholder="ฝ่ายการเมือง" 
+                                [(ngModel)]="this.PartylistviewModel.counselordivision_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.CounselordivisionModel" [value]="element.counselordivision_id">
+                                    {{element.counselordivision_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpAddpartylist.controls.ddlcounselordivision.hasError('required')">กรุณาระบุฝ่ายการเมือง</mat-error>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="form.invalid" [mat-dialog-close]="1">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            บันทึก
+                        </button>&nbsp;&nbsp;&nbsp;
+                        <button mat-raised-button (click)="onNoClick()" color="warn" tabindex="-1" [mat-dialog-close]="0">ยกเลิก</button>      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,1 +1,56 @@
-<p>ministry-insertdialog works!</p>
+<form [formGroup]="frmGrpAddministry" #form="ngForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <label for="">เพิ่มกระทรวง</label>
+                    <div class="float-right">
+                        <button mat-icon-button class="mx-auto" (click)="onNoClick()">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="form-group"><label for="">ชื่อกระทรวง</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>ชื่อกระทรวง</mat-label>
+                            <input matInput #ministryname type="text" formControlName="ministry_name" placeholder="ชื่อกระทรวง" 
+                            [(ngModel)]="this.MinistryModel.ministry_name" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="frmGrpAddministry.controls.ministry_name.hasError('required')">กรุณาระบุชื่อกระทรวง</mat-error>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div class="form-group"><label for="">หัวหน้าส่วนราชการ</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>หัวหน้าส่วนราชการ</mat-label>
+                            <input matInput #ministryhead type="text" formControlName="ministry_head" placeholder="หัวหน้าส่วนราชการ" 
+                            [(ngModel)]="this.MinistryModel.ministry_head" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="frmGrpAddministry.controls.ministry_head.hasError('required')">กรุณาระบุหัวหน้าส่วนราชการ</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group"><label for="">คำเรียนเชิญ</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>คำเรียนเชิญ</mat-label>
+                            <input matInput #ministryinvitation type="text" formControlName="ministry_invitation" placeholder="คำเรียนเชิญ" 
+                            [(ngModel)]="this.MinistryModel.ministry_invitation" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="frmGrpAddministry.controls.ministry_invitation.hasError('required')">กรุณาระบุคำเรียนเชิญ</mat-error>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="form.invalid" [mat-dialog-close]="1">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            บันทึก
+                        </button>&nbsp;&nbsp;&nbsp;
+                        <button mat-raised-button (click)="onNoClick()" color="warn" tabindex="-1" [mat-dialog-close]="0">ยกเลิก</button>      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

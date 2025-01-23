@@ -197,10 +197,11 @@ export class UserInsertdialogComponent implements OnInit, AfterViewInit, OnDestr
     else
     {
       userprofileData.user_id = this.UserprofileModel.user_id;
-      console.log(userprofileData);
       (await this.UserprofileService.Updateuserprofile(userprofileData)).subscribe(data => {
         if(data == 0) {this.showWarning('ไม่สามารถแก้ไขผู้ใช้งานได้');}
-        else {this.showSuccess('แก้ไขผู้ใช้งานเรียบร้อย');}
+        else {this.showSuccess('แก้ไขผู้ใช้งานเรียบร้อย');
+          localStorage.setItem(this.CURRENT_USER, JSON.stringify(userprofileData));
+        }
       });
     }
   }

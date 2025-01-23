@@ -21,6 +21,31 @@ export class CostcenterService {
     );
   }
 
+  Getcostcenter_all(Costcenter: Costcenter): Observable<any>{
+    return this.http.post<Costcenter[]>(`${this.baseUrl}/Getcostcenter_all`,Costcenter).pipe(
+      map((CostcenterData: Costcenter[]) =>{
+        return CostcenterData;
+      })
+    );
+  }
+
+  Savecostcenter(Costcenter: Costcenter): Observable<any>{
+    return this.http.post<number>(`${this.baseUrl}/Savecostcenter`,Costcenter).pipe(
+      map((CostcenterData: number) =>{
+        return CostcenterData;
+      })
+    );
+  }
+
+  async Updatecostcenter(Costcenter: Costcenter): Promise<Observable<any>>{
+    return await this.http.post<number>(`${this.baseUrl}/Updatecostcenter`,Costcenter).pipe(
+      map((CostcenterData: number) =>{
+        return CostcenterData;
+      })
+    );
+  }
+
+
 
 
 }
