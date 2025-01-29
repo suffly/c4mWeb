@@ -1,3 +1,4 @@
+<app-loading *ngIf="loading"></app-loading>
 <mat-toolbar color="primary" class="mat-elevation-z1">
     <div>
         <img src="../assets/images/logo-plm.png" height="50px"/>
@@ -74,11 +75,11 @@
         </table>
     </div>
 
-    <div class="card-header background-white">
+    <div *ngIf="ATCRModel.length !=0" class="card-header background-white">
         <label for=""> เอกสารแนบ </label>
     </div>
     
-    <div class="mat-elevation-z8 margin-bottom-60">
+    <div *ngIf="ATCRModel.length !=0" class="mat-elevation-z8 margin-bottom-60">
         <table  mat-table [dataSource]="dataSourceAttachres" matSort class="mat-elevation-z8">
             <ng-container matColumnDef="meeting_id">
                 <th mat-header-cell *matHeaderCellDef></th>

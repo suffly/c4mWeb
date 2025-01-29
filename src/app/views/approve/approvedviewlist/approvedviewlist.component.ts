@@ -31,6 +31,8 @@ export class ApprovedviewlistComponent implements OnInit, OnDestroy {
     private router: Router,
     ) {}
 
+    loading = false;
+
     btn_public:boolean = false;
     btn_approve:boolean = false;
     btn_owner:boolean = false;
@@ -90,16 +92,17 @@ export class ApprovedviewlistComponent implements OnInit, OnDestroy {
     }
 
     async loadData(){ 
+      this.loading = true;
       var Meetview = new Meetingview();
       const subscription = (this.MeetingviewService.Getmeetingview_All(Meetview)).subscribe(data => {
         this.dataSource.data = data;
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.MeetingviewModel = data;
-  
-        //console.log(this.MeetingviewModel);
+        this.loading = false;
       });
       this.subscriptions.push();
+      
     }
 
     public(i: number, data: Meetingview){

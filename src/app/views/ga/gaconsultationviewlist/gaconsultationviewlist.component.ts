@@ -10,6 +10,9 @@ import { Subject } from 'rxjs';
 import { Userprofile } from '@app/models/userprofile';
 import { GaconsulationviewService } from '@app/services/gaconsulationview.service';
 import { Gaconsulationview } from '@app/models/gaconsulationview';
+import { MinistryService } from '@app/services/ministry.service';
+import { Ministry } from '@app/models/ministry';
+
 
 
 @Component({
@@ -20,6 +23,7 @@ import { Gaconsulationview } from '@app/models/gaconsulationview';
 export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
 
   constructor(
+    public MinistryService: MinistryService,
     public GaconsulationviewService: GaconsulationviewService,
     private router: Router,
   ) {}
@@ -29,8 +33,10 @@ export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
   Gacounselorviewrow: number;
   Gaconsulationviewrow: number;
   GaconsulationviewModel: Gaconsulationview[];
+  MinistryModel: Ministry;
   dataSource = new MatTableDataSource<Gaconsulationview>();
-  displayedColumns: string[] = ['index', 'consulationdetail_topic', 'consulationdetail_detail', 'meeting_date', 'meetingset_desc', 'meeting_year', 'meeting_time', 'meetingterm_name', 'actions'];
+  //displayedColumns: string[] = ['index', 'consulationdetail_topic', 'consulationdetail_detail', 'meeting_date', 'meetingset_desc', 'meeting_year', 'meeting_time', 'meetingterm_name', 'actions'];
+  displayedColumns: string[] = ['index', 'consulationdetail_topic', 'meeting_date', 'counselor_fullname', 'status_name', 'actions'];
   pageSize: number = 10;
   pageSizeOptions = [10, 20, 30, 40, 50, 100];
   index: number;
@@ -43,7 +49,7 @@ export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
-  loading: boolean = true;
+  loading: boolean = false;
   currentUser: Userprofile;
   private readonly CURRENT_USER = 'currentUser';
 
@@ -60,15 +66,24 @@ export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
   }
 
   loadData(): void {
+    this.loading = true;
     this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
+
+    var Ministry_input = new Ministry;
+    Ministry_input.ministry_id = this.currentUser.user_ministry;
+    this.MinistryService.Getministry_byID(Ministry_input).subscribe(data => {this.MinistryModel = data});
+
     var Gaconsulationview_input = new Gaconsulationview;
     Gaconsulationview_input.ministry_id = this.currentUser.user_ministry;
     const subscribe = (this.GaconsulationviewService.Getgaconsulation_byministry(Gaconsulationview_input)).subscribe(data => {
       this.dataSource.data = data;
+      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.GaconsulationviewModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
+    
   }
 
   viewDetail(i:number, data: Gaconsulationview) {
@@ -85,6 +100,11 @@ export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
       this.router.navigate(['/gaconsultationdetail'])
     }, 500);
     //[routerLink]="['/gaconsultationdetail']" << for html
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

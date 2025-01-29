@@ -30,6 +30,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
     private router: Router,
     ) {}
   
+  loading = false;
 
   Meetingrow : number;
   Counselorrow: number;
@@ -62,6 +63,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
   }
 
   async loadData(){ 
+    this.loading = true;
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     //console.log("LoadCouselor, MeetingID : "+ this.Meetingrow);
     var Meetingview_input = new Meetingview();
@@ -74,6 +76,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.ConsulationviewModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }

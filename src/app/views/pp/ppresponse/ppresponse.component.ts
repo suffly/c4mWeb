@@ -23,6 +23,8 @@ export class PpresponseComponent implements OnInit, OnDestroy {
     private router: Router,
     ) { }
 
+  loading = false;
+
   Ppsearchrow: number;
   Ppsearchdetailrow: number;
   Ppresponserow: number;
@@ -46,12 +48,14 @@ export class PpresponseComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
+    this.loading = true;
     this.Ppsearchdetailrow = JSON.parse(localStorage.getItem('ppconsultationministry')||'{}');
     var Responseview_input = new Response();
     Responseview_input.consulationministry_id = this.Ppsearchdetailrow;
     const subscribe = (this.ResponseService.GetResponse_byConsulationministry(Responseview_input)).subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
+      this.loading = false;
     });
     this.subscriptions.push();
   }

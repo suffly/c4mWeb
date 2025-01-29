@@ -64,9 +64,12 @@ export class MeetingDownloaddialogComponent implements OnInit {
   }
 
   download(i:number,data:Template) {
+    this.loading = true;
+
     if (this.MeetingViewModel.count_consulationtotal == 0)
     {
       this.showWarning('ไม่สามารถดาวน์โหลดข้อมูลได้');
+      this.loading = false;
     }
     else
     {
@@ -79,9 +82,11 @@ export class MeetingDownloaddialogComponent implements OnInit {
             filename = data.template_topic + latest_date?.toString() + ".xlsx";
             this.FileSaverService.save(response, filename);
             this.showSuccess('ดาวน์โหลดข้อมูลสำเร็จ');
+            this.loading = false;
           }),
             (error: any) => console.log('Error downloading the file'), //when you use stricter type checking
             () => console.info('File downloaded successfully');
+            this.loading = false;
         }
 
         if (data.template_index == 2)
@@ -93,9 +98,11 @@ export class MeetingDownloaddialogComponent implements OnInit {
               filename = data.template_topic + latest_date?.toString() + ".xlsx";
               this.FileSaverService.save(response, filename);
               this.showSuccess('ดาวน์โหลดข้อมูลสำเร็จ');
+              this.loading = false;
             }),
               (error: any) => console.log('Error downloading the file'), //when you use stricter type checking
               () => console.info('File downloaded successfully');
+              this.loading = false;
           }
     
         if (data.template_index == 3)
@@ -107,9 +114,11 @@ export class MeetingDownloaddialogComponent implements OnInit {
             filename = data.template_topic + latest_date?.toString() + ".xlsx";
             this.FileSaverService.save(response, filename);
             this.showSuccess('ดาวน์โหลดข้อมูลสำเร็จ');
+            this.loading = false;
           }),
             (error: any) => console.log('Error downloading the file'), //when you use stricter type checking
             () => console.info('File downloaded successfully');
+            this.loading = false;
         }
 
     }

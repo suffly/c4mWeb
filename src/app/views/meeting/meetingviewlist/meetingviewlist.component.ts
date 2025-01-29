@@ -27,6 +27,8 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
     public dialogService: MatDialog, 
     private router: Router,
     ) {}
+  
+  loading = false;
 
   Meetingrow : number;
   MeetingviewModel : Meetingview[];
@@ -57,16 +59,17 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
   }
 
   async loadData(){ 
+    this.loading = true;
     var Meetview = new Meetingview();
     const subscription = (this.MeetingviewService.Getmeetingview_All(Meetview)).subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.MeetingviewModel = data;
-
-      //console.log(this.MeetingviewModel);
+      this.loading = false;
     });
     this.subscriptions.push();
+    
   }
 
   applyFilter(event: Event) {

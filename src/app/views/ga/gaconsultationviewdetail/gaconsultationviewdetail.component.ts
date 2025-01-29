@@ -44,8 +44,12 @@ export class GaconsultationviewdetailComponent implements OnInit, OnDestroy {
   Gaconsultationrow: number;
   Gaconsulationminitryrow: number;
   GaconsulationviewModel: Gaconsulationview[];
+  ConsulationministryviewModel: Consulationministryview[];
+  ConsulationprovinceviewModel: Consulationprovinceview[];
+  AttachModel: Attach[];
   dataSource = new MatTableDataSource<Gaconsulationview>();
-  displayedColumns: string[] = ['meeting_id', 'consulationdetail_topic', 'consulationdetail_detail', 'meeting_date', 'meetingset_desc', 'meeting_year', 'meeting_time', 'meetingterm_name', 'actions'];
+  //displayedColumns: string[] = ['meeting_id', 'consulationdetail_topic', 'consulationdetail_detail', 'meeting_date', 'meetingset_desc', 'meeting_year', 'meeting_time', 'meetingterm_name', 'actions'];
+  displayedColumns: string[] = ['meeting_id', 'consulationdetail_detail', 'meeting_date', 'counselor_fullname', 'status_name'];
   pageSize: number = 10;
   pageSizeOptions = [10, 20, 30, 40, 50, 100];
   index: number;
@@ -89,7 +93,7 @@ export class GaconsultationviewdetailComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
-  loading: boolean = true;
+  loading: boolean = false;
   currentUser: Userprofile;
   private readonly CURRENT_USER = 'currentUser';
 
@@ -114,6 +118,7 @@ export class GaconsultationviewdetailComponent implements OnInit, OnDestroy {
   }
 
   loadGAConsultation() {
+    this.loading = true;
     var Gaconsulationview_input = new Gaconsulationview;
     Gaconsulationview_input.ministry_id = this.currentUser.user_ministry;
     Gaconsulationview_input.consulationdetail_id = this.Gaconsultationrow;
@@ -121,39 +126,49 @@ export class GaconsultationviewdetailComponent implements OnInit, OnDestroy {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.GaconsulationviewModel = data;
+      this.loading = false;
       //console.log(data);
     });
     this.subscriptions.push();
   }
 
   loadMinistry() {
+    this.loading = true;
     var Consulationministryview_input = new Consulationministryview();
     Consulationministryview_input.ministry_id = this.currentUser.user_ministry;
     Consulationministryview_input.consulationdetail_id = this.Gaconsultationrow;
     const subscribe = (this.ConsulationministryviewService.Getconsulationministryview_byMinistry(Consulationministryview_input)).subscribe(data => {
       this.dataSourceCSLM.data = data;
       this.dataSourceCSLM.paginator = this.paginatorCSLM;
+      this.ConsulationministryviewModel = data;
+      this.loading = false;
       //console.log(data);
     });
     this.subscriptions.push();
   }
 
   loadProvince() {
+    this.loading = true;
     var Consulationprovinceview_input = new Consulationprovinceview();
     Consulationprovinceview_input.consulationdetail_id = this.Gaconsultationrow;
     const subscribe = (this.ConsulationprovinceviewService.Getconsulationprovinceview_byDetail(Consulationprovinceview_input)).subscribe(data => {
       this.dataSourceCSLP.data = data;
       this.dataSourceCSLP.paginator = this.paginatorCSLP;
+      this.ConsulationprovinceviewModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }
 
   loadAttach() {
+    this.loading = true;
     var Attach_input = new Attach();
     Attach_input.consulationdetail_id = this.Gaconsultationrow;
     const subscribe = (this.AttachService.GetAttach_byConsulationdetail(Attach_input)).subscribe(data => {
       this.dataSourceAttach.data = data;
       this.dataSourceAttach.paginator = this.paginatorAttach;
+      this.AttachModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }

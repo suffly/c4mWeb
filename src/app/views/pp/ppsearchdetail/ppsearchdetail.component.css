@@ -39,8 +39,8 @@ mat-toolbar {
 .mat-column-consulationdetail_detail {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 70% !important;
-    width: 70% !important;
+    flex: 0 0 50% !important;
+    width: 50% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
@@ -86,6 +86,20 @@ mat-toolbar {
     white-space: unset !important;
     flex: 0 0 15% !important;
     width: 15% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.mat-column-status_name {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 18% !important;
+    width: 18% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;

@@ -40,6 +40,8 @@ export class ResponselistComponent implements OnInit, OnDestroy {
     private router: Router,
     private cd: ChangeDetectorRef,
     ) {}
+  
+  loading = false;
 
   Meetingrow: number;
   Counselorrow: number;
@@ -72,6 +74,7 @@ export class ResponselistComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
+    this.loading = true;
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     this.Consulationrow = JSON.parse(localStorage.getItem('consulationview')||'{}');
@@ -87,6 +90,7 @@ export class ResponselistComponent implements OnInit, OnDestroy {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.ResponseModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }

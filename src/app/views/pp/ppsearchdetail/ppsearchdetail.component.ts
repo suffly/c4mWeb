@@ -35,11 +35,18 @@ export class PpsearchdetailComponent implements OnInit, OnDestroy {
     public datepipe: DatePipe,
     ) { }
 
+    loading = false;
+
     Ppsearchrow: number;
     Ppsearchdetailrow: number;
 
+    CSLDModel: Ppsearchview[];
+    CSLMModel: Consulationministryview[];
+    CSLPModel: Consulationprovinceview[];
+    AtchModel: Attach[];
+
     dataSource = new MatTableDataSource<Ppsearchview>();
-    displayedColumns: string[] = ['meeting_id', 'consulationdetail_detail', 'counselor_fullname', 'meeting_date'];
+    displayedColumns: string[] = ['meeting_id', 'consulationdetail_detail', 'counselor_fullname', 'meeting_date', 'status_name'];
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
     @ViewChild('filter', { static: true }) filter: ElementRef;
@@ -100,41 +107,53 @@ export class PpsearchdetailComponent implements OnInit, OnDestroy {
     }
 
     loadConsulation() {
+      this.loading = true;
       var Ppsearch_input = new Ppsearchview;
       Ppsearch_input.consulationdetail_id = this.Ppsearchrow;
       const subscribe = (this.PpsearchviewService.Getppsearch_byID(Ppsearch_input)).subscribe(data => {
         this.dataSource.data = data;
         this.dataSource.paginator = this.paginator;
+        this.CSLDModel = data;
+        this.loading = false;
       });
       this.subscriptions.push();
     }
 
     loadMinistry() {
+      this.loading = true;
       var Consulationministryview_input = new Consulationministryview();
       Consulationministryview_input.consulationdetail_id = this.Ppsearchrow;
       const subscribe = (this.ConsulationministryviewService.Getconsulationministryview_byDetail(Consulationministryview_input)).subscribe(data => {
         this.dataSourceCSLM.data = data;
         this.dataSourceCSLM.paginator = this.paginatorCSLM;
+        this.CSLMModel = data;
+        this.loading = false;
       });
       this.subscriptions.push();
     }
 
     loadProvince() {
+      this.loading = true;
       var Consulationprovinceview_input = new Consulationprovinceview();
       Consulationprovinceview_input.consulationdetail_id = this.Ppsearchrow;
       const subscribe = (this.ConsulationprovinceviewService.Getconsulationprovinceview_byDetail(Consulationprovinceview_input)).subscribe(data => {
         this.dataSourceCSLP.data = data;
         this.dataSourceCSLP.paginator = this.paginatorCSLP;
+        this.CSLPModel = data;
+        this.loading = false;
       });
       this.subscriptions.push();
     }
   
     loadAttach() {
+      this.loading = true;
       var Attach_input = new Attach();
       Attach_input.consulationdetail_id = this.Ppsearchrow;
       const subscribe = (this.AttachService.GetAttach_byConsulationdetail(Attach_input)).subscribe(data => {
         this.dataSourceAttach.data = data;
         this.dataSourceAttach.paginator = this.paginatorAttach;
+        this.AtchModel = data;
+        this.loading = false;
       });
       this.subscriptions.push();
     }

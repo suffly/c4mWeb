@@ -30,8 +30,13 @@ export class MpresponseviewdetailComponent implements OnInit, OnDestroy {
     public datepipe: DatePipe,
   ) {}
 
+  loading = false;
+
   Mpconsulationministryrow: number;
   Mpresponserow: number;
+
+  RESPModel: Response[];
+  ATCRModel: Attachres[];
   
   dataSourceResponse = new MatTableDataSource<Response>();
   displayedColumnsResponse: string[] = ['meeting_id', 'response_topic', 'create_date', 'create_title', 'create_name', 'create_surname', 'actions'];
@@ -80,23 +85,27 @@ export class MpresponseviewdetailComponent implements OnInit, OnDestroy {
   }
 
   loadResponse() {
+    this.loading = true;
     var Response_input = new Response();
     Response_input.response_id = this.Mpresponserow;
     const subscribe = (this.ResponseService.GetResponse_byid(Response_input)).subscribe(data => {
       this.dataSourceResponse.data = data;
       this.dataSourceResponse.paginator = this.paginatorResponse;
-      this.ResponseModel = data;
+      this.RESPModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }
 
   loadAttachres() {
+    this.loading = true;
     var Attachres_input = new Attachres();
     Attachres_input.response_id = this.Mpresponserow;
     const subscribe = (this.AttachresService.GetAttachres_byResponse(Attachres_input)).subscribe(data => {
       this.dataSourceAttachres.data = data;
       this.dataSourceAttachres.paginator = this.paginatorAttachres;
-      this.AttachresModel = data;
+      this.ATCRModel = data;
+      this.loading = false;
     })
     this.subscriptions.push();
   }

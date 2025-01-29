@@ -27,6 +27,8 @@ export class GaresponseviewlistComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     ) {}
 
+  loading = false;
+
   Responserow: number;
   Consulationministryrow: number;                                                                                       
   ResponseModel: Response;
@@ -55,6 +57,7 @@ export class GaresponseviewlistComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
+    this.loading = true;
     this.Consulationministryrow = JSON.parse(localStorage.getItem('consulationminitryview')||'{}');
     var Responseview_input = new Response();
     Responseview_input.consulationministry_id = this.Consulationministryrow;
@@ -64,6 +67,7 @@ export class GaresponseviewlistComponent implements OnInit, OnDestroy {
       this.ResponseModel = data;
     });
     this.subscriptions.push();
+    this.loading = false;
   }
 
   async openAddDialog(){

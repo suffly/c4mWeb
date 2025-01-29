@@ -42,9 +42,14 @@ export class MpconsultationviewdetailComponent implements OnInit, OnDestroy {
 
   Mpconsultationrow: number;
   Mpconsulationministryrow: number;
+  CSLDModel: Mpconsulationview[];
+  CSLMModel: Consulationministryview[];
+  CSLPModel: Consulationprovinceview[];
+  AtchModel: Attach[];
 
   dataSource = new MatTableDataSource<Mpconsulationview>();
-  displayedColumns: string[] = ['meeting_id', 'consulationdetail_topic', 'consulationdetail_detail', 'meeting_date', 'meetingset_desc', 'meeting_year', 'meeting_time', 'meetingterm_name', 'actions'];
+  //displayedColumns: string[] = ['meeting_id', 'consulationdetail_topic', 'consulationdetail_detail', 'meeting_date', 'meetingset_desc', 'meeting_year', 'meeting_time', 'meetingterm_name', 'actions'];
+  displayedColumns: string[] = ['meeting_id', 'consulationdetail_detail', 'meeting_date', 'meetingset_desc', 'meeting_year', 'meeting_time', 'meetingterm_name', 'status_name'];
   pageSize: number = 10;
   pageSizeOptions = [10, 20, 30, 40, 50, 100];
   index: number;
@@ -53,6 +58,7 @@ export class MpconsultationviewdetailComponent implements OnInit, OnDestroy {
 
   dataSourceCSLM = new MatTableDataSource<Consulationministryview>();
   displayedColumnsCSLM: string[] = ['meeting_id', 'ministry_name', 'status_name', 'actions'];
+  //displayedColumnsCSLM: string[] = ['meeting_id', 'ministry_name', 'status_name', 'status_id', 'actions'];
   @ViewChild('MatPaginatorCSLM') paginatorCSLM: MatPaginator;
   @ViewChild('MatSortCSLM', { static: true }) sortCSLM: MatSort;
   @ViewChild('filterCSLM', { static: true }) filterCSLM: ElementRef;
@@ -88,7 +94,7 @@ export class MpconsultationviewdetailComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
-  loading: boolean = true;
+  loading: boolean = false;
   currentUser: Userprofile;
   private readonly CURRENT_USER = 'currentUser';
 
@@ -103,50 +109,61 @@ export class MpconsultationviewdetailComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
-    this.loading = true;
     this.Mpconsultationrow = JSON.parse(localStorage.getItem('mpconsultation')||'{}');
     this.loadMPConsultation();
     this.loadMinistry();
     this.loadProvince();
     this.loadAttach();
-    this.loading = false;
   }
 
   loadMPConsultation() {
+    this.loading = true;
     var Mpconsultation_input = new Mpconsulationview();
     Mpconsultation_input.consulationdetail_id = this.Mpconsultationrow;
     const subscribe = (this.MpconsulationviewService.Getmpconsulation_byid(Mpconsultation_input)).subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
+      this.CSLDModel = data;
+      this.loading = false;
     });
+    this.subscriptions.push();
   }
 
   loadMinistry() {
+    this.loading = true;
     var Consulationministryview_input = new Consulationministryview();
     Consulationministryview_input.consulationdetail_id = this.Mpconsultationrow;
     const subscribe = (this.ConsulationministryviewService.Getconsulationministryview_byDetail(Consulationministryview_input)).subscribe(data => {
       this.dataSourceCSLM.data = data;
       this.dataSourceCSLM.paginator = this.paginatorCSLM;
+      this.CSLMModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }
 
   loadProvince() {
+    this.loading = true;
     var Consulationprovinceview_input = new Consulationprovinceview();
     Consulationprovinceview_input.consulationdetail_id = this.Mpconsultationrow;
     const subscribe = (this.ConsulationprovinceviewService.Getconsulationprovinceview_byDetail(Consulationprovinceview_input)).subscribe(data => {
       this.dataSourceCSLP.data = data;
       this.dataSourceCSLP.paginator = this.paginatorCSLP;
+      this.CSLPModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }
 
   loadAttach() {
+    this.loading = true;
     var Attach_input = new Attach();
     Attach_input.consulationdetail_id = this.Mpconsultationrow;
     const subscribe = (this.AttachService.GetAttach_byConsulationdetail(Attach_input)).subscribe(data => {
       this.dataSourceAttach.data = data;
       this.dataSourceAttach.paginator = this.paginatorAttach;
+      this.AtchModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }

@@ -57,8 +57,10 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private _FileSaverService: FileSaverService,
     public datepipe: DatePipe,
-    ) {}
+  ) {}
 
+  loading = false;
+  
   Meetingrow : number;
   Counselorrow: number;
   Consulationrow: number;
@@ -152,45 +154,53 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
   }
 
   loadConsulation() {
+    this.loading = true;
     var Consulationdetailview_input = new Consulationdetailview();
     Consulationdetailview_input.consulationdetail_id = this.Consulationrow;
     const subscribe = (this.ConsulationdetailviewService.GetConsulationdetail_byDetail(Consulationdetailview_input)).subscribe(data => {
       this.dataSourceCSLD.data = data;
       //this.dataSourceCSLD.paginator = this.paginatorCSLD;
       this.ConsulationdetailviewModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }
 
   loadMinistry() {
+    this.loading = true;
     var Consulationministryview_input = new Consulationministryview();
     Consulationministryview_input.consulationdetail_id = this.Consulationrow;
     const subscribe = (this.ConsulationministryviewService.Getconsulationministryview_byDetail(Consulationministryview_input)).subscribe(data => {
       this.dataSourceCSLM.data = data;
       this.dataSourceCSLM.paginator = this.paginatorCSLM;
       this.ConsulationministryviewModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }
 
   loadProvince() {
+    this.loading = true;
     var Consulationprovinceview_input = new Consulationprovinceview();
     Consulationprovinceview_input.consulationdetail_id = this.Consulationrow;
     const subscribe = (this.ConsulationprovinceviewService.Getconsulationprovinceview_byDetail(Consulationprovinceview_input)).subscribe(data => {
       this.dataSourceCSLP.data = data;
       this.dataSourceCSLP.paginator = this.paginatorCSLP;
       this.ConsulationprovinceviewModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }
 
   loadAttach() {
+    this.loading = true;
     var Attach_input = new Attach();
     Attach_input.consulationdetail_id = this.Consulationrow;
     const subscribe = (this.AttachService.GetAttach_byConsulationdetail(Attach_input)).subscribe(data => {
       this.dataSourceAttach.data = data;
       this.dataSourceAttach.paginator = this.paginatorAttach;
       this.AttachModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }

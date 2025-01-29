@@ -10,6 +10,9 @@ import { Subject } from 'rxjs';
 import { Userprofile } from '@app/models/userprofile';
 import { MpconsulationviewService } from '@app/services/mpconsulationview.service';
 import { Mpconsulationview } from '@app/models/mpconsulationview';
+import { CounselorviewService } from '@app/services/counselorview.service';
+import { Counselorview } from '@app/models/counselorview';
+
 
 
 @Component({
@@ -20,14 +23,18 @@ import { Mpconsulationview } from '@app/models/mpconsulationview';
 export class MpconsultationviewlistComponent implements OnInit, OnDestroy {
 
   constructor(
+    public CounselorviewService: CounselorviewService,
     public MpconsulationviewService: MpconsulationviewService,
     private router: Router,
   ) {}
 
   Mpconsultationrow: number;
   MpconsultationModel: Mpconsulationview[];
+  CounselorviewModel: Counselorview;
   dataSource = new MatTableDataSource<Mpconsulationview>();
-  displayedColumns: string[] = ['index', 'consulationdetail_topic', 'consulationdetail_detail', 'meeting_date', 'meetingset_desc', 'meeting_year', 'meeting_time', 'meetingterm_name', 'actions'];
+  // displayedColumns: string[] = ['index', 'consulationdetail_topic', 'consulationdetail_detail', 'meeting_date', 'meetingset_desc', 'meeting_year', 'meeting_time', 'meetingterm_name', 'actions'];
+  //displayedColumns: string[] = ['index', 'consulationdetail_topic', 'meeting_date', 'meetingset_desc', 'meeting_year', 'meeting_time', 'meetingterm_name', 'actions'];
+  displayedColumns: string[] = ['index', 'consulationdetail_topic', 'meeting_date', 'status_name', 'actions'];
   pageSize: number = 10;
   pageSizeOptions = [10, 20, 30, 40, 50, 100];
   index: number;
@@ -40,7 +47,7 @@ export class MpconsultationviewlistComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
-  loading: boolean = true;
+  loading: boolean = false;
   currentUser: Userprofile;
   private readonly CURRENT_USER = 'currentUser';
 
@@ -55,17 +62,25 @@ export class MpconsultationviewlistComponent implements OnInit, OnDestroy {
   }
 
   loadData(): void {
-    //this.loading = true;
+    this.loading = true;
     this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER) || '{}');
+
+    var Counselorview_input = new Counselorview;
+    Counselorview_input.counselor_id = this.currentUser.user_member;
+    this.CounselorviewService.Getcounselorview_byID(Counselorview_input).subscribe(data => {
+      this.CounselorviewModel = data;
+    });
+
     var Mpconsultation_input = new Mpconsulationview;
     Mpconsultation_input.counselor_id = this.currentUser.user_member;
     const subscribe = (this.MpconsulationviewService.Getmpconsulation_bymp(Mpconsultation_input)).subscribe(data => {
       this.dataSource.data = data;
+      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.MpconsultationModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
-    //this.loading = false;
   }
 
   viewDetail(i:number, data: Mpconsulationview) {

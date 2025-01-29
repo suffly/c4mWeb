@@ -14,19 +14,6 @@
 .mat-column-consulationdetail_topic {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 10% !important;
-  width: 10% !important;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-.mat-column-consulationdetail_detail {
-  word-wrap: break-word !important;
-  white-space: unset !important;
   flex: 0 0 40% !important;
   width: 40% !important;
   overflow-wrap: break-word;
@@ -37,6 +24,19 @@
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+/* .mat-column-consulationdetail_detail {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 30% !important;
+  width: 30% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+} */
 .mat-column-meeting_date {
   word-wrap: break-word !important;
   white-space: unset !important;
@@ -50,11 +50,11 @@
   -webkit-hyphens: auto;
   hyphens: auto;
 }
-.mat-column-meeting_date {
+.mat-column-counselor_fullname {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 10% !important;
-  width: 10% !important;
+  flex: 0 0 18% !important;
+  width: 18% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
@@ -63,37 +63,11 @@
   -webkit-hyphens: auto;
   hyphens: auto;
 }
-.mat-column-meeting_date {
+.mat-column-status_name {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 10% !important;
-  width: 10% !important;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-.mat-column-meeting_date {
-  word-wrap: break-word !important;
-  white-space: unset !important;
-  flex: 0 0 10% !important;
-  width: 10% !important;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-.mat-column-meeting_date {
-  word-wrap: break-word !important;
-  white-space: unset !important;
-  flex: 0 0 10% !important;
-  width: 10% !important;
+  flex: 0 0 18% !important;
+  width: 18% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;

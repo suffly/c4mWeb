@@ -43,6 +43,8 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
     public datepipe: DatePipe,
   ) {}
 
+  loading = false;
+
   Meetingrow : number;
   Counselorrow: number;
   Consulationrow: number;
@@ -102,23 +104,27 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
   }
 
   loadResponse() {
+    this.loading = true;
     var Response_input = new Response();
     Response_input.response_id = this.Responserow;
     const subscribe = (this.ResponseService.GetResponse_byid(Response_input)).subscribe(data => {
       this.dataSourceResponse.data = data;
       this.dataSourceResponse.paginator = this.paginatorResponse;
       this.ResponseModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
   }
 
   loadAttachres() {
+    this.loading = true;
     var Attachres_input = new Attachres();
     Attachres_input.response_id = this.Responserow;
     const subscribe = (this.AttachresService.GetAttachres_byResponse(Attachres_input)).subscribe(data => {
       this.dataSourceAttachres.data = data;
       this.dataSourceAttachres.paginator = this.paginatorAttachres;
       this.AttachresModel = data;
+      this.loading = true;
     })
     this.subscriptions.push();
   }

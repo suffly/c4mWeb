@@ -25,12 +25,15 @@ export class PpsearchComponent implements OnInit, OnDestroy {
     private router: Router,
     ) { }
 
+    loading = false;
+
     Ppsearchrow: number;
     PpsearchModel: Ppsearchview;
     dataSource = new MatTableDataSource<Ppsearchview>();
+    //displayedColumns: string[] = ['index', 'consulationdetail_topic', 'counselor_fullname', 'meeting_date', 'actions'];
     displayedColumns: string[] = ['index', 'consulationdetail_topic', 'counselor_fullname', 'meeting_date', 'actions'];
     pageSize: number = 10;
-    pageSizeOptions = [10, 20, 30, 40, 50];
+    pageSizeOptions = [10, 25, 50, 100, 200];
     index: number;
     id: number;
 
@@ -51,14 +54,17 @@ export class PpsearchComponent implements OnInit, OnDestroy {
     }
 
     loadData() {
+      this.loading = true;
       var Ppsearch_input = new Ppsearchview;
       const subscribe = (this.PpsearchviewService.Getppsearch_all(Ppsearch_input)).subscribe(data => {
         this.dataSource.data = data;
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.PpsearchModel = data;
+        this.loading = false;
       });
       this.subscriptions.push();
+      
     }
 
     viewDetail(i: number, data: Ppsearchview) {

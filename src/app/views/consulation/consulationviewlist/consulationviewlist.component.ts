@@ -32,6 +32,8 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
     private router: Router,
     ) {}
 
+  loading = false;
+  
   Meetingrow : number;
   Counselorrow: number;
   Consulationrow: number;
@@ -66,6 +68,7 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
   }
 
   async loadData() {
+    this.loading = true;
     this.Meetingrow = JSON.parse(localStorage.getItem('meetingview')||'{}');
     this.Counselorrow = JSON.parse(localStorage.getItem('counselorview')||'{}');
     //console.log("LoadConsulation, MeetingID : "+this.Meetingrow+" CounselorID : "+this.Counselorrow);
@@ -85,6 +88,7 @@ export class ConsulationviewlistComponent implements OnInit, OnDestroy {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.ConsulationdetailviewModel = data;
+      this.loading = false;
     });
 
     this.subscriptions.push();

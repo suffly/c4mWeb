@@ -32,6 +32,8 @@ export class GaresponseviewdetailComponent implements OnInit, OnDestroy {
     public datepipe: DatePipe,
   ) {}
 
+  loading = false;
+
   Responserow: number;
 
   dataSourceResponse = new MatTableDataSource<Response>();
@@ -74,9 +76,11 @@ export class GaresponseviewdetailComponent implements OnInit, OnDestroy {
   }
 
   loadData(){
+    this.loading = true;
     this.Responserow = JSON.parse(localStorage.getItem('response')||'{}');
     this.loadResponse();
     this.loadAttachres();
+    this.loading = false;
   }
 
   loadResponse(){

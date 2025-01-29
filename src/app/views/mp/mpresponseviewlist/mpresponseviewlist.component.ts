@@ -23,6 +23,8 @@ export class MpresponseviewlistComponent implements OnInit, OnDestroy {
     private router: Router,
     ) {}
 
+  loading = false;
+
   Mpconsulationministryrow: number;
   Mpresponserow: number;
   ResponseModel: Response;
@@ -51,6 +53,7 @@ export class MpresponseviewlistComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
+    this.loading = true;
     this.Mpconsulationministryrow = JSON.parse(localStorage.getItem('mpconsulationminitryview')||'{}');
     var Responseview_input = new Response();
     Responseview_input.consulationministry_id = this.Mpconsulationministryrow;
@@ -58,8 +61,10 @@ export class MpresponseviewlistComponent implements OnInit, OnDestroy {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.ResponseModel = data;
+      this.loading = false;
     });
     this.subscriptions.push();
+    
   }
 
   viewDetail(i:number, data: Response) {
