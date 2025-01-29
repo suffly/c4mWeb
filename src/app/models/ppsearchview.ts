@@ -11,4 +11,5 @@ export class Ppsearchview {
     // counselor_surname:string;
     counselor_fullname:string;
     meeting_date:Date;
+    status_name:string;
 }
