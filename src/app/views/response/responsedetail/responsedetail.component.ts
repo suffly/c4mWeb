@@ -124,7 +124,7 @@ export class ResponsedetailComponent implements OnInit, OnDestroy {
       this.dataSourceAttachres.data = data;
       this.dataSourceAttachres.paginator = this.paginatorAttachres;
       this.AttachresModel = data;
-      this.loading = true;
+      this.loading = false;
     })
     this.subscriptions.push();
   }
