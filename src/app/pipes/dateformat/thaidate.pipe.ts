@@ -59,7 +59,7 @@ export class ThaidatePipe implements PipeTransform {
       returnDate = outputDateShort.join(" ");
     }
     if (format == 'dd/mm/yyyy') {
-      if (date == (undefined || null)) {
+      if (date == undefined || date == null) {
         return '';
       }
       returnDate = outputThaiDateFormatDDMMYYYY.join("/");
