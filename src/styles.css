@@ -314,7 +314,24 @@ body .push-right {
     padding: 2px 5px 2px 5px;
 }
 
+.red-icon {
+    color: red !important;
+    fill: red !important;
+}
 
+.green-icon {
+    color: green !important;
+    fill: green !important;
+}
+
+.blue-icon {
+    color: blue !important;
+    fill: blue !important;
+}
+.orange-icon {
+    color: orange !important;
+    fill: orange !important;
+}
 
 /* เมนู ยืนยันความเป็นอิสระ -> รายงานการยืนยัน */
 @media (max-width:1366px) {
