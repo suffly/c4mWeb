@@ -118,6 +118,10 @@ import { MinistryviewlistComponent } from './views/adm/ministry/ministryviewlist
 import { MinistryInsertdialogComponent } from './views/adm/ministry/ministry-insertdialog/ministry-insertdialog.component';
 import { MemberviewlistComponent } from './views/adm/member/memberviewlist/memberviewlist.component';
 import { CounselorsviewlistComponent } from './views/adm/member/counselorsviewlist/counselorsviewlist.component';
+import { ReportInsertdialogComponent } from './views/pp/report/report-insertdialog/report-insertdialog.component';
+import { ReportDeletedialogComponent } from './views/pp/report/report-deletedialog/report-deletedialog.component';
+import { ReportDownloaddialogComponent } from './views/pp/report/report-downloaddialog/report-downloaddialog.component';
+import { ReportviewlistComponent } from './views/pp/report/reportviewlist/reportviewlist.component';
 
 
 export class AppDateAdapter extends NativeDateAdapter {
@@ -221,6 +225,10 @@ export const APP_DATE_FORMATS = {
     MinistryInsertdialogComponent,
     MemberviewlistComponent,
     CounselorsviewlistComponent,
+    ReportInsertdialogComponent,
+    ReportDeletedialogComponent,
+    ReportDownloaddialogComponent,
+    ReportviewlistComponent,
 
 
   ],

@@ -111,6 +111,10 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
   id: number;
   date: Date;
 
+  headMeeting: string = "";
+  MeetingDate: Date;
+  headCounselor: string = "";
+
   subscriptions = [];
   private ngUnsubscribe = new Subject<void>();
 
@@ -141,11 +145,27 @@ export class ConsulationviewdetailComponent implements OnInit, OnDestroy {
 
     var Meetingview_input = new Meetingview();
     Meetingview_input.meeting_id = this.Meetingrow;
-    this.MeetingviewService.Getmeetingview_byID(Meetingview_input).subscribe(data => {this.MeetingModel = data});
+    this.MeetingviewService.Getmeetingview_byID(Meetingview_input).subscribe(data => {
+      this.MeetingModel = data
+      this.headMeeting =  "    การ" + data.meetingtype_name + 
+      "    ชุดที่ " + data.meetingset_desc + 
+      "    ปีที่ " + data.meeting_year + 
+      "    ครั้งที่ " + data.meeting_time + 
+      "    ( " + data.meetingterm_name +" )";
+      this.MeetingDate = data.meeting_date;
+    });
 
     var Consulationview_input = new Consulationview();
     Consulationview_input.consulation_id = this.Counselorrow;
-    this.ConsulationviewService.Getconsulationview_byID(Consulationview_input).subscribe(data => {this.ConsulationviewModel = data});
+    this.ConsulationviewService.Getconsulationview_byID(Consulationview_input).subscribe(data => {
+      this.ConsulationviewModel = data
+      this.headCounselor = "    ผู้หารือ " + data.counselor_title + data.counselor_name +
+                           " " + data.counselor_middlename +
+                           " " + data.counselor_surname +
+                           "    สมาชิกสภาผู้แทนราษฎร" + data.counselortype_name + 
+                           " " + data.partylist_name;
+    });
+
     this.checkStatusConsulationDetail();
     this.loadConsulation();
     this.loadMinistry();

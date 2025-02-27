@@ -37,8 +37,10 @@ export class MpconsultationviewlistComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['index', 'consulationdetail_topic', 'meeting_date', 'status_name', 'actions'];
   pageSize: number = 10;
   pageSizeOptions = [10, 20, 30, 40, 50, 100];
+  currentPage = 0;
   index: number;
   id: number;
+  headCounselor: string = "";
 
   subscriptions = [];
   private ngUnsubscribe = new Subject<void>();
@@ -53,6 +55,7 @@ export class MpconsultationviewlistComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     localStorage.removeItem("mpconsultation");
+    this.currentPage = JSON.parse(localStorage.getItem('mpconsultpage')||'{}')
     this.loadData();
   }
 
@@ -69,6 +72,9 @@ export class MpconsultationviewlistComponent implements OnInit, OnDestroy {
     Counselorview_input.counselor_id = this.currentUser.user_member;
     this.CounselorviewService.Getcounselorview_byID(Counselorview_input).subscribe(data => {
       this.CounselorviewModel = data;
+      this.headCounselor =  "ข้อปรึกษาหารือของสมาชิกสภาผู้แทนราษฎร " + 
+                            data.counselor_title + data.counselor_name + " " + data.counselor_middlename + " " + data.counselor_surname + " " + 
+                            data.partylist_name;
     });
 
     var Mpconsultation_input = new Mpconsulationview;
@@ -81,6 +87,11 @@ export class MpconsultationviewlistComponent implements OnInit, OnDestroy {
       this.loading = false;
     });
     this.subscriptions.push();
+  }
+
+  onPaginateChange(event: any){
+    console.log(event)
+    localStorage.setItem('mpconsultpage', JSON.stringify(event.pageIndex));
   }
 
   viewDetail(i:number, data: Mpconsulationview) {

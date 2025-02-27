@@ -3,18 +3,19 @@
     <button mat-icon-button  (click)="backClicked()" >
       <mat-icon>arrow_back_ios</mat-icon>
     </button>
-    <label for="">ผู้หารือ </label>
+    <label for=""> ผู้หารือ </label>
 </div>
 
 <div class="card-body assert-row">
-    <div class="row">
-        <!-- ผู้ปรึกษาหารือในที่{{MeetingModel.meetingtype_name}} &nbsp; -->
-        &nbsp;&nbsp;การ{{MeetingModel.meetingtype_name}} &nbsp;&nbsp;
+    <div class="assert-row" >
+        <span [innerHtml]="headMeeting">  </span>
+        <span > วันที่ {{MeetingDate.toString()|thaidate:'medium'}}</span>
+        <!-- &nbsp;&nbsp;การ{{MeetingModel.meetingtype_name}} &nbsp;&nbsp;
         ชุดที่ {{MeetingModel.meetingset_desc}} &nbsp;&nbsp;
         ปีที่ {{MeetingModel.meeting_year}} &nbsp;&nbsp;
         ครั้งที่ {{MeetingModel.meeting_time}} &nbsp;&nbsp;
         ( {{MeetingModel.meetingterm_name}} ) &nbsp;&nbsp;
-        วันที่ {{MeetingModel.meeting_date.toString()|thaidate:'medium'}}
+        วันที่ {{MeetingModel.meeting_date.toString()|thaidate:'medium'}} -->
     </div>
 </div>
 
@@ -94,6 +95,6 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator #paginator [pageSize]="this.pageSize" [pageSizeOptions]="this.pageSizeOptions" showFirstLastButtons></mat-paginator>
+        <mat-paginator #paginator [pageSize]="this.pageSize" [pageSizeOptions]="this.pageSizeOptions" showFirstLastButtons [pageIndex]="currentPage" (page)="onPaginateChange($event)"></mat-paginator>
     </div>
 </div>

@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 import { MeetingviewService } from '@app/services/meetingview.service';
 import { Meetingview } from 'src/app/models/meetingview';
@@ -14,6 +15,7 @@ import { Consulationview } from '@app/models/consulationview';
 
 import { CounselorInsertdialogComponent } from '../counselor-insertdialog/counselor-insertdialog.component';
 import { CounselorDeletedialogComponent } from '../counselor-deletedialog/counselor-deletedialog.component';
+
 
 
 @Component({
@@ -28,6 +30,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
     public MeetingviewService: MeetingviewService,
     public dialogService: MatDialog, 
     private router: Router,
+    private DatePipe: DatePipe,
     ) {}
   
   loading = false;
@@ -38,8 +41,11 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['index', 'counselor_title', 'counselor_name', 'counselor_middlename', 'counselor_surname', 'counselortype_name', 'partylist_name', 'counselordivision_name', 'count_consulationdetail', 'actions'];
   pageSize: number = 10;
   pageSizeOptions = [10, 20, 30];
+  currentPage = 0;
   index: number;
   id: number;
+  headMeeting: string = "";
+  MeetingDate: Date;
 
   subscriptions = [];
   private ngUnsubscribe = new Subject<void>();
@@ -53,6 +59,7 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void{
     localStorage.removeItem("counselorview");
+    this.currentPage = JSON.parse(localStorage.getItem('counselorpage')||'{}')
     this.loadData();
 
   }
@@ -68,7 +75,16 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
     //console.log("LoadCouselor, MeetingID : "+ this.Meetingrow);
     var Meetingview_input = new Meetingview();
     Meetingview_input.meeting_id = this.Meetingrow;
-    this.MeetingviewService.Getmeetingview_byID(Meetingview_input).subscribe(data => {this.MeetingModel = data});
+    this.MeetingviewService.Getmeetingview_byID(Meetingview_input).subscribe(data => {
+      this.MeetingModel = data
+      this.headMeeting =  "    การ" + data.meetingtype_name + 
+                          "    ชุดที่ " + data.meetingset_desc + 
+                          "    ปีที่ " + data.meeting_year + 
+                          "    ครั้งที่ " + data.meeting_time + 
+                          "    ( " + data.meetingterm_name +" )";
+      this.MeetingDate = data.meeting_date;
+    });
+    
     var Consulationview_input = new Consulationview();
     Consulationview_input.meeting_id = this.Meetingrow
     const subscribe = (this.ConsulationviewService.Getconsulationview_byMeeting(Consulationview_input)).subscribe(data => {
@@ -79,6 +95,11 @@ export class CounselorviewlistComponent implements OnInit, OnDestroy {
       this.loading = false;
     });
     this.subscriptions.push();
+  }
+
+  onPaginateChange(event: any){
+    console.log(event)
+    localStorage.setItem('counselorpage', JSON.stringify(event.pageIndex));
   }
 
   applyFilter(event: Event) {

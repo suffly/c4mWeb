@@ -7,19 +7,20 @@
 </div>
 
 <div class="card-body assert-row">
-    <div class="row">
-        <!-- ผู้ปรึกษาหารือในที่{{MeetingModel.meetingtype_name}} &nbsp; -->
-        &nbsp;&nbsp;การ{{MeetingModel.meetingtype_name}} &nbsp;&nbsp;
+    <div class="assert-row">
+        <span [innerHtml]="headMeeting">  </span>
+        <span > วันที่ {{MeetingDate.toString()|thaidate:'medium'}}</span>
+        <!-- &nbsp;&nbsp;การ{{MeetingModel.meetingtype_name}} &nbsp;&nbsp;
         ชุดที่ {{MeetingModel.meetingset_desc}} &nbsp;&nbsp;
         ปีที่ {{MeetingModel.meeting_year}} &nbsp;&nbsp;
         ครั้งที่ {{MeetingModel.meeting_time}} &nbsp;&nbsp;
         ( {{MeetingModel.meetingterm_name}} ) &nbsp;&nbsp;
-        วันที่ {{MeetingModel.meeting_date.toString()|thaidate:'medium'}}
+        วันที่ {{MeetingModel.meeting_date.toString()|thaidate:'medium'}} -->
     </div>
-    <div class="row">
-        &nbsp;&nbsp;ผู้หารือ {{ConsulationviewModel.counselor_title}}{{ConsulationviewModel.counselor_name}} {{ConsulationviewModel.counselor_middlename}} {{ConsulationviewModel.counselor_surname}} &nbsp;&nbsp;
-        สมาชิกสภาผู้แทนราษฎร{{ConsulationviewModel.counselortype_name}} &nbsp;&nbsp; {{ConsulationviewModel.partylist_name}}
-        
+    <div class="assert-row">
+        <span [innerHtml]="headCounselor">  </span>
+        <!-- &nbsp;&nbsp;ผู้หารือ {{ConsulationviewModel.counselor_title}}{{ConsulationviewModel.counselor_name}} {{ConsulationviewModel.counselor_middlename}} {{ConsulationviewModel.counselor_surname}} &nbsp;&nbsp;
+        สมาชิกสภาผู้แทนราษฎร{{ConsulationviewModel.counselortype_name}} &nbsp;&nbsp; {{ConsulationviewModel.partylist_name}} -->
     </div>
 </div>
 

@@ -39,8 +39,10 @@ export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['index', 'consulationdetail_topic', 'meeting_date', 'counselor_fullname', 'status_name', 'actions'];
   pageSize: number = 10;
   pageSizeOptions = [10, 20, 30, 40, 50, 100];
+  currentPage = 0;
   index: number;
   id: number;
+  headMinistry: string = "";
 
   subscriptions = [];
   private ngUnsubscribe = new Subject<void>();
@@ -57,6 +59,7 @@ export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
     localStorage.removeItem("meetingview");
     localStorage.removeItem("counselorview");
     localStorage.removeItem("consulationview");
+    this.currentPage = JSON.parse(localStorage.getItem('gaconsultpage')||'{}')
     this.loadData();
   }
 
@@ -71,7 +74,10 @@ export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
 
     var Ministry_input = new Ministry;
     Ministry_input.ministry_id = this.currentUser.user_ministry;
-    this.MinistryService.Getministry_byID(Ministry_input).subscribe(data => {this.MinistryModel = data});
+    this.MinistryService.Getministry_byID(Ministry_input).subscribe(data => {
+      this.MinistryModel = data
+      this.headMinistry = "ข้อปรึกษาหารือถึง " + data.ministry_name;
+    });
 
     var Gaconsulationview_input = new Gaconsulationview;
     Gaconsulationview_input.ministry_id = this.currentUser.user_ministry;
@@ -84,6 +90,11 @@ export class GaconsultationviewlistComponent implements OnInit, OnDestroy {
     });
     this.subscriptions.push();
     
+  }
+
+  onPaginateChange(event: any){
+    console.log(event)
+    localStorage.setItem('gaconsultpage', JSON.stringify(event.pageIndex));
   }
 
   viewDetail(i:number, data: Gaconsulationview) {

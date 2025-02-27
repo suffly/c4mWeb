@@ -4,6 +4,7 @@ export class Mpconsulationview {
     meeting_id:number;
     consulationdetail_topic:string;
     consulationdetail_detail:string;
+    status_id:number;
     status_name:string;
     counselor_id:number;
     // counselor_title:string;

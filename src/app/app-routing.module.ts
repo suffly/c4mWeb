@@ -10,6 +10,7 @@ import { ConsulationviewlistComponent } from './views/consulation/consulationvie
 import { ConsulationviewdetailComponent } from './views/consulation/consulationviewdetail/consulationviewdetail.component';
 import { ResponselistComponent } from './views/response/responselist/responselist.component';
 import { ResponsedetailComponent } from './views/response/responsedetail/responsedetail.component';
+import { ReportviewlistComponent } from './views/pp/report/reportviewlist/reportviewlist.component';
 
 import { MpconsultationviewlistComponent } from './views/mp/mpconsultationviewlist/mpconsultationviewlist.component';
 import { MpconsultationviewdetailComponent } from './views/mp/mpconsultationviewdetail/mpconsultationviewdetail.component';
@@ -54,6 +55,7 @@ const routes: Routes = [
   {path: 'consulationdetail', component:ConsulationviewdetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['6','7','8','9']}},
   {path: 'response', component:ResponselistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['6','7','8','9']}},
   {path: 'responsedetail', component:ResponsedetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['6','7','8','9']}},
+  {path: 'summaryreport', component:ReportviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['6','7','8','9']}},
   
   {path: 'mpconsultation', component:MpconsultationviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','10']}},
   {path: 'mpconsultationdetail', component:MpconsultationviewdetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','10']}},
@@ -65,7 +67,7 @@ const routes: Routes = [
   {path: 'garesponse', component:GaresponseviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','11']}},
   {path: 'garesponsedetail', component:GaresponseviewdetailComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','11']}},
 
-  {path: 'approved', component:ApprovedviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9','8','7','6']}},
+  {path: 'approved', component:ApprovedviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['6','7','8','9']}},
 
   {path: 'userlist', component:UserviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9']}},
   {path: 'memberlist', component:MemberviewlistComponent, canActivate: [AuthGuard], data: {allowedRoles: ['9']}},

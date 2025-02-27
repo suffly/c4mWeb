@@ -1,0 +1,87 @@
+<form [formGroup]="frmGrpSummaryReportUpload" #form="ngForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <label for=""> อัปโหลดรายงาน </label>
+                </div>
+                <div class="card-body">
+                    <div class="form-group"><label for="">ชุดที่</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>เลือกชุดที่</mat-label>
+                            <mat-select formControlName="ddlset" placeholder="ชุดที่" 
+                                [(ngModel)]="this.SummaryreportviewModel.meetingset_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.MeetingsetModel" [value]="element.meetingset_id">
+                                    {{element.meetingset_desc}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpSummaryReportUpload.controls.ddlset.hasError('required')">กรุณาระบุชุดที่การประชุม</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">ปีที่</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>เลือกปีที่</mat-label>
+                            <mat-select formControlName="ddlyear" placeholder="ปีที่" 
+                                [(ngModel)]="this.SummaryreportviewModel.meeting_year" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.DDLMeetingYear" [value]="element.value">
+                                    {{element.viewvalue}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpSummaryReportUpload.controls.ddlyear.hasError('required')">กรุณาระบุปีที่การประชุม</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for="">สมัยการประชุม</label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>เลือกสมัยการประชุม</mat-label>
+                            <mat-select formControlName="ddlterm" placeholder="สมัยการประชุม" 
+                                [(ngModel)]="this.SummaryreportviewModel.meetingterm_id" [errorStateMatcher]="matcher">
+                                <mat-option *ngFor="let element of this.MeetingtermModel" [value]="element.meetingterm_id">
+                                    {{element.meetingterm_name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="frmGrpSummaryReportUpload.controls.ddlterm.hasError('required')">กรุณาระบุสมัยการประชุม</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"><label for=""> ชื่อเอกสารแนบ </label></div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill" hintLabel="จำนวนคำ">
+                            <mat-label> ชื่อเอกสารแนบ </mat-label>
+                            <input matInput #summaryreport_name type="text" formControlName="summaryreport_name" placeholder="ชื่อรายงาน"
+                            [(ngModel)]="this.SummaryreportviewModel.summaryreport_name" maxlength="1000" [errorStateMatcher]="matcher" >
+                            <mat-hint align="end"> {{summaryreport_name.value.length || 0}}/1000 </mat-hint>
+                            
+                            <!-- <mat-error *ngif="frmGrpAttachUpload.hasError('required')"> กรุณาระบุชื่อเอกสารแนบ </mat-error> -->
+                        </mat-form-field>
+                        <mat-form-field>
+                            <div>
+                                <mat-toolbar>
+                                    <input matInput [(ngModel)]="fileAttr" formControlName="txtUploadFile" readonly name="name">
+                                    <!-- <button mat-flat-button color="primary">Browse File</button> -->
+                                </mat-toolbar>
+                                <input #fileInput type="file" formControlName="txtInputUploadFile" id="uploadFile" (change)="onSelectFile($event,'IMG')" name="uploadFile">
+                            </div>
+                        </mat-form-field>
+                        <div *ngIf="currentFile" class="progress my-3">
+                            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{ progress }}"
+                                 aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
+                                {{ progress }}%
+                            </div>
+                        </div>
+                        <div *ngIf="message" class="alert-warning" role="alert"> {{ message }} </div>
+                        <div mat-dialog-actions>
+                            <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="form.invalid">
+                                <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
+                                    บันทึก
+                            </button>
+                            <button mat-raised-button (click)="onNoClick()" color="primary" tabindex="-1" [mat-dialog-close]="0"> ยกเลิก </button>
+                        </div>
+                    </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>

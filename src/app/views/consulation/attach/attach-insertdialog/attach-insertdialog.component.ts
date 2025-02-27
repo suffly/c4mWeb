@@ -157,7 +157,7 @@ export class AttachInsertdialogComponent implements OnInit {
           } else {
             this.message = 'Could not upload the file!';
           }
-          this.showWarning('ไม่สามารถบันทึกแก้ไขเอกสารได้ : ' + this.message);
+          this.showWarning('ไม่สามารถบันทึกเอกสารได้ : ' + this.message);
           this.dialogRef.close(0);
         }}
       );

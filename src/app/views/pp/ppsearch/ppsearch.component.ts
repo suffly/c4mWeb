@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { PpsearchviewService } from '@app/services/ppsearchview.service';
 import { Ppsearchview } from '@app/models/ppsearchview';
 
+import { ReportDownloaddialogComponent } from '../report/report-downloaddialog/report-downloaddialog.component';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class PpsearchComponent implements OnInit, OnDestroy {
     displayedColumns: string[] = ['index', 'consulationdetail_topic', 'counselor_fullname', 'meeting_date', 'actions'];
     pageSize: number = 10;
     pageSizeOptions = [10, 25, 50, 100, 200];
+    currentPage = 0;
     index: number;
     id: number;
 
@@ -50,6 +52,7 @@ export class PpsearchComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
       localStorage.removeItem("ppconsultation");
+      this.currentPage = JSON.parse(localStorage.getItem('page')||'{}')
       this.loadData();
     }
 
@@ -65,6 +68,27 @@ export class PpsearchComponent implements OnInit, OnDestroy {
       });
       this.subscriptions.push();
       
+    }
+
+    onPaginateChange(event: any){
+      localStorage.setItem('page', JSON.stringify(event.pageIndex));
+    }
+
+    OpenscreenExport() {
+      const dialogRef = this.dialogService.open(ReportDownloaddialogComponent,
+        {
+          width: '640px',
+          height: '480px',
+          disableClose: true
+        }
+      );
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result == 1) {
+          setTimeout(() => {
+            this.loadData()}, 500); 
+        } 
+      });
     }
 
     viewDetail(i: number, data: Ppsearchview) {

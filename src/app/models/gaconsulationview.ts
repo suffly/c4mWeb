@@ -7,6 +7,7 @@ export class Gaconsulationview {
     ministry_name:string;
     ministry_head:string;
     ministry_invitation:string;
+    status_id:number;
     status_name:string;
     consulationdetail_topic:string;
     consulationdetail_detail:string;

@@ -37,6 +37,7 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['index', 'meeting_set', 'meeting_year', 'meeting_time', 'meetingterm_name', 'meeting_date', 'owner_name', 'count_consulation', 'count_consulationtotal', 'actions'];
   pageSize: number = 10;
   pageSizeOptions = [10, 25, 50];
+  currentPage = 0;
   index: number;
   id: number;
   
@@ -49,6 +50,8 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void{
     localStorage.removeItem("meetingview");
+    localStorage.removeItem("counselorpage");
+    this.currentPage = JSON.parse(localStorage.getItem('meetingpage')||'{}')
     this.loadData();
 
   }
@@ -70,6 +73,10 @@ export class MeetingviewlistComponent implements OnInit, OnDestroy {
     });
     this.subscriptions.push();
     
+  }
+
+  onPaginateChange(event: any){
+    localStorage.setItem('meetingpage', JSON.stringify(event.pageIndex));
   }
 
   applyFilter(event: Event) {
