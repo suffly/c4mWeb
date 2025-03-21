@@ -26,6 +26,9 @@ export class ReportmeetingService {
     return this.http.get(`${this.baseUrl}/Createmeetingresultreport/${meeting_id}`,{responseType: 'blob'});
   }
 
+  Creatempreport(counselor_id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Creatempreport/${counselor_id}`,{responseType: 'blob'});
+  }
 
 
 }

@@ -122,6 +122,7 @@ import { ReportInsertdialogComponent } from './views/pp/report/report-insertdial
 import { ReportDeletedialogComponent } from './views/pp/report/report-deletedialog/report-deletedialog.component';
 import { ReportDownloaddialogComponent } from './views/pp/report/report-downloaddialog/report-downloaddialog.component';
 import { ReportviewlistComponent } from './views/pp/report/reportviewlist/reportviewlist.component';
+import { PpsearchdetailsComponent } from './views/pp/ppsearchdetails/ppsearchdetails.component';
 
 
 export class AppDateAdapter extends NativeDateAdapter {
@@ -229,6 +230,7 @@ export const APP_DATE_FORMATS = {
     ReportDeletedialogComponent,
     ReportDownloaddialogComponent,
     ReportviewlistComponent,
+    PpsearchdetailsComponent,
 
 
   ],

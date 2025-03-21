@@ -1,7 +1,16 @@
 <app-loading *ngIf="loading"></app-loading>
 <div class="card-header assert-row">
     <div class="assert-row" >
-        <span [innerHtml]="headCounselor">  </span>
+        <table>
+            <tr>
+              <th><span [innerHtml]="headCounselor"></span></th>
+              <th>
+                  <div align="right">
+                    <button class="btn" style="background-color:rgb(44, 44, 196);color:white;" (click)="downloadMpReport()"> สรุปข้อปรึกษาหารือ </button>
+                  </div>
+              </th>
+            </tr>
+          </table>
     </div>
     <!-- <label for="">ข้อปรึกษาหารือของสมาชิกสภาผู้แทนราษฎร</label> -->
     <!-- {{this.currentUser.user_title}}{{this.currentUser.user_name}} {{this.currentUser.user_midname}} {{this.currentUser.user_surname}} -->

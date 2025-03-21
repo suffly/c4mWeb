@@ -24,6 +24,7 @@ import { GaresponseviewdetailComponent } from './views/ga/garesponseviewdetail/g
 
 import { PpsearchComponent } from './views/pp/ppsearch/ppsearch.component';
 import { PpsearchdetailComponent } from './views/pp/ppsearchdetail/ppsearchdetail.component';
+import { PpsearchdetailsComponent } from './views/pp/ppsearchdetails/ppsearchdetails.component';
 import { PpresponseComponent } from './views/pp/ppresponse/ppresponse.component';
 import { PpresponsedetailComponent } from './views/pp/ppresponsedetail/ppresponsedetail.component';
 
@@ -43,6 +44,7 @@ const routes: Routes = [
 
   {path: 'search', component: PpsearchComponent},
   {path: 'searchdetail', component: PpsearchdetailComponent},
+  {path: 'searchdetails/:id', component: PpsearchdetailsComponent},
   {path: 'searchresponse', component: PpresponseComponent},
   {path: 'searchresdetail', component: PpresponsedetailComponent},
 

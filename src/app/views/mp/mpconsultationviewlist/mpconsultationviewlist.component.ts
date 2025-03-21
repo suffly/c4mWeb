@@ -6,12 +6,15 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
+import { DatePipe } from '@angular/common';
+import { FileSaverService } from 'ngx-filesaver';
 
 import { Userprofile } from '@app/models/userprofile';
 import { MpconsulationviewService } from '@app/services/mpconsulationview.service';
 import { Mpconsulationview } from '@app/models/mpconsulationview';
 import { CounselorviewService } from '@app/services/counselorview.service';
 import { Counselorview } from '@app/models/counselorview';
+import { ReportmeetingService } from '@app/services/reportmeeting.service';
 
 
 
@@ -25,6 +28,9 @@ export class MpconsultationviewlistComponent implements OnInit, OnDestroy {
   constructor(
     public CounselorviewService: CounselorviewService,
     public MpconsulationviewService: MpconsulationviewService,
+    public ReportmeetingService: ReportmeetingService,
+    public datepipe: DatePipe,
+    public FileSaverService: FileSaverService,
     private router: Router,
   ) {}
 
@@ -50,6 +56,7 @@ export class MpconsultationviewlistComponent implements OnInit, OnDestroy {
   @ViewChild('filter', { static: true }) filter: ElementRef;
 
   loading: boolean = false;
+  date:Date;
   currentUser: Userprofile;
   private readonly CURRENT_USER = 'currentUser';
 
@@ -104,6 +111,21 @@ export class MpconsultationviewlistComponent implements OnInit, OnDestroy {
       this.router.navigate(['/mpconsultationdetail'])
     }, 500);
     //[routerLink]="['/mpconsultationdetail']" << for html
+  }
+
+  downloadMpReport() {
+    var filename = "";
+    var fullname = "";
+    var midname = this.currentUser.user_midname ?? "";
+    fullname = this.currentUser.user_title + this.currentUser.user_name + "_" + midname + "_" + this.currentUser.user_surname + "_";
+    this.ReportmeetingService.Creatempreport(this.currentUser.user_member).subscribe((response: any) => {
+      this.date = new Date();
+      let latest_date = this.datepipe.transform(this.date, 'ddMMyyyy_HHmmss');
+      filename = "ข้อปรึกษาหารือของสมาชิกสภาผู้แทนราษฎร" + fullname + latest_date?.toString();
+      this.FileSaverService.save(response, filename); 
+    }),
+      (error: any) => console.log('Error downloading the file'), //when you use stricter type checking
+      () => console.info('File downloaded successfully');
   }
 
   applyFilter(event: Event) {
