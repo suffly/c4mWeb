@@ -61,7 +61,7 @@ mat-toolbar {
 } */
 .mat-column-counselor_fullname {
     word-wrap: break-word !important;
-    white-space: unset !important;
+    white-space: pre-wrap !important;
     flex: 0 0 20% !important;
     width: 20% !important;
     overflow-wrap: break-word;
